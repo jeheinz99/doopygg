@@ -1,0 +1,15 @@
+h1 {
+  display: flex;
+  justify-items: center;
+}
+
+.SearchBox {
+  display: flex;
+  overflow: auto;
+  justify-content: center;
+}
+
+#work {
+  display: flex;
+  justify-content: center;
+}
