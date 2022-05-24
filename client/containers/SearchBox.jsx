@@ -10,7 +10,11 @@ const SearchBox = props => {
 
     return (
       <div className="SearchBox">
-        <h1>Welcome</h1>
+        <div id="welcome">Welcome</div>
+
+        <div id="inputSummonerName">Input your Summoner Name Below</div>
+
+        <input type="text" id="SearchBoxInput"></input>
       </div>
     );
 

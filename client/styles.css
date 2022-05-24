@@ -1,15 +1,19 @@
-h1 {
-  display: flex;
-  justify-items: center;
-}
-
 .SearchBox {
   display: flex;
-  overflow: auto;
-  justify-content: center;
+  flex-flow: column wrap;
+  align-items: center;
 }
 
-#work {
-  display: flex;
-  justify-content: center;
+#welcome {
+  font-size: 3em;
+  font-family: "Koulen", sans-serif;
+}
+
+#SearchBoxInput {
+  width: 13em;
+}
+
+#inputSummonerName {
+  font-size: 2em;
+  font-family: "Koulen", sans-serif;
 }
