@@ -4,9 +4,17 @@
   align-items: center;
 }
 
+.PlayerBox {
+  display: flex;
+}
+
+.SummonerBox {
+  display: flex;
+}
+
 #welcome {
   font-size: 3em;
-  font-family: "Koulen", sans-serif;
+  /* font-family: "Koulen", sans-serif; */
 }
 
 #SearchBoxInput {
@@ -15,5 +23,5 @@
 
 #inputSummonerName {
   font-size: 2em;
-  font-family: "Koulen", sans-serif;
+  /* font-family: "Koulen", sans-serif; */
 }

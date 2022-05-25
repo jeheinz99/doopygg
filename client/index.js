@@ -6,6 +6,8 @@ import App from './App.jsx';
 
 // import containers
 import SearchBox from './containers/SearchBox.jsx'
+import PlayerBox from './containers/PlayerBox.jsx';
+import MatchesBox from './containers/MatchesBox.jsx';
 
 // import displays
 
@@ -16,7 +18,7 @@ import store from './store';
 render (
   // wrapping app in provider
   <Provider store={store}>
-    <App/>
+      <App/>
   </Provider>,
   document.getElementById('contents')
 );

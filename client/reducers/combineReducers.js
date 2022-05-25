@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
 // import all reducers here
-import summonerReducer from "./reducer";
+import summonerReducer from "./summonerReducer";
 
 // combine reducers
 const reducers = combineReducers({
