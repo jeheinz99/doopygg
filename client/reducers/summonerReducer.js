@@ -1,11 +1,12 @@
 import * as types from '../constants/actionTypes';
 import { connect } from 'react-redux';
-import container from '../containers/SearchBox.jsx'
+import SearchBox from '../containers/SearchBox.jsx'
 
 const initialState = {
   summonerName: '',
   summonerLevel: 0,
   summonerRank: '',
+  sommonerNameInput: '',
   matchHistory: [],
 };
 
@@ -13,13 +14,20 @@ const summonerReducer = (state = initialState, action) => {
   
   const { type, payload } = action;
 
-  switch (action.type) {
+  // console.log(type);
+  // console.log(payload);
+
+  switch (type) {
     case types.ADD_SUMMONER_DATA:
       return { ...state, 
-        summonerName: action.payload,
-        summonerLevel: action.payload,
-        summonerRank: action.payload 
+        summonerName: payload.summonerName,
+        summonerLevel: payload.summonerLevel,
       };
+
+    // case types.ADD_MATCH_HISTORY:
+    //   return { ...state,
+    //     matchHistory: action.payload,
+    //   }
 
   default: {
     return state;

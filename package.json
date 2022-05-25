@@ -31,8 +31,7 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.1"
+    "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
     "@babel/core": "^7.18.0",

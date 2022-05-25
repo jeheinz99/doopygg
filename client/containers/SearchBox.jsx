@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
   summonerName: state.summonerName,
   summonerLevel: state.summonerLevel,
   summonerRank: state.summonerRank,
+  summonerNameInput: state.summonerNameInput,
   matchHistory: state.matchHistory,
 });
 
@@ -20,12 +21,19 @@ const mapDispatchToProps = dispatch => (
 });
 
 const SearchBox = props => {
+
+  let summonerNameInput;
+    function summonerNameData (e) {
+      summonerNameInput = e.target.value;
+      return summonerNameInput;
+    }
+
   return (
     <div className="SearchBox">
       <div id="welcome"> Welcome </div>
       <div id="inputSummonerName"> Input your Summoner Name Below </div>
-      <input type="text" id="SearchBoxInput"  value={props.summonerName} onChange={(e) => {(e.target.value);}} required></input>
-      <button id="SearchBoxButton" onClick={() => props.loadSummonerData(props.input)}> Submit </button>
+      <input type="text" id="SearchBoxInput" onChange={ summonerNameData } required></input>
+      <button id="SearchBoxButton" onClick={() => props.loadSummonerData(summonerNameInput)}> Submit </button>
     </div>
   );
 
