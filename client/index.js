@@ -7,8 +7,8 @@ import App from './App.jsx';
 // import containers
 import SearchBox from './containers/SearchBox.jsx';
 
-// import displays
-
+// import components
+import MatchBoxes from './components/MatchBoxes.jsx'
 
 // store
 import store from './store';

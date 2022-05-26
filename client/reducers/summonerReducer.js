@@ -19,16 +19,25 @@ const summonerReducer = (state = initialState, action) => {
 
   switch (type) {
     case types.ADD_SUMMONER_DATA:
-      return { ...state, 
+      //logging state, not altering 
+      console.log(Object.assign(
+        {},
+        state, {
+          summonerName: payload.summonerName,
+          summonerLevel: payload.summonerLevel,
+          matchHistory: payload.matchHistory
+        }
+      ));
+      // returning new state if case ADD_SUMMONER_DATA is met
+      return Object.assign(
+        {}, 
+        state, {
         summonerName: payload.summonerName,
         summonerLevel: payload.summonerLevel,
-      };
-
-    // case types.ADD_MATCH_HISTORY:
-    //   return { ...state,
-    //     matchHistory: action.payload,
-    //   }
-
+        matchHistory: payload.matchHistory
+        }
+      );
+  // returning default state if no case is met
   default: {
     return state;
     }

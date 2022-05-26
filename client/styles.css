@@ -2,14 +2,7 @@
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-}
-
-.PlayerBox {
-  display: flex;
-}
-
-.SummonerBox {
-  display: flex;
+  width: 95%;
 }
 
 #welcome {
@@ -24,4 +17,38 @@
 #inputSummonerName {
   font-size: 2em;
   /* font-family: "Koulen", sans-serif; */
+}
+
+.OuterBox {
+  display: flex;
+  flex-flow: column wrap;
+  justify-items: center;
+}
+
+.OuterSearchBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 10px;
+  width: 85%;
+  margin: 15px auto;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  border-radius: 2em;
+}
+
+.MatchBoxes {
+  display: flex;
+  padding: 10px;
+  width: 40%;
+  justify-content: center;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  border-radius: 2em;
+}
+
+.winMatch {
+  background-color: blue;
+}
+
+.loseMatch {
+  background-color: red;
 }

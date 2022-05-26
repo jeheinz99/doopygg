@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { dispatch } from 'rxjs/internal/observable/pairs';
 import { addSummonerNameActionCreator } from '../actions/actions.js';
 import * as actions from '../actions/actions.js'
+import MatchBoxes from '../components/MatchBoxes.jsx';
 
 const mapStateToProps = state => ({
-  summonerName: state.summonerName,
-  summonerLevel: state.summonerLevel,
-  summonerRank: state.summonerRank,
-  summonerNameInput: state.summonerNameInput,
-  matchHistory: state.matchHistory,
+  summonerName: state.summoners.summonerName,
+  summonerLevel: state.summoners.summonerLevel,
+  summonerRank: state.summoners.summonerRank,
+  summonerNameInput: state.summoners.summonerNameInput,
+  matchHistory: state.summoners.matchHistory,
 });
 
 const mapDispatchToProps = dispatch => (
@@ -18,6 +19,7 @@ const mapDispatchToProps = dispatch => (
     const summonerData = await actions.getSummonerData(input);
     dispatch(actions.addSummonerDataActionCreator(summonerData));
   }
+
 });
 
 const SearchBox = props => {
@@ -27,16 +29,20 @@ const SearchBox = props => {
       summonerNameInput = e.target.value;
       return summonerNameInput;
     }
+  
+  const { matchHistory } = props;
 
   return (
-    <div className="SearchBox">
-      <div id="welcome"> Welcome </div>
-      <div id="inputSummonerName"> Input your Summoner Name Below </div>
-      <input type="text" id="SearchBoxInput" onChange={ summonerNameData } required></input>
-      <button id="SearchBoxButton" onClick={() => props.loadSummonerData(summonerNameInput)}> Submit </button>
-    </div>
+    <div className="OuterSearchBox">
+      <div className="SearchBox">
+        <div id="welcome"> Welcome </div>
+        <div id="inputSummonerName"> Input your Summoner Name Below </div>
+        <input type="text" id="SearchBoxInput" onChange={ summonerNameData } required></input>
+        <button id="SearchBoxButton" onClick={() => props.loadSummonerData(summonerNameInput)}> Submit </button>
+      </div>
+    <MatchBoxes matchHistory={matchHistory}/>
+  </div>
   );
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);
