@@ -20,7 +20,6 @@ const SummonerBox = props => {
         {summonerRank[0] ? <img id="rankIcon" src={`https://opgg-static.akamaized.net/images/medals_new/grandmaster.png`}/> : ''}
         {summonerRank[0] ? <p>{`Ranked Solo: ${summonerRank[0]} ${summonerRank[1]} LP`}</p> : ''}
       </div>
-
     </div>
   </div>
   )
