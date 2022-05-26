@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100&display=swap');
+
 .SearchBox {
   display: flex;
   flex-flow: column wrap;
@@ -5,35 +8,62 @@
   width: 95%;
 }
 
+#SearchBoxButton {
+	box-shadow: 0px 0px 0px 2px #455478;
+	background:linear-gradient(to bottom, #555151 5%, #322e30 100%);
+	background-color:#8f3535;
+	border-radius:10px;
+	border:0.15em double #244680;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #66282f;
+}
+#SearchBoxButton:hover {
+	background:linear-gradient(to bottom, #353131 5%, #2c2a2b 100%);
+	background-color:#564e50;
+}
+#SearchBoxButton:active {
+	position:relative;
+	top:1px;
+}
+
 #welcome {
   font-size: 3em;
-  /* font-family: "Koulen", sans-serif; */
+  font-family: 'Prompt', sans-serif;
 }
 
 #SearchBoxInput {
-  width: 13em;
+  padding: 5px;
+  font-size: 16px;
+  border-width: 3px;
+  border-color: #a41c49;
+  background-color: #bddbfa;
+  color: #fff;
+  border-style: double;
+  border-radius: 10px;
+  box-shadow: 1px 0px 9px rgba(0,0,0,.65);
+  text-shadow: -2px 0px 7px rgba(66,66,66,.75);
+  text-align: center;
+}
+
+#SearchBoxInput:focus {
+  outline:none;
 }
 
 #inputSummonerName {
   font-size: 2em;
-  /* font-family: "Koulen", sans-serif; */
+  font-family: 'Prompt', sans-serif;
 }
 
 .OuterBox {
   display: flex;
   flex-flow: column wrap;
   justify-items: center;
-}
-
-.OuterSearchBox {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 10px;
-  width: 85%;
-  margin: 15px auto;
-  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border-radius: 2em;
 }
 
 .MatchBoxes {
@@ -45,10 +75,102 @@
   border-radius: 2em;
 }
 
-.winMatch {
-  background-color: blue;
+.OuterSearchBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  width: 85%;
+  margin: 15px auto;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  border-radius: 2em;
+  border-width: 4px;
+  border-style: double;
+  border-color: #1C6EA4;
 }
 
-.loseMatch {
-  background-color: red;
+.Matches {
+  justify-content: space-around;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 1px;
+  align-items: center;
+  font-family: 'Koulen', cursive;
+}
+
+h3 {
+  font-size: 1.75em;
+  text-align: center;
+  font-family: 'Prompt', sans-serif;
+}
+
+h4 {
+  font-size: 1.5em;
+  font-family: 'Prompt', sans-serif;
+}
+
+#winMatch {
+  background: rgb(22,81,191);
+  background: linear-gradient(90deg, rgba(22,81,191,1) 0%, rgba(41,61,150,1) 10%, rgba(56,72,108,1) 51%, rgba(56,95,186,1) 100%);
+  border-radius: 1.5em;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+#loseMatch {
+  background: rgb(173,44,72);
+  background: linear-gradient(90deg, rgba(173,44,72,1) 0%, rgba(150,41,64,1) 10%, rgba(108,56,67,1) 51%, rgba(186,56,86,1) 100%);
+  border-radius: 1.5em;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+#championIcon {
+  height: 5%;
+  width: 5%;
+  border-radius: 2em;
+  border: 3px solid rgb(0, 0, 0)
+}
+
+.SummonerInfoBox {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px;
+  width: 85%;
+  margin: 15px auto;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  border-width: 4px;
+  border-style: double;
+  border-color: #a41c49;
+  border-radius: 2em;
+  font-family: 'Prompt', sans-serif;
+  font-size: 1.5em;
+}
+
+#SummonerInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#summonerRankInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#summonerIcon {
+  display: flex;
+  width: 50%;
+  height: 50%;
+  border-radius: 2em;
+}
+
+#rankIcon {
+  align-self: center;
+  width: 50%;
+}
+
+#MatchBoxes {
+  border-color: #afd433;
 }
