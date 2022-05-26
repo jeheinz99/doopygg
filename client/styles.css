@@ -134,7 +134,8 @@ h4 {
 .SummonerInfoBox {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
+  column-gap: 0px;
   padding: 10px;
   width: 85%;
   margin: 15px auto;
@@ -144,33 +145,40 @@ h4 {
   border-color: #a41c49;
   border-radius: 2em;
   font-family: 'Prompt', sans-serif;
-  font-size: 1.5em;
 }
 
 #SummonerInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 1.2em;
 }
 
 #summonerRankInfo {
   display: flex;
+  width: 70%;
   flex-direction: column;
+  flex-shrink: 2;
   align-items: center;
 }
 
 #summonerIcon {
   display: flex;
+  flex-grow: 2;
   width: 50%;
-  height: 50%;
   border-radius: 2em;
+  border: 3px solid rgb(0, 0, 0);
 }
 
 #rankIcon {
-  align-self: center;
-  width: 50%;
+  display: flex;
+  width: 55%;
 }
 
 #MatchBoxes {
   border-color: #afd433;
+}
+
+p {
+  margin: 0.5em;
 }

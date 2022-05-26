@@ -62,9 +62,16 @@ export const getSummonerData = async (summonerName) => {
     }
   });
 
-  // console.log(responseRankData);
-  const rankData = [responseRankData.data[0].tier, responseRankData.data[0].leaguePoints, responseRankData.data[1].tier, responseRankData.data[1].leaguePoints];
+  console.log(responseRankData.data);
 
+  // checks to see if 1 of the 2 arrays returned are for ranked solo or ranked flex
+  const rankData = [];
+  for (let i = 0; i < responseRankData.data.length; i++) {
+    if (responseRankData.data[i].queueType === "RANKED_SOLO_5x5") {
+      rankData.push(responseRankData.data[i].tier);
+      rankData.push(responseRankData.data[i].leaguePoints); 
+    }
+  }
   // logs 2nd API call using puuid
   // console.log(responseMatchData);
 
@@ -120,6 +127,6 @@ export const getSummonerData = async (summonerName) => {
     profileIcon: responseSummData.data.profileIconId,
     matchHistory: matchesData, 
   }
-  // console.log(summonerData);
+  console.log(summonerData);
   return summonerData;
 };
