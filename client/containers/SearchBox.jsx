@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { dispatch } from 'rxjs/internal/observable/pairs';
-import { addSummonerNameActionCreator } from '../actions/actions.js';
 import * as actions from '../actions/actions.js'
 import MatchBoxes from '../components/MatchBoxes.jsx';
 import SummonerBox from '../components/SummonerBox.jsx';

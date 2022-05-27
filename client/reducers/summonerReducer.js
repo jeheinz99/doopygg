@@ -1,6 +1,4 @@
 import * as types from '../constants/actionTypes';
-import { connect } from 'react-redux';
-import SearchBox from '../containers/SearchBox.jsx'
 
 const initialState = {
   summonerName: '',

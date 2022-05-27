@@ -2,21 +2,26 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
-import App from './App.jsx';
+import App from './routes/App.jsx';
 
-// import containers
-import SearchBox from './containers/SearchBox.jsx';
+// temp import for routing to different pages
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// import components
-import MatchBoxes from './components/MatchBoxes.jsx'
+// import pages
+import ChampionsPage from './routes/ChampionsPage'
 
 // store
 import store from './store';
 
 render (
-  // wrapping app in provider
+  // wrapping app in provider and BrowserRouter for page navigation
   <Provider store={store}>
-      <App/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App/>} />
+          <Route path="champions" element={<ChampionsPage />} />
+      </Routes>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('contents')
 );
