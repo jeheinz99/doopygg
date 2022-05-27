@@ -17,7 +17,7 @@ export const addSummonerDataActionCreator = summonerData => ({
 // asynchronous call to API to get info based on summonerName input
 export const getSummonerData = async (summonerName) => {
   // need new api key every day
-  const api_key = 'RGAPI-a5ec742f-6e38-4703-9a34-8a746d6bb1b0'
+  const api_key = 'RGAPI-c2fff483-e374-4e82-8ea1-c1adeaba6b45'
   // this response returns the summoner's name and level
   let responseSummData = await axios.get(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${api_key}`, 
   {
