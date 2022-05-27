@@ -2,13 +2,14 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
-import App from './routes/App.jsx';
+import App from './App.jsx';
 
 // temp import for routing to different pages
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // import pages
 import ChampionsPage from './routes/ChampionsPage'
+import NothingHerePage from './routes/NothingHerePage.jsx';
 
 // store
 import store from './store';
@@ -20,6 +21,7 @@ render (
       <Routes>
         <Route path="/" element={<App/>} />
           <Route path="champions" element={<ChampionsPage />} />
+          <Route path="*" element={<NothingHerePage />} />
       </Routes>
     </BrowserRouter>
   </Provider>,

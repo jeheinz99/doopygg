@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions.js'
-import MatchBoxes from '../components/MatchBoxes.jsx';
-import SummonerBox from '../components/SummonerBox.jsx';
+import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
+import SummonerBox from '../components/AppComponents/SummonerBox.jsx';
+import { Outlet, Link } from 'react-router-dom'
 
 const mapStateToProps = state => ({
   summonerName: state.summoners.summonerName,
@@ -18,7 +19,6 @@ const mapDispatchToProps = dispatch => (
     const summonerData = await actions.getSummonerData(input);
     dispatch(actions.addSummonerDataActionCreator(summonerData));
   }
-
 });
 
 const SearchBox = props => {
@@ -34,8 +34,10 @@ const SearchBox = props => {
   return (
     <div className="OuterSearchBox">
       <div className="SearchBox">
-        <div id="welcome"> doopy.gg </div>
+        <Link to="/champions"> Champions </Link>
+        <div id="welcome"> doopy.gg Summoners </div>
         <div id="inputSummonerName"> Input your Summoner Name Below </div>
+        <Outlet />
         <br></br>
         <input type="text" id="SearchBoxInput" onChange={ summonerNameData } required></input>
         <br></br>

@@ -11,7 +11,6 @@ const initialState = {
 const summonerReducer = (state = initialState, action) => {
   
   const { type, payload } = action;
-  // console.log(payload);
 
   // console.log(type);
   // console.log(payload);
@@ -39,6 +38,7 @@ const summonerReducer = (state = initialState, action) => {
         summonerRank: payload.summonerRank,
         }
       );
+      
   // returning default state if no case is met
   default: {
     return state;

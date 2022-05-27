@@ -14,6 +14,17 @@ export const addSummonerDataActionCreator = summonerData => ({
   payload: summonerData
 });
 
+export const addChampionDataActionCreator = championData => ({
+  type: types.ADD_CHAMPION_DATA,
+  payload: championData
+});
+
+// asynchronous calls to get data before using synchronous actions
+
+export const getChampionData = async (championName) => {
+  return 'hi';
+};
+
 // asynchronous call to API to get info based on summonerName input
 export const getSummonerData = async (summonerName) => {
   // need new api key every day
