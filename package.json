@@ -1,7 +1,7 @@
 {
-  "name": "soloproject",
+  "name": "doopygg",
   "version": "1.0.0",
-  "description": "\"solo project\"",
+  "description": "\"doopygg\"",
   "main": "client.js",
   "scripts": {
     "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"nodemon ./server/server.js\"",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jeheinz99/soloproject.git"
+    "url": "https://github.com/jeheinz99/doopygg.git"
   },
   "author": "Joe Heinz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jeheinz99/soloproject/issues"
+    "url": "https://github.com/jeheinz99/doopygg/issues"
   },
-  "homepage": "https://github.com/jeheinz99/soloproject#readme",
+  "homepage": "https://github.com/jeheinz99/doopygg#readme",
   "dependencies": {
     "@material/textfield": "^14.0.0",
     "axios": "^0.27.2",
