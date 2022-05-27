@@ -182,3 +182,29 @@ h4 {
 p {
   margin: 0.5em;
 }
+
+.Endpoints {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+a:link, a:visited {
+  background-color:#8f3535;
+  background:linear-gradient(to bottom, #555151 5%, #322e30 100%);
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  border-style: double;
+  border-color: #1C6EA4;
+  width: 10%;
+}
+
+a:hover, a:active {
+  background:linear-gradient(to bottom, #353131 5%, #2c2a2b 100%);
+  background-color:#564e50;
+  position:relative;
+  top:1px;
+}

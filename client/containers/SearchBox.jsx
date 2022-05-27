@@ -34,10 +34,8 @@ const SearchBox = props => {
   return (
     <div className="OuterSearchBox">
       <div className="SearchBox">
-        <Link to="/champions"> Champions </Link>
         <div id="welcome"> doopy.gg Summoners </div>
         <div id="inputSummonerName"> Input your Summoner Name Below </div>
-        <Outlet />
         <br></br>
         <input type="text" id="SearchBoxInput" onChange={ summonerNameData } required></input>
         <br></br>

@@ -6,9 +6,14 @@ import './styles.css'
 
 const App = props => {
     return (
-      <div>
-        <SearchBox />
+    <div>
+      <div className="Endpoints">
+        <Link to="/champions"> Champions </Link>
+        <Link to="/leaderboards"> Leaderboards </Link>
+        <Outlet />
       </div>
+        <SearchBox />
+    </div>
     );
 }
 
