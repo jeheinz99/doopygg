@@ -5,7 +5,7 @@ import { Outlet, Link } from 'react-router-dom';
 import './styles.css'
 
 const App = props => {
-    return (
+  return (
     <div>
       <div className="Endpoints">
         <Link to="/champions"> Champions </Link>
@@ -14,7 +14,7 @@ const App = props => {
       </div>
         <SearchBox />
     </div>
-    );
+  );
 }
 
 export default App;

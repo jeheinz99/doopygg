@@ -13,8 +13,7 @@ const mapStateToProps = state => ({
   matchHistory: state.summoners.matchHistory,
 });
 
-const mapDispatchToProps = dispatch => (
-  {
+const mapDispatchToProps = dispatch => ({
   loadSummonerData: async (input) => {
     const summonerData = await actions.getSummonerData(input);
     dispatch(actions.addSummonerDataActionCreator(summonerData));
