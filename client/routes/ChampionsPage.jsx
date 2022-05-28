@@ -1,12 +1,16 @@
 import React from 'react';
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import ChampPageContainer from '../containers/ChampPageContainer';
 
 const ChampionsPage = props => {
   return (
-    <div className="ChampPageContainer">
+    <div>
+      <div className="Endpoints">
+        <Link to="/"> Home </Link>
+        <Link to="/leaderboards"> Leaderboards </Link>
+        <Outlet />
+      </div>
       <ChampPageContainer />
-      <h1> Champions </h1>
       <Outlet />
     </div>
   );

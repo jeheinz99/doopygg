@@ -18,13 +18,13 @@ const mapDispatchToProps = dispatch => (
 const LeaderboardPageContainer = props => {
 
   const { leaderboardData } = props;
-  console.log(leaderboardData);
+  // console.log(leaderboardData);
 
   return (
-  <div className="LeaderbordPageBox">
-    <div className ="OuterSearchBox" id="welcome"> doopy.gg Leaderboards </div>
-    <button id="SearchBoxButton" onClick={() => props.loadLeaderboardData()}> Search! </button>
-    <LeaderboardBoxes leaderboardData={ leaderboardData } />
+  <div className="LeaderboardPageBox">
+      <div className ="OuterSearchBox" id="welcome"> doopy.gg Leaderboards </div>
+      <button id="LeaderboardBoxButton" onClick={() => props.loadLeaderboardData()}> Search! </button>
+      <LeaderboardBoxes leaderboardData={ leaderboardData } />
   </div>
   );
 };
