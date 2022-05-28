@@ -8,8 +8,13 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// router handler to respond with main app
+const summonerRouter = express.Router();
+summonerRouter.use('/', summonerRouter);
+// console.log('hiiiiiii');
+
 // handles requests for static files
-app.use('/', express.static(path.join(__dirname, '../client')))
+app.use('/', express.static(path.join(__dirname, '../client')));
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));

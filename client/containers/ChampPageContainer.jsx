@@ -10,7 +10,7 @@ const mapDispatchToProps = dispatch => (
   {
   loadChampionData: async (input) => {
     const championData = await actions.getChampionData(input);
-    dispatch(actions.addSummonerDataActionCreator(summonerData));
+    dispatch(actions.addSummonerDataActionCreator(championData));
   }
 });
 

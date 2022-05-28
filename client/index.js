@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import pages
 import ChampionsPage from './routes/ChampionsPage'
 import NothingHerePage from './routes/NothingHerePage.jsx';
+import LeaderboardPage from './routes/LeaderboardPage.jsx';
 
 // store
 import store from './store';
@@ -21,6 +22,7 @@ render (
       <Routes>
         <Route path="/" element={<App/>} />
           <Route path="champions" element={<ChampionsPage />} />
+          <Route path="leaderboards" element={<LeaderboardPage />} />
           <Route path="*" element={<NothingHerePage />} />
       </Routes>
     </BrowserRouter>
