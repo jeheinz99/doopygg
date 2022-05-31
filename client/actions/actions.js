@@ -252,7 +252,7 @@ export const getTFTData = async (summonerName) => {
   
   const { data } = getSummData;
   const { puuid } = data;
-
+  const { profileIconId } = data;
   // returns a list of recent matches based on puuid 
   const getMatchList = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=5&api_key=${api_key}`,
   {
@@ -303,6 +303,7 @@ export const getTFTData = async (summonerName) => {
   const TFTData = {
     TFTData: TFTMatchHistory,
     summonerName: summonerName,
+    summonerIcon: profileIconId,
   }
   return TFTData;
 };

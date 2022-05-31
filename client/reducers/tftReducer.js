@@ -3,6 +3,7 @@ import * as types from '../constants/actionTypes';
 const initialState = {
   TFTData: [],
   summonerName: '',
+  summonerIcon: 0,
 };
 
 const tftReducer = (state = initialState, action) => {
@@ -23,6 +24,7 @@ const tftReducer = (state = initialState, action) => {
         state, {
           TFTData: payload.TFTData,
           summonerName: payload.summonerName,
+          summonerIcon: payload.summonerIcon,
         }
       );
 

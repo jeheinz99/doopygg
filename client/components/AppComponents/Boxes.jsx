@@ -4,7 +4,7 @@ const Matches = props => {
   
   const { kills, deaths, assists, matchLength, champion, gameMode, id } = props;
   
-  const image = `https://opgg-static.akamaized.net/images/lol/champion/${champion}.png`
+  const image = `https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${champion}.png`
 
   return (
     <div className="Matches" id={id}>

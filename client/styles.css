@@ -420,3 +420,19 @@ p {
 #SearchBoxInputTFT:hover {
   background-color: #22212174;
 }
+
+.TFTMatches {
+  justify-content: space-around;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 1px;
+  align-items: center;
+  color:rgba(255, 255, 255, 0.861);
+  font-family: 'Koulen', cursive;
+}
+
+#TFTMatchBoxes {
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  border-radius: 1.5em;
+}

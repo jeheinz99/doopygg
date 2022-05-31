@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions.js';
+import TFTMatchBoxes from '../components/TFTComponents/TFTMatchBoxes.jsx';
 
-import SummonerBox from '../components/TFTComponents/SummonerBox.jsx'
+import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx'
 
 const mapStateToProps = state => ({
   TFTData: state.tft.TFTData,
+  summonerName: state.tft.summonerName,
+  summonerIcon: state.tft.summonerIcon,
 });
 
 const mapDispatchToProps = dispatch => (
@@ -25,7 +28,7 @@ const TFTPageContainer = props => {
       return summonerNameInput;
     }
 
-    const { summonerName } = props;
+    const { summonerName, TFTData, summonerIcon } = props;
 
   return (
     <div className="OuterSearchBox">
@@ -37,7 +40,8 @@ const TFTPageContainer = props => {
         <br></br>
         <button id="SearchBoxButton" onClick={() => props.loadTFTData(summonerNameInput)}> Search </button>
       </div>
-      <SummonerBox summonerName={summonerName}/>
+      <TFTSummonerBox summonerName={summonerName} summonerIcon={summonerIcon}/>
+      <TFTMatchBoxes TFTData={TFTData}/>
     </div>
   );
 };

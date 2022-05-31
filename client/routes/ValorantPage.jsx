@@ -10,13 +10,13 @@ const ValorantPage = props => {
     <div className="AppBox">
       <div className="EndpointBar">
         <div className="EndpointLogos">
-          <a id="DiscordLogoLink" href="https://discord.com/">
+          <a id="DiscordLogoLink" target="_blank" href="https://discord.com/">
             <img id="discordLogo" src={discordLogo}/>
           </a>
-          <a id="YoutubeLogoLink" href="https://www.youtube.com/channel/UCfXdp5JwO4QghC01p-_h5OA">
+          <a id="YoutubeLogoLink" target="_blank" href="https://www.youtube.com/channel/UCfXdp5JwO4QghC01p-_h5OA">
             <img id="youtubeLogo" src={youtubeLogo}/>
           </a>
-          <a id="TwitterLogoLink" href="https://twitter.com/kindo_v9">
+          <a id="TwitterLogoLink" target="_blank" href="https://twitter.com/kindo_v9">
             <img id="twitterLogo" src={twitterLogo}/>
           </a>
         </div>
