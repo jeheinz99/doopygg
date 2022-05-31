@@ -1,13 +1,11 @@
 import React from 'react';
-import LeaderboardPageContainer from '../containers/LeaderboardPageContainer';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link } from 'react-router-dom';
+import ValorantPageContainer from '../containers/ValorantPageContainer';
 import discordLogo from '../assets/discordLogo.png';
 import twitterLogo from '../assets/twitterLogo.png';
 import youtubeLogo from '../assets/youtubeLogo.png';
 
-import '../styles.css'
-
-const LeaderboardPage = props => {
+const ValorantPage = props => {
   return (
     <div className="AppBox">
       <div className="EndpointBar">
@@ -25,15 +23,15 @@ const LeaderboardPage = props => {
         <div className="Endpoints">
           <Link id="home" to="/"> Home </Link>
           <Link id="champions" to="/champions"> Champions </Link>
-          <Link id="valorant" to="/valorant"> Valorant </Link>
+          <Link id="leaderboards" to="/leaderboards"> Valorant </Link>
           <Link id="tft" to="/tft"> TFT </Link>
           <Outlet />
         </div>
       </div>
-      <LeaderboardPageContainer />
+      <ValorantPageContainer />
       <Outlet />
     </div>
   );
 };
 
-export default LeaderboardPage;
+export default ValorantPage;

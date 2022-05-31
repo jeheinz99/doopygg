@@ -1,80 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100&display=swap');
 
-.SearchBox {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  width: 95%;
+html, body {
+  margin: 0;
+  height: 100%;
 }
-
-#SearchBoxButton {
-	box-shadow: 0px 0px 0px 2px #455478;
-	background:linear-gradient(to bottom, #555151 5%, #322e30 100%);
-	background-color:#8f3535;
-	border-radius:10px;
-	border:0.15em double #244680;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:19px;
-	padding:12px 37px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #66282f;
+.AppBox {
+  justify-content: center;
+  background: #181A1B;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 100vh;
+  position: absolute;
+  overflow: scroll;
 }
-#SearchBoxButton:hover {
-	background:linear-gradient(to bottom, #353131 5%, #2c2a2b 100%);
-	background-color:#564e50;
-}
-#SearchBoxButton:active {
-	position:relative;
-	top:1px;
-}
-
-#welcome {
-  font-size: 3em;
-  font-family: 'Prompt', sans-serif;
-}
-
-#SearchBoxInput {
-  padding: 5px;
-  font-size: 16px;
-  border-width: 3px;
-  border-color: #a41c49;
-  background-color: #bddbfa;
-  color: #fff;
-  border-style: double;
-  border-radius: 10px;
-  box-shadow: 1px 0px 9px rgba(0,0,0,.65);
-  text-shadow: -2px 0px 7px rgba(66,66,66,.75);
-  text-align: center;
-}
-
-#SearchBoxInput:focus {
-  outline:none;
-}
-
-#inputSummonerName {
-  font-size: 2em;
-  font-family: 'Prompt', sans-serif;
-}
-
 .OuterBox {
   display: flex;
   flex-flow: column wrap;
   justify-items: center;
 }
-
-.MatchBoxes {
+.SearchBox {
   display: flex;
-  padding: 10px;
-  width: 40%;
-  justify-content: center;
-  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border-radius: 2em;
+  flex-flow: column wrap;
+  align-items: center;
+  width: 100%;
+  color: white;
 }
-
 .OuterSearchBox {
   display: flex;
   flex-direction: column;
@@ -87,125 +40,83 @@
   border-width: 4px;
   border-style: double;
   border-color: #1C6EA4;
+  background: #181A1B;
 }
 
-.Matches {
-  justify-content: space-around;
-  width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  padding: 1px;
-  align-items: center;
-  font-family: 'Koulen', cursive;
-}
-
-h3 {
-  font-size: 1.75em;
+#SearchBoxInput {
+  font-family: 'Roboto', sans-serif;
   text-align: center;
-  font-family: 'Prompt', sans-serif;
-}
-
-h4 {
-  font-size: 1.5em;
-  font-family: 'Prompt', sans-serif;
-}
-
-#winMatch {
-  background: rgb(22,81,191);
-  background: linear-gradient(90deg, rgba(22,81,191,1) 0%, rgba(41,61,150,1) 10%, rgba(56,72,108,1) 51%, rgba(56,95,186,1) 100%);
-  border-radius: 1.5em;
-  border: 2px solid rgb(0, 0, 0);
-}
-
-#loseMatch {
-  background: rgb(173,44,72);
-  background: linear-gradient(90deg, rgba(173,44,72,1) 0%, rgba(150,41,64,1) 10%, rgba(108,56,67,1) 51%, rgba(186,56,86,1) 100%);
-  border-radius: 1.5em;
-  border: 2px solid rgb(0, 0, 0);
-}
-
-#championIcon {
-  height: 5%;
-  width: 5%;
-  border-radius: 2em;
-  border: 3px solid rgb(0, 0, 0)
-}
-
-.SummonerInfoBox {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  column-gap: 0px;
-  padding: 10px;
-  width: 85%;
-  margin: 15px auto;
-  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  font-size: 1em;
   border-width: 4px;
   border-style: double;
-  border-color: #a41c49;
-  border-radius: 2em;
-  font-family: 'Prompt', sans-serif;
-}
-
-#SummonerInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1.2em;
-}
-
-#summonerRankInfo {
-  display: flex;
-  width: 70%;
-  flex-direction: column;
-  flex-shrink: 2;
-  align-items: center;
-}
-
-#summonerIcon {
-  display: flex;
-  flex-grow: 2;
-  width: 50%;
-  border-radius: 2em;
-  border: 3px solid rgb(0, 0, 0);
-}
-
-#rankIcon {
-  display: flex;
-  width: 55%;
-}
-
-#MatchBoxes {
-  border-color: #afd433;
-}
-
-p {
-  margin: 0.5em;
-}
-
-.Endpoints {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10px;
-}
-
-a:link, a:visited {
-  background-color:#8f3535;
-  background:linear-gradient(to bottom, #555151 5%, #322e30 100%);
-  color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 5px;
-  border-style: double;
   border-color: #1C6EA4;
+  background-color: #181A1B;
+  color:rgba(255, 255, 255, 0.861);
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+}
+#SearchBoxInput:focus {
+  outline: 0;
+}
+#SearchBoxInput:hover {
+  background-color: #22212174;
+}
+
+#SearchBoxButton {
+  background-color:#292828;
+  border:0.10em double #1C6EA4;
+  border-radius: 0.5em;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family: 'Prompt', sans-serif;
+  letter-spacing: 0.05em;
+  font-size:15px;
+  font-weight:bold;
+  padding:9px 23px;
+  text-decoration:none;
+  text-shadow:0px -1px 0px #7a2a1d;
+}
+#SearchBoxButton:hover {
+  background-color:#222020;
+  border: 0.10em double #a41c49;
+}
+#SearchBoxButton:active {
+  position:relative;
+  top:1px;
+}
+
+#welcomeLeaderboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 3em;
+  font-family: 'Prompt', sans-serif;
+  color:rgba(255, 255, 255, 0.861);
+}
+
+#LeaderboardBoxButton {
+  background-color:#292828;
+  border:0.10em double #1C6EA4;
+  border-radius: 0.5em;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family: 'Prompt', sans-serif;
+  letter-spacing: 0.05em;
+  font-size:15px;
+  font-weight:bold;
+  padding:9px 23px;
+  text-decoration:none;
+  text-shadow:0px -1px 0px #7a2a1d;
   width: 10%;
 }
-
-a:hover, a:active {
-  background:linear-gradient(to bottom, #353131 5%, #2c2a2b 100%);
-  background-color:#564e50;
+#LeaderboardBoxButton:hover {
+  background-color:#222020;
+  border: 0.10em double #a41c49;
+}
+#LeaderboardBoxButton:active {
   position:relative;
   top:1px;
 }
@@ -216,46 +127,296 @@ a:hover, a:active {
   border-radius: 1.5em;
   border: 2px solid rgb(255, 255, 255);
 }
-
 #profileIcon {
   height: 5%;
   width: 5%;
   border-radius: 2em;
   border: 3px solid rgb(0, 0, 0)
 }
-
 #LBBoxes {
   gap: 5px;
-  border-color: #ffffff;
+  border-radius: 2em;
+  border-width: 4px;
+  border-style: double;
+  border-color: #1C6EA4;
 }
-
 .LeaderboardPageBox {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
 
-#LeaderboardBoxButton {
-	box-shadow: 0px 0px 0px 2px #455478;
-	background:linear-gradient(to bottom, #555151 5%, #322e30 100%);
-	background-color:#8f3535;
+#welcome {
+  font-size: 3em;
+  font-family: 'Prompt', sans-serif;
+  color:rgba(255, 255, 255, 0.861);
+}
+#inputSummonerName {
+  font-size: 2em;
+  font-family: 'Prompt', sans-serif;
+}
+.Matches {
+  justify-content: space-around;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 1px;
+  align-items: center;
+  font-family: 'Koulen', cursive;
+}
+#winMatch {
+  background: rgb(22,81,191);
+  background: linear-gradient(90deg, rgba(22,81,191,1) 0%, rgba(41,61,150,1) 10%, rgba(56,72,108,1) 51%, rgba(56,95,186,1) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.861);
+  border-radius: 1.5em;
+}
+#loseMatch {
+  background: rgb(173,44,72);
+  background: linear-gradient(90deg, rgba(173,44,72,1) 0%, rgba(150,41,64,1) 10%, rgba(108,56,67,1) 51%, rgba(186,56,86,1) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  border-radius: 1.5em;
+}
+.MatchBoxes {
+  display: flex;
+  padding: 10px;
+  width: 40%;
+  justify-content: center;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  border-radius: 2em;
+}
+h3 {
+  font-size: 1.75em;
+  text-align: center;
+  font-family: 'Prompt', sans-serif;
+  color: rgba(255, 255, 255, 0.861);
+}
+h4 {
+  font-size: 1.5em;
+  font-family: 'Prompt', sans-serif;
+  color: rgba(255, 255, 255, 0.861);
+}
+#championIcon {
+  height: 5%;
+  width: 5%;
+  border-radius: 2em;
+  border: 2px solid rgba(255, 255, 255, 55);
+}
+.SummonerInfoBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 0px;
+  color: rgba(255, 255, 255, 0.861);
+  padding: 10px;
+  width: 85%;
+  margin: 15px auto;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  border-width: 4px;
+  border-style: double;
+  border-color: #a41c49;
+  border-radius: 2em;
+  font-family: 'Prompt', sans-serif;
+}
+#SummonerInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2em;
+}
+#summonerRankInfo {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  flex-shrink: 2;
+  align-items: center;
+}
+#summonerIcon {
+  display: flex;
+  flex-grow: 2;
+  width: 50%;
+  border-radius: 2em;
+  border: 2px solid rgba(255, 255, 255, 55);
+}
+#rankIcon {
+  display: flex;
+  width: 55%;
+}
+#MatchBoxes {
+  border-color: #afd433;
+  color: rgba(255, 255, 255, 0.861);
+}
+p {
+  margin: 0.5em;
+}
+
+#valorant:link, #valorant:visited, #champions:link, #champions:visited, #leaderboards:link, #leaderboards:visited, #home:link, #home:visited, #tft:link, #tft:visited {
+  display: inline-block;
+  background-color:#8f3535;
+  background:linear-gradient(to bottom, #555151 5%, #322e30 100%);
+  color: white;
+  padding: 14px 25px;
+  text-decoration: none;
+  border:0.10em double #1C6EA4;
+  border-radius: 5px;
+  border-color: #1C6EA4;
+  width: 30%;
+}
+#valorant:hover, #champions:hover, #leaderboards:hover, #home:hover, #tft:hover {
+  background:linear-gradient(to bottom, #353131 5%, #2c2a2b 100%);
+  background-color:#564e50;
+  position:relative;
+  border: 0.10em double #a41c49;
+}
+#valorant:active, #champions:active, #leaderboards:active, #home:active, #tft:active {
+  top: 1px;
+}
+
+#discordLogo {
+  width: 100%;
+}
+#DiscordLogoLink {
+  display: inline-block;
+  width: 8%;
+  height: 75%;
+}
+#discordLogo:hover {
+  filter: invert(20%);
+}
+
+#youtubeLogo {
+  width: 100%;
+}
+#YoutubeLogoLink {
+  display: inline-block;
+  width: 9%;
+  height: 80%;
+  margin-left: 5px;
+}
+#youtubeLogo:hover {
+  filter: invert(20%);
+}
+
+#twitterLogo {
+  width: 100%;
+}
+#TwitterLogoLink { 
+  display: inline-block;
   width: 10%;
-	border-radius:10px;
-	border:0.15em double #244680;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:19px;
-	padding:12px 37px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #66282f;
+  height: 90%; 
 }
-#LeaderboardBoxButton:hover {
-	background:linear-gradient(to bottom, #353131 5%, #2c2a2b 100%);
-	background-color:#564e50;
+#twitterLogo:hover {
+  filter: invert(20%);
 }
-#LeaderboardBoxButton:active {
-	position:relative;
-	top:1px;
+
+.EndpointBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+} 
+.EndpointLogos {
+  width: 55%;
+  display: inline-flex;
+  gap: 5px;
+  margin-top: 10px;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+.Endpoints {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#welcomeValorant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 3em;
+  font-family: 'Prompt', sans-serif;
+  color:rgba(255, 255, 255, 0.861);
+}
+
+#ValorantBoxButton {
+  background-color:#292828;
+  border:0.10em double #1C6EA4;
+  border-radius: 0.5em;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family: 'Prompt', sans-serif;
+  letter-spacing: 0.05em;
+  font-size:15px;
+  font-weight:bold;
+  padding:9px 23px;
+  text-decoration:none;
+  text-shadow:0px -1px 0px #7a2a1d;
+  width: 10%;
+}
+#ValorantBoxButton:hover {
+  background-color:#222020;
+  border: 0.10em double #a41c49;
+}
+#ValorantBoxButton:active {
+  position:relative;
+  top:1px;
+}
+
+#ValBoxInput {
+  width: 20%;
+  height: 25%;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  font-size: 0.5em;
+  border-width: 4px;
+  border-style: double;
+  border-color: #1C6EA4;
+  background-color: #181A1B;
+  color:rgba(255, 255, 255, 0.861);
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+}
+#ValBoxInput:focus {
+  outline: 0;
+}
+#ValBoxInput:hover {
+  background-color: #22212174;
+}
+
+.ValorantSearchBox {
+  display: flex; 
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#welcomeTFT {
+  font-size: 2em;
+  font-family: 'Prompt', sans-serif;
+  color:rgba(255, 255, 255, 0.861);
+}
+
+#SearchBoxInputTFT {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  font-size: 0.5em;
+  border-width: 4px;
+  border-style: double;
+  border-color: #1C6EA4;
+  background-color: #181A1B;
+  color:rgba(255, 255, 255, 0.861);
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  width: 20%;
+}
+#SearchBoxInputTFT:focus {
+  outline: 0;
+}
+#SearchBoxInputTFT:hover {
+  background-color: #22212174;
 }

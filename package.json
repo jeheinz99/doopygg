@@ -20,12 +20,14 @@
   },
   "homepage": "https://github.com/jeheinz99/doopygg#readme",
   "dependencies": {
-    "@material/textfield": "^14.0.0",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@material-ui/lab": "^4.0.0-alpha.61",
+    "@material-ui/styles": "^4.11.5",
     "axios": "^0.27.2",
     "express": "^4.18.1",
     "mongoose": "^6.3.4",
     "npm": "^8.10.0",
-    "pg": "^8.7.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-hot-loader": "^4.13.0",
@@ -33,7 +35,8 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.0",

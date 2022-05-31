@@ -11,10 +11,7 @@ const Matches = props => {
       <p>{champion}</p>
       <img id="championIcon" src={image}/>
       <p>{gameMode}</p>
-      <p>Game Duration:
-        <br></br>
-        {`${Math.floor(Number(matchLength / 60))} minutes ${Number(matchLength) % 60} seconds`}
-      </p>
+      <p>{`${Math.floor(Number(matchLength / 60))} minutes ${Number(matchLength) % 60} seconds`}</p>
       <p>Kills: {kills}</p>
       <p>Deaths: {deaths}</p>
       <p>Assists: {assists}</p>

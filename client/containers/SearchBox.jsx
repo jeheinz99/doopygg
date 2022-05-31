@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions.js'
 import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
 import SummonerBox from '../components/AppComponents/SummonerBox.jsx';
-import { Outlet, Link } from 'react-router-dom'
 
 const mapStateToProps = state => ({
   summonerName: state.summoners.summonerName,
@@ -36,9 +35,9 @@ const SearchBox = props => {
         <div id="welcome"> doopy.gg Summoners </div>
         <div id="inputSummonerName"> Input your Summoner Name Below </div>
         <br></br>
-        <input type="text" id="SearchBoxInput" onChange={ summonerNameData } required></input>
+        <input id="SearchBoxInput" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
         <br></br>
-        <button id="SearchBoxButton" onClick={() => props.loadSummonerData(summonerNameInput)}> Search! </button>
+        <button id="SearchBoxButton" onClick={() => props.loadSummonerData(summonerNameInput)}> Search </button>
       </div>
     <SummonerBox summonerName={summonerName} summonerLevel={summonerLevel} matchHistory={matchHistory} summonerRank={summonerRank}/>
     <MatchBoxes matchHistory={matchHistory}/>

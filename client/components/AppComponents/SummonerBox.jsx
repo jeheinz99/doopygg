@@ -6,6 +6,10 @@ const SummonerBox = props => {
   console.log(summonerRank);
   const rank = summonerRank[0];
   
+  // const temp = `https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-${rank.toLowerCase()}.png`
+
+  // const temp2 = `https://opgg-static.akamaized.net/images/medals_new/${rank.toLowerCase()}.png`
+
   return (
   <div>
     <h3>Summoner Information</h3>

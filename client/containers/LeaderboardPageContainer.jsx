@@ -22,9 +22,11 @@ const LeaderboardPageContainer = props => {
 
   return (
   <div className="LeaderboardPageBox">
-      <div className ="OuterSearchBox" id="welcome"> doopy.gg Leaderboards </div>
-      <button id="LeaderboardBoxButton" onClick={() => props.loadLeaderboardData()}> Search! </button>
-      <LeaderboardBoxes leaderboardData={ leaderboardData } />
+    <div className ="OuterSearchBox" id="welcome"> 
+      <p> doopy.gg Leaderboards </p>
+      <button className="OuterSearchBox" id="LeaderboardBoxButton" onClick={() => props.loadLeaderboardData()}> Search! </button>
+    </div>
+    <LeaderboardBoxes leaderboardData={ leaderboardData } />
   </div>
   );
 };

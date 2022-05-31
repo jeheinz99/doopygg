@@ -11,21 +11,25 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ChampionsPage from './routes/ChampionsPage'
 import NothingHerePage from './routes/NothingHerePage.jsx';
 import LeaderboardPage from './routes/LeaderboardPage.jsx';
+import ValorantPage from './routes/ValorantPage.jsx';
+import TFTPage from './routes/TFTPage.jsx'
 
 // store
 import store from './store';
 
 render (
   // wrapping app in provider and BrowserRouter for page navigation
-  <Provider store={store}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App/>} />
-          <Route path="champions" element={<ChampionsPage />} />
-          <Route path="leaderboards" element={<LeaderboardPage />} />
-          <Route path="*" element={<NothingHerePage />} />
-      </Routes>
-    </BrowserRouter>
-  </Provider>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+            <Route path="champions" element={<ChampionsPage />} />
+            <Route path="leaderboards" element={<LeaderboardPage />} />
+            <Route path="valorant" element={<ValorantPage />} />
+            <Route path="tft" element={<TFTPage />} />
+            <Route path="*" element={<NothingHerePage />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>,
   document.getElementById('contents')
 );
