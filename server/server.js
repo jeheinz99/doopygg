@@ -1,20 +1,56 @@
 const path = require('path');
 const express = require('express');
-
 const app = express();
 const PORT = 3000;
+
+// require summoner controllers
+const summonerController = require('./controllers/summonerController');
+
+// require valorant controllers
+const valorantController = require('./controllers/valorantController');
+
+const mongoose = require('mongoose');
+
 
 // parsing request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// router handler to respond with main app
-const summonerRouter = express.Router();
-summonerRouter.use('/', summonerRouter);
-// console.log('hiiiiiii');
+// // handles requests for static files
+app.use('/', express.static(path.join(__dirname, ' ../client')));
 
-// handles requests for static files
-app.use('/', express.static(path.join(__dirname, '../client')));
+
+// allows requests with headers to back-end from our localhost endpoint
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
+
+// SUMMONER ENDPOINT
+// router handler to handle all requests to main app endpoint with summoners
+const summonerRouter = express.Router();
+app.use('/:summonerName', summonerRouter);
+
+app.get('/:summonerName', summonerController.summData, (req, res) => {
+  console.log(res.locals.summonerData);
+  return res.status(200).send(res.locals.summonerData);
+});
+
+// VALORANT ENDPOINT
+// router handler to handle all request to /valorant endpoint 
+const valorantRouter = express.Router();
+app.use('/valorant', valorantRouter);
+
+app.get('/valorant/:riotId/:tagLine', valorantController.valData, (req, res) => {
+  console.log(res.locals.valData);
+  return res.status(200).send(res.locals.valData);
+});
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
@@ -33,8 +69,8 @@ app.use((err, req, res, next) => {
 });
 
 // starts server
-// app.listen(PORT, () => {
-//   console.log(`Server listening on port: ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
+});
 
 module.exports = app;

@@ -36,9 +36,9 @@ module.exports = {
     template: './client/index.html'
   })],
   devServer: {
-    // proxy: {
-    //   '/': 'http://localhost:3000',
-    // },
+    proxy: {
+      '/': 'http://localhost:3000',
+    },
     host: 'localhost',
     static: {
       directory: path.resolve(__dirname, './dist/index.html')

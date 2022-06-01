@@ -1,15 +1,16 @@
 const summonerController = {};
+const axios = require('axios');
 
 // need new api key every day
-const api_key = 'RGAPI-b90fea9f-7381-4904-9930-76d3f9da04e6'
+const api_key = 'RGAPI-b0aec923-5cd2-4d75-8dbe-f803f276f981'
 
 // middleware to retrieve data for summoner search on home page
 summonerController.summData = async (req, res, next) => {
 
-  console.log('hi plz work');
   const { summonerName } = req.params;
 
-    // this response returns the summoner's name and level
+  try {
+
     let responseSummData = await axios.get(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${api_key}`, 
     {
       headers: {
@@ -22,8 +23,7 @@ summonerController.summData = async (req, res, next) => {
 
     const { data } = responseSummData;
     const { puuid } = data;
-
-
+    
     // uses summoner's puuid to get summoner's match history list of past 10 games to an array
     let responseMatchData = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${api_key}`,
     {
@@ -37,9 +37,10 @@ summonerController.summData = async (req, res, next) => {
 
     // list of match IDs in an array
     const matchIdList = responseMatchData.data;
+    
     // summonerId from first API request used to get rank information
     const summonerId = responseSummData.data.id;
-
+    
     let responseRankData = await axios.get(`https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${api_key}`,
     {
       headers: {
@@ -49,8 +50,6 @@ summonerController.summData = async (req, res, next) => {
         "Origin": "https://developer.riotgames.com"
       }
     });
-
-    console.log(responseRankData.data);
 
     // checks to see if 1 of the 2 arrays returned are for ranked solo or ranked flex
     const rankData = [];
@@ -64,7 +63,6 @@ summonerController.summData = async (req, res, next) => {
     // console.log(responseMatchData);
 
     const matchHistoryData = [];
-    
     // iterates through the matchIdList of 10 match IDs and pushes the match data for each match to a new array matchHistoryData
     for (let i = 0; i < matchIdList.length; i++) {
       let responseMatchHistory = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchIdList[i]}?api_key=${api_key}`,
@@ -78,12 +76,10 @@ summonerController.summData = async (req, res, next) => {
         });
       matchHistoryData.push(responseMatchHistory.data.info);
     }
+    // iterates through the matchHistoryData list to find the summoner being-
+    // looked up so you only find their statistics for each match and push an object 
+    // with statistics from the last 10 matches 
 
-    /* 
-    iterates through the matchHistoryData list to find the summoner being-
-    looked up so you only find their statistics for each match and push an object 
-    with statistics from the last 10 matches 
-    */
 
     // logs third API call using array of matches 
     // console.log(matchHistoryData);
@@ -115,17 +111,14 @@ summonerController.summData = async (req, res, next) => {
       profileIcon: responseSummData.data.profileIconId,
       matchHistory: matchesData, 
     }
-
-    // console.log(summonerData);
+    console.log('summonerData back-end', summonerData);
     res.locals.summonerData = summonerData;
     next();
-
-    // } catch(err) {
-    // return next(createErr({
-    //   method: 'summData',
-    //   type: 'when receiving data from request',
-    //   err: 'err'
-    // }));
+  }
+  catch(err) {
+    console.log('error in summonerController at summData', err);
+    next(err);
+  }
 };
 
 module.exports = summonerController;

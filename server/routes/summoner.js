@@ -3,7 +3,7 @@ const express = require('express');
 const summonerController = require('../controllers/summonerController');
 
 // add request to get summoner data
-router.get('/', summonerController.summData, async (req, res) => {
+router.get('/:summonerName', summonerController.summData, async (req, res) => {
   console.log('hiiiiiii')
   return res.status(200).send(res.locals.summonerData);
 });
