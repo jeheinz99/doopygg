@@ -2,7 +2,7 @@ const summonerController = {};
 const axios = require('axios');
 
 // need new api key every day
-const api_key = 'RGAPI-b0aec923-5cd2-4d75-8dbe-f803f276f981'
+const api_key = 'RGAPI-dfb26bd0-9f47-4fed-875c-46eab36aa0be'
 
 // middleware to retrieve data for summoner search on home page
 summonerController.summData = async (req, res, next) => {
@@ -111,14 +111,14 @@ summonerController.summData = async (req, res, next) => {
       profileIcon: responseSummData.data.profileIconId,
       matchHistory: matchesData, 
     }
-    console.log('summonerData back-end', summonerData);
+    // console.log('summonerData back-end', summonerData);
     res.locals.summonerData = summonerData;
     next();
   }
   catch(err) {
     console.log('error in summonerController at summData', err);
     next(err);
-  }
+  };
 };
 
 module.exports = summonerController;

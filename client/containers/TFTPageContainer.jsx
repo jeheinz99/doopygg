@@ -11,8 +11,7 @@ const mapStateToProps = state => ({
   summonerIcon: state.tft.summonerIcon,
 });
 
-const mapDispatchToProps = dispatch => (
-  {
+const mapDispatchToProps = dispatch => ({
     loadTFTData: async (input) => {
       const TFTData = await actions.getTFTData(input);
       dispatch(actions.addTFTDataActionCreator(TFTData));

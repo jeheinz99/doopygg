@@ -4,7 +4,7 @@ import TFTBoxes from './TFTBoxes.jsx'
 const TFTMatchBoxes = props => {
 
   const { TFTData } = props;
-  console.log(TFTData);
+  // console.log(TFTData);
 
   const matchList = [];
   for (let i = 0; i < TFTData.length; i++) {

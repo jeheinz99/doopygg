@@ -1,15 +1,14 @@
 const valorantController = {};
 const axios = require('axios');
 
-const api_key = 'RGAPI-b0aec923-5cd2-4d75-8dbe-f803f276f981';
+const api_key = 'RGAPI-dfb26bd0-9f47-4fed-875c-46eab36aa0be';
 
 valorantController.valData = async (req, res, next) => {
 
   const { riotId, tagLine } = req.params;
-  console.log('riotId and tagLine in controller', riotId, tagLine);
+  // console.log('riotId and tagLine in controller', riotId, tagLine);
 
   try {
-
     const valDataResponse = await axios.get(`https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${riotId}/${tagLine}?api_key=${api_key}`,
     {
       headers: {

@@ -3,7 +3,7 @@ import React from 'react';
 const SummonerBox = props => {
 
   const { summonerName, summonerLevel, matchHistory, summonerRank } = props;
-  console.log(summonerRank);
+  // console.log(summonerRank);
   const rank = summonerRank[0];
 
   return (

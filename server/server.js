@@ -9,6 +9,13 @@ const summonerController = require('./controllers/summonerController');
 // require valorant controllers
 const valorantController = require('./controllers/valorantController');
 
+// require tft controllers
+const TFTController = require('./controllers/TFTController');
+
+// require leaderboard controllers
+const leaderboardController = require('./controllers/leaderboardController');
+
+
 const mongoose = require('mongoose');
 
 
@@ -17,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // // handles requests for static files
-app.use('/', express.static(path.join(__dirname, ' ../client')));
+// app.use('/', express.static(path.join(__dirname, ' ../client')));
 
 
 // allows requests with headers to back-end from our localhost endpoint
@@ -40,6 +47,26 @@ app.use('/:summonerName', summonerRouter);
 app.get('/:summonerName', summonerController.summData, (req, res) => {
   console.log(res.locals.summonerData);
   return res.status(200).send(res.locals.summonerData);
+});
+
+// TFT ENDPOINT 
+// router handler to handle all request to /tft endpoint
+const TFTRouter = express.Router();
+app.use('/tft/:summonerName', TFTRouter);
+
+app.get('/tft/:summonerName', TFTController.TFTData, (req, res) => {
+  console.log(res.locals.TFTData);
+  return res.status(200).send(res.locals.TFTData);
+});
+
+// LEADERBOARD ENDPOINT
+// router handler to handle all request to /leaderboard endpoint
+const leaderboardRouter = express.Router();
+app.use('/leaderboard', leaderboardRouter);
+
+app.get('/leaderboard', leaderboardController.leaderboardData, (req, res) => {
+  console.log(res.locals.leaderboardData);
+  return res.status(200).send(res.locals.leaderboardData);
 });
 
 // VALORANT ENDPOINT
