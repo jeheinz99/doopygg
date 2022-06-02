@@ -2,9 +2,9 @@ import React from 'react';
 
 const Matches = props => {
   
-  const { kills, deaths, assists, matchLength, champion, gameMode, id } = props;
+  const { kills, deaths, assists, matchLength, champion, gameMode, id, championId } = props;
   
-  const image = `https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${champion}.png`
+  const image = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`
 
   return (
     <div className="Matches" id={id}>

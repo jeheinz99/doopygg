@@ -1,8 +1,6 @@
 const summonerController = {};
 const axios = require('axios');
-
-// need new api key every day
-const api_key = 'RGAPI-dfb26bd0-9f47-4fed-875c-46eab36aa0be'
+const api_key = '';
 
 // middleware to retrieve data for summoner search on home page
 summonerController.summData = async (req, res, next) => {
@@ -83,7 +81,7 @@ summonerController.summData = async (req, res, next) => {
 
     // logs third API call using array of matches 
     // console.log(matchHistoryData);
-
+    console.log('in back-end', matchHistoryData);
     const matchesData = [];
 
     for (let i = 0; i < matchHistoryData.length; i++) {
@@ -91,6 +89,7 @@ summonerController.summData = async (req, res, next) => {
         if (matchHistoryData[i].participants[j].summonerName === summonerName) {
           const player = matchHistoryData[i].participants[j];
           matchesData.push({
+            championId: player.championId,
             summonerIcon: player.profileIcon,
             kills: player.kills,
             deaths: player.deaths,

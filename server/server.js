@@ -39,16 +39,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-// SUMMONER ENDPOINT
-// router handler to handle all requests to main app endpoint with summoners
-const summonerRouter = express.Router();
-app.use('/:summonerName', summonerRouter);
-
-app.get('/:summonerName', summonerController.summData, (req, res) => {
-  console.log(res.locals.summonerData);
-  return res.status(200).send(res.locals.summonerData);
-});
-
 // TFT ENDPOINT 
 // router handler to handle all request to /tft endpoint
 const TFTRouter = express.Router();
@@ -62,9 +52,9 @@ app.get('/tft/:summonerName', TFTController.TFTData, (req, res) => {
 // LEADERBOARD ENDPOINT
 // router handler to handle all request to /leaderboard endpoint
 const leaderboardRouter = express.Router();
-app.use('/leaderboard', leaderboardRouter);
+app.use('/leaderboards/:regionName', leaderboardRouter);
 
-app.get('/leaderboard', leaderboardController.leaderboardData, (req, res) => {
+app.get('/leaderboards/:regionName', leaderboardController.leaderboardData, (req, res) => {
   console.log(res.locals.leaderboardData);
   return res.status(200).send(res.locals.leaderboardData);
 });
@@ -77,6 +67,16 @@ app.use('/valorant', valorantRouter);
 app.get('/valorant/:riotId/:tagLine', valorantController.valData, (req, res) => {
   console.log(res.locals.valData);
   return res.status(200).send(res.locals.valData);
+});
+
+// SUMMONER ENDPOINT
+// router handler to handle all requests to main app endpoint with summoners
+const summonerRouter = express.Router();
+app.use('/:summonerName', summonerRouter);
+
+app.get('/:summonerName', summonerController.summData, (req, res) => {
+  console.log(res.locals.summonerData);
+  return res.status(200).send(res.locals.summonerData);
 });
 
 // catch-all route handler for any requests to an unknown route

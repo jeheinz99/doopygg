@@ -37,10 +37,11 @@ export const addTFTDataActionCreator = TFTData => ({
 // asynchronous calls to get data before using synchronous actions
 
 // asynchronous call to API to get info for top 25 NA players currently
-export const getLeaderboardData = async () => {
+export const getLeaderboardData = async (regionName) => {
 
   // this sends a get request to leaderboardRouter in server.js
-  let responseLeaderboardData = await axios.get('/leaderboards');
+  console.log(regionName);
+  let responseLeaderboardData = await axios.get(`/leaderboards/${regionName}`);
   console.log('LEADERBOARDS response from back-end', responseLeaderboardData.data);
   return responseLeaderboardData.data;
 

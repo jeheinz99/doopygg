@@ -1,8 +1,6 @@
 const TFTController = {};
 const axios = require('axios');
-
-// need new api key every day
-const api_key = 'RGAPI-dfb26bd0-9f47-4fed-875c-46eab36aa0be';
+const api_key = '';
 
 // middleware to retrieve data for summoner search on TFT page
 TFTController.TFTData = async (req, res, next) => {
@@ -75,6 +73,7 @@ TFTController.TFTData = async (req, res, next) => {
       summonerName: summonerName,
       summonerIcon: profileIconId,
     }
+
     // console.log(TFTData);
     res.locals.TFTData = TFTData;
     next()

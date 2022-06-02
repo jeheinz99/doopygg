@@ -1,9 +1,10 @@
 import React from 'react';
 import SearchBox from './containers/SearchBox.jsx';
 import { Outlet, Link } from 'react-router-dom';
-import discordLogo from './assets/discordLogo.png'
-import twitterLogo from './assets/twitterLogo.png'
-import youtubeLogo from './assets/youtubeLogo.png'
+import discordLogo from './assets/discordLogo.png';
+import twitterLogo from './assets/twitterLogo.png';
+import youtubeLogo from './assets/youtubeLogo.png';
+// import valorantLogo from './assets/valorantLogo.png';
 
 import './styles.css'
 
@@ -23,10 +24,11 @@ const App = props => {
           </a>
         </div>
         <div className="Endpoints">
-          <Link id="valorant" to="/valorant"> Valorant </Link> 
-          <Link id="champions" to="/champions"> Champions </Link>
+          <Link id="home" to="/"> Home </Link>
+          <Link id="valorant" to="/valorant"> Valorant </Link>
           <Link id="leaderboards" to="/leaderboards"> Leaderboards </Link>
           <Link id="tft" to="/tft"> TFT </Link>
+          <Link id="champions" to="/champions"> Champions </Link>
         </div>
       </div>
       <SearchBox />

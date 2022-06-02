@@ -39,8 +39,8 @@ const TFTPageContainer = props => {
         <br></br>
         <button id="SearchBoxButton" onClick={() => props.loadTFTData(summonerNameInput)}> Search </button>
       </div>
-      <TFTSummonerBox summonerName={summonerName} summonerIcon={summonerIcon}/>
-      <TFTMatchBoxes TFTData={TFTData}/>
+      {TFTData[0] ? <TFTSummonerBox summonerName={summonerName} summonerIcon={summonerIcon}/> : ''};
+      {TFTData[0] ? <TFTMatchBoxes TFTData={TFTData}/> : ''};
     </div>
   );
 };

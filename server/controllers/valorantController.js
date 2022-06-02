@@ -1,7 +1,6 @@
 const valorantController = {};
 const axios = require('axios');
-
-const api_key = 'RGAPI-dfb26bd0-9f47-4fed-875c-46eab36aa0be';
+const api_key = '';
 
 valorantController.valData = async (req, res, next) => {
 

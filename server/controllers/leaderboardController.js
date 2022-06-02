@@ -1,16 +1,17 @@
 const leaderboardController = {};
 const axios = require('axios');
-
-// need new api key every day
-const api_key = 'RGAPI-dfb26bd0-9f47-4fed-875c-46eab36aa0be';
+// const api_key = 'RGAPI-4a5f553b-cb12-4fee-9f91-f91908f38321';
 
 // middleware to retrieve data for top 25 on NA leaderboards
 leaderboardController.leaderboardData = async (req, res, next) => {
 
-  console.log('hisdafasdgiahgbafhgabfg');
+  const { regionName } = req.params;
+
+  console.log('region name in back-end', regionName);
+
   try {
     // async call to API to get summonerName, tier, wins/losses, leaguePoints about top 25 Challengers in N/A
-    const leaderboardDataResponse = await axios.get(`https://na1.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/I?page=1&api_key=${api_key}`,
+    const leaderboardDataResponse = await axios.get(`https://${regionName}.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/I?page=1&api_key=${api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -27,8 +28,8 @@ leaderboardController.leaderboardData = async (req, res, next) => {
     const profileIconArr = [];
     for (let i = 0; i < 25; i++) {
       const { summonerId } = data[i];
-      // console.log(summonerId);
-    const leaderboardDataResponseTwo = await axios.get(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/${summonerId}?api_key=${api_key}`,
+      console.log(summonerId);
+    const leaderboardDataResponseTwo = await axios.get(`https://${regionName}.api.riotgames.com/lol/summoner/v4/summoners/${summonerId}?api_key=${api_key}`,
     {
       headers: {
           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",

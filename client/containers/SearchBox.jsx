@@ -39,8 +39,8 @@ const SearchBox = props => {
         <br></br>
         <button id="SearchBoxButton" onClick={() => props.loadSummonerData(summonerNameInput)}> Search </button>
       </div>
-    <SummonerBox summonerName={summonerName} summonerLevel={summonerLevel} matchHistory={matchHistory} summonerRank={summonerRank}/>
-    <MatchBoxes matchHistory={matchHistory}/>
+    {matchHistory[0] ? <SummonerBox summonerName={summonerName} summonerLevel={summonerLevel} matchHistory={matchHistory} summonerRank={summonerRank}/> : ''};
+    {matchHistory[0] ? <MatchBoxes matchHistory={matchHistory}/> : ''};
   </div>
   );
 };

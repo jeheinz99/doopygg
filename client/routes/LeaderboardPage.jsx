@@ -24,9 +24,10 @@ const LeaderboardPage = props => {
         </div>
         <div className="Endpoints">
           <Link id="home" to="/"> Home </Link>
-          <Link id="champions" to="/champions"> Champions </Link>
           <Link id="valorant" to="/valorant"> Valorant </Link>
+          <Link id="leaderboards" to="/leaderboards"> Leaderboards </Link>
           <Link id="tft" to="/tft"> TFT </Link>
+          <Link id="champions" to="/champions"> Champions </Link>
           <Outlet />
         </div>
       </div>

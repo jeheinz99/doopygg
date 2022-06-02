@@ -3,7 +3,7 @@ import React from 'react';
 const TFTBoxes = props => {
 
   const { augments, companion, damageDealt, level, matchLength, placement, setNumber, traits, units, id } = props
-  // console.log(augments);
+  console.log('this is augments', augments);
   // console.log(traits);
   // console.log(units);
   // console.log(companion);

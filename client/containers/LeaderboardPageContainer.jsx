@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => (
   {
-  loadLeaderboardData: async () => {
-    const leaderboardData = await actions.getLeaderboardData();
+  loadLeaderboardData: async (input) => {
+    const leaderboardData = await actions.getLeaderboardData(input);
     dispatch(actions.addLeaderboardDataActionCreator(leaderboardData));
   }
 });
@@ -20,13 +20,22 @@ const LeaderboardPageContainer = props => {
   const { leaderboardData } = props;
   // console.log(leaderboardData);
 
+  let regionIdInput;
+  function regionIdData (e) {
+    regionIdInput = e.target.value;
+    return regionIdInput;
+  }
+
   return (
   <div className="LeaderboardPageBox">
     <div className ="OuterSearchBox" id="welcome"> 
-      <p> doopy.gg Leaderboards </p>
-      <button className="OuterSearchBox" id="LeaderboardBoxButton" onClick={() => props.loadLeaderboardData()}> Search! </button>
+      <p> doopy.gg Leaderboards <br></br>
+                Input Your Region
+      </p>
+      <input id="ValBoxInput" placeholder="Ex. NA1" onChange={ regionIdData } required></input>
+      <button className="OuterSearchBox" id="LeaderboardBoxButton" onClick={() => props.loadLeaderboardData(regionIdInput)}> Search! </button>
     </div>
-    <LeaderboardBoxes leaderboardData={ leaderboardData } />
+    {leaderboardData[0] ? <LeaderboardBoxes leaderboardData={ leaderboardData } /> : '' };
   </div>
   );
 };
