@@ -1,6 +1,6 @@
 // import app/provider/redux
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux'
 import App from './App.jsx';
 
@@ -17,7 +17,9 @@ import TFTPage from './routes/TFTPage.jsx'
 // store
 import store from './store';
 
-render (
+const root = createRoot(document.getElementById('contents'));
+
+root.render (
   // wrapping app in provider and BrowserRouter for page navigation
     <Provider store={store}>
       <BrowserRouter>
@@ -30,6 +32,5 @@ render (
             <Route path="*" element={<NothingHerePage />} />
         </Routes>
       </BrowserRouter>
-    </Provider>,
-  document.getElementById('contents')
+    </Provider>
 );

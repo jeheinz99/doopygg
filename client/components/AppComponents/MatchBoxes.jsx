@@ -1,5 +1,6 @@
 import React from 'react';
-import Matches from './Boxes';
+import Matches from './Boxes.jsx';
+
 
 const MatchBoxes = props => {
 

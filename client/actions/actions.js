@@ -40,9 +40,9 @@ export const addTFTDataActionCreator = TFTData => ({
 export const getLeaderboardData = async (regionName) => {
 
   // this sends a get request to leaderboardRouter in server.js
-  console.log(regionName);
+  // console.log(regionName);
   let responseLeaderboardData = await axios.get(`/leaderboards/${regionName}`);
-  console.log('LEADERBOARDS response from back-end', responseLeaderboardData.data);
+  // console.log('LEADERBOARDS response from back-end', responseLeaderboardData.data);
   return responseLeaderboardData.data;
 
 };
@@ -52,7 +52,7 @@ export const getSummonerData = async (summonerName) => {
 
   // this sends a get request to summonerRouter in server.js
   let responseSummData = await axios.get(`/${summonerName}`);
-  console.log('SUMM response from back-end', responseSummData.data);
+  // console.log('SUMM response from back-end', responseSummData.data);
   return responseSummData.data;
 
 };
@@ -62,7 +62,7 @@ export const getValorantData = async (riotID, tagLine) => {
 
   // this sends a get request to valorantRouter in server.js
   let responseValData = await axios.get(`/valorant/${riotID}/${tagLine}`);
-  console.log('VAL response from back-end', responseValData.data);
+  // console.log('VAL response from back-end', responseValData.data);
   return responseValData.data;
   
 };
@@ -72,7 +72,7 @@ export const getTFTData = async (summonerName) => {
 
   // this sends a get request to TFTRouter in server.js
   let responseTFTData = await axios.get(`/tft/${summonerName}`);
-  console.log('TFT response from back-end', responseTFTData.data);
+  // console.log('TFT response from back-end', responseTFTData.data);
   return responseTFTData.data;
 
 };

@@ -7,6 +7,10 @@ const TFTBoxes = props => {
   // console.log(traits);
   // console.log(units);
   // console.log(companion);
+  // const augmentsArr = [];
+  // for (let i = 0; i < augments.length; i++) {
+  //   augmentsArr.push({img src=`https://raw.communitydragon.org/12.9/plugins/rcp-be-lol-game-data/global/default`})
+  // }
 
   return (
     <div className="TFTMatches" id={id}>

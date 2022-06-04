@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
   loadSummonerData: async (input) => {
     const summonerData = await actions.getSummonerData(input);
     dispatch(actions.addSummonerDataActionCreator(summonerData));
-  }
+  },
 });
 
 const SearchBox = props => {
@@ -39,8 +39,8 @@ const SearchBox = props => {
         <br></br>
         <button id="SearchBoxButton" onClick={() => props.loadSummonerData(summonerNameInput)}> Search </button>
       </div>
-    {matchHistory[0] ? <SummonerBox summonerName={summonerName} summonerLevel={summonerLevel} matchHistory={matchHistory} summonerRank={summonerRank}/> : ''};
-    {matchHistory[0] ? <MatchBoxes matchHistory={matchHistory}/> : ''};
+    {matchHistory[0] ? <SummonerBox summonerName={summonerName} summonerLevel={summonerLevel} matchHistory={matchHistory} summonerRank={summonerRank}/> : ''}
+    {matchHistory[0] ? <MatchBoxes matchHistory={matchHistory}/> : ''}
   </div>
   );
 };

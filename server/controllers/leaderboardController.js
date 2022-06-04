@@ -1,6 +1,6 @@
 const leaderboardController = {};
 const axios = require('axios');
-// const api_key = 'RGAPI-4a5f553b-cb12-4fee-9f91-f91908f38321';
+const api_key = '';
 
 // middleware to retrieve data for top 25 on NA leaderboards
 leaderboardController.leaderboardData = async (req, res, next) => {

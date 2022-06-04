@@ -45,7 +45,7 @@ const TFTRouter = express.Router();
 app.use('/tft/:summonerName', TFTRouter);
 
 app.get('/tft/:summonerName', TFTController.TFTData, (req, res) => {
-  console.log(res.locals.TFTData);
+  // console.log(res.locals.TFTData);
   return res.status(200).send(res.locals.TFTData);
 });
 
@@ -55,7 +55,7 @@ const leaderboardRouter = express.Router();
 app.use('/leaderboards/:regionName', leaderboardRouter);
 
 app.get('/leaderboards/:regionName', leaderboardController.leaderboardData, (req, res) => {
-  console.log(res.locals.leaderboardData);
+  // console.log(res.locals.leaderboardData);
   return res.status(200).send(res.locals.leaderboardData);
 });
 
@@ -65,7 +65,7 @@ const valorantRouter = express.Router();
 app.use('/valorant', valorantRouter);
 
 app.get('/valorant/:riotId/:tagLine', valorantController.valData, (req, res) => {
-  console.log(res.locals.valData);
+  // console.log(res.locals.valData);
   return res.status(200).send(res.locals.valData);
 });
 
@@ -75,7 +75,7 @@ const summonerRouter = express.Router();
 app.use('/:summonerName', summonerRouter);
 
 app.get('/:summonerName', summonerController.summData, (req, res) => {
-  console.log(res.locals.summonerData);
+  // console.log(res.locals.summonerData);
   return res.status(200).send(res.locals.summonerData);
 });
 

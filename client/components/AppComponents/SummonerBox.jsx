@@ -11,7 +11,7 @@ const SummonerBox = props => {
     <h3>Summoner Information</h3>
     <div className="SummonerInfoBox">
       <div id="SummonerInfo">
-        {matchHistory[0] ? <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${matchHistory[0].summonerIcon}.jpg`}/> : ''}
+        {matchHistory[0] && <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${matchHistory[0].summonerIcon}.jpg`}/>}
         <p>{`Name: ${summonerName}`}</p>
         <p>{`Level: ${summonerLevel}`}</p>
       </div>
