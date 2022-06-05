@@ -1,25 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions/actions.js'
+import { getSummonerData } from '../actions/actions.js';
 import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
 import SummonerBox from '../components/AppComponents/SummonerBox.jsx';
+import { useSelector, useDispatch } from 'react-redux';
 
-const mapStateToProps = state => ({
-  summonerName: state.summoners.summonerName,
-  summonerLevel: state.summoners.summonerLevel,
-  summonerRank: state.summoners.summonerRank,
-  summonerNameInput: state.summoners.summonerNameInput,
-  matchHistory: state.summoners.matchHistory,
-});
-
-const mapDispatchToProps = dispatch => ({
-  loadSummonerData: async (input) => {
-    const summonerData = await actions.getSummonerData(input);
-    dispatch(actions.addSummonerDataActionCreator(summonerData));
-  }
-});
-
-const SearchBox = props => {
+const SearchBox = () => {
+  const matchHistory = useSelector(state => state.summoners.matchHistory);
+  const summonerName = useSelector(state => state.summoners.summonerName);
+  const loadSummonerData = useDispatch();
 
   let summonerNameInput;
     function summonerNameData (e) {
@@ -27,9 +15,7 @@ const SearchBox = props => {
       return summonerNameInput;
     }
   
-  const { matchHistory, summonerName, summonerLevel, summonerRank, loadSummonerData} = props;
-  console.log('matchHistory in SearchBox', matchHistory)
-  // console.log('boxState in SearchBox', matchHistory[0].boxState)
+  // const { matchHistory, summonerName, summonerLevel, summonerRank, loadSummonerData} = props;
 
   return (
     <div className="OuterSearchBox">
@@ -39,12 +25,12 @@ const SearchBox = props => {
         <br></br>
         <input id="SearchBoxInput" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
         <br></br>
-        <button id="SearchBoxButton" onClick={() => loadSummonerData(summonerNameInput)}> Search </button>
+        <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> Search </button>
       </div>
-    {matchHistory[0] ? <SummonerBox summonerName={summonerName} summonerLevel={summonerLevel} matchHistory={matchHistory} summonerRank={summonerRank}/> : ''}
-    {matchHistory[0] ? <MatchBoxes matchHistory={matchHistory}/> : ''}
+    {matchHistory[0] ? <SummonerBox /> : ''}
+    {matchHistory[0] ? <MatchBoxes /> : ''}
   </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);
+export default SearchBox;

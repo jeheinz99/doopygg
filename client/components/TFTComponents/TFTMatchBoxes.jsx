@@ -1,10 +1,10 @@
 import React from 'react';
 import TFTBoxes from './TFTBoxes.jsx'
+import { useSelector } from 'react-redux';
 
-const TFTMatchBoxes = props => {
+const TFTMatchBoxes = () => {
 
-  const { TFTData } = props;
-  // console.log(TFTData);
+  const TFTData = useSelector(state => state.tft.TFTData)
 
   const matchList = [];
   for (let i = 0; i < TFTData.length; i++) {

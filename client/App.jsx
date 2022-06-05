@@ -8,7 +8,7 @@ import youtubeLogo from './assets/youtubeLogo.png';
 
 import './styles.css'
 
-const App = props => {
+const App = () => {
   return (
     <div className="AppBox">
       <div className="EndpointBar">

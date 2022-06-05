@@ -1,8 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const TFTSummonerBox = props => {
+const TFTSummonerBox = () => {
 
-  const {  summonerName, summonerIcon } = props;
+  const summonerName = useSelector(state => state.tft.summonerName);
+  const summonerIcon = useSelector(state => state.tft.summonerIcon);
 
   return (
     <div>

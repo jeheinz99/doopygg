@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import DropDownBox from './DropDownBox.jsx';
 
-
 const Matches = props => {
-  
   const { kills, deaths, assists, matchLength, champion, gameMode, id, championId } = props;
-
+  
   const image = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
   
   const [open, setOpen] = useState(false);
+  // const summonerName = useSelector(state => state.summoner.summonerName)
 
   return (
     <div className="Matches" id={id}>

@@ -2,11 +2,10 @@ import * as types from '../constants/actionTypes';
 
 const initialState = {
   summonerName: '',
-  summonerLevel: '',
-  summonerRank: '',
-  sommonerNameInput: '',
+  summonerLevel: 0,
   matchHistory: [],
-};
+  summonerRank: '',
+}
 
 const summonerReducer = (state = initialState, action) => {
   

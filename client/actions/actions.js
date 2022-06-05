@@ -3,11 +3,6 @@ import axios from 'axios'
 import * as types from '../constants/actionTypes';
 
 // export actions and payloads
-   
-export const addSummonerMatchHistory = matchHistory => ({
-  type: types.ADD_MATCH_HISTORY,
-  payload: matchHistory
-});
 
 export const addSummonerDataActionCreator = summonerData => ({
   type: types.ADD_SUMMONER_DATA,
@@ -34,47 +29,31 @@ export const addTFTDataActionCreator = TFTData => ({
   payload: TFTData
 });
 
-// asynchronous calls to get data before using synchronous actions
-
-// asynchronous call to API to get info for top 25 NA players currently
-export const getLeaderboardData = async (regionName) => {
-
-  // this sends a get request to leaderboardRouter in server.js
-  // console.log(regionName);
-  let responseLeaderboardData = await axios.get(`/leaderboards/${regionName}`);
-  // console.log('LEADERBOARDS response from back-end', responseLeaderboardData.data);
-  return responseLeaderboardData.data;
-
+// async thunks
+export const getLeaderboardData = (regionName) => async dispatch => {
+  const responseLeaderboardData = await axios.get(`/leaderboards/${regionName}`);
+  console.log('LEADERBOARDS response from back-end', responseLeaderboardData.data);
+  dispatch(addLeaderboardDataActionCreator(responseLeaderboardData.data));
 };
 
-// asynchronous call to API to get info based on summonerName input
-export const getSummonerData = async (summonerName) => {
-
-  // this sends a get request to summonerRouter in server.js
-  let responseSummData = await axios.get(`/${summonerName}`);
-  // console.log('SUMM response from back-end', responseSummData.data);
-  return responseSummData.data;
-
+export const getSummonerData = summonerName => async dispatch => {
+  const responseSummData = await axios.get(`/${summonerName}`);
+  console.log('SUMM response from back-end', responseSummData.data);
+  dispatch(addSummonerDataActionCreator(responseSummData.data));
 };
 
 // asynchronous call to API to get info based on riot ID input
-export const getValorantData = async (riotID, tagLine) => {
-
-  // this sends a get request to valorantRouter in server.js
-  let responseValData = await axios.get(`/valorant/${riotID}/${tagLine}`);
-  // console.log('VAL response from back-end', responseValData.data);
-  return responseValData.data;
-  
+export const getValorantData = (riotID, tagLine) => async dispatch => {
+  const responseValData = await axios.get(`/valorant/${riotID}/${tagLine}`);
+  console.log('VAL response from back-end', responseValData.data);
+  dispatch(addValorantDataActionCreator(responseValData.data));  
 };
 
 // asynchronous call to API to get info based on summonerName input
-export const getTFTData = async (summonerName) => {
-
-  // this sends a get request to TFTRouter in server.js
-  let responseTFTData = await axios.get(`/tft/${summonerName}`);
-  // console.log('TFT response from back-end', responseTFTData.data);
-  return responseTFTData.data;
-
+export const getTFTData = (summonerName) => async dispatch => {
+  const responseTFTData = await axios.get(`/tft/${summonerName}`);
+  console.log('TFT response from back-end', responseTFTData.data);
+  dispatch(addTFTDataActionCreator(responseTFTData.data));
 };
 
 export const getChampionData = async (championName) => {

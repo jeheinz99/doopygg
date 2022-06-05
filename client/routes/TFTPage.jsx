@@ -5,7 +5,7 @@ import discordLogo from '../assets/discordLogo.png';
 import twitterLogo from '../assets/twitterLogo.png';
 import youtubeLogo from '../assets/youtubeLogo.png';
 
-const TFTPage = props => {
+const TFTPage = () => {
   return (
     <div className="AppBox">
       <div className="EndpointBar">

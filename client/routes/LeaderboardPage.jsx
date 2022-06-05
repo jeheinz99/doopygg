@@ -7,7 +7,7 @@ import youtubeLogo from '../assets/youtubeLogo.png';
 
 import '../styles.css'
 
-const LeaderboardPage = props => {
+const LeaderboardPage = () => {
   return (
     <div className="AppBox">
       <div className="EndpointBar">

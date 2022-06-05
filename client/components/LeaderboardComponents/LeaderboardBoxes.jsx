@@ -1,9 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Boxes from './Boxes.jsx';
 
-const LeaderboardBoxes = props => {
+const LeaderboardBoxes = () => {
 
-  const { leaderboardData } = props;
+  const leaderboardData = useSelector(state => state.leaderboard.leaderboardData)
 
   const boxes = [];
   for (let i = 0; i < leaderboardData.length; i++) {

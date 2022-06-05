@@ -1,9 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const SummonerBox = props => {
+const SummonerBox = () => {
+  const summonerLevel = useSelector(state => state.summoners.summonerLevel);
+  const matchHistory = useSelector(state => state.summoners.matchHistory);
+  const summonerRank = useSelector(state => state.summoners.summonerRank);
+  const summonerName = useSelector(state => state.summoners.summonerName);
 
-  const { summonerName, summonerLevel, matchHistory, summonerRank } = props;
-  // console.log(summonerRank);
   const rank = summonerRank[0];
 
   return (

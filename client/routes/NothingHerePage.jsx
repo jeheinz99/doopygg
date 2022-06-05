@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const NothingHerePage = props => {
+const NothingHerePage = () => {
   return (
     <div>
       <h1>There's nothing here</h1>

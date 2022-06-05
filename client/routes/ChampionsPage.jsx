@@ -7,7 +7,7 @@ import twitterLogo from '../assets/twitterLogo.png';
 
 
 
-const ChampionsPage = props => {
+const ChampionsPage = () => {
   return (
     <div className="AppBox">
       <div className="EndpointBar">

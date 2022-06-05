@@ -20,10 +20,7 @@
   },
   "homepage": "https://github.com/jeheinz99/doopygg#readme",
   "dependencies": {
-    "@material-ui/core": "^4.12.4",
-    "@material-ui/icons": "^4.11.3",
-    "@material-ui/lab": "^4.0.0-alpha.61",
-    "@material-ui/styles": "^4.11.5",
+    "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
     "express": "^4.18.1",
     "mongoose": "^6.3.4",

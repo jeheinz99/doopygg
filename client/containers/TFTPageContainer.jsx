@@ -1,33 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions/actions.js';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTFTData } from '../actions/actions.js';
 import TFTMatchBoxes from '../components/TFTComponents/TFTMatchBoxes.jsx';
 
 import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx'
 
-const mapStateToProps = state => ({
-  TFTData: state.tft.TFTData,
-  summonerName: state.tft.summonerName,
-  summonerIcon: state.tft.summonerIcon,
-});
+const TFTPageContainer = () => {
 
-const mapDispatchToProps = dispatch => ({
-    loadTFTData: async (input) => {
-      const TFTData = await actions.getTFTData(input);
-      dispatch(actions.addTFTDataActionCreator(TFTData));
-    }
-  }
-);
-
-const TFTPageContainer = props => {
+  const loadTFTData = useDispatch();
+  const summonerName = useSelector(state => state.tft.summonerName);
+  const TFTData = useSelector(state => state.tft.TFTData);
+  const summonerIcon = useSelector(state => state.tft.summonerIcon);
 
   let summonerNameInput;
     function summonerNameData (e) {
       summonerNameInput = e.target.value;
       return summonerNameInput;
     }
-
-    const { summonerName, TFTData, summonerIcon } = props;
 
   return (
     <div className="OuterSearchBox">
@@ -37,12 +26,12 @@ const TFTPageContainer = props => {
         <br></br>
         <input id="SearchBoxInputTFT" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
         <br></br>
-        <button id="SearchBoxButton" onClick={() => props.loadTFTData(summonerNameInput)}> Search </button>
+        <button id="SearchBoxButton" onClick={() => loadTFTData(getTFTData(summonerNameInput))}> Search </button>
       </div>
-      {TFTData[0] ? <TFTSummonerBox summonerName={summonerName} summonerIcon={summonerIcon}/> : ''};
-      {TFTData[0] ? <TFTMatchBoxes TFTData={TFTData}/> : ''};
+      {TFTData[0] && <TFTSummonerBox />};
+      {TFTData[0] && <TFTMatchBoxes />};
     </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TFTPageContainer);
+export default TFTPageContainer;
