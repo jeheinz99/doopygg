@@ -1,6 +1,6 @@
 const summonerController = {};
 const axios = require('axios');
-const api_key = 'RGAPI-51cfb372-28a2-472c-9bb1-5c27f715607b';
+const api_key = 'RGAPI-1ced6ff3-f1ea-4e3d-8e05-3c378cddb138';
 
 // middleware to retrieve data for summoner search on home page
 summonerController.summData = async (req, res, next) => {

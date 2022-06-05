@@ -4,7 +4,7 @@ import Matches from './Boxes.jsx';
 
 const MatchBoxes = props => {
 
-  const { matchHistory } = props;
+  const { matchHistory } = props;  
 
   const matchList = [];
   for (let i = 0; i < matchHistory.length; i++) {

@@ -24,7 +24,7 @@ const summonerReducer = (state = initialState, action) => {
         summonerRank: payload.summonerRank,
         }
       );
-      
+
   // returning default state if no case is met
   default: {
     return state;
