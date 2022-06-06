@@ -2,6 +2,45 @@ const summonerController = {};
 const axios = require('axios');
 const api_key = 'RGAPI-1ced6ff3-f1ea-4e3d-8e05-3c378cddb138';
 
+// const getItemIcons = async (itemsArr) => {
+//   const getItemData = await axios.get('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json');
+//   const outputArr = [];
+
+//   // no check for id of 0 in the json array if there is no item
+//   for (let i = 0; i < itemsArr.length; i++) {
+//     if (itemsArr[i] === 0) {
+//       outputArr.push(0);
+//     }
+//   }
+
+//   try {
+//     // we know when to stop checking when we find all 7 items, outputArr will have a length of 7
+//     while (outputArr.length < 6) {
+//         // for each match, iterates through the item data array
+//         for (let i = 0; i < getItemData.data.length; i++) {
+//           // at each point in the array, check if the current index matches
+//           for (let j = 0; j < itemsArr.length; j++) {
+//             console.log(itemsArr[j], 'inside function, itemsArr[j]');
+//             console.log(getItemData.data[i].id, 'inside function, getItemData.data[i].id');
+//             // if the current index matches, push the value to a new output array
+//             if (itemsArr[j].item === getItemData.data[i].id) {
+//               // delcare a temp string to get icon path
+//               let tempStr = getItemData.data[i].iconPath
+//               // lowercase and replace the endpoint
+//               tempStr = tempStr.toLowerCase().replace('/lol-game-data/assets/', '');
+//               matchesData[i].item0 = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${tempStr}`;
+//               outputArr.push(matchesData[i]);
+//             }
+//           }
+//         }
+//       }
+//     return outputArr;
+//     }
+//   catch(err) {
+//     console.log('error in getItemIcons', err);
+//   }
+// };
+
 // middleware to retrieve data for summoner search on home page
 summonerController.summData = async (req, res, next) => {
 
@@ -23,7 +62,7 @@ summonerController.summData = async (req, res, next) => {
     const { puuid } = data;
     
     // uses summoner's puuid to get summoner's match history list of past 10 games to an array
-    let responseMatchData = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${api_key}`,
+    let responseMatchData = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=5&api_key=${api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -95,10 +134,45 @@ summonerController.summData = async (req, res, next) => {
             deaths: player.deaths,
             assists: player.assists,
             matchLength: `${matchHistoryData[i].gameDuration}`,
-            gameMode: matchHistoryData[i].gameMode,
+            gameMode: matchHistoryData[i].queueId,
             champion: player.championName,
             win: player.win,
+            statShardDefense: player.perks.statPerks.defense,
+            statShardFlex: player.perks.statPerks.flex, 
+            statShardOffense: player.perks.statPerks.offense,
+            keystone: player.perks.styles[0].selections[0].perk,
+            secondaryRuneTree: player.perks.styles[1].style,
+            // items: [player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.item6],
           });
+        };
+      };
+    };
+
+    // WIP GETTING ICONS FOR ITEMS
+
+    // for (let i = 0; i < matchHistoryData.length; i++) {
+    //   console.log('matchesData.items BEFORE function', matchesData[i].items);
+    //   let result = await getItemIcons(matchesData[i].items);
+    //   matchesData[i].items = result;
+    //   console.log('matchesData.items AFTER function', matchesData[i].items);
+    // }
+    
+    const getRuneData = await axios.get('http://ddragon.leagueoflegends.com/cdn/12.10.1/data/en_US/runesReforged.json');
+
+    for (let k = 0; k < matchHistoryData.length; k++) {
+      // for each match, iterates through the rune data array
+      for (let i = 0; i < getRuneData.data.length; i++) {
+        // iterates through each of the 3-4 possible keystone/rune choices
+        for (let j = 0; j < getRuneData.data[i].slots[0].runes.length; j++) {
+          // console.log(getRuneData.data[i].slots[0].runes[j].id, `${i}`);
+          // checks our keystone ID to match file path
+          if (matchesData[k].keystone === getRuneData.data[i].slots[0].runes[j].id) {
+            matchesData[k].keystone = `https://ddragon.leagueoflegends.com/cdn/img/${getRuneData.data[i].slots[0].runes[j].icon}`;
+          }
+          // checks our secondary rune tree ID to match file path
+          if (matchesData[k].secondaryRuneTree === getRuneData.data[i].id) {
+            matchesData[k].secondaryRuneTree = `https://ddragon.leagueoflegends.com/cdn/img/${getRuneData.data[i].icon}`;
+          }
         };
       };
     };

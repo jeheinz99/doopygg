@@ -4,7 +4,6 @@ import { Outlet, Link } from 'react-router-dom';
 import discordLogo from './assets/discordLogo.png';
 import twitterLogo from './assets/twitterLogo.png';
 import youtubeLogo from './assets/youtubeLogo.png';
-// import valorantLogo from './assets/valorantLogo.png';
 
 import './styles.css'
 

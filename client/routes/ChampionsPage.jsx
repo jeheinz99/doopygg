@@ -6,7 +6,6 @@ import youtubeLogo from '../assets/youtubeLogo.png';
 import twitterLogo from '../assets/twitterLogo.png';
 
 
-
 const ChampionsPage = () => {
   return (
     <div className="AppBox">

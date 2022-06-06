@@ -5,8 +5,6 @@ import discordLogo from '../assets/discordLogo.png';
 import twitterLogo from '../assets/twitterLogo.png';
 import youtubeLogo from '../assets/youtubeLogo.png';
 
-import '../styles.css'
-
 const LeaderboardPage = () => {
   return (
     <div className="AppBox">
