@@ -5,6 +5,7 @@ const initialState = {
   summonerLevel: 0,
   matchHistory: [],
   summonerRank: '',
+  otherPlayersMatches: [],
 }
 
 const summonerReducer = (state = initialState, action) => {
@@ -21,6 +22,7 @@ const summonerReducer = (state = initialState, action) => {
         summonerLevel: payload.summonerLevel,
         matchHistory: payload.matchHistory,
         summonerRank: payload.summonerRank,
+        otherPlayersMatches: payload.otherPlayersMatches,
         }
       );
 

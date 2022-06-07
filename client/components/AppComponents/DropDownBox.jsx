@@ -1,7 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-
-const DropDownBox = props => {
+const DropDownBox = () => {
   return (
     <div>
       <p>hello</p>

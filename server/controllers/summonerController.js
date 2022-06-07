@@ -1,47 +1,97 @@
 const summonerController = {};
 const axios = require('axios');
-const api_key = 'RGAPI-1ced6ff3-f1ea-4e3d-8e05-3c378cddb138';
+const api_key = '';
 
-// const getItemIcons = async (itemsArr) => {
-//   const getItemData = await axios.get('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json');
-//   const outputArr = [];
+// HELPER FUNCTIONS ---> USED TO GET DATA FROM JSON OBJECTS FROM RIOT API DATA
 
-//   // no check for id of 0 in the json array if there is no item
-//   for (let i = 0; i < itemsArr.length; i++) {
-//     if (itemsArr[i] === 0) {
-//       outputArr.push(0);
-//     }
-//   }
+const mapStatShards = (shard, statShardsData) => {
+  let str = '';
 
-//   try {
-//     // we know when to stop checking when we find all 7 items, outputArr will have a length of 7
-//     while (outputArr.length < 6) {
-//         // for each match, iterates through the item data array
-//         for (let i = 0; i < getItemData.data.length; i++) {
-//           // at each point in the array, check if the current index matches
-//           for (let j = 0; j < itemsArr.length; j++) {
-//             console.log(itemsArr[j], 'inside function, itemsArr[j]');
-//             console.log(getItemData.data[i].id, 'inside function, getItemData.data[i].id');
-//             // if the current index matches, push the value to a new output array
-//             if (itemsArr[j].item === getItemData.data[i].id) {
-//               // delcare a temp string to get icon path
-//               let tempStr = getItemData.data[i].iconPath
-//               // lowercase and replace the endpoint
-//               tempStr = tempStr.toLowerCase().replace('/lol-game-data/assets/', '');
-//               matchesData[i].item0 = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${tempStr}`;
-//               outputArr.push(matchesData[i]);
-//             }
-//           }
-//         }
-//       }
-//     return outputArr;
-//     }
-//   catch(err) {
-//     console.log('error in getItemIcons', err);
-//   }
-// };
+  for (let i = 0; i < statShardsData.data.length; i++) {
+    if (shard === statShardsData.data[i].id) {
+      str = statShardsData.data[i].iconPath;
+      str = str.toLowerCase().replace('/lol-game-data/assets/', '');
+      return `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${str}`;
+    }
+  }
+};
 
-// middleware to retrieve data for summoner search on home page
+// maps queue type based on queueId
+const mapQueueType = (queueId, queueData) => {
+  let str = '';
+  // reverse iterate through the array because most queues are high numbers, lower ids are deprecated
+  for (let i = queueData.data.length-1; i >= 0; i--) {
+    if (queueId === queueData.data[i].queueId) {
+      str = queueData.data[i].description;
+      str = str.replace(' games', '');
+      return str;
+    }
+  }
+};
+
+// maps item icons for 6 items for player from ids
+const mapItemIcons = (item, itemsData) => {
+
+  let str = '';
+  if (item === 0) {
+    return 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png';
+  }
+  // list is sorted, checks if the ID of the item is higher or lower than the middle object id
+  if (item < itemsData.data[(itemsData.data.length / 2).toFixed(0)].id) {
+    // if it is lower, iterate from the start
+    for (let i = 0; i < itemsData.data.length; i++) {
+      if (item === itemsData.data[i].id) {
+        str = itemsData.data[i].iconPath;
+        str = str.toLowerCase().replace('/lol-game-data/assets/', '');
+        return `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${str}`;
+      }
+    }
+  }
+  else {
+    // otherwise, iterate from the end of the array 
+    for (let i = itemsData.data.length-1; i >= 0; i--) {
+      if (item === itemsData.data[i].id) {
+        str = itemsData.data[i].iconPath;
+        str = str.toLowerCase().replace('/lol-game-data/assets/', '');
+        return `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${str}`;
+      }
+    }
+  }
+};
+
+// maps rune icons for keystone and secondary tree from ids
+const mapRuneIcons = (rune, runeData) => {
+  let str = '';
+
+  for (let i = 0; i < runeData.data.length; i++) {
+    for (let j = 0; j < runeData.data[i].slots[0].runes.length; j++) {
+
+      if (rune === runeData.data[i].id) {
+        str = runeData.data[i].icon;
+        return `https://ddragon.leagueoflegends.com/cdn/img/${str}`;
+      }
+      else if (rune === runeData.data[i].slots[0].runes[j].id) {
+        str = runeData.data[i].slots[0].runes[j].icon;
+        return `https://ddragon.leagueoflegends.com/cdn/img/${str}`;
+      }
+      
+    }
+  }
+};
+
+// maps summoner spell icons from ids
+const mapSummonerIcons = (summSpell, summSpellData) => {
+  let str = '';
+
+  for (let i = 0; i < summSpellData.data.length; i++) {
+    if (summSpell === summSpellData.data[i].id) {
+      str = summSpellData.data[i].iconPath;
+      str = str.toLowerCase().replace('/lol-game-data/assets/', '');
+      return `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${str}`;
+    }
+  }
+};
+
 summonerController.summData = async (req, res, next) => {
 
   const { summonerName } = req.params;
@@ -96,9 +146,8 @@ summonerController.summData = async (req, res, next) => {
         rankData.push(responseRankData.data[i].leaguePoints); 
       }
     }
-    // logs 2nd API call using puuid
-    // console.log(responseMatchData);
-
+    
+    // const matchHistoryTimes = [];
     const matchHistoryData = [];
     // iterates through the matchIdList of 10 match IDs and pushes the match data for each match to a new array matchHistoryData
     for (let i = 0; i < matchIdList.length; i++) {
@@ -111,17 +160,26 @@ summonerController.summData = async (req, res, next) => {
           "Origin": "https://developer.riotgames.com"
           }
         });
+
       matchHistoryData.push(responseMatchHistory.data.info);
+      // let responseMatchHistoryTimeline = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchIdList[i]}/timeline?api_key=${api_key}`,
+      // {
+      //   headers: {
+      //     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+      //     "Accept-Language": "en-US,en;q=0.9",
+      //     "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+      //     "Origin": "https://developer.riotgames.com"
+      //     }
+      //   });
+      // console.log(responseMatchHistoryTimeline.data.info.frames[0].events[0].realTimestamp, 'unix timestamp for game creation date');
+      // matchHistoryTimes.push(responseMatchHistoryTimeline.data.info.frames[0].events[0].realTimestamp);
     }
+
     // iterates through the matchHistoryData list to find the summoner being-
     // looked up so you only find their statistics for each match and push an object 
     // with statistics from the last 10 matches 
-
-
-    // logs third API call using array of matches 
-    // console.log(matchHistoryData);
-    // console.log('in back-end', matchHistoryData);
     const matchesData = [];
+    const otherPlayersData = [];
 
     for (let i = 0; i < matchHistoryData.length; i++) {
       for (let j = 0; j < 10; j++) {
@@ -137,52 +195,62 @@ summonerController.summData = async (req, res, next) => {
             gameMode: matchHistoryData[i].queueId,
             champion: player.championName,
             win: player.win,
-            statShardDefense: player.perks.statPerks.defense,
-            statShardFlex: player.perks.statPerks.flex, 
-            statShardOffense: player.perks.statPerks.offense,
-            keystone: player.perks.styles[0].selections[0].perk,
-            secondaryRuneTree: player.perks.styles[1].style,
-            // items: [player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.item6],
+            visionScore: player.visionScore,
+            cs: player.totalMinionsKilled,
+            champDamage: player.TotalDamageDealtToChampions,
+            champLevel: player.champLevel,
+            summonerSpells: [player.summoner1Id, player.summoner2Id],
+            statShards: [player.perks.statPerks.defense, player.perks.statPerks.flex, player.perks.statPerks.offense],
+            items: [player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.item6],
+            runes: [player.perks.styles[0].selections[0].perk, player.perks.styles[1].style]
           });
-        };
+        }
+        else {
+          const player = matchHistoryData[i].participants[j];
+          otherPlayersData.push({
+            championId: player.championId,
+            summonerName: player.summonerName,
+          });
+        }
       };
     };
 
-    // WIP GETTING ICONS FOR ITEMS
+    const runeData = await axios.get('http://ddragon.leagueoflegends.com/cdn/12.10.1/data/en_US/runesReforged.json');
+    const summSpellData = await axios.get('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/summoner-spells.json');
+    const itemsData = await axios.get('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json');
+    const statShardsData = await axios.get('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perks.json');
+    const queueData = await axios.get('https://static.developer.riotgames.com/docs/lol/queues.json');
 
-    // for (let i = 0; i < matchHistoryData.length; i++) {
-    //   console.log('matchesData.items BEFORE function', matchesData[i].items);
-    //   let result = await getItemIcons(matchesData[i].items);
-    //   matchesData[i].items = result;
-    //   console.log('matchesData.items AFTER function', matchesData[i].items);
-    // }
-    
-    const getRuneData = await axios.get('http://ddragon.leagueoflegends.com/cdn/12.10.1/data/en_US/runesReforged.json');
+    for (let i = 0; i < matchHistoryData.length; i++) {
 
-    for (let k = 0; k < matchHistoryData.length; k++) {
-      // for each match, iterates through the rune data array
-      for (let i = 0; i < getRuneData.data.length; i++) {
-        // iterates through each of the 3-4 possible keystone/rune choices
-        for (let j = 0; j < getRuneData.data[i].slots[0].runes.length; j++) {
-          // console.log(getRuneData.data[i].slots[0].runes[j].id, `${i}`);
-          // checks our keystone ID to match file path
-          if (matchesData[k].keystone === getRuneData.data[i].slots[0].runes[j].id) {
-            matchesData[k].keystone = `https://ddragon.leagueoflegends.com/cdn/img/${getRuneData.data[i].slots[0].runes[j].icon}`;
-          }
-          // checks our secondary rune tree ID to match file path
-          if (matchesData[k].secondaryRuneTree === getRuneData.data[i].id) {
-            matchesData[k].secondaryRuneTree = `https://ddragon.leagueoflegends.com/cdn/img/${getRuneData.data[i].icon}`;
-          }
-        };
-      };
-    };
+      const runesMap = await Promise.all(matchesData[i].runes.map(rune => mapRuneIcons(rune, runeData)));
+      const summSpellMap = await Promise.all(matchesData[i].summonerSpells.map(summSpell => mapSummonerIcons(summSpell, summSpellData)));
+      const itemsMap = await Promise.all(matchesData[i].items.map(item => mapItemIcons(item, itemsData)));
+      const statShardsMap = await Promise.all(matchesData[i].statShards.map(shard => mapStatShards(shard, statShardsData)));
+      const queueMap = await mapQueueType(matchesData[i].gameMode, queueData);
+
+      matchesData[i].statShards = statShardsMap;
+      matchesData[i].gameMode = queueMap;
+      matchesData[i].items = itemsMap;
+      matchesData[i].runes = runesMap;
+      matchesData[i].summonerSpells = summSpellMap;
+
+    }
+
+    // console.log(matchesData[0].gameMode, 'gameMode back end after iteration');
+    // console.log(matchesData[0].statShards, 'statShards back end after iteration');
+    // console.log(matchesData[0].runes, 'runes back end after iteration');
+    // console.log(matchesData[0].summonerSpells, 'summSpells back end after iteration');
+    // console.log(matchesData[0].items, 'items back end after iteration');
+
 
     const summonerData = {
       summonerName: responseSummData.data.name,
       summonerLevel: responseSummData.data.summonerLevel,
       summonerRank: rankData,
       profileIcon: responseSummData.data.profileIconId,
-      matchHistory: matchesData, 
+      matchHistory: matchesData,
+      otherPlayersMatches: otherPlayersData, 
     }
     // console.log('summonerData back-end', summonerData);
     res.locals.summonerData = summonerData;

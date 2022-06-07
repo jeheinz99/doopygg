@@ -202,6 +202,7 @@ html, body {
 .MatchGroup1 {
   display: flex;
   flex-direction: column;
+  line-height: 80%;
 }
 .MatchGroup2 {
   display: flex;
@@ -216,11 +217,17 @@ html, body {
   gap: 5px;
 }
 .MatchGroup2div2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 25%;
+}
+.MatchGroup2div3 {
   display: inline-flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
-
+  width: 30px;
 }
 .MatchGroupButton {
   display: flex;
@@ -247,6 +254,88 @@ html, body {
 #secondaryRuneIcon {
   width: 70%;
 }
+#summonerSpellIcon1 {
+  border-radius: 0.5em;
+  border: 1px solid rgb(111, 110, 110)
+}
+#summonerSpellIcon2 {
+  border-radius: 0.5em;
+  border: 1px solid rgb(111, 110, 110)
+}
+.MatchGroup4 {
+  display: flex;
+  flex-direction: column;
+}
+.upperHalfItems {
+  display: flex;
+  gap: 1px;
+}
+#item0 {
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5em;
+  border: 1px solid #000;
+}
+#item1 {
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5em;
+  border: 1px solid #000;
+}
+#item2 {
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5em;
+  border: 1px solid #000;
+}
+#item3 {
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5em;
+  border: 1px solid #000;
+}
+#item4 {
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5em;
+  border: 1px solid #000;
+}
+#item5 {
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5em;
+  border: 1px solid #000;
+}
+#item6 {
+  width: 32px;
+  height: 32px;
+}
+.MatchGroup5 {
+  display: flex;
+  flex-direction: row;
+}
+.leftSidePlayers {
+  display: flex;
+  flex-direction: column;
+}
+.rightSidePlayers {
+  display: flex;
+  flex-direction: column;
+
+}
+#player0Champion, #player1Champion, #player2Champion, #player3Champion, #player4Champion, #player5Champion, #player6Champion, #player7Champion, #player8Champion, #player9Champion {
+  width: 32px;
+  height: 32px;
+}
+.leftSideGroup0, .leftSideGroup1, .leftSideGroup2, .leftSideGroup3, .leftSideGroup4, .rightSideGroup0, .rightSideGroup1, .rightSideGroup2, .rightSideGroup3, .rightSideGroup4 {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  font-size: 0.8em;
+}
+
+
 h3 {
   font-size: 1.75em;
   text-align: center;

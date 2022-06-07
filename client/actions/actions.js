@@ -29,8 +29,12 @@ export const addTFTDataActionCreator = TFTData => ({
   payload: TFTData
 });
 
+
+
+
+
 // async thunks
-export const getLeaderboardData = (regionName) => async dispatch => {
+export const getLeaderboardData = regionName => async dispatch => {
   const responseLeaderboardData = await axios.get(`/leaderboards/${regionName}`);
   console.log('LEADERBOARDS response from back-end', responseLeaderboardData.data);
   dispatch(addLeaderboardDataActionCreator(responseLeaderboardData.data));
@@ -50,13 +54,13 @@ export const getValorantData = (riotID, tagLine) => async dispatch => {
 };
 
 // asynchronous call to API to get info based on summonerName input
-export const getTFTData = (summonerName) => async dispatch => {
+export const getTFTData = summonerName => async dispatch => {
   const responseTFTData = await axios.get(`/tft/${summonerName}`);
   console.log('TFT response from back-end', responseTFTData.data);
   dispatch(addTFTDataActionCreator(responseTFTData.data));
 };
 
-export const getChampionData = async (championName) => {
+export const getChampionData = championName => async dispatch => {
   return 'hi';
   // this response returns the champion Data
 };
