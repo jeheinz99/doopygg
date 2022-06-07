@@ -1,13 +1,13 @@
 const leaderboardController = {};
 const axios = require('axios');
-const api_key = '';
+const { api_key } = require('../data')
 
 // middleware to retrieve data for top 25 on NA leaderboards
 leaderboardController.leaderboardData = async (req, res, next) => {
 
   const { regionName } = req.params;
 
-  console.log('region name in back-end', regionName);
+  // console.log('region name in back-end', regionName);
 
   try {
     // async call to API to get summonerName, tier, wins/losses, leaguePoints about top 25 Challengers in N/A
@@ -28,7 +28,7 @@ leaderboardController.leaderboardData = async (req, res, next) => {
     const profileIconArr = [];
     for (let i = 0; i < 25; i++) {
       const { summonerId } = data[i];
-      console.log(summonerId);
+      // console.log(summonerId);
     const leaderboardDataResponseTwo = await axios.get(`https://${regionName}.api.riotgames.com/lol/summoner/v4/summoners/${summonerId}?api_key=${api_key}`,
     {
       headers: {
@@ -59,7 +59,7 @@ leaderboardController.leaderboardData = async (req, res, next) => {
       leaderboardData: leaderboardDataArray,
       profileIcon: profileIconArr,
     };
-    console.log('IN BACK END', leaderboardData);
+    // console.log('IN BACK END', leaderboardData);
     res.locals.leaderboardData = leaderboardData;
     next();
   }

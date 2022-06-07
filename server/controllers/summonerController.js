@@ -1,10 +1,12 @@
 const summonerController = {};
 const axios = require('axios');
-const api_key = '';
+const data = require('../data');
+const { api_key } = data;
 
 // HELPER FUNCTIONS ---> USED TO GET DATA FROM JSON OBJECTS FROM RIOT API DATA
 
 const mapStatShards = (shard, statShardsData) => {
+
   let str = '';
 
   for (let i = 0; i < statShardsData.data.length; i++) {
@@ -197,7 +199,7 @@ summonerController.summData = async (req, res, next) => {
             win: player.win,
             visionScore: player.visionScore,
             cs: player.totalMinionsKilled,
-            champDamage: player.TotalDamageDealtToChampions,
+            champDamage: player.totalDamageDealtToChampions,
             champLevel: player.champLevel,
             summonerSpells: [player.summoner1Id, player.summoner2Id],
             statShards: [player.perks.statPerks.defense, player.perks.statPerks.flex, player.perks.statPerks.offense],

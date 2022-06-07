@@ -14,7 +14,6 @@ const MatchBoxes = () => {
     const chunk = otherPlayersMatches.slice(i, i + chunkSize);
     chunkArr.push(chunk);
   }
-  console.log(chunkArr, 'chunkArr in front-end for each match');
 
   const matchList = [];
   for (let i = 0; i < matchHistory.length; i++) {

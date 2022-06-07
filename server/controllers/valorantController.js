@@ -1,6 +1,6 @@
 const valorantController = {};
 const axios = require('axios');
-const api_key = '';
+const { api_key } = require('../data');
 
 valorantController.valData = async (req, res, next) => {
 

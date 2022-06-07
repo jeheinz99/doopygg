@@ -6,12 +6,11 @@ import DropDownBox from './DropDownBox.jsx';
 const Matches = props => {
 
   const summonerName = useSelector(state => state.summoners.summonerName);
-  const { otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, secondaryRuneTree, keystone, starShardOffense, starShardDefense, starShardFlex, outcome } = props;
+  const { otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, secondaryRuneTree, keystone, statShardOffense, statShardDefense, statShardFlex, outcome } = props;
   
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 
   const [open, setOpen] = useState(false);
-  // const summonerName = useSelector(state => state.summoner.summonerName)
 
   return (
     <div className="MatchesWrapper">
@@ -19,13 +18,13 @@ const Matches = props => {
         <div className="MatchGroup1">
           <p>{gameMode}</p>
           <p>{`${Math.floor(Number(matchLength / 60))}:${Number(matchLength) % 60}`}</p>
-          <p>{outcome}</p>
+          {id === "winMatch" ? <p style={{color: 'blue'}}>{outcome}</p> : <p style={{color: 'red'}}>{outcome}</p>}
         </div>
         <div className="MatchGroup2">
           <img id="championIcon" src={championIcon}/>
         <div className="MatchGroup2div3">
-          <img id="summonerSpellIcon1" src={summonerSpells[0]}/>
-          <img id="summonerSpellIcon2" src={summonerSpells[1]}/>
+            <img id="summonerSpellIcon1" src={summonerSpells[0]}/>
+            <img id="summonerSpellIcon2" src={summonerSpells[1]}/>
         </div>
         <div className="MatchGroup2div">
           <img id="keystoneIcon" src={keystone}/>
@@ -39,16 +38,19 @@ const Matches = props => {
         </div>
         </div>
         <div className="MatchGroup4">
-          <div className="upperHalfItems">
-            <img id="item0" src={items[0]}/>
-            <img id="item1" src={items[1]}/>
-            <img id="item2" src={items[2]}/>
+          <div className="MatchGroup4div">
+            <div className="upperHalfItems">
+              <img id="item0" src={items[0]}/>
+              <img id="item1" src={items[1]}/>
+              <img id="item2" src={items[2]}/>
+            </div>
+            <div className="lowerHalfItems">
+              <img id="item3" src={items[3]}/>
+              <img id="item4" src={items[4]}/>
+              <img id="item5" src={items[5]}/>
+            </div>
           </div>
-          <div className="lowerHalfItems">
-            <img id="item0" src={items[3]}/>
-            <img id="item0" src={items[4]}/>
-            <img id="item0" src={items[5]}/>
-          </div>
+          <img id="item6" src={items[6]}/>
         </div>
         <div className="MatchGroup5">
           <div className="leftSidePlayers">
@@ -101,7 +103,7 @@ const Matches = props => {
         </div>
         </div>
       <div className="DropDownBoxes">
-        {open && <DropDownBox />}
+        {open && <DropDownBox otherPlayers={otherPlayers} id={id} kills={kills} deaths={deaths} assists={assists} items={items} cs={cs} summonerSpells={summonerSpells} visionScore={visionScore} champDamage={champDamage} champLevel={champLevel} secondaryRuneTree={secondaryRuneTree} keystone={keystone} championId={championId}/>}
       </div>
     </div>
   );

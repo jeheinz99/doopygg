@@ -1,6 +1,6 @@
 const TFTController = {};
 const axios = require('axios');
-const api_key = '';
+const { api_key } = require('../data');
 
 // middleware to retrieve data for summoner search on TFT page
 TFTController.TFTData = async (req, res, next) => {
