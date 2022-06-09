@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-const { PG_URI } = require('./data');
+const { PG_URI } = require('../data');
 
 const pool = new Pool({
     connectionString: PG_URI

@@ -5,8 +5,7 @@ import DropDownBox from './DropDownBox.jsx';
 
 const Matches = props => {
 
-  const summonerName = useSelector(state => state.summoners.summonerName);
-  const { otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, secondaryRuneTree, keystone, statShardOffense, statShardDefense, statShardFlex, outcome } = props;
+  const { otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
   
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 
@@ -27,8 +26,8 @@ const Matches = props => {
             <img id="summonerSpellIcon2" src={summonerSpells[1]}/>
         </div>
         <div className="MatchGroup2div">
-          <img id="keystoneIcon" src={keystone}/>
-          <img id="secondaryRuneIcon" src={secondaryRuneTree}/>
+          <img id="keystoneIcon" src={runes[0]}/>
+          <img id="secondaryRuneIcon" src={runes[5]}/>
         </div>
         <div className="MatchGroup2div2">
         <p>{kills} / {deaths} / {assists}</p>
@@ -93,8 +92,8 @@ const Matches = props => {
                 <p>{otherPlayers[8].summonerName}</p>
               </div>
               <div className="rightSideGroup4">
-                <img id="player9Champion" src={championIcon}/>
-                <p>{summonerName}</p>
+                <img id="player9Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[9].championId}.png`}/>
+                <p>{otherPlayers[9].summonerName}</p>
               </div>
           </div>
         </div>
@@ -103,7 +102,7 @@ const Matches = props => {
         </div>
         </div>
       <div className="DropDownBoxes">
-        {open && <DropDownBox otherPlayers={otherPlayers} id={id} kills={kills} deaths={deaths} assists={assists} items={items} cs={cs} summonerSpells={summonerSpells} visionScore={visionScore} champDamage={champDamage} champLevel={champLevel} secondaryRuneTree={secondaryRuneTree} keystone={keystone} championId={championId}/>}
+        {open && <DropDownBox otherPlayers={otherPlayers} id={id} kills={kills} deaths={deaths} assists={assists} items={items} cs={cs} summonerSpells={summonerSpells} visionScore={visionScore} champDamage={champDamage} champLevel={champLevel} runes={runes} championId={championId}/>}
       </div>
     </div>
   );

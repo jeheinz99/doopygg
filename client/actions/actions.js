@@ -31,8 +31,6 @@ export const addTFTDataActionCreator = TFTData => ({
 
 
 
-
-
 // async thunks
 export const getLeaderboardData = regionName => async dispatch => {
   const responseLeaderboardData = await axios.get(`/leaderboards/${regionName}`);

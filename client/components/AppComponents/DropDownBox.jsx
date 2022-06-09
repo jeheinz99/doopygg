@@ -1,62 +1,59 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import TeamsBoxes from './TeamsBoxes';
 
 const DropDownBox = props => {
 
-  const summonerName = useSelector(state => state.summoners.summonerName);
-  const summonerRank = useSelector(state => state.summoners.summonerRank);
+  const team1Box = [];
+  const team2Box = [];
 
-  const { id, otherPlayers, kills, deaths, assists, visionScore, items, cs, summonerSpells, champDamage, champLevel, secondaryRuneTree, championId, keystone } = props;
+  let team1Barons = 0;
+  let team1Turrets = 0;
+  let team1Dragons = 0;
+  let team1Gold = 0;
 
-  const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
+  let team2Barons = 0;
+  let team2Turrets = 0;
+  let team2Dragons = 0;
+  let team2Gold = 0;
+
+  const { otherPlayers, id } = props;
+  
+  for (let i = 0; i < otherPlayers.length; i++) {
+    (otherPlayers[i].win ? team1Box.push(<TeamsBoxes key={i} teamBarons={otherPlayers[i].teamBarons} goldEarned={otherPlayers[i].goldEarned} turretKills={otherPlayers[i].turretKills} dragons={otherPlayers[i].dragons} summonerName={otherPlayers[i].summonerName} otherPlayers={otherPlayers} id={id} kills={otherPlayers[i].kills} deaths={otherPlayers[i].deaths} assists={otherPlayers[i].assists} items={otherPlayers[i].items} cs={otherPlayers[i].cs} summonerSpells={otherPlayers[i].summonerSpells} visionScore={otherPlayers[i].visionScore} champDamage={otherPlayers[i].champDamage} champLevel={otherPlayers[i].champLevel} runes={otherPlayers[i].runes} championId={otherPlayers[i].championId}/>) : 
+    team2Box.push((<TeamsBoxes key={i} teamBarons={otherPlayers[i].teamBarons} goldEarned={otherPlayers[i].goldEarned} turretKills={otherPlayers[i].turretKills} dragons={otherPlayers[i].dragons} summonerName={otherPlayers[i].summonerName} otherPlayers={otherPlayers} id={id} kills={otherPlayers[i].kills} deaths={otherPlayers[i].deaths} assists={otherPlayers[i].assists} items={otherPlayers[i].items} cs={otherPlayers[i].cs} summonerSpells={otherPlayers[i].summonerSpells} visionScore={otherPlayers[i].visionScore} champDamage={otherPlayers[i].champDamage} champLevel={otherPlayers[i].champLevel} runes={otherPlayers[i].runes} championId={otherPlayers[i].championId}/>)));
+  }
 
   return (
     <div className="DropDownBoxMatch" id={id}>
-      <div className="Team1DropDownBox">
-        <div className="Team1Players">
-          <div className="Player0Team1">
-            <div className="Player0Team1ChampIcon">
-              <img id="Player0Champion" src={championIcon}/>
-            </div>
-            <div className="Player0Team1SummonerSpells">
-              <img id="summonerSpellIcon1DropDown" src={summonerSpells[0]}/>
-              <img id="summonerSpellIcon2DropDown" src={summonerSpells[1]}/>
-            </div>
-            <div className="Player0Team1Runes">
-              <img id="Player0Team1Keystone" src={keystone}/>
-              <img id="Player0Team1SecondaryTree" src={secondaryRuneTree}/>
-            </div>
-            <div className="Player0Team1Info">
-              <p>{summonerName}</p>
-              <p>{summonerRank[0]}</p>
-            </div>
-            <div className="Player0Team1KDA">
-              <p>{kills} / {deaths} / {assists}</p>
-              <p>K/D/A: {`${((kills + assists) / deaths).toFixed(2)}`}</p>
-            </div>
-            <div className="Player0Team1Damage">
-              <p>{champDamage}</p>
-            </div>
-            <div className="Player0Team1CS">
-              <p>{cs}</p>
-            </div>
-            <div className="Player0Team1VisionScore">
-              <p>{visionScore}</p>
-            </div>
-            <div className="Player0Team1Items">
-              <div className="upperHalfItemsDD">
-                <img id="item0DD" src={items[0]}/>
-                <img id="item1DD" src={items[1]}/>
-                <img id="item2DD" src={items[2]}/>
-              </div>
-              <div className="lowerHalfItemsDD">
-                <img id="item3DD" src={items[3]}/>
-                <img id="item4DD" src={items[4]}/>
-                <img id="item5DD" src={items[5]}/>
-              </div>
-            </div>            
-          </div>
+      <div className="team1BoxDD">
+        { team1Box }
+      </div>
+      <div className="ObjectivesDD">
+        <div className="Team1ObjectivesDD">
+          <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/baron_square.png'/>
+            <p>{team1Barons}</p>
+          <img id="DragonIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/dragon_square.png'/>
+            <p>{team1Dragons}</p>
+          <p>Gold: {team1Gold}</p>
+          <img id="TurretIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/turret_blue_square.png'/>
+            <p>{team1Turrets}</p>
         </div>
+        <div className="Team2ObjectivesDD">
+          <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/baron_square.png'/>
+            <p>{team2Barons}</p>
+          <img id="DragonIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/dragon_square.png'/>
+            <p>{team2Dragons}</p>
+          <p>Gold: {team1Gold}</p>
+          <img id="TurretIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/turret_red_square.png'/>
+            <p>{team2Turrets}</p>
+        </div>
+      </div>
+      <div className="team2BoxDD">
+        { team2Box }
+      </div>
+      <div className="DDButtonDiv">
+        <button id="RuneDDButton"><img id="RuneDDImage" src='https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/runesicon.png'/></button>
+        <button id="StatDDButton"><img id="StatDDImage" src='https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodscdrscalingicon.png'/></button>
       </div>
     </div>
   );

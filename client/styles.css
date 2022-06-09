@@ -159,9 +159,9 @@ html, body {
 
 .MatchesWrapper {
   display: flex;
-  align-items: center;
   flex-direction: column;
   width: 100%;
+  align-items: center;
 }
 #winMatch {
   background: rgb(22,81,191);
@@ -190,14 +190,16 @@ html, body {
 .DropDownBoxes {
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
   border-radius: 2em;
+  width: 100%;
 }
 .Matches {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 1px;
   align-items: center;
   font-family: 'Koulen', cursive;
+  gap: 2em;
 }
 .MatchGroup1 {
   display: flex;
@@ -234,6 +236,7 @@ html, body {
   margin-top: auto;
 }
 #DropDownButton {
+  display: flex;
   border-radius: 2em;
   border: 3px solid rgba(23, 22, 22, 0.8);
 }
@@ -295,15 +298,18 @@ html, body {
 .MatchGroup5 {
   display: flex;
   flex-direction: row;
+  font-size: 1em;
+  flex: 1;
 }
 .leftSidePlayers {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 .rightSidePlayers {
   display: flex;
   flex-direction: column;
-
+  flex: 1;
 }
 #player0Champion, #player1Champion, #player2Champion, #player3Champion, #player4Champion, #player5Champion, #player6Champion, #player7Champion, #player8Champion, #player9Champion {
   width: 32px;
@@ -320,11 +326,13 @@ html, body {
 .DropDownBoxMatch {
   display: flex;
   width: 100%;
+  gap: 2em;
 }
 .Team1DropDownBox {
+  margin-left: 1em;
+  margin-top: 0.3em;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 .Team1Players, .Team2Players {
   display: flex;
@@ -334,28 +342,50 @@ html, body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 .Player0Team1ChampIcon {
-
+  display: flex;
+}
+.Player0Team1Damage, .Player0Team1CS, .Player0Team1Info, .Player0Team1VisionScore {
+  min-width: 10%;
+  max-width: 30%;
+  display: flex;
+  font-size: 0.75em;
+  overflow: hidden;
+}
+.Player0Team1KDA {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75em;
+  min-width: 10%;
+  max-width: 30%;
 }
 #summonerSpellIcon1DropDown, #summonerSpellIcon2DropDown {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border-radius: 0.5em;
   border: 1px solid rgb(111, 110, 110)
 }
 #Player0Champion {
-  width: 56px;
-  height: 56px;
+  width: 32px;
+  height: 32px;
   border-radius: 5%;
+  border: 1px solid rgb(18, 18, 18);
 }
 #Player0Team1Keystone {
-  height: 32px;
-  width: 32px;
+  height: 24px;
+  width: 24px;
+}
+#Player0Team1SecondaryTree {
+  height: 20x;
+  width: 20px;
 }
 .Player0Team1Runes {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .Player0Team1SummonerSpells {
   display: flex;
@@ -375,12 +405,62 @@ html, body {
   gap: 1px;
 }
 #item0DD, #item1DD, #item2DD, #item3DD, #item4DD, #item5DD {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border-radius: 0.5em;
   border: 1px solid #000;
 } 
-
+.ObjectivesDD {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.Team1ObjectivesDD {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Team2ObjectivesDD {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#BaronIconDD, #DragonIconDD, #TurretIconDD {
+  height: 32px;
+  width: 32px;
+  border-radius: 2em;
+  border: 1px solid rgb(27, 27, 27)
+}
+.DDButtonDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+#RuneDDButton {
+  padding: 7.5%;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 1em;
+  background-color: #7a2a1d;
+}
+#StatDDButton {
+  padding: 7.5%;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 1em;
+  background-color: #7a2a1d;
+}
+#RuneDDButton:hover, #StatDDButton:hover {
+  filter: invert(10%);
+}
+#StatDDImage {
+  width: 24px;
+  height: 24px;
+}
+#RuneDDImage {
+  width: 24px;
+  height: 24px;
+}
 
 h3 {
   font-size: 1.75em;
