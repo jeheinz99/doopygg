@@ -1,6 +1,49 @@
 const TFTController = {};
 const axios = require('axios');
 const { api_key } = require('../data');
+const db = require('../models/IconPaths');
+
+const mapAugmentIcons = async augments => {
+  const query = `SELECT path FROM tftaugments WHERE name IN ('${augments[0]}', '${augments[1]}', '${augments[2]}')
+  ORDER BY CASE name
+  WHEN '${augments[0]}' then 1
+  WHEN '${augments[1]}' then 2
+  WHEN '${augments[2]}' then 3
+  end;`
+
+  const path = await db.query(query);
+  // console.log(path.rows, 'path rows after query');
+  return [path.rows[0].path, path.rows[1].path, path.rows[2].path];
+};
+
+const mapLittleLegendIcons = async legendId => {
+  const query = `SELECT path FROM littlelegends WHERE id IN ('${legendId}')`;
+
+  const path = await db.query(query);
+  return path.rows[0].path;
+};
+
+const mapUnitIcons = async units => {
+
+  const unitsArr = [];
+  for (let i = 0; i < units.length; i++) {
+    const query = `SELECT path FROM tftchamps WHERE name IN ('${units[i].character_id}')`
+    const path = await db.query(query);
+    unitsArr.push(path.rows[0].path);
+  }
+  return unitsArr;
+};
+
+const mapTraitIcons = async traits => {
+
+  const traitsArr = [];
+  for (let i = 0; i < traits.length; i++) {
+    const query = `SELECT path FROM traits WHERE name IN ('${traits[i].name}')`
+    const path = await db.query(query);
+    traitsArr.push(path.rows[0].path);
+  }
+  return traitsArr;
+};
 
 // middleware to retrieve data for summoner search on TFT page
 TFTController.TFTData = async (req, res, next) => {
@@ -50,6 +93,7 @@ TFTController.TFTData = async (req, res, next) => {
       matchData.push(getMatchData.data.info)
     };
     const TFTMatchHistory = [];
+    const OtherPlayersData = [];
     for (let i = 0; i < matchData.length; i++) {
       for (let j = 0; j < 8; j++) {
         if (matchData[i].participants[j].puuid === puuid) {
@@ -58,20 +102,45 @@ TFTController.TFTData = async (req, res, next) => {
             matchLength: matchData[i].game_length,
             setNumber: matchData[i].tft_set_number,
             augments: player.augments,
-            companion: player.companion,
+            companion: player.companion.content_ID,
             level: player.level,
             placement: player.placement,
             damageDealt: player.total_damage_to_players,
             traits: player.traits,
             units: player.units,
+            unitIcons: [],
+            traitIcons: [],
+          });
+        }
+        else {
+          const player = matchData[i].participants[j];
+          OtherPlayersData.push({
+            augments: player.augments,
           });
         }
       }
+    }
+
+    for (let i = 0; i < matchData.length; i++) {
+
+      const augmentsMap = await mapAugmentIcons(TFTMatchHistory[i].augments);
+      const littleLegendMap = await mapLittleLegendIcons(TFTMatchHistory[i].companion);
+      const unitsMap = await mapUnitIcons(TFTMatchHistory[i].units);
+      const traitsMap = await mapTraitIcons(TFTMatchHistory[i].traits);
+
+      TFTMatchHistory[i].traitIcons = traitsMap;
+      TFTMatchHistory[i].unitIcons = unitsMap;
+      TFTMatchHistory[i].augments = augmentsMap;
+      TFTMatchHistory[i].companion = littleLegendMap;
+
     };
+
+
     const TFTData = {
       TFTData: TFTMatchHistory,
       summonerName: summonerName,
       summonerIcon: profileIconId,
+      OtherPlayersData: OtherPlayersData,
     }
 
     // console.log(TFTData);

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTFTData } from '../actions/actions.js';
 import TFTMatchBoxes from '../components/TFTComponents/TFTMatchBoxes.jsx';
+import RecentMatchesBox from '../components/TFTComponents/TFTRecentMatchesBox.jsx';
 
 import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx'
 
@@ -28,8 +29,11 @@ const TFTPageContainer = () => {
         <br></br>
         <button id="SearchBoxButton" onClick={() => loadTFTData(getTFTData(summonerNameInput))}> Search </button>
       </div>
-      {TFTData[0] && <TFTSummonerBox />};
-      {TFTData[0] && <TFTMatchBoxes />};
+      <div className="TFTTopHalfBox">
+        {TFTData[0] && <TFTSummonerBox />}
+        {/* {TFTData[0] && <RecentMatchesBox />} */}
+      </div>
+      {TFTData[0] && <TFTMatchBoxes />}
     </div>
   );
 };

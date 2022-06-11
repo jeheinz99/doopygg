@@ -24,36 +24,52 @@ const DropDownBox = props => {
   }
 
   return (
-    <div className="DropDownBoxMatch" id={id}>
-      <div className="team1BoxDD">
-        { team1Box }
-      </div>
-      <div className="ObjectivesDD">
-        <div className="Team1ObjectivesDD">
-          <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/baron_square.png'/>
-            <p>{team1Barons}</p>
-          <img id="DragonIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/dragon_square.png'/>
-            <p>{team1Dragons}</p>
-          <p>Gold: {team1Gold}</p>
-          <img id="TurretIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/turret_blue_square.png'/>
-            <p>{team1Turrets}</p>
+    <div>
+      <div className="TeamInfoTextDD" id={id}>
+        <div className="TeamInfoTextDD1">
+          <p id="kdaDD">KDA</p>
+          <p id="damageDD">Damage</p>
+          <p id="csDD">CS</p>
+          <p id="visionDD">Vision</p>
         </div>
-        <div className="Team2ObjectivesDD">
-          <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/baron_square.png'/>
-            <p>{team2Barons}</p>
-          <img id="DragonIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/dragon_square.png'/>
-            <p>{team2Dragons}</p>
-          <p>Gold: {team1Gold}</p>
-          <img id="TurretIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/turret_red_square.png'/>
-            <p>{team2Turrets}</p>
+        <div className="TeamInfoTextDD2">
+          <p id="kdaDD2">KDA</p>
+          <p id="damageDD2">Damage</p>
+          <p id="csDD2">CS</p>
+          <p id="visionDD2">Vision</p>
         </div>
       </div>
-      <div className="team2BoxDD">
-        { team2Box }
-      </div>
-      <div className="DDButtonDiv">
-        <button id="RuneDDButton"><img id="RuneDDImage" src='https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/runesicon.png'/></button>
-        <button id="StatDDButton"><img id="StatDDImage" src='https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodscdrscalingicon.png'/></button>
+      <div className="DropDownBoxMatch" id={id}>
+        <div className="team1BoxDD">
+          { team1Box }
+        </div>
+        <div className="ObjectivesDD">
+          <div className="Team1ObjectivesDD">
+            <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/baron_square.png'/>
+              <p>{team1Barons}</p>
+            <img id="DragonIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/dragon_square.png'/>
+              <p>{team1Dragons}</p>
+            <p>Gold: {team1Gold}</p>
+            <img id="TurretIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/turret_blue_square.png'/>
+              <p>{team1Turrets}</p>
+          </div>
+          <div className="Team2ObjectivesDD">
+            <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/baron_square.png'/>
+              <p>{team2Barons}</p>
+            <img id="DragonIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/dragon_square.png'/>
+              <p>{team2Dragons}</p>
+              <p>Gold: {team1Gold}</p>
+            <img id="TurretIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/turret_red_square.png'/>
+              <p>{team2Turrets}</p>
+          </div>
+        </div>
+        <div className="team2BoxDD">
+          { team2Box }
+        </div>
+        <div className="DDButtonDiv">
+          <button id="RuneDDButton"><img id="RuneDDImage" src='https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/runesicon.png'/></button>
+          <button id="StatDDButton"><img id="StatDDImage" src='https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodscdrscalingicon.png'/></button>
+        </div>
       </div>
     </div>
   );

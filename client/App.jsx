@@ -4,6 +4,7 @@ import { Outlet, Link } from 'react-router-dom';
 import discordLogo from './assets/discordLogo.png';
 import twitterLogo from './assets/twitterLogo.png';
 import youtubeLogo from './assets/youtubeLogo.png';
+import linkedinLogo from './assets/linkedInIcon.png';
 
 import './styles.css'
 
@@ -20,6 +21,9 @@ const App = () => {
           </a>
           <a id="TwitterLogoLink" target="_blank" href="https://twitter.com/kindo_v9">
             <img id="twitterLogo" src={twitterLogo}/>
+          </a>
+          <a id="LinkedInLogoLink" target="_blank" href="https://www.linkedin.com/in/joseph-heinz-874676240">
+            <img id="linkedinLogo" src={linkedinLogo}/>
           </a>
         </div>
         <div className="Endpoints">

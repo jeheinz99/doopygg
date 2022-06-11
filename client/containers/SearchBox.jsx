@@ -3,10 +3,10 @@ import { getSummonerData } from '../actions/actions.js';
 import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
 import SummonerBox from '../components/AppComponents/SummonerBox.jsx';
 import { useSelector, useDispatch } from 'react-redux';
+import duck from '../assets/duck.png';
 
 const SearchBox = () => {
   const matchHistory = useSelector(state => state.summoners.matchHistory);
-  const summonerName = useSelector(state => state.summoners.summonerName);
   const loadSummonerData = useDispatch();
 
   let summonerNameInput;

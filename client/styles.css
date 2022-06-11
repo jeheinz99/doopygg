@@ -21,6 +21,18 @@ html, body {
   flex-flow: column wrap;
   justify-items: center;
 }
+#winMatch {
+  background: rgb(22,81,191);
+  background: linear-gradient(90deg, rgba(22,81,191,1) 0%, rgba(41,61,150,1) 10%, rgba(56,72,108,1) 51%, rgba(56,95,186,1) 100%);
+  /* border: 1px solid rgba(255, 255, 255, 0.861); */
+  /* border-radius: 1.5em; */
+}
+#loseMatch {
+  background: rgb(173,44,72);
+  background: linear-gradient(90deg, rgba(173,44,72,1) 0%, rgba(150,41,64,1) 10%, rgba(108,56,67,1) 51%, rgba(186,56,86,1) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  /* border-radius: 1.5em; */
+}
 .SearchBox {
   display: flex;
   flex-flow: column wrap;
@@ -101,17 +113,12 @@ html, body {
   background-color:#292828;
   border:0.10em double #1C6EA4;
   border-radius: 0.5em;
-  display:inline-block;
   cursor:pointer;
   color:#ffffff;
   font-family: 'Prompt', sans-serif;
-  letter-spacing: 0.05em;
-  font-size:15px;
-  font-weight:bold;
-  padding:9px 23px;
   text-decoration:none;
   text-shadow:0px -1px 0px #7a2a1d;
-  width: 10%;
+  width: 50%;
 }
 #LeaderboardBoxButton:hover {
   background-color:#222020;
@@ -141,10 +148,76 @@ html, body {
   border-style: double;
   border-color: #1C6EA4;
 }
+.OuterLBBox {
+  width: 100%;
+  font-size: 1.3em;
+}
 .LeaderboardPageBox {
   display: flex;
   flex-flow: column;
   align-items: center;
+}
+.Rank1LBBox {
+  display: inline-flex;
+  flex-direction: row;
+  font-size: 1.5em;
+  width: 100%;
+  background: rgb(206, 217, 183);
+  background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%);
+  border-radius: 1.5em;
+  border: 2px solid rgb(255, 255, 255);
+  font-family: 'Koulen', cursive;
+  justify-content: space-around;
+}
+.Rank1LB1 {
+  display: flex;
+  align-items: center;
+  font-size: 2.5em;
+  font-weight: 1000;
+  font-family: 'Prompt', cursive;
+}
+.Rank1LB2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.Rank1LB3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.Rank1LB4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#Rank1LBIcon {
+  width: 128px;
+  height: 128px;
+  border-radius: 2em;
+  border: 3px solid rgb(0, 0, 0)
+}
+.LBButtons {
+  display: flex;
+  width: 50%;
+}
+.LBButtonsBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.LBButtonsBox1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.LBButtonsBox2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
 }
 
 #welcome {
@@ -163,18 +236,6 @@ html, body {
   width: 100%;
   align-items: center;
 }
-#winMatch {
-  background: rgb(22,81,191);
-  background: linear-gradient(90deg, rgba(22,81,191,1) 0%, rgba(41,61,150,1) 10%, rgba(56,72,108,1) 51%, rgba(56,95,186,1) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.861);
-  border-radius: 1.5em;
-}
-#loseMatch {
-  background: rgb(173,44,72);
-  background: linear-gradient(90deg, rgba(173,44,72,1) 0%, rgba(150,41,64,1) 10%, rgba(108,56,67,1) 51%, rgba(186,56,86,1) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.80);
-  border-radius: 1.5em;
-}
 .MatchBoxes {
   display: flex;
   padding: 10px;
@@ -189,26 +250,29 @@ html, body {
 }
 .DropDownBoxes {
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border-radius: 2em;
+  /* border-radius: 2em; */
   width: 100%;
 }
 .Matches {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 1px;
   align-items: center;
   font-family: 'Koulen', cursive;
+  border: 1px solid rgba(255, 255, 255, 0.80);
   gap: 2em;
 }
 .MatchGroup1 {
   display: flex;
   flex-direction: column;
   line-height: 80%;
+  min-width: 10%;
+  max-width: 10%;
 }
 .MatchGroup2 {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 .MatchGroup2div {
   display: inline-flex;
@@ -326,7 +390,44 @@ html, body {
 .DropDownBoxMatch {
   display: flex;
   width: 100%;
-  gap: 2em;
+  gap: 3em;
+  justify-items: center;
+  justify-content: space-around;
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  border-top: none;
+}
+.TeamInfoTextDD {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-size: 0.8em;
+  font-family: Prompt;
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  border-top: none;
+  width: 100%;
+}
+.TeamInfoTextDD1 {
+  display: flex;
+  margin-left: 36.5%;
+}
+#damageDD {
+  position: relative;
+  margin-left: 7.5%;
+}
+#csDD {
+  position: relative;
+  margin-left: 0.01%;
+}
+.TeamInfoTextDD2 {
+  display: flex;
+  margin-left: 42.5%;
+}
+#damageDD2 {
+  position: relative;
+  margin-left: 8%;
+}
+#csDD2 {
+  position: relative;
+  margin-left: 0.01%;
 }
 .Team1DropDownBox {
   margin-left: 1em;
@@ -344,11 +445,25 @@ html, body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .Player0Team1ChampIcon {
   display: flex;
 }
-.Player0Team1Damage, .Player0Team1CS, .Player0Team1Info, .Player0Team1VisionScore {
+.Player0Team1Info {
+  display: flex;
+  flex-direction: row;
+  min-width: 16%;
+  max-width: 16%;
+  overflow: hidden;
+  align-items: center;
+  font-size: 0.75em;
+  justify-content: flex-start;
+}
+.Player0Team1Info p {
+  margin: 0;
+}
+.Player0Team1Damage, .Player0Team1CS, .Player0Team1VisionScore {
   min-width: 10%;
   max-width: 30%;
   display: flex;
@@ -359,8 +474,8 @@ html, body {
   display: flex;
   flex-direction: column;
   font-size: 0.75em;
-  min-width: 10%;
-  max-width: 30%;
+  min-width: 25%;
+  max-width: 25%;
 }
 #summonerSpellIcon1DropDown, #summonerSpellIcon2DropDown {
   width: 24px;
@@ -412,6 +527,8 @@ html, body {
 } 
 .ObjectivesDD {
   display: flex;
+  max-width: 5%;
+  min-width: 5%;
   flex-direction: row;
   align-items: center;
 }
@@ -576,6 +693,18 @@ p {
   filter: invert(20%);
 }
 
+#linkedinLogo {
+  width: 100%;
+}
+#LinkedInLogoLink {
+  display: inline-block;
+  width: 9%;
+  height: 80%; 
+}
+#linkedinLogo:hover {
+  filter: invert(20%);
+}
+
 .EndpointBar {
   display: flex;
   flex-direction: row;
@@ -690,6 +819,33 @@ p {
   background-color: #22212174;
 }
 
+
+
+
+
+
+.TFTTopHalfBox {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.TFTMatchBoxes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  padding: 10px;
+  width: 90%;
+  margin: 15px auto;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  border-radius: 2em;
+  border-width: 4px;
+  border-style: double;
+  border-color: #1C6EA4;
+  background: #181A1B;
+}
 .TFTMatches {
   justify-content: space-around;
   width: 100%;
@@ -699,9 +855,77 @@ p {
   align-items: center;
   color:rgba(255, 255, 255, 0.861);
   font-family: 'Koulen', cursive;
+  border: 1px solid rgba(255, 255, 255, 0.80);
 }
 
-#TFTMatchBoxes {
-  border: 1px solid rgba(255, 255, 255, 0.80);
-  border-radius: 1.5em;
+.TFTMatchGroup1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.TFTMatchGroup2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#LittleLegendIcon {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 2em;
+  border: 2px solid rgba(51, 51, 51, 0.403);
+}
+.TFTMatchGroup3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.TFTAugGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.TFTTraitGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.TFTTraitGroup1 {
+  display: flex;
+  gap: 5px;
+}
+.TFTTraitGroup2 {
+  display: flex;
+  gap: 5px;
+}
+#TFTAug1, #TFTAug2, #TFTAug3 {
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5px;
+  border: 0.5px solid rgba(255, 255, 255, 0.403);
+}
+.TFTMatchGroup4 {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+.TFTUnitGroup1 {
+  display: flex;
+  gap: 5px;
+}
+.TFTUnitGroup2 {
+  display: flex;
+  gap: 5px;
+}
+#TFTunit {
+  height: 64px;
+  width: 64px;
+  object-fit: cover;
+  object-position: 85%;
+  border-radius: 2em;
+  border: 0.5px solid rgba(255, 255, 255, 0.403);
 }

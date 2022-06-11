@@ -9,6 +9,11 @@ export const addSummonerDataActionCreator = summonerData => ({
   payload: summonerData
 });
 
+export const addSummChampDataActionCreator = summChampData => ({
+  type: types.ADD_SUMM_CHAMP_DATA,
+  payload: summChampData
+});
+
 export const addChampionDataActionCreator = championData => ({
   type: types.ADD_CHAMPION_DATA,
   payload: championData
@@ -43,6 +48,12 @@ export const getSummonerData = summonerName => async dispatch => {
   console.log('SUMM response from back-end', responseSummData.data);
   dispatch(addSummonerDataActionCreator(responseSummData.data));
 };
+
+export const getSummonerChampData = summonerName => async dispatch => {
+  const responseSummChampData = await axios.get(`/${summonerName}`);
+  console.log('SUMMCHAMP response from back-end', responseSummChampData.data);
+  dispatch(addSummChampDataActionCreator(responseSummChampData.data));
+}
 
 // asynchronous call to API to get info based on riot ID input
 export const getValorantData = (riotID, tagLine) => async dispatch => {

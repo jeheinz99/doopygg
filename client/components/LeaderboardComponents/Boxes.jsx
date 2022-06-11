@@ -9,15 +9,17 @@ const Boxes = props => {
   const ladderNumber = id + 1;
   
   return (
-    <div className="Matches" id="leaderboardBox">
-      <p> #{ladderNumber} </p>
-      <img id="profileIcon" src={image}/>
-      <p> {summonerName} </p>
-      <p> Wins: {wins} </p>
-      <p> Losses: {losses} </p>
-      <p> {winPercent} % W/L </p>
-      <p> {rank} </p>
-      <p> {leaguePoints} LP </p>
+    <div className="OuterLBBox">
+      <div className="Matches" id="leaderboardBox">
+        <p> #{ladderNumber} </p>
+        <img id="profileIcon" src={image}/>
+        <p> {summonerName} </p>
+        <p> Wins: {wins} </p>
+        <p> Losses: {losses} </p>
+        <p> {winPercent} % W/L </p>
+        <p> {rank} </p>
+        <p> {leaguePoints} LP </p>
+      </div>
     </div>
   );
 };
