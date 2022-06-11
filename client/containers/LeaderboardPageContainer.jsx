@@ -7,17 +7,17 @@ const LeaderboardPageContainer = () => {
 
   const leaderboardData = useSelector(state => state.leaderboard.leaderboardData);
 
-  const regions = {'BR1': 'Brazil', 
-  'EUN1': 'EUNE', 
-  'EUW1': 'Europe West', 
-  'JP1': 'Japan', 
-  'KR': 'Korea',
+  const regions = {'BR1': 'BR',
+  'RU': 'RU', 
+  'TR1': 'TR', 
+  'JP1': 'JP', 
   'LA1': 'LAS', 
   'LA2': 'LAN',
-  'NA1': 'North America',
-  'OC1': 'Oceania',
-  'RU': 'Russia',
-  'TR1': 'Turkey'};
+  'NA1': 'NA',
+  'KR': 'KR',
+  'OC1': 'OCE',
+  'EUN1': 'EUNE', 
+  'EUW1': 'EUW'};
 
   const regionsArr = [];
   const regionsArr2 = [];

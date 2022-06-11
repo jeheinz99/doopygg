@@ -7,6 +7,7 @@ const Matches = props => {
 
   const { otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
   
+  console.log(otherPlayers, 'otherPlayers in Matches / Boxes.jsx');
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 
   const [open, setOpen] = useState(false);

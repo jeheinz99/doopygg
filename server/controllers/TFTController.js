@@ -29,20 +29,19 @@ const mapUnitIcons = async units => {
   for (let i = 0; i < units.length; i++) {
     const query = `SELECT path FROM tftchamps WHERE name IN ('${units[i].character_id}')`
     const path = await db.query(query);
-    unitsArr.push(path.rows[0].path);
+    units[i]["unitIcon"] = path.rows[0].path;
   }
-  return unitsArr;
+  return units;
 };
 
 const mapTraitIcons = async traits => {
 
-  const traitsArr = [];
   for (let i = 0; i < traits.length; i++) {
     const query = `SELECT path FROM traits WHERE name IN ('${traits[i].name}')`
     const path = await db.query(query);
-    traitsArr.push(path.rows[0].path);
+    traits[i]["traitIcon"] = path.rows[0].path;
   }
-  return traitsArr;
+  return traits;
 };
 
 // middleware to retrieve data for summoner search on TFT page
@@ -65,7 +64,7 @@ TFTController.TFTData = async (req, res, next) => {
     const { puuid } = data;
     const { profileIconId } = data;
     // returns a list of recent matches based on puuid 
-    const getMatchList = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=5&api_key=${api_key}`,
+    const getMatchList = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -128,8 +127,8 @@ TFTController.TFTData = async (req, res, next) => {
       const unitsMap = await mapUnitIcons(TFTMatchHistory[i].units);
       const traitsMap = await mapTraitIcons(TFTMatchHistory[i].traits);
 
-      TFTMatchHistory[i].traitIcons = traitsMap;
-      TFTMatchHistory[i].unitIcons = unitsMap;
+      TFTMatchHistory[i].traits = traitsMap;
+      TFTMatchHistory[i].units = unitsMap;
       TFTMatchHistory[i].augments = augmentsMap;
       TFTMatchHistory[i].companion = littleLegendMap;
 

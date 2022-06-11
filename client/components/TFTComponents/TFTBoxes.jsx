@@ -2,30 +2,32 @@ import React, { useState } from 'react';
 
 const TFTBoxes = props => {
 
-  const { augments, companion, damageDealt, level, matchLength, placement, setNumber, traits, traitIcons, unitIcons } = props
+  const { augments, companion, damageDealt, level, matchLength, placement, setNumber, traits, units, id } = props
   
+  console.log(id, 'id in tftboxes');
+
   const unitsArr = [];
   const unitsArr2 =[];
 
   const traitsArr = [];
   const traitsArr2 = [];
 
-  for (let i = 0; i < traitIcons.length; i++) {
-    (traitsArr.length < (traitIcons.length / 2) ? traitsArr.push(<img key={`trait-${i}`} id="TFTtrait" src={traitIcons[i]}/>) : traitsArr2.push(<img key={i} id="TFTtrait" src={traitIcons[i]}/>));
+  for (let i = 0; i < traits.length; i++) {
+    (traitsArr.length < (traits.length / 2) ? traitsArr.push(<img key={`trait-${i}`} className="TFTtrait" id={`Trait-${traits[i].style}`} src={traits[i].traitIcon}/>) : traitsArr2.push(<img key={`trait-${i}`} className="TFTtrait" id={`Trait-${traits[i].style}`} src={traits[i].traitIcon}/>));
   }
 
-  for (let i = 0; i < unitIcons.length; i++) {
-    (unitsArr.length < (unitIcons.length / 2) ? unitsArr.push(<img key={`unit-${i}`} id="TFTunit" src={unitIcons[i]}/>) : unitsArr2.push(<img key={`unit-${i}`} id="TFTunit" src={unitIcons[i]}/>));
+  for (let i = 0; i < units.length; i++) {
+    (unitsArr.length < (units.length / 2) ? unitsArr.push(<img key={`unit-${i}`} className="TFTunit" id={`Unit-${units[i].rarity}`} src={units[i].unitIcon}/>) : unitsArr2.push(<img key={`unit-${i}`} className="TFTunit" id={`Unit-${units[i].rarity}`} src={units[i].unitIcon}/>));
   }
 
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="TFTMatches">
+    <div className="TFTMatches" id={id}>
       <div className="TFTMatchGroup1">
-        <p>5v5 Ranked TFT</p>
+        <p>Ranked TFT</p>
         <p>{`${Math.floor(Number(matchLength / 60))}:${(Number(matchLength) % 60).toFixed()}`}</p>
-        <p>Placement: {placement}/8 </p>
+        <p id={`placementnumber-${placement}`}>{placement}/8</p>
         <p>Set {setNumber} </p>
       </div>
       <div className="TFTMatchGroup2">

@@ -9,11 +9,13 @@ const MatchBoxes = () => {
 
   const chunkArr = [];
   console.log(otherPlayersMatches)
-  const chunkSize = (otherPlayersMatches.length / 5);
+  const chunkSize = (otherPlayersMatches.length / matchHistory.length);
   for (let i = 0; i < otherPlayersMatches.length; i+= chunkSize) {
     const chunk = otherPlayersMatches.slice(i, i + chunkSize);
     chunkArr.push(chunk);
   }
+
+  console.log(chunkArr, 'chunkArr in MatchBoxes');
 
   const matchList = [];
   for (let i = 0; i < matchHistory.length; i++) {

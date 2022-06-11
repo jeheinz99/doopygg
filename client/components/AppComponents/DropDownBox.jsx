@@ -24,7 +24,7 @@ const DropDownBox = props => {
   }
 
   return (
-    <div>
+    <div className="DDBoxWrap">
       <div className="TeamInfoTextDD" id={id}>
         <div className="TeamInfoTextDD1">
           <p id="kdaDD">KDA</p>
@@ -45,21 +45,21 @@ const DropDownBox = props => {
         </div>
         <div className="ObjectivesDD">
           <div className="Team1ObjectivesDD">
-            <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/baron_square.png'/>
               <p>{team1Barons}</p>
-            <img id="DragonIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/dragon_square.png'/>
               <p>{team1Dragons}</p>
-            <p>Gold: {team1Gold}</p>
-            <img id="TurretIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/turret_blue_square.png'/>
+              <p>{team1Gold}</p>
               <p>{team1Turrets}</p>
           </div>
+          <div className="MiddleIconsDD">
+            <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-match-history/global/default/baron-100.png'/>
+            <img id="DragonIconDD" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-match-history/global/default/dragon-100.png'/>
+            <img id="GoldIconDD" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-postgame/global/default/mask-icon-gold.png'/>
+            <img id="TurretIconDD" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-match-history/global/default/tower-100.png'/>
+          </div>
           <div className="Team2ObjectivesDD">
-            <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/baron_square.png'/>
               <p>{team2Barons}</p>
-            <img id="DragonIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/dragon_square.png'/>
               <p>{team2Dragons}</p>
-              <p>Gold: {team1Gold}</p>
-            <img id="TurretIconDD" src='https://raw.communitydragon.org/latest/game/data/images/ui/momentstimelineportraits/turret_red_square.png'/>
+              <p>{team1Gold}</p>
               <p>{team2Turrets}</p>
           </div>
         </div>

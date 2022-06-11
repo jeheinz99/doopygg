@@ -49,21 +49,21 @@ html, body {
   width: 90%;
   margin: 15px auto;
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border-radius: 2em;
-  border-width: 4px;
-  border-style: double;
-  border-color: #1C6EA4;
+  border-radius: 0.3em;
+  border-width: 1px;
+  border-style: solid;
+  border-color:rgba(255, 255, 255, 0.861);
   background: #181A1B;
 }
 
 #SearchBoxInput {
   font-family: 'Roboto', sans-serif;
   text-align: center;
-  border-radius: 0.5em;
+  border-radius: 0.2em;
   padding: 0.5em;
   font-size: 1em;
-  border-width: 4px;
-  border-style: double;
+  border-width: 1px;
+  border-style: solid;
   border-color: #1C6EA4;
   background-color: #181A1B;
   color:rgba(255, 255, 255, 0.861);
@@ -162,19 +162,22 @@ html, body {
   flex-direction: row;
   font-size: 1.5em;
   width: 100%;
-  background: rgb(206, 217, 183);
-  background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%);
+  background: url('https://cdna.artstation.com/p/assets/images/images/028/767/524/large/horace-hsu-spirit-blossom-kindred-final.jpg?1595445173');
+  object-fit: cover;
+  background-position: 1375px 2100px;
+  /* background: rgb(206, 217, 183); */
+  /* background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%); */
   border-radius: 1.5em;
   border: 2px solid rgb(255, 255, 255);
-  font-family: 'Koulen', cursive;
+  font-family: Koulen;
   justify-content: space-around;
 }
 .Rank1LB1 {
   display: flex;
   align-items: center;
   font-size: 2.5em;
-  font-weight: 1000;
-  font-family: 'Prompt', cursive;
+  letter-spacing: 0.1em;
+  font-family: Koulen;
 }
 .Rank1LB2 {
   display: flex;
@@ -198,26 +201,25 @@ html, body {
   border: 3px solid rgb(0, 0, 0)
 }
 .LBButtons {
-  display: flex;
-  width: 50%;
+  width: 3em;
 }
 .LBButtonsBox {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 70%;
+  align-items: center;
 }
 .LBButtonsBox1 {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  width: 70%;
 }
 .LBButtonsBox2 {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  width: 72%;
 }
 
 #welcome {
@@ -247,6 +249,12 @@ html, body {
   border-color: #a41c49;
   color: rgba(255, 255, 255, 0.861);
   gap: 5px;
+}
+.DDBoxWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .DropDownBoxes {
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
@@ -309,9 +317,9 @@ html, body {
 }
 #championIcon {
   width: 35%;
-  border-radius: 50%;
   /* overflow: hidden; */
-  border: 3px solid rgb(14, 14, 14);
+  border-radius: 0.5em;
+  border:1px solid rgb(90, 89, 89);
   /* -webkit-box-shadow: inset 10px 10px 10px #000; */
   /* -moz-box-shadow: inset 10px 10px 10px #000; */
   /* box-shadow: inset 10px 10px 10px #000; */
@@ -391,7 +399,7 @@ html, body {
   display: flex;
   width: 100%;
   gap: 3em;
-  justify-items: center;
+  /* justify-items: center; */
   justify-content: space-around;
   border: 1px solid rgba(255, 255, 255, 0.80);
   border-top: none;
@@ -411,23 +419,35 @@ html, body {
 }
 #damageDD {
   position: relative;
-  margin-left: 7.5%;
+  margin-left: 9%;
 }
 #csDD {
   position: relative;
   margin-left: 0.01%;
 }
+#visionDD {
+  position: relative;
+  margin-left: 2%;
+}
 .TeamInfoTextDD2 {
   display: flex;
   margin-left: 42.5%;
 }
+#kdaDD2 {
+  position: relative;
+  margin-left: 0.1%;
+}
 #damageDD2 {
   position: relative;
-  margin-left: 8%;
+  margin-left: 5%;
 }
 #csDD2 {
   position: relative;
-  margin-left: 0.01%;
+  margin-left: 1%;
+}
+#visionDD2 {
+  position: relative;
+  margin-left: 2%;
 }
 .Team1DropDownBox {
   margin-left: 1em;
@@ -468,6 +488,7 @@ html, body {
   max-width: 30%;
   display: flex;
   font-size: 0.75em;
+  justify-content: center;
   overflow: hidden;
 }
 .Player0Team1KDA {
@@ -526,27 +547,48 @@ html, body {
   border: 1px solid #000;
 } 
 .ObjectivesDD {
-  display: flex;
-  max-width: 5%;
-  min-width: 5%;
+  min-width: 2%;
+  max-width: 2%;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
+  font-family: Koulen;
+}
+.MiddleIconsDD {
+  display: flex;
+  flex-direction: column;
+  gap: 2.8em;
 }
 .Team1ObjectivesDD {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2em;
 }
 .Team2ObjectivesDD {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2em;
+}
+#BaronIconDD {
+  filter:hue-rotate(80deg)
+}
+#DragonIconDD {
+  filter: hue-rotate(180deg)
+}
+#GoldIconDD {
+  height: 32px;
+  width: 32px;
+  filter: brightness(50%) sepia(100) saturate(50) hue-rotate(45deg);
+  /* border-radius: 2em; */
+  /* border: 2px solid rgb(7, 7, 7); */
 }
 #BaronIconDD, #DragonIconDD, #TurretIconDD {
   height: 32px;
   width: 32px;
-  border-radius: 2em;
-  border: 1px solid rgb(27, 27, 27)
+  /* border-radius: 2em; */
+  /* border: 2px solid rgb(7, 7, 7); */
 }
 .DDButtonDiv {
   display: flex;
@@ -600,10 +642,10 @@ h4 {
   width: 85%;
   margin: 15px auto;
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border-width: 4px;
-  border-style: double;
+  border-width: 2px;
+  border-style: solid;
   border-color: #a41c49;
-  border-radius: 2em;
+  border-radius: 0.5em;
   font-family: 'Prompt', sans-serif;
 }
 #SummonerInfo {
@@ -801,11 +843,11 @@ p {
 #SearchBoxInputTFT {
   font-family: 'Roboto', sans-serif;
   text-align: center;
-  border-radius: 0.5em;
+  border-radius: 0.2em;
   padding: 0.5em;
   font-size: 0.5em;
-  border-width: 4px;
-  border-style: double;
+  border-width: 1px;
+  border-style: solid;
   border-color: #1C6EA4;
   background-color: #181A1B;
   color:rgba(255, 255, 255, 0.861);
@@ -840,10 +882,10 @@ p {
   width: 90%;
   margin: 15px auto;
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border-radius: 2em;
-  border-width: 4px;
+  border-radius: 0.3em;
+  border-width: 1px;
   border-style: double;
-  border-color: #1C6EA4;
+  border-color: #a41c49;
   background: #181A1B;
 }
 .TFTMatches {
@@ -873,7 +915,7 @@ p {
   height: 64px;
   object-fit: cover;
   border-radius: 2em;
-  border: 2px solid rgba(51, 51, 51, 0.403);
+  border: 2px solid rgba(133, 133, 133, 0.403);
 }
 .TFTMatchGroup3 {
   display: flex;
@@ -921,11 +963,116 @@ p {
   display: flex;
   gap: 5px;
 }
-#TFTunit {
+
+.TFTtrait {
+  width: 32px;
+  height: 32px;
+  padding: 1px;
+
+}
+/* #Trait-0 {
+  background-image: url('https://raw.communitydragon.org/pbe/game/assets/ux/tft/tft_traits_texture_atlas.png');
+  background-position: 33% 6%;
+  border-radius: 1em;
+  border: 1px solid #000;
+  object-fit: cover;
+}
+#Trait-1 {
+  background-image: url('https://raw.communitydragon.org/pbe/game/assets/ux/tft/tft_traits_texture_atlas.png');
+  background-position: 43% 6%;
+  border-radius: 1em;
+  border: 1px solid #000;
+  object-fit: cover;
+}
+#Trait-2 {
+  background-image: url('https://raw.communitydragon.org/pbe/game/assets/ux/tft/tft_traits_texture_atlas.png');
+  background-position: 73.8% 6%;
+  border-radius: 1em;
+  border: 1px solid #000;
+  object-fit: cover;
+}
+#Trait-3 {
+  background-image: url('https://raw.communitydragon.org/pbe/game/assets/ux/tft/tft_traits_texture_atlas.png');
+  background-position: 64% 31.5%;
+  border-radius: 1em;
+  border: 1px solid #000;
+  object-fit: cover;
+}
+#Trait-4 {
+
+} */
+
+.TFTunit {
   height: 64px;
   width: 64px;
   object-fit: cover;
   object-position: 85%;
   border-radius: 2em;
-  border: 0.5px solid rgba(255, 255, 255, 0.403);
+  border: 2px solid rgba(255, 255, 255, 0.403);
 }
+#Unit-0 {
+  border-color:rgb(111, 110, 110);
+}
+#Unit-1 {
+  border-color: rgb(39, 125, 39);
+}
+#Unit-2 {
+  border-color:rgb(68, 92, 198);
+}
+#Unit-3 {
+  border-color: purple;
+}
+#Unit-4 {
+  border-color: orangered;
+}
+#Unit-5 {
+  border-color: gold;
+}
+#Unit-6 {
+  border-color: red;
+}
+#Unit-8 {
+  border-color: rgb(8, 213, 145);
+}
+
+#tftplacement-1 {
+  border-color: rgb(247, 229, 125);
+}
+
+#tftplacement-2, #tftplacement-3, #tftplacement-4 {
+  border-color: #1C6EA4;
+} 
+
+#tftplacement-5, #tftplacement-6, #tftplacement-7 {
+  border-color: #c8114e;
+
+}
+
+#tftplacement-8 {
+  border-color: #564e50;
+}
+
+#placementnumber-1 {
+  color: rgb(247, 229, 125);
+  font-size: 1.5em;
+  font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+#placementnumber-2, #placementnumber-3, #placementnumber-4 {
+  color: #1C6EA4;
+  font-size: 1.5em;
+  font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+#placementnumber-5, #placementnumber-6, #placementnumber-7 {
+  color: #c8114e;
+  font-size: 1.5em;
+  font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+#placementnumber-8 {
+  color:rgb(111, 110, 110);
+  font-size: 1.5em;
+  font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
