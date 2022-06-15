@@ -861,11 +861,111 @@ p {
   background-color: #22212174;
 }
 
+.TFTDropDownBoxes {
+  width: 100%;
+}
+.TFTDDBoxWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  border-top: none;
+}
+.TFTDDPlayerBox {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  /* gap: 2em; */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.80);
+}
+.TFTDDB1 {
+  display: flex;
+  flex-direction: column;
+  color: rgba(255, 255, 255, 0.80);
+  font-family: Koulen;
+}
+.TFTDDB2 {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-family: Koulen;
+}
+.AugListB2 {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+#DDAug1, #DDAug2, #DDAug3 {
+  height: 32px;
+  width: 32px;
+  border-radius: 0.5px;
+  border: 0.5px solid rgba(255, 255, 255, 0.403);
+}
+.LLIconDD {
+  color: rgba(255, 255, 255, 0.80);
+
+}
+#LittleLegendIconDD {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 2em;
+  border: 2px solid rgba(133, 133, 133, 0.403);
+}
+#DDTrait-0, #DDTrait-1, #DDTrait-2, #DDTrait-3, #DDTrait-4 {
+  height: 24px;
+  width: 24px;
+}
+.TFTDDB3 {
+  display: flex;
+  align-items: center;
+}
+.DDTFTunit {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  object-position: 85%;
+  border-radius: 2em;
+  border: 2px solid rgba(255, 255, 255, 0.403);
+}
+.UnitsList1 {
+}
+.UnitsList2 {
+}
+.TFTDDB4 {
+  display: flex;
+  flex-direction: column;
+  color: rgba(255, 255, 255, 0.80);
+  justify-content: center;
+  font-family: Koulen;
+  align-items: center;
+}
+.TFTGoldIconDiv {
+  display: flex;
+  align-items: center;
+}
+.TFTStageIconDiv {
+  display: flex;
+  align-items: center;
+}
+#TFTGoldIconDDB4 {
+  height: 32px;
+  width: 32px;
+  filter: brightness(55%) sepia(100) saturate(55) hue-rotate(46deg);
+}
+#TFTStageIconDDB4 {
+  height: 32px;
+  width: 32px;
+}
 
 
-
-
-
+.TFTWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
 .TFTTopHalfBox {
   display: flex;
   width: 100%;

@@ -64,7 +64,7 @@ TFTController.TFTData = async (req, res, next) => {
     const { puuid } = data;
     const { profileIconId } = data;
     // returns a list of recent matches based on puuid 
-    const getMatchList = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${api_key}`,
+    const getMatchList = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=3&api_key=${api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -92,7 +92,7 @@ TFTController.TFTData = async (req, res, next) => {
       matchData.push(getMatchData.data.info)
     };
     const TFTMatchHistory = [];
-    const OtherPlayersData = [];
+    const otherPlayersData = [];
     for (let i = 0; i < matchData.length; i++) {
       for (let j = 0; j < 8; j++) {
         if (matchData[i].participants[j].puuid === puuid) {
@@ -107,14 +107,31 @@ TFTController.TFTData = async (req, res, next) => {
             damageDealt: player.total_damage_to_players,
             traits: player.traits,
             units: player.units,
-            unitIcons: [],
-            traitIcons: [],
+          });
+          otherPlayersData.push({
+            augments: player.augments,
+            companion: player.companion.content_ID,
+            level: player.level,
+            placement: player.placement,
+            damageDealt: player.total_damage_to_players,
+            traits: player.traits,
+            units: player.units,
+            lastRound: player.last_round,
+            goldLeft: player.gold_left
           });
         }
         else {
           const player = matchData[i].participants[j];
-          OtherPlayersData.push({
+          otherPlayersData.push({
             augments: player.augments,
+            companion: player.companion.content_ID,
+            level: player.level,
+            placement: player.placement,
+            damageDealt: player.total_damage_to_players,
+            traits: player.traits,
+            units: player.units,
+            lastRound: player.last_round,
+            goldLeft: player.gold_left
           });
         }
       }
@@ -134,12 +151,26 @@ TFTController.TFTData = async (req, res, next) => {
 
     };
 
+    for (let i = 0; i < otherPlayersData.length; i++) {
+      
+      const augmentsMap = await mapAugmentIcons(otherPlayersData[i].augments);
+      const littleLegendMap = await mapLittleLegendIcons(otherPlayersData[i].companion);
+      const unitsMap = await mapUnitIcons(otherPlayersData[i].units);
+      const traitsMap = await mapTraitIcons(otherPlayersData[i].traits);
+
+      otherPlayersData[i].traits = traitsMap;
+      otherPlayersData[i].units = unitsMap;
+      otherPlayersData[i].companion = littleLegendMap;
+      otherPlayersData[i].augments = augmentsMap;
+
+    }
+
 
     const TFTData = {
       TFTData: TFTMatchHistory,
       summonerName: summonerName,
       summonerIcon: profileIconId,
-      OtherPlayersData: OtherPlayersData,
+      otherPlayersData: otherPlayersData,
     }
 
     // console.log(TFTData);

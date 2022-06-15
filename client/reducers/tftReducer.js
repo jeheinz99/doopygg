@@ -4,6 +4,7 @@ const initialState = {
   TFTData: [],
   summonerName: '',
   summonerIcon: 0,
+  otherPlayersData: [],
 };
 
 const tftReducer = (state = initialState, action) => {
@@ -25,6 +26,7 @@ const tftReducer = (state = initialState, action) => {
           TFTData: payload.TFTData,
           summonerName: payload.summonerName,
           summonerIcon: payload.summonerIcon,
+          otherPlayersData: payload.otherPlayersData,
         }
       );
 

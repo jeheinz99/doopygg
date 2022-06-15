@@ -15,8 +15,6 @@ const MatchBoxes = () => {
     chunkArr.push(chunk);
   }
 
-  console.log(chunkArr, 'chunkArr in MatchBoxes');
-
   const matchList = [];
   for (let i = 0; i < matchHistory.length; i++) {
     if (matchHistory[i].win){

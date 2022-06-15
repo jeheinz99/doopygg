@@ -7,10 +7,9 @@ const Matches = props => {
 
   const { otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
   
-  console.log(otherPlayers, 'otherPlayers in Matches / Boxes.jsx');
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 
-  const [open, setOpen] = useState(false);
+  const [summonerOpen, setOpen] = useState(false);
 
   return (
     <div className="MatchesWrapper">
@@ -99,11 +98,11 @@ const Matches = props => {
           </div>
         </div>
         <div className="MatchGroupButton">
-          <button id="DropDownButton" onClick={(e) => setOpen(!open) }><img src={'https://upload.wikimedia.org/wikipedia/commons/d/db/Vector_down_arrow_link.svg'}/></button>
+          <button id="DropDownButton" onClick={() => setOpen(!summonerOpen) }><img src={'https://upload.wikimedia.org/wikipedia/commons/d/db/Vector_down_arrow_link.svg'}/></button>
         </div>
         </div>
       <div className="DropDownBoxes">
-        {open && <DropDownBox otherPlayers={otherPlayers} id={id} kills={kills} deaths={deaths} assists={assists} items={items} cs={cs} summonerSpells={summonerSpells} visionScore={visionScore} champDamage={champDamage} champLevel={champLevel} runes={runes} championId={championId}/>}
+        {summonerOpen && <DropDownBox otherPlayers={otherPlayers} id={id} kills={kills} deaths={deaths} assists={assists} items={items} cs={cs} summonerSpells={summonerSpells} visionScore={visionScore} champDamage={champDamage} champLevel={champLevel} runes={runes} championId={championId}/>}
       </div>
     </div>
   );
