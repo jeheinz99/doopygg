@@ -1,6 +1,7 @@
 import React from 'react';
 import TFTBoxes from './TFTBoxes.jsx'
 import { useSelector } from 'react-redux';
+import RecentMatchesBox from './TFTRecentMatchesBox.jsx';
 
 const TFTMatchBoxes = () => {
 
@@ -24,6 +25,7 @@ const TFTMatchBoxes = () => {
   return (
     <div className="TFTMatchBoxes">
       <h4>Match History</h4>
+      {/* <RecentMatchesBox/> */}
       { matchList }
     </div>
   );

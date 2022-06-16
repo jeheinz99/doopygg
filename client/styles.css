@@ -876,7 +876,6 @@ p {
   display: flex;
   width: 100%;
   justify-content: space-around;
-  /* gap: 2em; */
   border-bottom: 1px solid rgba(255, 255, 255, 0.80);
 }
 .TFTDDB1 {
@@ -884,12 +883,15 @@ p {
   flex-direction: column;
   color: rgba(255, 255, 255, 0.80);
   font-family: Koulen;
+  width: 12%;
 }
 .TFTDDB2 {
   display: flex;
   gap: 5px;
   align-items: center;
   font-family: Koulen;
+  width: 30%;
+  justify-content: flex-start;
 }
 .AugListB2 {
   display: flex;
@@ -930,8 +932,10 @@ p {
   border: 2px solid rgba(255, 255, 255, 0.403);
 }
 .UnitsList1 {
+
 }
 .UnitsList2 {
+  
 }
 .TFTDDB4 {
   display: flex;

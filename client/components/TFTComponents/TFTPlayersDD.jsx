@@ -18,6 +18,15 @@ const TFTPlayersDD = props => {
     (unitsArr.length < (units.length / 2) ? unitsArr.push(<img key={`ddunit-${i}`} className="DDTFTunit" id={`Unit-${units[i].rarity}`} src={units[i].unitIcon}/>) : unitsArr2.push(<img key={`unit-${i}`} className="DDTFTunit" id={`Unit-${units[i].rarity}`} src={units[i].unitIcon}/>));
   }
 
+  // converts last round to stage number
+  let firstNum = 1 + Math.floor(lastRound / 6);
+  let secondNum = (lastRound % 6);
+  if (secondNum === 0) {
+    secondNum = 0;
+    firstNum -= 1;
+  }
+  const stage = `${firstNum} - ${secondNum}`
+
   return (
     <div className="TFTDDPlayerBox">
 
@@ -65,7 +74,7 @@ const TFTPlayersDD = props => {
         </div>
         <div className="TFTStageIconDiv">
           <img id="TFTStageIconDDB4" src='https://raw.communitydragon.org/pbe/game/assets/ux/tft/stageicons/swordscurrent.png'/>
-          <p>{lastRound}</p>
+          <p>{stage}</p>
         </div>
       </div>
     </div>
