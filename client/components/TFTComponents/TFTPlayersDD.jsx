@@ -17,12 +17,11 @@ const TFTPlayersDD = props => {
   for (let i = 0; i < units.length; i++) {
     (unitsArr.length < (units.length / 2) ? unitsArr.push(<img key={`ddunit-${i}`} className="DDTFTunit" id={`Unit-${units[i].rarity}`} src={units[i].unitIcon}/>) : unitsArr2.push(<img key={`unit-${i}`} className="DDTFTunit" id={`Unit-${units[i].rarity}`} src={units[i].unitIcon}/>));
   }
-
   // converts last round to stage number
   let firstNum = 1 + Math.floor(lastRound / 6);
   let secondNum = (lastRound % 6);
   if (secondNum === 0) {
-    secondNum = 0;
+    secondNum = 6;
     firstNum -= 1;
   }
   const stage = `${firstNum} - ${secondNum}`

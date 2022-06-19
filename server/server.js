@@ -2,6 +2,16 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const PORT = 3000;
+const { MONGO_URI } = require('./data');
+const mongoose = require('mongoose');
+
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: 'DoopyGG-Cluster'
+})
+.then(() => console.log('Connected to Mongo DB.'))
+.catch(err => console.log(err));
 
 // require summoner controllers
 const summonerController = require('./controllers/summonerController');
@@ -38,9 +48,9 @@ app.use(function(req, res, next) {
 // TFT ENDPOINT 
 // router handler to handle all request to /tft endpoint
 const TFTRouter = express.Router();
-app.use('/tft/:summonerName', TFTRouter);
+app.use('/tft', TFTRouter);
 
-app.get('/tft/:summonerName', TFTController.TFTData, (req, res) => {
+TFTRouter.get('/:summonerName', TFTController.TFTData, (req, res) => {
   // console.log(res.locals.TFTData);
   return res.status(200).send(res.locals.TFTData);
 });
@@ -48,9 +58,9 @@ app.get('/tft/:summonerName', TFTController.TFTData, (req, res) => {
 // LEADERBOARD ENDPOINT
 // router handler to handle all request to /leaderboard endpoint
 const leaderboardRouter = express.Router();
-app.use('/leaderboards/:regionName', leaderboardRouter);
+app.use('/leaderboards', leaderboardRouter);
 
-app.get('/leaderboards/:regionName', leaderboardController.leaderboardData, (req, res) => {
+leaderboardRouter.get('/:regionName', leaderboardController.leaderboardData, (req, res) => {
   // console.log(res.locals.leaderboardData);
   return res.status(200).send(res.locals.leaderboardData);
 });
@@ -60,7 +70,7 @@ app.get('/leaderboards/:regionName', leaderboardController.leaderboardData, (req
 const valorantRouter = express.Router();
 app.use('/valorant', valorantRouter);
 
-app.get('/valorant/:riotId/:tagLine', valorantController.valData, (req, res) => {
+valorantRouter.get('/:riotId/:tagLine', valorantController.valData, (req, res) => {
   // console.log(res.locals.valData);
   return res.status(200).send(res.locals.valData);
 });
@@ -68,10 +78,15 @@ app.get('/valorant/:riotId/:tagLine', valorantController.valData, (req, res) => 
 // SUMMONER ENDPOINT
 // router handler to handle all requests to main app endpoint with summoners
 const summonerRouter = express.Router();
-app.use('/:summonerName', summonerRouter);
+app.use('/summoner', summonerRouter);
 
-app.get('/:summonerName', summonerController.summData, (req, res) => {
-  // console.log(res.locals.summonerData);
+summonerRouter.get('/check/:summonerName', summonerController.checkAndGetSummData, summonerController.addSummData, (req, res) => {
+  // console.log(res.locals.recentSummoner, ' recent summoner in server js');
+  return res.status(200).send(res.locals.recentSummoner);
+});
+
+summonerRouter.get('/:summonerName', summonerController.summData, (req, res) => {
+  console.log(res.locals.summonerData);
   return res.status(200).send(res.locals.summonerData);
 });
 

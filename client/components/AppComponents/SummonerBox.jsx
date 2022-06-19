@@ -10,8 +10,9 @@ const SummonerBox = () => {
   const rank = summonerRank[0];
 
   return (
-  <div>
+  <div className="outerSummonerBox">
     <h3>Summoner Information</h3>
+    <button id="summonerUpdateButton">Update</button>
     <div className="SummonerInfoBox">
       <div id="SummonerInfo">
         {matchHistory[0] && <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${matchHistory[0].summonerIcon}.jpg`}/>}

@@ -76,7 +76,7 @@ html, body {
   background-color: #22212174;
 }
 
-#SearchBoxButton {
+#summonerUpdateButton {
   background-color:#292828;
   border:0.10em double #1C6EA4;
   border-radius: 0.5em;
@@ -91,13 +91,19 @@ html, body {
   text-decoration:none;
   text-shadow:0px -1px 0px #7a2a1d;
 }
-#SearchBoxButton:hover {
+#summonerUpdateButton:hover {
   background-color:#222020;
   border: 0.10em double #a41c49;
 }
-#SearchBoxButton:active {
+#summonerUpdateButton:active {
   position:relative;
   top:1px;
+}
+.SummonerDataBoxGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #welcomeLeaderboard {
@@ -250,11 +256,18 @@ html, body {
   color: rgba(255, 255, 255, 0.861);
   gap: 5px;
 }
+.Box20 {
+  display: flex;
+  width: 100%;
+  /* align-items: center; */
+  /* justify-content: space-around; */
+}
 .DDBoxWrap {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 .DropDownBoxes {
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
@@ -647,6 +660,29 @@ h4 {
   border-color: #a41c49;
   border-radius: 0.5em;
   font-family: 'Prompt', sans-serif;
+}
+#SearchBoxButton {
+  background-color:#292828;
+  border:0.10em double #1C6EA4;
+  border-radius: 0.5em;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family: 'Prompt', sans-serif;
+  letter-spacing: 0.05em;
+  font-size:15px;
+  font-weight:bold;
+  padding:9px 23px;
+  text-decoration:none;
+  text-shadow:0px -1px 0px #7a2a1d;
+}
+#SearchBoxButton:hover {
+  background-color:#222020;
+  border: 0.10em double #a41c49;
+}
+#SearchBoxButton:active {
+  position:relative;
+  top:1px;
 }
 #SummonerInfo {
   display: flex;

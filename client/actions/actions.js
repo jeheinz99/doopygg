@@ -44,7 +44,13 @@ export const getLeaderboardData = regionName => async dispatch => {
 };
 
 export const getSummonerData = summonerName => async dispatch => {
-  const responseSummData = await axios.get(`/${summonerName}`);
+  const responseSummData = await axios.get(`/summoner/${summonerName}`);
+  console.log('SUMM response from back-end', responseSummData.data);
+  dispatch(addSummonerDataActionCreator(responseSummData.data));
+};
+
+export const checkSummonerData = summonerName => async dispatch => {
+  const responseSummData = await axios.get(`/summoner/check/${summonerName}`);
   console.log('SUMM response from back-end', responseSummData.data);
   dispatch(addSummonerDataActionCreator(responseSummData.data));
 };
