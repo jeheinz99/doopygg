@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const SummonerChampDataBox = () => {
 
   const summonerName = useSelector(state => state.summoners.summonerName);
-  const summonerDBData = useSelector(state => state.summoners.summonerDBData);
+  // const summonerDBData = useSelector(state => state.summoners.summonerDBData);
 
 
   // const dataObj = {};

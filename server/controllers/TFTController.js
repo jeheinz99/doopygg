@@ -2,6 +2,9 @@ const TFTController = {};
 const axios = require('axios');
 const { api_key } = require('../data');
 const db = require('../models/IconPaths');
+const tftSummoner = require('../models/TFTSummonerData');
+const tftMatches = require('../models/TFTMatchesModel');
+
 
 const mapAugmentIcons = async augments => {
   const query = `SELECT path FROM tftaugments WHERE name IN ('${augments[0]}', '${augments[1]}', '${augments[2]}')
@@ -44,8 +47,32 @@ const mapTraitIcons = async traits => {
   return traits;
 };
 
+TFTController.checkTFTSummData = async (req, res, next) => {
+
+  const { summonerName } = req.params;
+  
+  try {
+    const summoner = await tftSummoner.findOne({summonerName: summonerName});
+
+    if (summoner !== null) {
+      res.locals.TFTData = summoner.summonerRecentData;
+      return next();
+    }
+    return next();
+  }
+  catch(err) {
+    console.log('error in checkTFTSummData');
+    return next(err);
+  }
+}
+
 // middleware to retrieve data for summoner search on TFT page
-TFTController.TFTData = async (req, res, next) => {
+TFTController.updateTFTSummData = async (req, res, next) => {
+
+  if (res.locals.TFTData) {
+    return next();
+  }
+
   try {
     const { summonerName } = req.params;
     // console.log('TFTData back-end', summonerName);
@@ -79,17 +106,29 @@ TFTController.TFTData = async (req, res, next) => {
 
     const matchData = [];
     for (let i = 0; i < matchIdList.length; i++) {
-
-      const getMatchData = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/${matchIdList[i]}?api_key=${api_key}`,
-      {
-        headers: {
-          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-          "Accept-Language": "en-US,en;q=0.9",
-          "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-          "Origin": "https://developer.riotgames.com"
-          }
-      });
-      matchData.push(getMatchData.data.info)
+      // pings DB to findOne match based on the matchId
+      const match = await tftMatches.findOne({matchId: matchIdList[i]});
+      // if match returns null (doesn't exist in DB), ping API and then store it
+      if (match === null) {
+        const getMatchData = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/${matchIdList[i]}?api_key=${api_key}`,
+        {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Origin": "https://developer.riotgames.com"
+            }
+        });
+        await tftMatches.create({
+          matchId: matchIdList[i],
+          matchData: getMatchData.data.info,
+        });
+        matchData.push(getMatchData.data.info);
+      }
+      // if match doesn't return null, it is in DB 
+      else {
+        matchData.push(match.matchData);
+      }
     };
     const TFTMatchHistory = [];
     const otherPlayersData = [];
@@ -173,13 +212,25 @@ TFTController.TFTData = async (req, res, next) => {
       otherPlayersData: otherPlayersData,
     }
 
-    // console.log(TFTData);
+    const summoner = await tftSummoner.findOne({summonerName: summonerName});
+
+    if (summoner === null) {
+      await tftSummoner.create({
+        summonerName: summonerName,
+        puuid: puuid,
+        summonerRecentData: TFTData,
+      });
+    }
+    else {
+      await tftSummoner.findOneAndUpdate({summonerName: summonerName}, {summonerRecentData: TFTData});
+    }
+
     res.locals.TFTData = TFTData;
-    next()
+    return next();
   } 
   catch(err) {
     console.log('error in TFTController at TFTData', err);
-    next(err);
+    return next(err);
   };
 };
 

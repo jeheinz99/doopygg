@@ -49,17 +49,11 @@ export const getSummonerData = summonerName => async dispatch => {
   dispatch(addSummonerDataActionCreator(responseSummData.data));
 };
 
-export const checkSummonerData = summonerName => async dispatch => {
-  const responseSummData = await axios.get(`/summoner/check/${summonerName}`);
-  console.log('SUMM response from back-end', responseSummData.data);
-  dispatch(addSummonerDataActionCreator(responseSummData.data));
+export const updateSummonerData = summonerName => async dispatch => {
+  const responseSummUpdateData = await axios.get(`/summoner/update/${summonerName}`);
+  console.log('SUMM UPDATE response from back-end', responseSummUpdateData.data);
+  dispatch(addSummonerDataActionCreator(responseSummUpdateData.data));
 };
-
-export const getSummonerChampData = summonerName => async dispatch => {
-  const responseSummChampData = await axios.get(`/${summonerName}`);
-  console.log('SUMMCHAMP response from back-end', responseSummChampData.data);
-  dispatch(addSummChampDataActionCreator(responseSummChampData.data));
-}
 
 // asynchronous call to API to get info based on riot ID input
 export const getValorantData = (riotID, tagLine) => async dispatch => {
@@ -73,6 +67,12 @@ export const getTFTData = summonerName => async dispatch => {
   const responseTFTData = await axios.get(`/tft/${summonerName}`);
   console.log('TFT response from back-end', responseTFTData.data);
   dispatch(addTFTDataActionCreator(responseTFTData.data));
+};
+
+export const updateTFTData = summonerName => async dispatch => {
+  const responseTFTUpdateData = await axios.get(`/tft/update/${summonerName}`);
+  console.log('TFT UPDATE response from back-end', responseTFTUpdateData.data);
+  dispatch(addSummonerDataActionCreator(responseTFTUpdateData.data));
 };
 
 export const getChampionData = championName => async dispatch => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSummonerData, checkSummonerData } from '../actions/actions.js';
+import { getSummonerData } from '../actions/actions.js';
 import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
 import SummonerBox from '../components/AppComponents/SummonerBox.jsx';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,9 +7,7 @@ import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataB
 
 const SearchBox = () => {
   const matchHistory = useSelector(state => state.summoners.matchHistory);
-  const summonerDBData = useSelector(state => state.summoners.summonerDBData);
   const loadSummonerData = useDispatch();
-  // const checkifSummonerData = useDispatch();
 
   let summonerNameInput;
     function summonerNameData (e) {
@@ -31,7 +29,6 @@ const SearchBox = () => {
       </div>
     <div className="SummonerDataBoxGroup">
       {matchHistory[0] && <SummonerBox />}
-      {Object.keys(summonerDBData)[0] && <SummonerChampDataBox/>}
     </div>
     {matchHistory[0] && <MatchBoxes />}
   </div>

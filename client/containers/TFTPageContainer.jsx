@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTFTData } from '../actions/actions.js';
+import { getTFTData, updateTFTData } from '../actions/actions.js';
 import TFTMatchBoxes from '../components/TFTComponents/TFTMatchBoxes.jsx';
 import RecentMatchesBox from '../components/TFTComponents/TFTRecentMatchesBox.jsx';
 
@@ -8,6 +8,7 @@ import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx'
 
 const TFTPageContainer = () => {
 
+  const update = useDispatch();
   const loadTFTData = useDispatch();
   const summonerName = useSelector(state => state.tft.summonerName);
   const TFTData = useSelector(state => state.tft.TFTData);
@@ -28,6 +29,7 @@ const TFTPageContainer = () => {
         <input id="SearchBoxInputTFT" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
         <br></br>
         <button id="SearchBoxButton" onClick={() => loadTFTData(getTFTData(summonerNameInput))}> Search </button>
+        <button id="tempButton" onClick={() => update(updateTFTData(summonerNameInput))}> Update </button>
       </div>
       <div className="TFTTopHalfBox">
         {TFTData[0] && <TFTSummonerBox />}

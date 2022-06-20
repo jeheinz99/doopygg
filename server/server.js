@@ -50,7 +50,13 @@ app.use(function(req, res, next) {
 const TFTRouter = express.Router();
 app.use('/tft', TFTRouter);
 
-TFTRouter.get('/:summonerName', TFTController.TFTData, (req, res) => {
+TFTRouter.get('/update/:summonerName', TFTController.updateTFTSummData, (req, res) => {
+  // console.log(res.locals.TFTData);
+  return res.status(200).send(res.locals.TFTData);
+});
+
+// summonerController.checkSummData, summonerController.updateSummData
+TFTRouter.get('/:summonerName', TFTController.checkTFTSummData, TFTController.updateTFTSummData, (req, res) => {
   // console.log(res.locals.TFTData);
   return res.status(200).send(res.locals.TFTData);
 });
@@ -80,12 +86,12 @@ valorantRouter.get('/:riotId/:tagLine', valorantController.valData, (req, res) =
 const summonerRouter = express.Router();
 app.use('/summoner', summonerRouter);
 
-summonerRouter.get('/check/:summonerName', summonerController.checkAndGetSummData, summonerController.addSummData, (req, res) => {
+summonerRouter.get('/update/:summonerName',  summonerController.updateSummData, (req, res) => {
   // console.log(res.locals.recentSummoner, ' recent summoner in server js');
-  return res.status(200).send(res.locals.recentSummoner);
+  return res.status(200).send(res.locals.summonerData);
 });
 
-summonerRouter.get('/:summonerName', summonerController.summData, (req, res) => {
+summonerRouter.get('/:summonerName', summonerController.checkSummData, summonerController.updateSummData, (req, res) => {
   console.log(res.locals.summonerData);
   return res.status(200).send(res.locals.summonerData);
 });

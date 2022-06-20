@@ -3,7 +3,8 @@ const axios = require('axios');
 const data = require('../data');
 const { api_key } = data;
 const db = require('../models/IconPaths');
-const Summoner = require('../models/summonerData');
+const lolSummoner = require('../models/summonerData');
+const lolMatches = require('../models/LoLMatchesModel');
 
 // HELPER FUNCTIONS ---> USED TO GET DATA FROM SQL DATABASE FROM RIOT API DATA
 
@@ -89,20 +90,75 @@ const mapSummonerIcons = async summSpells => {
   return [path.rows[0].path, path.rows[1].path];
 };
 
-summonerController.summData = async (req, res, next) => {
+summonerController.checkSummData = async (req, res, next) => {
 
   const { summonerName } = req.params;
-  
-  const summoner = await Summoner.findOne({summonerName: summonerName});
-  console.log(summoner.summonerRecentData, 'test');
 
-  if (summoner !== null) {
-    res.locals.summonerData = summoner.summonerRecentData;
+  try {
+    const summoner = await lolSummoner.findOne({summonerName: summonerName});
+
+    // const { matchesPlayed } = summoner;
+
+    // let ms = 1300;
+    // const tempArr = [];
+    // const timeout = ms => {
+    //   return new Promise(resolve => setTimeout(resolve, ms));
+    // };
+    // const apiCall = async matchesPlayed => {
+    //   for (let i = 0; i < matchesPlayed.length; i++) {
+    //     for (let j = 0; j < matchesPlayed[i].length; j++) {
+    //       const match = await lolMatches.findOne({matchId: matchesPlayed[i][j]});
+    //       if (match === null) {
+    //         const getMatchObj = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4326617754?api_key=RGAPI-0819602b-05b5-488c-aaa4-b6657496a9c2`,
+    //         {
+    //           headers: {
+    //             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+    //             "Accept-Language": "en-US,en;q=0.9",
+    //             "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+    //             "Origin": "https://developer.riotgames.com"
+    //           }
+    //         });
+    //         await lolMatches.create({
+    //           matchId: matchesPlayed[i][j],
+    //           matchData: getMatchObj.data.info,
+    //         });
+    //         tempArr.push(getMatchObj.data.info);
+    //         console.log(`match obj ${j}`);
+    //         await timeout(ms);
+    //       }
+    //       else {
+    //         tempArr.push(match.matchData);
+    //         console.log(`match obj ${j}`);
+    //         await timeout(ms);
+    //       }
+    //     }
+    //   }
+    // }
+    // const result = await apiCall(matchesPlayed);
+
+    if (summoner !== null) {
+      res.locals.summonerData = summoner.summonerRecentData;
+      return next();
+    }
+    return next();
+  }
+  catch(err) {
+    console.log('error in checkSummData');
+    return next(err);
+  }
+};
+
+summonerController.updateSummData = async (req, res, next) => {
+
+  const { summonerName } = req.params;
+
+  // checks if res.locals.summonerData exists, if it does then just skips this controller -
+  // determined by whether the user pressed 'search' or 'update'
+  if (res.locals.summonerData) {
     return next();
   }
 
   try {
-
     let responseSummData = await axios.get(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${api_key}`, 
     {
       headers: {
@@ -115,6 +171,7 @@ summonerController.summData = async (req, res, next) => {
 
     const { data } = responseSummData;
     const { puuid } = data;
+
     
     // uses summoner's puuid to get summoner's match history list of past 10 games to an array
     let responseMatchData = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${api_key}`,
@@ -152,32 +209,32 @@ summonerController.summData = async (req, res, next) => {
       }
     }
     
-    // const matchHistoryTimes = [];
     const matchHistoryData = [];
     // iterates through the matchIdList of 10 match IDs and pushes the match data for each match to a new array matchHistoryData
     for (let i = 0; i < matchIdList.length; i++) {
-      let responseMatchHistory = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchIdList[i]}?api_key=${api_key}`,
-      {
-        headers: {
-          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-          "Accept-Language": "en-US,en;q=0.9",
-          "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-          "Origin": "https://developer.riotgames.com"
-          }
+      // pings DB to findOne match based on the matchId
+      const match = await lolMatches.findOne({matchId: matchIdList[i]});
+      // if match returns null (doesn't exist in DB), ping API and then store it
+      if (match === null) {
+        const responseMatchHistory = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchIdList[i]}?api_key=${api_key}`,
+        {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Origin": "https://developer.riotgames.com"
+            }
         });
-
-      matchHistoryData.push(responseMatchHistory.data.info);
-      // let responseMatchHistoryTimeline = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchIdList[i]}/timeline?api_key=${api_key}`,
-      // {
-      //   headers: {
-      //     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-      //     "Accept-Language": "en-US,en;q=0.9",
-      //     "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-      //     "Origin": "https://developer.riotgames.com"
-      //     }
-      //   });
-      // console.log(responseMatchHistoryTimeline.data.info.frames[0].events[0].realTimestamp, 'unix timestamp for game creation date');
-      // matchHistoryTimes.push(responseMatchHistoryTimeline.data.info.frames[0].events[0].realTimestamp);
+        await lolMatches.create({
+          matchId: matchIdList[i],
+          matchData: responseMatchHistory.data.info,
+        });
+        matchHistoryData.push(responseMatchHistory.data.info);
+      }
+      // if match doesn't return null, it is in DB 
+      else {
+        matchHistoryData.push(match.matchData);
+      }
     }
 
     // iterates through the matchHistoryData list to find the summoner being-
@@ -226,7 +283,7 @@ summonerController.summData = async (req, res, next) => {
             assists: player.assists,
             win: player.win,
             turretKills: player.turretKills,
-            teamBarons: player.challenges.teamBaronKills,
+            // teamBarons: player.challenges.teamBaronKills,
             dragons: player.dragonKills,
             goldEarned: player.goldEarned,
             visionScore: player.visionScore,
@@ -258,7 +315,7 @@ summonerController.summData = async (req, res, next) => {
             assists: player.assists,
             win: player.win,
             turretKills: player.turretKills,
-            teamBarons: player.challenges.teamBaronKills,
+            // teamBarons: player.challenges.teamBaronKills,
             dragons: player.dragonKills,
             goldEarned: player.goldEarned,
             visionScore: player.visionScore,
@@ -319,63 +376,12 @@ summonerController.summData = async (req, res, next) => {
     // console.log(matchesData[0].summonerSpells, 'summSpells back end after iteration');
     // console.log(matchesData[0].items, 'items back end after iteration');
 
+    const allS12MatchesArr = [];
 
-    const summonerData = {
-      summonerName: responseSummData.data.name,
-      summonerLevel: responseSummData.data.summonerLevel,
-      summonerRank: rankData,
-      profileIcon: responseSummData.data.profileIconId,
-      matchHistory: matchesData,
-      otherPlayersMatches: otherPlayersData,
-      summonerDBData: summoner, 
-    };
-
-    await Summoner.findOneAndUpdate({summonerName: summonerName}, {summonerRecentData: summonerData});
-
-    // console.log('summonerData back-end', summonerData);
-    res.locals.summonerData = summonerData;
-    next();
-  }
-  catch(err) {
-    console.log('error in summonerController at summData', err);
-    next(err);
-  };
-};
-
-summonerController.checkAndGetSummData = async (req, res, next) => {
-
-  const { summonerName } = req.params;
-  // console.log('summonerName in checkSummData', summonerName);
-
-  try {
-
-    const summoner = await Summoner.findOne({summonerName: summonerName});
-
-    if (summoner !== null) {
-      res.locals.foundSummData = summoner;
-      return next();
-    }
-    return err;
-  }
-  catch(err) {
-
-    let getPuuid = await axios.get(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${api_key}`, 
-    {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-        "Accept-Language": "en-US,en;q=0.9",
-        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-        "Origin": "https://developer.riotgames.com",
-      }
-    });
-
-    const { puuid } = getPuuid.data;
-    console.log(puuid, 'puuid after api call');
-
-    const matchesArr = [];
     try {
+
       for (let i = 0; i < 2000; i+=100) {
-        let getRankedS12Matches = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1641531600&queue=420&start=${i}&count=100&api_key=${api_key}`,
+        const getRankedS12Matches = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1641531600&queue=420&type=ranked&start=${i}&count=100&api_key=${api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -385,26 +391,48 @@ summonerController.checkAndGetSummData = async (req, res, next) => {
           }
         });
 
-        matchesArr.push(getRankedS12Matches.data);
+        allS12MatchesArr.push(getRankedS12Matches.data);
 
         if (getRankedS12Matches.data.length !== 100) {
-          await Summoner.create({
-            summonerName: summonerName,
-            puuid: puuid,
-            matchesPlayed: matchesArr,
-          });
+          await lolSummoner.findOneAndUpdate({summonerName: summonerName}, {matchesPlayed: allS12MatchesArr});
           break;
         }
       }
-      res.locals.checkSummData = {
-        summonerName: summonerName,
-        matchesPlayed: matchesArr
-      };
-      return next();
     }
     catch(err) {
+      console.log('err in getting all s12 ranked matches');
       return next(err);
     }
+
+    const summonerData = {
+      summonerName: responseSummData.data.name,
+      summonerLevel: responseSummData.data.summonerLevel,
+      summonerRank: rankData,
+      profileIcon: responseSummData.data.profileIconId,
+      matchHistory: matchesData,
+      otherPlayersMatches: otherPlayersData,
+    };
+
+    const summoner = await lolSummoner.findOne({summonerName: summonerName});
+
+    if (summoner === null) {
+      await lolSummoner.create({
+        summonerName: summonerName,
+        puuid: puuid,
+        summonerRecentData: summonerData,
+      });
+    }
+    else {
+      await lolSummoner.findOneAndUpdate({summonerName: summonerName}, {summonerRecentData: summonerData});
+    }
+
+    // console.log('summonerData back-end', summonerData);
+    res.locals.summonerData = summonerData;
+    return next();
+  }
+  catch(err) {
+    console.log('error in summonerController at summData', err);
+    return next(err);
   }
 };
 
@@ -435,8 +463,8 @@ summonerController.addSummData = async (req, res, next) => {
         }
       // }
 
-      await Summoner.findOneAndUpdate({summonerName: summonerName}, {matchesData: matchesDataArr});
-      const summTest = await Summoner.findOne({summonerName: summonerName});
+      await lolSummoner.findOneAndUpdate({summonerName: summonerName}, {matchesData: matchesDataArr});
+      const summTest = await lolSummoner.findOne({summonerName: summonerName});
       res.locals.recentSummoner = summTest;
       return next();
     }
