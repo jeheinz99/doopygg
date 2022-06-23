@@ -92,7 +92,7 @@ summonerRouter.get('/update/:summonerName',  summonerController.updateSummData, 
 });
 
 summonerRouter.get('/:summonerName', summonerController.checkSummData, summonerController.updateSummData, (req, res) => {
-  console.log(res.locals.summonerData);
+  // console.log(res.locals.summonerData);
   return res.status(200).send(res.locals.summonerData);
 });
 

@@ -4,25 +4,42 @@ import { useSelector } from "react-redux";
 const SummonerChampDataBox = () => {
 
   const summonerName = useSelector(state => state.summoners.summonerName);
-  // const summonerDBData = useSelector(state => state.summoners.summonerDBData);
+  const allMatchesPlayed = useSelector(state => state.summoners.allMatchesPlayed);
 
+  const getMatchData = matchId => {
 
-  // const dataObj = {};
-  // for (let i = 0; i < summonerDBData[matchesData].length; i++) {
-  //   for (let j = 0; j < 10; j++) {
-  //     if (summonerDBData[matchesData][i].participants[j].summonerName === summonerName) {
-      //   const player = summonerDBData[matchesData][i].participants[j];
+    for (let i = 0; i < matchId.participants.length; i++) {
+      if (matchId.participants[i].summonerName === summonerName) {
+        const player = matchId.participants[i];
         
-      // }
-  //   }
-  // }
+        const outputObj = {
+            name: player.championName,
+            kills: player.kills,
+            deaths: player.deaths,
+            assists: player.assists,
+            win: player.win,
+            cs: player.totalMinionsKilled,
+            damage: player.totalDamageDealtToChampions,
+            gold: player.goldEarned,
+        };
+        return outputObj;
+      }
+    }
+  };
+
+  const dataArr = [];
+  
+  const result = allMatchesPlayed.map(matchId => getMatchData(matchId.matchData));
+  console.log(result);
+  dataArr.push(result);
+  
+  console.log(dataArr, 'dataArr after looping');
 
   return (
     <div className="testdiv">
-      hello
+      test
     </div>
   );
-
 };
 
 export default SummonerChampDataBox;

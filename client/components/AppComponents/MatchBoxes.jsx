@@ -8,7 +8,6 @@ const MatchBoxes = () => {
   const otherPlayersMatches = useSelector(state => state.summoners.otherPlayersMatches);
 
   const chunkArr = [];
-  console.log(otherPlayersMatches)
   const chunkSize = (otherPlayersMatches.length / matchHistory.length);
   for (let i = 0; i < otherPlayersMatches.length; i+= chunkSize) {
     const chunk = otherPlayersMatches.slice(i, i + chunkSize);

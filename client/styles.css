@@ -101,7 +101,6 @@ html, body {
 }
 .SummonerDataBoxGroup {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -712,18 +711,39 @@ p {
   margin: 0.5em;
 }
 
-#valorant:link, #valorant:visited, #champions:link, #champions:visited, #leaderboards:link, #leaderboards:visited, #home:link, #home:visited, #tft:link, #tft:visited {
-  display: inline-block;
-  background-color:#8f3535;
-  background:linear-gradient(to bottom, #555151 5%, #322e30 100%);
-  color: white;
-  padding: 14px 25px;
-  text-decoration: none;
-  border:0.10em double #1C6EA4;
-  border-radius: 5px;
-  border-color: #1C6EA4;
-  width: 30%;
+#HomeLogo {
+  height: 32px;
+  width: 32px;
 }
+#HomeLogo:hover, #tftLogo:hover, #valorantLogo:hover, #LeaderboardLogo:hover, #RiotLogo:hover {
+  filter: invert(20%);
+}
+
+#tftLogo {
+  height: 46px;
+  width: 76px;
+}
+
+#valorantLogo {
+  width: 64px;
+  height: 64px;
+}
+
+#LeaderboardLogo {
+  height: 32px;
+  width: 32px;
+}
+
+#RiotLogo {
+  height: 32px;
+  width: 32px;
+}
+
+#valorant:link, #valorant:visited, #champions:link, #champions:visited, #leaderboards:link, #leaderboards:visited, #home:link, #home:visited, #tft:link, #tft:visited {
+  display: flex;
+  color: white;
+}
+/*
 #valorant:hover, #champions:hover, #leaderboards:hover, #home:hover, #tft:hover {
   background:linear-gradient(to bottom, #353131 5%, #2c2a2b 100%);
   background-color:#564e50;
@@ -732,7 +752,7 @@ p {
 }
 #valorant:active, #champions:active, #leaderboards:active, #home:active, #tft:active {
   top: 1px;
-}
+} */
 
 #discordLogo {
   width: 100%;
@@ -802,10 +822,11 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 10px;
+  gap: 2em;
   align-items: center;
   margin-top: 10px;
 }
+
 
 #welcomeValorant {
   display: flex;

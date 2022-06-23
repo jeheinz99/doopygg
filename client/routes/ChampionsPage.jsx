@@ -1,6 +1,14 @@
 import React from 'react';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import ChampPageContainer from '../containers/ChampPageContainer';
+
+import { SiRiotgames } from 'react-icons/si';
+import { AiFillHome } from 'react-icons/ai';
+import { MdLeaderboard } from 'react-icons/md';
+
+import valorantLogo from '../assets/valorantLogo.png';
+import tftLogo from '../assets/tftLogo.png';
+
 import discordLogo from '../assets/discordLogo.png';
 import youtubeLogo from '../assets/youtubeLogo.png';
 import twitterLogo from '../assets/twitterLogo.png';
@@ -25,11 +33,11 @@ const ChampionsPage = () => {
           </a>
         </div>
         <div className="Endpoints">
-          <Link id="home" to="/"> Home </Link>
-          <Link id="valorant" to="/valorant"> Valorant </Link>
-          <Link id="leaderboards" to="/leaderboards"> Leaderboards </Link>
-          <Link id="tft" to="/tft"> TFT </Link>
-          <Link id="champions" to="/champions"> Champions </Link>
+          <NavLink style={({isActive}) => ({color: isActive ? '#ED4252' : ''})} id="home" to="/"> <AiFillHome id="HomeLogo"/> </NavLink>
+          <NavLink style={({isActive}) => ({filter: isActive ? 'invert(45%) sepia(76%) saturate(6132%) hue-rotate(337deg) brightness(108%) contrast(86%)' : ''})} id="valorant" to="/valorant"> <img id="valorantLogo" src={valorantLogo}/> </NavLink>
+          <NavLink style={({isActive}) => ({color: isActive ? '#ED4252' : ''})} id="leaderboards" to="/leaderboards"> <MdLeaderboard id="LeaderboardLogo"/> </NavLink>
+          <NavLink style={({isActive}) => ({filter: isActive ? 'invert(45%) sepia(76%) saturate(6132%) hue-rotate(337deg) brightness(108%) contrast(86%)' : ''})} id="tft" to="/tft"> <img id="tftLogo" src={tftLogo}/> </NavLink>
+          <NavLink style={({isActive}) => ({color: isActive ? '#ED4252' : ''})} id="champions" to="/champions"> <SiRiotgames id="RiotLogo"/> </NavLink>
           <Outlet />
         </div>
       </div>

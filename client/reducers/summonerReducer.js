@@ -6,6 +6,7 @@ const initialState = {
   matchHistory: [],
   summonerRank: '',
   otherPlayersMatches: [],
+  allMatchesPlayed: [],
 }
 
 const summonerReducer = (state = initialState, action) => {
@@ -18,11 +19,12 @@ const summonerReducer = (state = initialState, action) => {
       return Object.assign(
         {}, 
         state, {
-        summonerName: payload.summonerName,
-        summonerLevel: payload.summonerLevel,
-        matchHistory: payload.matchHistory,
-        summonerRank: payload.summonerRank,
-        otherPlayersMatches: payload.otherPlayersMatches,
+        summonerName: payload.summonerRecentData.summonerName,
+        summonerLevel: payload.summonerRecentData.summonerLevel,
+        matchHistory: payload.summonerRecentData.matchHistory,
+        summonerRank: payload.summonerRecentData.summonerRank,
+        otherPlayersMatches: payload.summonerRecentData.otherPlayersMatches,
+        allMatchesPlayed: payload.matchesPlayed,
         }
       );
     

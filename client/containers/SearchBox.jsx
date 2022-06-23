@@ -7,6 +7,7 @@ import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataB
 
 const SearchBox = () => {
   const matchHistory = useSelector(state => state.summoners.matchHistory);
+  // const allMatchesPlayed = useSelector(state => state.summoners.allMatchesPlayed);
   const loadSummonerData = useDispatch();
 
   let summonerNameInput;
@@ -28,6 +29,7 @@ const SearchBox = () => {
         <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> Search </button>
       </div>
     <div className="SummonerDataBoxGroup">
+      {/* {allMatchesPlayed[0] && <SummonerChampDataBox />} */}
       {matchHistory[0] && <SummonerBox />}
     </div>
     {matchHistory[0] && <MatchBoxes />}
