@@ -19,7 +19,7 @@ const summonerReducer = (state = initialState, action) => {
       return Object.assign(
         {}, 
         state, {
-        summonerName: payload.summonerRecentData.summonerName,
+        summonerName: payload.summonerName,
         summonerLevel: payload.summonerRecentData.summonerLevel,
         matchHistory: payload.summonerRecentData.matchHistory,
         summonerRank: payload.summonerRecentData.summonerRank,

@@ -92,7 +92,6 @@ summonerController.checkSummData = async (req, res, next) => {
 
   try {
     const summoner = await lolSummoner.findOne({summonerName: summonerName});
-
     // if (summoner !== null && summoner.matchesPlayed[0]) {
 
     //   const newMatchesArr = [];
@@ -149,7 +148,7 @@ summonerController.updateSummData = async (req, res, next) => {
 
     
     // uses summoner's puuid to get summoner's match history list of past 10 games to an array
-    let responseMatchData = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${api_key}`,
+    let responseMatchData = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20&api_key=${api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -186,9 +185,11 @@ summonerController.updateSummData = async (req, res, next) => {
     
     const matchHistoryData = [];
     // iterates through the matchIdList of 10 match IDs and pushes the match data for each match to a new array matchHistoryData
-    for (let i = 0; i < matchIdList.length; i++) {
+    console.log(matchIdList);
+    // for (let i = 0; i < matchIdList.length; i++) {
       // pings DB to findOne match based on the matchId
-      const match = await lolMatches.findOne({matchId: matchIdList[i]});
+      const match = await lolMatches.findOne({matchId: 'NA1_4330809504'});
+      console.log(match);
       // if match returns null (doesn't exist in DB), ping API and then store it
       if (match === null) {
         const responseMatchHistory = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchIdList[i]}?api_key=${api_key}`,
@@ -210,7 +211,7 @@ summonerController.updateSummData = async (req, res, next) => {
       else {
         matchHistoryData.push(match.matchData);
       }
-    }
+    // }
 
     // iterates through the matchHistoryData list to find the summoner being-
     // looked up so you only find their statistics for each match and push an object 
@@ -320,28 +321,28 @@ summonerController.updateSummData = async (req, res, next) => {
     // maps icons for main player being searched for
     for (let i = 0; i < matchHistoryData.length; i++) {
 
-      const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
-      const runesMap = await mapRuneIcons(matchesData[i].runes); // 11 runes total
-      const summSpellMap = await mapSummonerIcons(matchesData[i].summonerSpells); // 2 items total
-      const queueMap = await mapQueueType(matchesData[i].gameMode, queueData);
+      // const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
+      // const runesMap = await mapRuneIcons(matchesData[i].runes); // 11 runes total
+      // const summSpellMap = await mapSummonerIcons(matchesData[i].summonerSpells); // 2 items total
+      // const queueMap = await mapQueueType(matchesData[i].gameMode, queueData);
 
-      matchesData[i].gameMode = queueMap;
-      matchesData[i].items = itemsMap;
-      matchesData[i].runes = runesMap;
-      matchesData[i].summonerSpells = summSpellMap;
+      // matchesData[i].gameMode = queueMap;
+      // matchesData[i].items = itemsMap;
+      // matchesData[i].runes = runesMap;
+      // matchesData[i].summonerSpells = summSpellMap;
 
     }
 
     // maps icons for other players
     for (let i = 0; i < otherPlayersData.length; i++) {
 
-      const itemsMap = await mapItemIcons(otherPlayersData[i].items); // 7 items total
-      const runesMap = await mapRuneIcons(otherPlayersData[i].runes); // 11 runes total
-      const summSpellMap = await mapSummonerIcons(otherPlayersData[i].summonerSpells); // 2 items total
+      // const itemsMap = await mapItemIcons(otherPlayersData[i].items); // 7 items total
+      // const runesMap = await mapRuneIcons(otherPlayersData[i].runes); // 11 runes total
+      // const summSpellMap = await mapSummonerIcons(otherPlayersData[i].summonerSpells); // 2 items total
 
-      otherPlayersData[i].items = itemsMap;
-      otherPlayersData[i].runes = runesMap;
-      otherPlayersData[i].summonerSpells = summSpellMap;
+      // otherPlayersData[i].items = itemsMap;
+      // otherPlayersData[i].runes = runesMap;
+      // otherPlayersData[i].summonerSpells = summSpellMap;
 
     }
 
