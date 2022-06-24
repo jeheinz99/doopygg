@@ -40,6 +40,7 @@ const MatchBoxes = () => {
         gameMode={matchHistory[i].gameMode} 
         championId={matchHistory[i].championId}/>);
     }
+
     else {
       matchList.push(<Matches 
         id="loseMatch" 
@@ -69,16 +70,26 @@ const MatchBoxes = () => {
       recent20Data[matchHistory[i].champion].assists += matchHistory[i].assists;
       recent20Data[matchHistory[i].champion].champDamage += matchHistory[i].champDamage;
       recent20Data[matchHistory[i].champion].cs += matchHistory[i].cs;
+      recent20Data[matchHistory[i].champion].played += 1;
+
+      
+      (matchHistory[i].win === true ? recent20Data[matchHistory[i].champion].win +=1 : recent20Data[matchHistory[i].champion].loss +=1);
+
     }
 
     else {
       const newObj = {};
-
+      
+      newObj.championId = matchHistory[i].championId;
       newObj.kills = matchHistory[i].kills;
       newObj.deaths = matchHistory[i].deaths;
       newObj.assists = matchHistory[i].assists;
       newObj.champDamage = matchHistory[i].champDamage;
       newObj.cs = matchHistory[i].cs;
+      newObj.played = 1;
+
+      (matchHistory[i].win === true ? newObj.win = 1 : newObj.loss = 0);
+      (matchHistory[i].win !== true ? newObj.win = 0 : newObj.loss = 1);
 
       recent20Data[matchHistory[i].champion] = newObj;
     }
@@ -89,6 +100,7 @@ const MatchBoxes = () => {
   return (
     <div id="MatchBoxes" className="OuterSearchBox">
       <h4>Match History</h4>
+      <Recent20StatsBox recent20Data={recent20Data}/>
       { matchList }
     </div>
   );

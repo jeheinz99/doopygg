@@ -633,6 +633,20 @@ html, body {
   height: 24px;
 }
 
+.Recent20ChampCard {
+  display: flex;
+  align-items: center;
+}
+
+.Recent20champCardDiv2box1 {
+  display: flex;
+}
+
+#championIconRecent20 {
+  height: 32px;
+  width: 32px;
+}
+
 h3 {
   font-size: 1.75em;
   text-align: center;
