@@ -6,6 +6,7 @@ const TeamsBoxes = props => {
   const {id, otherPlayers, kills, deaths, assists, items, cs, summonerSpells, visionScore, champDamage, champLevel, runes, championId, summonerName } = props;
   
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
+  const KDA = ((kills + assists) / deaths).toFixed(2);
 
   return (
       <div className="Team1DropDownBox">
@@ -27,7 +28,10 @@ const TeamsBoxes = props => {
             </div>
             <div className="Player0Team1KDA">
               <p>{kills} / {deaths} / {assists}</p>
-              <p>K/D/A: {`${((kills + assists) / deaths).toFixed(2)}`}</p>
+              {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
+              {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
+              {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
+              {KDA < 3 && <p id="lessthan3kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
             </div>
             <div className="Player0Team1Damage">
               <p>{champDamage}</p>

@@ -10,13 +10,23 @@ const Boxes = props => {
   
   return (
     <div className="OuterLBBox">
-      <div className="Matches" id="leaderboardBox">
-        <p> #{ladderNumber} </p>
+      <div className="leaderboardBox">
+        <p id="LBRankNumberTag"> #{ladderNumber} </p>
         <img id="profileIcon" src={image}/>
         <p> {summonerName} </p>
         <p> Wins: {wins} </p>
         <p> Losses: {losses} </p>
-        <p> {winPercent} % W/L </p>
+
+        <div className="LBBoxDiv">
+          {isNaN(winPercent) && <p id="exact100wr"> 100% </p>}
+          {!isNaN(winPercent) && winPercent >= 60 && <p id="above60wr"> {winPercent}% </p>}
+          {!isNaN(winPercent) && winPercent < 60 && <p id="below60wr"> {winPercent}% </p>}
+          <div className="WinLossBar">
+            <div className="winBar" style={{width: `${winPercent}%`}}>{wins}W</div>
+            <div className="lossBar" style={{width: `${100 - winPercent}%`}}>{losses}L</div>
+          </div>
+        </div>
+
         <p> {rank} </p>
         <p> {leaguePoints} LP </p>
       </div>

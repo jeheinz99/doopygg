@@ -11,6 +11,8 @@ const LeaderboardBoxes = () => {
     boxes.push(<Boxes key={i} id={i} profileIcon={leaderboardData[i].profileIcon} wins={leaderboardData[i].wins} losses={leaderboardData[i].losses} leaguePoints={leaderboardData[i].leaguePoints} summonerName={leaderboardData[i].summonerName} rank={leaderboardData[i].summonerRank}/>);
   };
 
+  const winPercent = ((leaderboardData[0].wins / (leaderboardData[0].wins + leaderboardData[0].losses))*100).toFixed(2);
+
   return (
     <div id="LBBoxes" className="OuterSearchBox">
       <div className="Rank1LBBox">
@@ -25,7 +27,13 @@ const LeaderboardBoxes = () => {
         <div className="Rank1LB3">
           <p> Wins: {leaderboardData[0].wins} </p>
           <p> Losses: {leaderboardData[0].losses} </p>
-          <p> {((leaderboardData[0].wins / (leaderboardData[0].wins + leaderboardData[0].losses))*100).toFixed(2)} % W/L </p>
+          {isNaN(winPercent) && <p id="exact100wr"> 100% </p>}
+          {!isNaN(winPercent) && winPercent >= 60 && <p id="above60wr"> {winPercent}% </p>}
+          {!isNaN(winPercent) && winPercent < 60 && <p id="below60wr"> {winPercent}% </p>}
+          <div className="WinLossBar">
+            <div className="winBar" style={{width: `${winPercent}%`}}>{leaderboardData[0].wins}W</div>
+            <div className="lossBar" style={{width: `${100 - winPercent}%`}}>{leaderboardData[0].losses}L</div>
+          </div>
         </div>
         <div className="Rank1LB4">
           <p>{leaderboardData[0].leaguePoints} LP </p>

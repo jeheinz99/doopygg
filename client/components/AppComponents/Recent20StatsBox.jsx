@@ -69,7 +69,6 @@ const Recent20StatsBox = props => {
   };
 
   const top3Played = findTop3(recent20Data);
-  console.log(top3Played);
 
   const champsArr = [];
   for (let i = 0; i < top3Played.length; i++) {
@@ -114,8 +113,8 @@ const Recent20StatsBox = props => {
           <p> {totalWins + totalLosses}G {`( ${totalWins}`}<span id="winTag">{`W`}</span> - {totalLosses}<span id="lossTag">{`L`}</span>{' )'}</p>
 
           <div className="WinLossBar">
-            <div className="winBar" style={{width: `${totalWinPercent}%`}}></div>
-            <div className="lossBar" style={{width: `${100 - totalWinPercent}%`}}></div>
+            <div className="winBar" id="R20WinBar" style={{width: `${totalWinPercent}%`}}>{totalWins}W</div>
+            <div className="lossBar" id="R20WinBar" style={{width: `${100 - totalWinPercent}%`}}>{totalLosses}L</div>
           </div>
 
           <p>{avgKills} / <span id="avgDeathsSpanTag">{avgDeaths}</span> / {avgAssists}</p>

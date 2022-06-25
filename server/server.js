@@ -90,7 +90,7 @@ summonerRouter.get('/test', summonerController.testSummData, (req, res) => {
   return res.status(200).send(res.locals.summonerTestData);
 });
 
-summonerRouter.get('/update/:summonerName',  summonerController.updateSummData, (req, res) => {
+summonerRouter.get('/update/:summonerName', summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
   // console.log(res.locals.recentSummoner, ' recent summoner in server js');
   return res.status(200).send(res.locals.summonerData);
 });

@@ -34,13 +34,11 @@ const LeaderboardPageContainer = () => {
       <div className="LBButtonsBox">
         <div className="LBButtonsBox1">
           { regionsArr }
-        </div>
-        <div className="LBButtonsBox2">
           { regionsArr2 }
         </div>
       </div>
     </div>
-    {leaderboardData[0] && <LeaderboardBoxes />};
+    {leaderboardData[0] && <LeaderboardBoxes />}
   </div>
   );
 };

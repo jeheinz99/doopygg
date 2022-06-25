@@ -9,10 +9,11 @@ import { MdLeaderboard } from 'react-icons/md';
 import valorantLogo from '../assets/valorantLogo.png';
 import tftLogo from '../assets/tftLogo.png';
 
-import discordLogo from '../assets/discordLogo.png';
-import twitterLogo from '../assets/twitterLogo.png';
-import youtubeLogo from '../assets/youtubeLogo.png';
-import linkedinLogo from '../assets/linkedInIcon.png';
+import { FaDiscord } from 'react-icons/fa';
+import { BsTwitter } from 'react-icons/bs';
+import { AiFillYoutube } from 'react-icons/ai';
+import { AiFillLinkedin } from 'react-icons/ai';
+import { AiFillGithub } from 'react-icons/ai';
 
 const ValorantPage = () => {
   return (
@@ -20,16 +21,19 @@ const ValorantPage = () => {
       <div className="EndpointBar">
         <div className="EndpointLogos">
           <a id="DiscordLogoLink" target="_blank" href="https://discord.com/">
-            <img id="discordLogo" src={discordLogo}/>
+            <FaDiscord color="#7289d9" id="discordLogo"/>
           </a>
           <a id="YoutubeLogoLink" target="_blank" href="https://www.youtube.com/channel/UCfXdp5JwO4QghC01p-_h5OA">
-            <img id="youtubeLogo" src={youtubeLogo}/>
+            <AiFillYoutube color="#FF0000" id="youtubeLogo"/>
           </a>
           <a id="TwitterLogoLink" target="_blank" href="https://twitter.com/kindo_v9">
-            <img id="twitterLogo" src={twitterLogo}/>
+            <BsTwitter color="#00acee" id="twitterLogo"/>
           </a>
           <a id="LinkedInLogoLink" target="_blank" href="https://www.linkedin.com/in/joseph-heinz-874676240">
-            <img id="linkedinLogo" src={linkedinLogo}/>
+            <AiFillLinkedin color="#0072b1" id="LinkedInLogo"/>
+          </a>
+          <a id="GithubLogoLink" target="_blank" href="https://github.com/jeheinz99">
+            <AiFillGithub color="white" id="githubLogo"/>
           </a>
         </div>
         <div className="Endpoints">

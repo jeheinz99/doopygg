@@ -53,45 +53,45 @@ const Matches = props => {
         </div>
         <div className="MatchGroup5">
           <div className="leftSidePlayers">
-            <div className="leftSideGroup0">
+            <div className="leftSideGroup">
               <img id="player0Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[0].championId}.png`}/>
               <p>{otherPlayers[0].summonerName}</p>
             </div>
-            <div className="leftSideGroup1">
+            <div className="leftSideGroup">
               <img id="player1Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[1].championId}.png`}/>
               <p>{otherPlayers[1].summonerName}</p>
             </div>
-            <div className="leftSideGroup2">
+            <div className="leftSideGroup">
               <img id="player2Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[2].championId}.png`}/>
               <p>{otherPlayers[2].summonerName}</p>
             </div>
-            <div className="leftSideGroup3">
+            <div className="leftSideGroup">
               <img id="player3Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[3].championId}.png`}/>
               <p>{otherPlayers[3].summonerName}</p>
             </div>
-            <div className="leftSideGroup4">
+            <div className="leftSideGroup">
               <img id="player4Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[4].championId}.png`}/>
               <p>{otherPlayers[4].summonerName}</p>
             </div>
           </div>
             <div className="rightSidePlayers">
-              <div className="rightSideGroup0">
+              <div className="rightSideGroup">
                 <img id="player5Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[5].championId}.png`}/>
                 <p>{otherPlayers[5].summonerName}</p>
               </div>
-              <div className="rightSideGroup1">
+              <div className="rightSideGroup">
                 <img id="player6Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[6].championId}.png`}/>
                 <p>{otherPlayers[6].summonerName}</p>
               </div>
-              <div className="leftSideGroup2">
+              <div className="rightSideGroup">
                 <img id="player7Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[7].championId}.png`}/>
                 <p>{otherPlayers[7].summonerName}</p>
               </div>
-              <div className="rightSideGroup3">
+              <div className="rightSideGroup">
                 <img id="player8Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[8].championId}.png`}/>
                 <p>{otherPlayers[8].summonerName}</p>
               </div>
-              <div className="rightSideGroup4">
+              <div className="rightSideGroup">
                 <img id="player9Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[9].championId}.png`}/>
                 <p>{otherPlayers[9].summonerName}</p>
               </div>

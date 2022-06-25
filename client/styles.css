@@ -5,18 +5,17 @@
 
 html, body {
   margin: 0;
-  height: 100%;
+  width: 100vw;
+  height: 100vw;
+  background: #16161b;
 }
 .AppBox {
-  justify-content: center;
-  background: #181A1B;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  height: 100vh;
-  position: absolute;
-  overflow: scroll;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #16161b;
+  width: 100%;
+  height: 100%;
 }
 .OuterBox {
   display: flex;
@@ -26,18 +25,15 @@ html, body {
 #winMatch {
   background: rgb(22,81,191);
   background: linear-gradient(90deg, rgba(22,81,191,1) 0%, rgba(41,61,150,1) 10%, rgba(56,72,108,1) 51%, rgba(56,95,186,1) 100%);
-  /* border: 1px solid rgba(255, 255, 255, 0.861); */
-  /* border-radius: 1.5em; */
 }
 #loseMatch {
   background: rgb(173,44,72);
   background: linear-gradient(90deg, rgba(173,44,72,1) 0%, rgba(150,41,64,1) 10%, rgba(108,56,67,1) 51%, rgba(186,56,86,1) 100%);
   border: 1px solid rgba(255, 255, 255, 0.80);
-  /* border-radius: 1.5em; */
 }
 .SearchBox {
   display: flex;
-  flex-flow: column wrap;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   color: white;
@@ -46,27 +42,22 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding: 10px;
-  width: 90%;
-  margin: 15px auto;
+  width: 95%;
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border-radius: 0.3em;
-  border-width: 1px;
-  border-style: solid;
-  border-color:rgba(255, 255, 255, 0.861);
-  background: #181A1B;
+  border-radius: 0.2em;
+  border: 1px solid rgba(255, 255, 255, 0.861);
+  background: #16161b;
+  gap: 2em;
+  padding: 10px;
 }
 
 #SearchBoxInput {
-  font-family: 'Roboto', sans-serif;
+  font-family: Kanit;
   text-align: center;
   border-radius: 0.2em;
   padding: 0.5em;
   font-size: 1em;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #1C6EA4;
+  border: 1px solid #1C6EA4;
   background-color: #181A1B;
   color:rgba(255, 255, 255, 0.861);
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
@@ -85,13 +76,14 @@ html, body {
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
   letter-spacing: 0.05em;
   font-size:15px;
   font-weight:bold;
   padding:9px 23px;
   text-decoration:none;
   text-shadow:0px -1px 0px #7a2a1d;
+  height: 3em;
 }
 #summonerUpdateButton:hover {
   background-color:#222020;
@@ -103,8 +95,13 @@ html, body {
 }
 .SummonerDataBoxGroup {
   display: flex;
-  justify-content: center;
   align-items: center;
+  height: 21em;
+}
+.headerinfo {
+  display: flex;
+  align-items: center;
+  gap: 2em;
 }
 
 #welcomeLeaderboard {
@@ -112,20 +109,20 @@ html, body {
   flex-direction: column;
   align-items: center;
   font-size: 3em;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
   color:rgba(255, 255, 255, 0.861);
 }
 
 #LeaderboardBoxButton {
   background-color:#292828;
   border:0.10em double #1C6EA4;
-  border-radius: 0.5em;
+  border-radius: 0.2em;
   cursor:pointer;
   color:#ffffff;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
   text-decoration:none;
   text-shadow:0px -1px 0px #7a2a1d;
-  width: 50%;
+  width: 5em;
 }
 #LeaderboardBoxButton:hover {
   background-color:#222020;
@@ -136,11 +133,36 @@ html, body {
   top:1px;
 }
 
-#leaderboardBox {
+.leaderboardBox {
+  display: flex;
+  align-items: center;
   background: rgb(206, 217, 183);
   background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%);
   border-radius: 1.5em;
   border: 2px solid rgb(255, 255, 255);
+  width: 100%;
+  font-family: Kanit;
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  gap: 2em;
+}
+.LBBoxDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 7em;
+}
+.leaderboardBox p {
+  text-align: center;
+  font-family: Kanit;
+  font-size: 0.8em;
+  width: 10em;
+  margin: 0;
+}
+#LBRankNumberTag {
+  font-size: 1.5em;
+  padding: 10px;
+  margin: 0;
+  width: 1em;
 }
 #profileIcon {
   height: 5%;
@@ -163,6 +185,7 @@ html, body {
   display: flex;
   flex-flow: column;
   align-items: center;
+  width: 100%;
 }
 .Rank1LBBox {
   display: inline-flex;
@@ -176,7 +199,7 @@ html, body {
   /* background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%); */
   border-radius: 1.5em;
   border: 2px solid rgb(255, 255, 255);
-  font-family: Koulen;
+  font-family: Kanit;
   justify-content: space-around;
 }
 .Rank1LB1 {
@@ -184,7 +207,7 @@ html, body {
   align-items: center;
   font-size: 2.5em;
   letter-spacing: 0.1em;
-  font-family: Koulen;
+  font-family: Kanit;
 }
 .Rank1LB2 {
   display: flex;
@@ -195,6 +218,12 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+.Rank1LB3 p {
+  width: 5em;
+  margin: 0;
+  text-align: center;
 }
 .Rank1LB4 {
   display: flex;
@@ -208,41 +237,47 @@ html, body {
   border: 3px solid rgb(0, 0, 0)
 }
 .LBButtons {
-  width: 3em;
+  display: flex;
+  width: 2em;
+  height: 0.9em;
+  justify-content: center;
 }
 .LBButtonsBox {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  gap: 0.5em;
   align-items: center;
 }
 .LBButtonsBox1 {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  width: 70%;
 }
 .LBButtonsBox2 {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 72%;
 }
 
 #welcome {
+  text-align: center;
+  gap: 0;
   font-size: 3em;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
   color:rgba(255, 255, 255, 0.861);
 }
 #inputSummonerName {
-  font-size: 2em;
-  font-family: 'Prompt', sans-serif;
+  font-size: 1.25em;
+  font-weight: -200;
+  font-family: Kanit;
 }
 
 .MatchesWrapper {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 98%;
   align-items: center;
 }
 .MatchBoxes {
@@ -253,9 +288,11 @@ html, body {
   border-radius: 2em;
 }
 #MatchBoxes {
-  border-color: #a41c49;
-  color: rgba(255, 255, 255, 0.861);
-  gap: 5px;
+  gap: 0.5em;
+  color:rgba(255, 255, 255, 0.80);
+}
+#MatchBoxes h4 {
+  margin: 1.5em;
 }
 .Box20 {
   display: flex;
@@ -280,21 +317,27 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Koulen', cursive;
+  font-family: Kanit;
   border: 1px solid rgba(255, 255, 255, 0.80);
   gap: 2em;
 }
 .MatchGroup1 {
   display: flex;
   flex-direction: column;
-  line-height: 80%;
-  min-width: 10%;
-  max-width: 10%;
+}
+.MatchGroup1 p {
+  margin: 0;
+  width: 7em;
+  text-align: center;
 }
 .MatchGroup2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+.MatchGroup2div2 p {
+  width: 7em;
+  text-align: center;
 }
 .MatchGroup2div {
   display: inline-flex;
@@ -330,13 +373,10 @@ html, body {
   filter: invert(20%);
 }
 #championIcon {
-  width: 35%;
-  /* overflow: hidden; */
+  width: 88px;
+  height: 88px;
   border-radius: 0.5em;
-  border:1px solid rgb(90, 89, 89);
-  /* -webkit-box-shadow: inset 10px 10px 10px #000; */
-  /* -moz-box-shadow: inset 10px 10px 10px #000; */
-  /* box-shadow: inset 10px 10px 10px #000; */
+  border:1px solid rgb(170, 170, 170);
 }
 #keystoneIcon {
   width: 100%;
@@ -372,8 +412,8 @@ html, body {
   gap: 2px;
 }
 #item0, #item1, #item2, #item3, #item4, #item5, #item6 {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 0.5em;
   border: 2px solid #000;
 }
@@ -384,29 +424,33 @@ html, body {
 .MatchGroup5 {
   display: flex;
   flex-direction: row;
-  font-size: 1em;
-  flex: 1;
+  gap: 1em;
 }
 .leftSidePlayers {
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 .rightSidePlayers {
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 #player0Champion, #player1Champion, #player2Champion, #player3Champion, #player4Champion, #player5Champion, #player6Champion, #player7Champion, #player8Champion, #player9Champion {
   width: 32px;
   height: 32px;
 }
-.leftSideGroup0, .leftSideGroup1, .leftSideGroup2, .leftSideGroup3, .leftSideGroup4, .rightSideGroup0, .rightSideGroup1, .rightSideGroup2, .rightSideGroup3, .rightSideGroup4 {
+.leftSideGroup, .rightSideGroup {
   display: flex;
   flex-direction: row;
   align-content: center;
   align-items: center;
   font-size: 0.8em;
+  gap: 0.5em;
+}
+
+.leftSideGroup p, .rightSideGroup p {
+  width: 7em;
+  margin: 0;
+  overflow: hidden;
 }
 
 .DropDownBoxMatch {
@@ -422,7 +466,7 @@ html, body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   font-size: 0.8em;
-  font-family: Prompt;
+  font-family: Kanit;
   border: 1px solid rgba(255, 255, 255, 0.80);
   border-top: none;
   width: 100%;
@@ -479,7 +523,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: Kanit;
 }
 .Player0Team1ChampIcon {
   display: flex;
@@ -566,7 +610,7 @@ html, body {
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  font-family: Koulen;
+  font-family: Kanit;
 }
 .MiddleIconsDD {
   display: flex;
@@ -634,12 +678,86 @@ html, body {
   width: 24px;
   height: 24px;
 }
+.outerSummonerBox {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.outerSummonerDataBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  border-radius: 0.5em;
+  background-color: #232752;
+  padding: 10px;
+}
+.outerSummonerDataBox h3 {
+  border-top: 2px solid #ffffff;
+  margin: 10px;
+  font-family: Kanit;
+}
+.SummonerDataBoxEntries {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
+}
+.champEntryWrapper {
+  display: flex;
+  justify-content: center;
+  width: 85%;
+  background-color: #3c4071;
+  border-radius: 0.5em;
+}
+.champEntry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.champEntry p {
+  width: 7em;
+  margin: 0;
+  font-family: Kanit;
+  color: rgba(255, 255, 255, 0.80);
+}
+.champEntryDiv1 {
+  display: flex;
+  gap: 0.5em;
+}
+.champEntryDiv1 p {
+  display: flex;
+  width: 5em;
+}
+.champEntryDiv2 {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em;
+}
+.champEntryDiv3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.champEntryDiv4 {
+  display: flex;
+  width: 7.5em;
+}
+#champEntryChampIcon {
+  width: 32px;
+  height: 32px;
+}
 
 .recent20Wrapper {
   display: flex;
   width: 100%;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10px;
 }
 .recent20StatsBox {
   display: flex;
@@ -654,32 +772,37 @@ html, body {
 .recent20TotalStats {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 .recent20TotalStats p {
   font-family: Kanit;
-  /* font-weight: 500; */
   width: 8em;
+  text-align: center;
 }
 .recent20Champs {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 0.1em;
+  border-radius: 0.5em;
+  padding: 5px;
+  background-color: #3c4071;
+  margin: 5px;
 }
 .Recent20ChampCard {
   display: flex;
   align-items: center;
 }
-.Recent20champCardDiv2box1 {
+
+.Recent20ChampCardDiv2box1 {
   display: flex;
   align-items: center;
-  justify-content: center;
+  width: 100%;
 }
-.Recent20champCardDiv2box1 p {
+.Recent20ChampCardDiv2box1 p {
   width: 7em;
   margin: 0;
   font-family: Kanit;
-  /* font-weight: 500; */
+  text-align: center;
 }
 .gamesPlayedLast20 {
   display: flex;
@@ -735,16 +858,51 @@ html, body {
   width: 100%;
 }
 .winBar {
-  height: 10px;
-  background-color:#1c27c9;
+  color:rgba(255, 255, 255, 0.80);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55em;
+  height: 15px;
   border: 2px solid #000;
+  background-color:#2d36b9;
   border-right: none;
+  font-family: Kanit;
 }
 .lossBar {
-  border-left: none;
+  color:rgba(255, 255, 255, 0.80);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55em;
   border: 2px solid #000;
-  height: 10px;
-  background-color: #C42402;
+  height: 15px;
+  border-left: none;
+  background-color: #b43215;
+  font-family: Kanit;
+}
+#RPWinBar {
+  font-size: 0.7em;
+}
+#R20WinBar {
+  font-size: 0.85em;
+}
+.DataBoxHeader {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+#rankedsoloheader {
+  font-family: Kanit;
+  padding: 5px;
+  border-right: 2px solid rgba(255, 255, 255, 0.80);
+  border-radius: 0.3em;
+  color:rgba(255, 255, 255, 0.80);
+}
+#rankedsoloheader:hover {
+  cursor: pointer;
+  filter: invert(20%);
 }
 
 .positionStats {
@@ -786,29 +944,26 @@ html, body {
 h3 {
   font-size: 1.75em;
   text-align: center;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
   color: rgba(255, 255, 255, 0.861);
 }
 h4 {
   font-size: 1.5em;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
   color: rgba(255, 255, 255, 0.861);
 }
 .SummonerInfoBox {
   display: flex;
   flex-direction: row;
   align-items: center;
-  column-gap: 0px;
-  color: rgba(255, 255, 255, 0.861);
-  padding: 10px;
+  color: rgba(255, 255, 255, 0.86);
   width: 85%;
-  margin: 15px auto;
+  height: 100%;
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border-width: 2px;
-  border-style: solid;
-  border-color: #a41c49;
+  border: 1px solid rgba(255, 255, 255, 0.86);
   border-radius: 0.5em;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
+  background-color: #232752;
 }
 #SearchBoxButton {
   background-color:#292828;
@@ -817,7 +972,7 @@ h4 {
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
   letter-spacing: 0.05em;
   font-size:15px;
   font-weight:bold;
@@ -893,84 +1048,76 @@ p {
   display: flex;
   color: white;
 }
-/*
-#valorant:hover, #champions:hover, #leaderboards:hover, #home:hover, #tft:hover {
-  background:linear-gradient(to bottom, #353131 5%, #2c2a2b 100%);
-  background-color:#564e50;
-  position:relative;
-  border: 0.10em double #a41c49;
+#githubLogo {
+  height: 32px;
+  width: 32px;
 }
-#valorant:active, #champions:active, #leaderboards:active, #home:active, #tft:active {
-  top: 1px;
-} */
-
+#GithubLogoLink {
+  display: inline-block;
+}
+#githubLogo:hover {
+  filter: invert(20%);
+}
 #discordLogo {
-  width: 100%;
+  height: 32px;
+  width: 32px;
 }
 #DiscordLogoLink {
   display: inline-block;
-  width: 8%;
-  height: 75%;
 }
 #discordLogo:hover {
   filter: invert(20%);
 }
 
 #youtubeLogo {
-  width: 100%;
+  height: 32px;
+  width: 32px;
 }
 #YoutubeLogoLink {
   display: inline-block;
-  width: 9%;
-  height: 80%;
-  margin-left: 5px;
 }
 #youtubeLogo:hover {
   filter: invert(20%);
 }
 
 #twitterLogo {
-  width: 100%;
+  height: 32px;
+  width: 32px;
 }
 #TwitterLogoLink { 
   display: inline-block;
-  width: 10%;
-  height: 90%; 
 }
 #twitterLogo:hover {
   filter: invert(20%);
 }
 
-#linkedinLogo {
-  width: 100%;
+#LinkedInLogo {
+  height: 32px;
+  width: 32px;
 }
 #LinkedInLogoLink {
   display: inline-block;
-  width: 9%;
-  height: 80%; 
 }
-#linkedinLogo:hover {
+#LinkedInLogo:hover {
   filter: invert(20%);
 }
 
 .EndpointBar {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  width: 90%;
 } 
 .EndpointLogos {
-  width: 45%;
-  display: inline-flex;
-  gap: 5px;
-  margin-top: 10px;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
+  display: flex;
   justify-content: flex-start;
+  gap: 2em;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
 }
 .Endpoints {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   gap: 2em;
   align-items: center;
@@ -983,8 +1130,9 @@ p {
   flex-direction: column;
   align-items: center;
   font-size: 3em;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
   color:rgba(255, 255, 255, 0.861);
+  padding: 10px;
 }
 
 #ValorantBoxButton {
@@ -994,7 +1142,7 @@ p {
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
   letter-spacing: 0.05em;
   font-size:15px;
   font-weight:bold;
@@ -1015,7 +1163,7 @@ p {
 #ValBoxInput {
   width: 20%;
   height: 25%;
-  font-family: 'Roboto', sans-serif;
+  font-family: Kanit;
   text-align: center;
   border-radius: 0.5em;
   padding: 0.5em;
@@ -1040,15 +1188,20 @@ p {
   justify-content: center;
   align-items: center;
 }
+.ValorantPageBox {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
 
 #welcomeTFT {
   font-size: 2em;
-  font-family: 'Prompt', sans-serif;
+  font-family: Kanit;
   color:rgba(255, 255, 255, 0.861);
 }
 
 #SearchBoxInputTFT {
-  font-family: 'Roboto', sans-serif;
+  font-family: Kanit;
   text-align: center;
   border-radius: 0.2em;
   padding: 0.5em;
@@ -1089,15 +1242,15 @@ p {
   display: flex;
   flex-direction: column;
   color: rgba(255, 255, 255, 0.80);
-  font-family: Koulen;
+  font-family: Kanit;
   width: 12%;
 }
 .TFTDDB2 {
   display: flex;
   gap: 5px;
   align-items: center;
-  font-family: Koulen;
-  width: 30%;
+  font-family: Kanit;
+  width: 23em;
   justify-content: flex-start;
 }
 .AugListB2 {
@@ -1127,8 +1280,10 @@ p {
   width: 24px;
 }
 .TFTDDB3 {
+  width: 15em;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .DDTFTunit {
   height: 40px;
@@ -1145,11 +1300,12 @@ p {
   
 }
 .TFTDDB4 {
+  width: 6.5em;
   display: flex;
   flex-direction: column;
   color: rgba(255, 255, 255, 0.80);
   justify-content: center;
-  font-family: Koulen;
+  font-family: Kanit;
   align-items: center;
 }
 .TFTGoldIconDiv {
@@ -1200,26 +1356,33 @@ p {
   background: #181A1B;
 }
 .TFTMatches {
-  justify-content: space-around;
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
   padding: 1px;
   align-items: center;
   color:rgba(255, 255, 255, 0.861);
-  font-family: 'Koulen', cursive;
+  font-family: Kanit;
   border: 1px solid rgba(255, 255, 255, 0.80);
+  gap: 5em;
 }
 
 .TFTMatchGroup1 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+.TFTMatchGroup1 p {
+  width: 3em;
+  margin: 2px;
+  text-align: center;
 }
 .TFTMatchGroup2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 15em;
 }
 #LittleLegendIcon {
   width: 64px;
@@ -1229,10 +1392,10 @@ p {
   border: 2px solid rgba(133, 133, 133, 0.403);
 }
 .TFTMatchGroup3 {
+  width: 25em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   gap: 10px;
 }
 .TFTAugGroup {
@@ -1387,3 +1550,18 @@ p {
   font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 
+.donthavedatabox {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: #222020;
+  border-radius: 1em;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  width: 20em;
+}
+#kittisaurDuck {
+  width: 80%;
+  border-radius: 5em;
+  border: 3px solid rgba(255, 255, 255, 0.80);
+}

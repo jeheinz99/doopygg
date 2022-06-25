@@ -8,6 +8,7 @@ const lolSummonerSchema = new mongoose.Schema({
   matchHistory: {type: Array, required: false},
   otherPlayersMatches: {type: Array, required: false},
   S12MatchesPlayed: {type: Array, required: false},
+  S12MatchesPlayedData: {type: Array, required: false},
 });
 
 module.exports = mongoose.model('lolSummoner', lolSummonerSchema);

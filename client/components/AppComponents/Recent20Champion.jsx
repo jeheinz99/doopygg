@@ -17,7 +17,7 @@ const Recent20Champion = props => {
       </div>
 
       <div className="Recent20ChampCardDiv2">
-        <div className="Recent20champCardDiv2box1">
+        <div className="Recent20ChampCardDiv2box1">
           <p> {id} </p>
           {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
           {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
@@ -32,6 +32,7 @@ const Recent20Champion = props => {
             <p id="gamesPlayedLast20ptag2"> {`(${win}W`} - {`${loss}L)`} </p>
           </div>
         </div>
+
       </div>
       <div className="Recent20ChampCardDiv3">
         
