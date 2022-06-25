@@ -71,7 +71,7 @@ const MatchBoxes = () => {
       recent20Data[matchHistory[i].champion].champDamage += matchHistory[i].champDamage;
       recent20Data[matchHistory[i].champion].cs += matchHistory[i].cs;
       recent20Data[matchHistory[i].champion].played += 1;
-
+      recent20Data[matchHistory[i].champion].positions[matchHistory[i].position] += 1;
       
       (matchHistory[i].win === true ? recent20Data[matchHistory[i].champion].win +=1 : recent20Data[matchHistory[i].champion].loss +=1);
 
@@ -80,6 +80,7 @@ const MatchBoxes = () => {
     else {
       const newObj = {};
       
+      newObj.championName = matchHistory[i].champion;
       newObj.championId = matchHistory[i].championId;
       newObj.kills = matchHistory[i].kills;
       newObj.deaths = matchHistory[i].deaths;
@@ -87,14 +88,25 @@ const MatchBoxes = () => {
       newObj.champDamage = matchHistory[i].champDamage;
       newObj.cs = matchHistory[i].cs;
       newObj.played = 1;
+      
+      newObj.positions = {'TOP': 0, 'JUNGLE': 0, 'MIDDLE': 0, 'BOTTOM': 0, 'UTILITY': 0, '': 0, 'Invalid': 0};
+      newObj.positions[matchHistory[i].position] = 1;
 
-      (matchHistory[i].win === true ? newObj.win = 1 : newObj.loss = 0);
-      (matchHistory[i].win !== true ? newObj.win = 0 : newObj.loss = 1);
+      if (matchHistory[i].win === true) {
+        newObj.win = 1;
+        newObj.loss = 0;
+      }
+
+      else {
+        newObj.win = 0;
+        newObj.loss = 1;
+      }
 
       recent20Data[matchHistory[i].champion] = newObj;
     }
   }
-  console.log(recent20Data);
+
+  console.log(recent20Data, 'recent20Data');
 
 
   return (

@@ -110,10 +110,16 @@ summonerController.checkSummData = async (req, res, next) => {
     // }
 
     if (summoner !== null) {
-      res.locals.summonerData = summoner;
+      res.locals.summonerData = {
+        summonerName: summoner.summonerName,
+        summonerLevel: summoner.summonerLevel,
+        summonerRank: summoner.summonerRank,
+        profileIcon: summoner.profileIcon,
+        matchHistory: summoner.matchHistory,
+        otherPlayersMatches: summoner.otherPlayersMatches,
+      };
       return next();
     }
-
     return next();
   }
   catch(err) {
@@ -230,6 +236,7 @@ summonerController.updateSummData = async (req, res, next) => {
             matchLength: `${matchHistoryData[i].gameDuration}`,
             gameMode: matchHistoryData[i].queueId,
             champion: player.championName,
+            position: player.teamPosition,
             win: player.win,
             visionScore: player.visionScore,
             cs: player.totalMinionsKilled,
@@ -260,6 +267,7 @@ summonerController.updateSummData = async (req, res, next) => {
             // teamBarons: player.challenges.teamBaronKills,
             dragons: player.dragonKills,
             goldEarned: player.goldEarned,
+            position: player.teamPosition,
             visionScore: player.visionScore,
             cs: player.totalMinionsKilled,
             champDamage: player.totalDamageDealtToChampions,
@@ -293,6 +301,7 @@ summonerController.updateSummData = async (req, res, next) => {
             dragons: player.dragonKills,
             goldEarned: player.goldEarned,
             visionScore: player.visionScore,
+            position: player.teamPosition,
             cs: player.totalMinionsKilled,
             champDamage: player.totalDamageDealtToChampions,
             champLevel: player.champLevel,
@@ -362,7 +371,7 @@ summonerController.updateSummData = async (req, res, next) => {
         allS12MatchesArr.push(getRankedS12Matches.data);
 
         if (getRankedS12Matches.data.length !== 100) {
-          await lolSummoner.findOneAndUpdate({summonerName: summonerName}, {matchesPlayed: allS12MatchesArr});
+          await lolSummoner.findOneAndUpdate({summonerName: summonerName}, {S12MatchesPlayed: allS12MatchesArr});
           break;
         }
       }
@@ -383,15 +392,31 @@ summonerController.updateSummData = async (req, res, next) => {
 
     const summoner = await lolSummoner.findOne({summonerName: summonerName});
 
+
+    console.log(otherPlayersData);
     if (summoner === null) {
       await lolSummoner.create({
         summonerName: summonerName,
-        puuid: puuid,
-        summonerRecentData: summonerData,
+        summonerRank: rankData,
+        summonerLevel: responseSummData.data.summonerLevel,
+        profileIcon: responseSummData.data.profileIconId,
+        matchHistory: matchesData,
+        otherPlayersMatches: otherPlayersData
       });
     }
     else {
-      await lolSummoner.findOneAndUpdate({summonerName: summonerName}, {summonerRecentData: summonerData});
+      await lolSummoner.findOneAndUpdate({summonerName: summonerName},
+        { 
+          $set: {
+          summonerName: summonerName,
+          summonerRank: rankData,
+          summonerLevel: responseSummData.data.summonerLevel,
+          profileIcon: responseSummData.data.profileIconId,
+          matchHistory: matchesData,
+          otherPlayersMatches: otherPlayersData
+          }
+        }
+      );
     }
 
     res.locals.summonerData = summonerData;
@@ -445,6 +470,59 @@ summonerController.addSummData = async (req, res, next) => {
   return next();
 };
 
+summonerController.testSummData = async (req, res, next) => {
+
+  try {
+
+    const summoner = await lolSummoner.findOne({summonerName: 'Doopliss2'});
+
+    if (summoner !== null) {
+      const rankedMatchesArr = [];
+      for (let i = 0; i < summoner.S12MatchesPlayed.length; i++) {
+        for (let j = 0; j < summoner.S12MatchesPlayed[i].length; j++) {
+
+          console.log(`match testing ${summoner.S12MatchesPlayed[i][j]}`);
+
+          const matchObj = await lolMatches.findOne({matchId: summoner.S12MatchesPlayed[i][j]});
+          
+          if (matchObj === null) {
+
+            const getMatchObj = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${summoner.S12MatchesPlayed[i][j]}?api_key=${api_key}`,
+            {
+              headers: {
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+                "Origin": "https://developer.riotgames.com"
+                }
+            });
+
+            await lolMatches.create({
+              matchId: summoner.S12MatchesPlayed[i][j],
+              matchData: getMatchObj.data.info
+            });
+          }
+          else {
+            rankedMatchesArr.push(matchObj.matchData);
+          }
+        }
+      }
+      console.log(rankedMatchesArr);
+      res.locals.summonerTestData = rankedMatchesArr;
+      return next();
+    }
+
+    return next();
+
+  }
+
+  catch(err) {
+    console.log(err, 'err in testSummData');
+    return next(err);
+  }
+};
+
+
 module.exports = summonerController;
 
 // const { matchesPlayed } = summoner;
@@ -459,7 +537,7 @@ module.exports = summonerController;
 //     for (let j = 0; j < matchesPlayed[i].length; j++) {
 //       const match = await lolMatches.findOne({matchId: matchesPlayed[i][j]});
 //       if (match === null) {
-//         const getMatchObj = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4326617754?api_key=RGAPI-0819602b-05b5-488c-aaa4-b6657496a9c2`,
+//         const getMatchObj = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4326617754?api_key=${api_key}`,
 //         {
 //           headers: {
 //             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",

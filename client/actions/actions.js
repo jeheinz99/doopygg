@@ -44,6 +44,8 @@ export const getLeaderboardData = regionName => async dispatch => {
 };
 
 export const getSummonerData = summonerName => async dispatch => {
+  document.getElementById('SearchBoxInput').value = '';
+  document.getElementById('SearchBoxInput').placeholder = `${summonerName}`;
   const responseSummData = await axios.get(`/summoner/${summonerName}`);
   console.log('SUMM response from back-end', responseSummData.data);
   dispatch(addSummonerDataActionCreator(responseSummData.data));
@@ -78,4 +80,11 @@ export const updateTFTData = summonerName => async dispatch => {
 export const getChampionData = championName => async dispatch => {
   return 'hi';
   // this response returns the champion Data
+};
+
+export const testAsyncFunc = () => async dispatch => {
+  console.log('hi in testasyncfunc');
+  const responseSummTestData = await axios.get(`/summoner/test`);
+  console.log('SUMM TEST response from back-end', responseSummTestData.data);
+  // dispatch(addSummonerDataActionCreator(responseSummTestData.data));
 };

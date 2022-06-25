@@ -86,6 +86,10 @@ valorantRouter.get('/:riotId/:tagLine', valorantController.valData, (req, res) =
 const summonerRouter = express.Router();
 app.use('/summoner', summonerRouter);
 
+summonerRouter.get('/test', summonerController.testSummData, (req, res) => {
+  return res.status(200).send(res.locals.summonerTestData);
+});
+
 summonerRouter.get('/update/:summonerName',  summonerController.updateSummData, (req, res) => {
   // console.log(res.locals.recentSummoner, ' recent summoner in server js');
   return res.status(200).send(res.locals.summonerData);

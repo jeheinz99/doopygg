@@ -5,39 +5,172 @@ const Recent20StatsBox = props => {
 
   const { recent20Data } = props;
 
-  const tempFunc = data => {
-    const mostPlayed = 0;
-    const secondMost = 0;
-    const thirdMost = 0;
-  };
+  let totalWins = 0;
+  let totalLosses = 0;
+  let totalKills = 0;
+  let totalDeaths = 0;
+  let totalAssists = 0;
 
-  const orderedData = tempFunc(recent20Data);
-
-  const champsArr = [];
+  let totalTop = 0;
+  let totalJungle = 0;
+  let totalMid = 0;
+  let totalBottom = 0;
+  let totalSupport = 0;
+  
   for (let i in recent20Data) {
-    (champsArr.length < 3 ? champsArr.push(
-    <Recent20Champion 
-    key={`champion-${i}`}
-    championId={recent20Data[i].championId}
-    id={i}
-    kills={recent20Data[i].kills}
-    deaths={recent20Data[i].deaths}
-    assists={recent20Data[i].assists}
-    played={recent20Data[i].played}
-    win={recent20Data[i].win}
-    loss={recent20Data[i].loss}
-    cs={recent20Data[i].cs}
-    champDamage={recent20Data[i].champDamage}
-    />) : null);
+
+    totalWins += recent20Data[i].win;
+    totalLosses += recent20Data[i].loss;
+    totalKills += recent20Data[i].kills;
+    totalDeaths += recent20Data[i].deaths;
+    totalAssists += recent20Data[i].assists;
+
+    totalTop += recent20Data[i].positions.TOP;
+    totalJungle += recent20Data[i].positions.JUNGLE;
+    totalMid += recent20Data[i].positions.MIDDLE;
+    totalBottom += recent20Data[i].positions.BOTTOM;
+    totalSupport += recent20Data[i].positions.UTILITY;
+
   }
 
-  const temp = champsArr.sort(({played: a}, {played: b}) => b - a);
-  console.log(temp);
+  const getKDAId = KDA => {
+
+    if (KDA < 3) {
+      return 'lessthan3kda';
+    }
+
+    if (KDA < 5 && KDA >= 3) {
+      return 'between3and5kda';
+    }
+
+    if (KDA >= 5 && KDA !== 'Infinity') {
+      return 'over5kda';
+    }
+
+    if (KDA === 'Infinity') {
+      return 'over5kda';
+    }
+  };
+
+  const findTop3 = data => {
+
+    const tempArr = [];
+
+    for (let i in data) {
+      tempArr.push(data[i]);
+    }
+
+    tempArr.sort((a, b) => {
+      return ((b.played - a.played) === 0 ? (((b.kills + b.assists) / b.deaths) - ((a.kills + a.assists) / a.deaths)) : b.played - a.played);
+    });
+
+    return [tempArr[0], tempArr[1], tempArr[2]];
+
+  };
+
+  const top3Played = findTop3(recent20Data);
+  console.log(top3Played);
+
+  const champsArr = [];
+  for (let i = 0; i < top3Played.length; i++) {
+    champsArr.push(<Recent20Champion 
+      key={`champion-${i}`}
+      championId={top3Played[i].championId}
+      id={top3Played[i].championName}
+      kills={top3Played[i].kills}
+      deaths={top3Played[i].deaths}
+      assists={top3Played[i].assists}
+      played={top3Played[i].played}
+      win={top3Played[i].win}
+      loss={top3Played[i].loss}
+      cs={top3Played[i].cs}
+      champDamage={top3Played[i].champDamage}
+      />);
+  }
+
+  const avgKills = (totalKills / (totalWins + totalLosses)).toFixed(1);
+  const avgDeaths = (totalDeaths / (totalWins + totalLosses)).toFixed(1);
+  const avgAssists = (totalAssists / (totalWins + totalLosses)).toFixed(1);
+
+  const totalKDA = ((totalKills + totalAssists) / totalDeaths).toFixed(2);
+  
+  const kdaID = getKDAId(totalKDA);
+
+  const totalWinPercent = (totalWins / (totalWins + totalLosses))*100;
+
+  const totalPositionGames = (totalTop + totalJungle + totalMid + totalBottom + totalSupport);
+  const totalTopPercent = (totalTop / totalPositionGames)*100;
+  const totalJunglePercent = (totalJungle / totalPositionGames)*100;
+  const totalMidPercent = (totalMid / totalPositionGames)*100;
+  const totalBottomPercent = (totalBottom / totalPositionGames)*100;
+  const totalSupportPercent = (totalSupport / totalPositionGames)*100;
 
   return (
-    <div className="recent20StatsBox">
-      Recent Matches
-      {champsArr}
+    <div className="recent20Wrapper">
+      <h3>Recent 20 Matches</h3>
+      <div className="recent20StatsBox">
+
+        <div className="recent20TotalStats">
+          <p> {totalWins + totalLosses}G {`( ${totalWins}`}<span id="winTag">{`W`}</span> - {totalLosses}<span id="lossTag">{`L`}</span>{' )'}</p>
+
+          <div className="WinLossBar">
+            <div className="winBar" style={{width: `${totalWinPercent}%`}}></div>
+            <div className="lossBar" style={{width: `${100 - totalWinPercent}%`}}></div>
+          </div>
+
+          <p>{avgKills} / <span id="avgDeathsSpanTag">{avgDeaths}</span> / {avgAssists}</p>
+          <p id={`${kdaID}`}>K/D/A: {totalKDA}</p>
+        </div>
+
+        <div className="recent20Champs">
+          {champsArr}
+        </div>
+
+        <div className="positionStats">
+
+        <div className="pos-div">
+          <div className="PositionBar">
+            <div id="non-filled-pos" style={{height: `${100 - totalTopPercent}%`}}></div>
+            <div id="filled-pos" style={{height: `${totalTopPercent}%`}}></div>
+          </div>
+          <img id="topLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-top.png'/>
+        </div>
+
+          <div className="pos-div">
+            <div className="PositionBar">
+              <div id="non-filled-pos" style={{height: `${100 - totalJunglePercent}%`}}></div>
+              <div id="filled-pos" style={{height: `${totalJunglePercent}%`}}></div>
+            </div>
+            <img id="jungleLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle.png'/>
+          </div>
+
+          <div className="pos-div">
+            <div className="PositionBar">
+              <div id="non-filled-pos" style={{height: `${100 - totalMidPercent}%`}}></div>
+              <div id="filled-pos" style={{height: `${totalMidPercent}%`}}></div>
+            </div>
+            <img id="midLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-middle.png'/>
+          </div>
+
+          <div className="pos-div">
+            <div className="PositionBar">
+              <div id="non-filled-pos" style={{height: `${100 - totalBottomPercent}%`}}></div>
+              <div id="filled-pos" style={{height: `${totalBottomPercent}%`}}></div>
+            </div>
+            <img id="bottomLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom.png'/>
+          </div>
+
+          <div className="pos-div">
+            <div className="PositionBar">
+              <div id="non-filled-pos" style={{height: `${100 - totalSupportPercent}%`}}></div>
+              <div id="filled-pos" style={{height: `${totalSupportPercent}%`}}></div>
+            </div>
+            <img id="supportLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png'/>
+          </div>
+
+        </div>
+
+      </div>
     </div>
   );
 };

@@ -21,9 +21,9 @@ const summonerReducer = (state = initialState, action) => {
         state, {
         summonerName: payload.summonerName,
         summonerLevel: payload.summonerLevel,
-        matchHistory: payload.summonerRecentData.matchHistory,
-        summonerRank: payload.summonerRecentData.summonerRank,
-        otherPlayersMatches: payload.summonerRecentData.otherPlayersMatches,
+        matchHistory: payload.matchHistory,
+        summonerRank: payload.summonerRank,
+        otherPlayersMatches: payload.otherPlayersMatches,
         allMatchesPlayed: payload.matchesPlayed,
         }
       );

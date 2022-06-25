@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
 
 html, body {
   margin: 0;
@@ -633,19 +635,153 @@ html, body {
   height: 24px;
 }
 
+.recent20Wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.recent20StatsBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  gap: 2em;
+  background-color: #272c53;
+}
+.recent20TotalStats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.recent20TotalStats p {
+  font-family: Kanit;
+  /* font-weight: 500; */
+  width: 8em;
+}
+.recent20Champs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .Recent20ChampCard {
   display: flex;
   align-items: center;
 }
-
 .Recent20champCardDiv2box1 {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Recent20champCardDiv2box1 p {
+  width: 7em;
+  margin: 0;
+  font-family: Kanit;
+  /* font-weight: 500; */
+}
+.gamesPlayedLast20 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#gamesPlayedLast20ptag1 {
+  font-size: 0.9em;
+}
+#gamesPlayedLast20ptag2 {
+  font-size: 0.75em;
 }
 
 #championIconRecent20 {
   height: 32px;
   width: 32px;
 }
+
+#avgDeathsSpanTag {
+  color:#C42402;
+}
+
+#exact100wr {
+  color: #FFC300;
+  width: 4em;
+}
+#above60wr {
+  color: #C42402;
+  width: 4em;
+}
+#below60wr {
+  width: 4em;
+}
+
+#over5kda {
+  color: #FFC300;
+}
+#between3and5kda {
+  color: rgb(68, 92, 198);
+}
+#lessthan3kda {
+}
+#winTag {
+  color: rgb(68, 92, 198);
+  /* font-size: 0.75em; */
+}
+#lossTag {
+  color:#C42402;
+  /* font-size: 0.75em; */
+}
+.WinLossBar {
+  display: flex;
+  width: 100%;
+}
+.winBar {
+  height: 10px;
+  background-color:#1c27c9;
+  border: 2px solid #000;
+  border-right: none;
+}
+.lossBar {
+  border-left: none;
+  border: 2px solid #000;
+  height: 10px;
+  background-color: #C42402;
+}
+
+.positionStats {
+  display: flex;
+  gap: 3em;
+  height: 6.5em;
+}
+
+.pos-div {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.PositionBar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#topLogo, #jungleLogo, #midLogo, #bottomLogo, #supportLogo {
+  height: 24px;
+  width: 24px;
+}
+
+#non-filled-pos {
+  border: 2px solid rgb(19, 19, 19);
+}
+
+#filled-pos {
+  background-color:#8287c7;
+  border: 2px solid rgb(19, 19, 19);
+  border-top: none;
+}
+
 
 h3 {
   font-size: 1.75em;
