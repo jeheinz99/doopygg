@@ -375,6 +375,7 @@ summonerController.updateSummData = async (req, res, next) => {
       matchHistory: matchesData,
       otherPlayersMatches: otherPlayersData,
       allMatchesPlayed: allS12MatchesArr,
+      allMatchesPlayedData: [],
     };
 
     const summoner = await lolSummoner.findOne({summonerName: summonerName});

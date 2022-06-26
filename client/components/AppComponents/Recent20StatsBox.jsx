@@ -108,7 +108,7 @@ const Recent20StatsBox = props => {
     <div className="recent20Wrapper">
       <h3>Recent 20 Matches</h3>
       <div className="recent20StatsBox">
-
+        
         <div className="recent20TotalStats">
           <p> {totalWins + totalLosses}G {`( ${totalWins}`}<span id="winTag">{`W`}</span> - {totalLosses}<span id="lossTag">{`L`}</span>{' )'}</p>
 

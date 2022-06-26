@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import SummonerChampDataBoxEntry from "./SummonerChampDataBoxEntry";
+
+import { AiFillCaretDown } from 'react-icons/ai';
 
 const SummonerChampDataBox = () => {
 
@@ -88,17 +90,22 @@ const SummonerChampDataBox = () => {
     />);
   }
 
+  const [ open, setOpen ] = useState(false);
 
   return (
     <div className="outerSummonerDataBox">
+
       <div className="DataBoxHeader">
         <h3> Most Played </h3>
         <p id="rankedsoloheader"> Ranked Solo </p>
       </div>
+      
       <div className="SummonerDataBoxEntries">
         {champEntries}
       </div>
-      
+    
+      <button className="SummonerDataBoxExpand" onClick={ () => setOpen(!open) }><AiFillCaretDown /></button>
+
     </div>
   );
 };

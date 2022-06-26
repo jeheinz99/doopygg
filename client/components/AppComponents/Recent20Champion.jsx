@@ -15,7 +15,7 @@ const Recent20Champion = props => {
       <div className="Recent20ChampCardDiv1">
         <img id="championIconRecent20" src={championIcon}/>
       </div>
-
+      
       <div className="Recent20ChampCardDiv2">
         <div className="Recent20ChampCardDiv2box1">
           <p> {id} </p>

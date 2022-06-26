@@ -897,7 +897,6 @@ html, body {
   font-family: Kanit;
   padding: 5px;
   border-right: 2px solid rgba(255, 255, 255, 0.80);
-  border-radius: 0.3em;
   color:rgba(255, 255, 255, 0.80);
 }
 #rankedsoloheader:hover {
