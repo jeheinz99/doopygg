@@ -40,8 +40,12 @@ const SummonerChampDataBoxEntry = props => {
 
         <div className="champEntryDiv4">
           <div className="WinLossBar">
-            <div className="winBar" id="RPWinBar" style={{width: `${winPercent}%`}}>{win}W</div>
-            <div className="lossBar" id="RPWinBar" style={{width: `${100 - winPercent}%`}}>{loss}L</div>
+            <div className="winBar" id="RPWinBar" style={{width: `${winPercent}%`}}>
+              {win !== 0 && <p>{win}W</p>}
+              </div>
+            <div className="lossBar" id="RPWinBar" style={{width: `${100 - winPercent}%`}}>
+              {loss !== 0 && <p>{loss}L</p>}
+              </div>
           </div>
         </div>
       </div>

@@ -110,7 +110,9 @@ const Recent20StatsBox = props => {
       <div className="recent20StatsBox">
         
         <div className="recent20TotalStats">
-          <p> {totalWins + totalLosses}G {`( ${totalWins}`}<span id="winTag">{`W`}</span> - {totalLosses}<span id="lossTag">{`L`}</span>{' )'}</p>
+          <p> {totalWins + totalLosses}G </p>
+          <p> {totalWinPercent}% W/L </p>
+          {/* {`( ${totalWins}`}<span id="winTag">{`W`}</span> - {totalLosses}<span id="lossTag">{`L`}</span>{' )'} */}
 
           <div className="WinLossBar">
             <div className="winBar" id="R20WinBar" style={{width: `${totalWinPercent}%`}}>{totalWins}W</div>
@@ -126,47 +128,50 @@ const Recent20StatsBox = props => {
         </div>
 
         <div className="positionStats">
+          <h2> Positions </h2>
+          <div className="pos-div-wrap">
 
-        <div className="pos-div">
-          <div className="PositionBar">
-            <div id="non-filled-pos" style={{height: `${100 - totalTopPercent}%`}}></div>
-            <div id="filled-pos" style={{height: `${totalTopPercent}%`}}></div>
-          </div>
-          <img id="topLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-top.png'/>
-        </div>
-
-          <div className="pos-div">
-            <div className="PositionBar">
-              <div id="non-filled-pos" style={{height: `${100 - totalJunglePercent}%`}}></div>
-              <div id="filled-pos" style={{height: `${totalJunglePercent}%`}}></div>
+            <div className="pos-div">
+              <div className="PositionBar">
+                <div id="non-filled-pos" style={{height: `${100 - totalTopPercent}%`}}></div>
+                <div id="filled-pos" style={{height: `${totalTopPercent}%`}}></div>
+              </div>
+              <img id="topLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-top.png'/>
             </div>
-            <img id="jungleLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle.png'/>
-          </div>
 
-          <div className="pos-div">
-            <div className="PositionBar">
-              <div id="non-filled-pos" style={{height: `${100 - totalMidPercent}%`}}></div>
-              <div id="filled-pos" style={{height: `${totalMidPercent}%`}}></div>
+            <div className="pos-div">
+              <div className="PositionBar">
+                <div id="non-filled-pos" style={{height: `${100 - totalJunglePercent}%`}}></div>
+                <div id="filled-pos" style={{height: `${totalJunglePercent}%`}}></div>
+              </div>
+              <img id="jungleLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle.png'/>
             </div>
-            <img id="midLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-middle.png'/>
-          </div>
 
-          <div className="pos-div">
-            <div className="PositionBar">
-              <div id="non-filled-pos" style={{height: `${100 - totalBottomPercent}%`}}></div>
-              <div id="filled-pos" style={{height: `${totalBottomPercent}%`}}></div>
+            <div className="pos-div">
+              <div className="PositionBar">
+                <div id="non-filled-pos" style={{height: `${100 - totalMidPercent}%`}}></div>
+                <div id="filled-pos" style={{height: `${totalMidPercent}%`}}></div>
+              </div>
+              <img id="midLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-middle.png'/>
             </div>
-            <img id="bottomLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom.png'/>
-          </div>
 
-          <div className="pos-div">
-            <div className="PositionBar">
-              <div id="non-filled-pos" style={{height: `${100 - totalSupportPercent}%`}}></div>
-              <div id="filled-pos" style={{height: `${totalSupportPercent}%`}}></div>
+            <div className="pos-div">
+              <div className="PositionBar">
+                <div id="non-filled-pos" style={{height: `${100 - totalBottomPercent}%`}}></div>
+                <div id="filled-pos" style={{height: `${totalBottomPercent}%`}}></div>
+              </div>
+              <img id="bottomLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom.png'/>
             </div>
-            <img id="supportLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png'/>
-          </div>
 
+            <div className="pos-div">
+              <div className="PositionBar">
+                <div id="non-filled-pos" style={{height: `${100 - totalSupportPercent}%`}}></div>
+                <div id="filled-pos" style={{height: `${totalSupportPercent}%`}}></div>
+              </div>
+              <img id="supportLogo" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png'/>
+            </div>
+
+          </div>
         </div>
 
       </div>

@@ -6,7 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataBox.jsx';
 import SummonerChampDataBoxTemp from '../components/AppComponents/SummonerChampDataBoxTemp.jsx';
 
+import { BiSearch } from 'react-icons/bi';
+
 const SearchBox = () => {
+  const summName = useSelector(state => state.summoners.summonerName);
   const matchHistory = useSelector(state => state.summoners.matchHistory);
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
   const loadSummonerData = useDispatch();
@@ -26,25 +29,27 @@ const SearchBox = () => {
         <div id="welcome"> doopy.gg Summoners </div>
         <div id="inputSummonerName"> Input your Summoner Name Below </div>
         <br></br>
-        <input id="SearchBoxInput" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
-        <br></br>
-        <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> Search </button>
+        <div className="SearchBoxInputandIcon">
+          <input id="SearchBoxInput" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
+          <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
+        </div>
       </div>
       {matchHistory[0] && <div className="headerinfo">
-        <h3>Summoner Information</h3>
-        <button id="summonerUpdateButton" onClick={() => update(updateSummonerData(summonerName))}> Update </button>
+        <h3> Summoner Information </h3>
+        <button id="summonerUpdateButton" onClick={() => update(updateSummonerData(summName))}> Update </button>
       </div>}
     {matchHistory[0] && allMatchesPlayedData[0] && <div className="SummonerDataBoxGroup">
       <SummonerChampDataBox />
-      <SummonerBox />
+      <MatchBoxes />
+      {/* <SummonerBox /> */}
     </div>}
 
     {matchHistory[0] && allMatchesPlayedData[0] === undefined && <div className="SummonerDataBoxGroup">
       <SummonerChampDataBoxTemp />
-      <SummonerBox />
+      {/* <SummonerBox /> */}
       </div>}
 
-    {matchHistory[0] && <MatchBoxes />}
+    {/* {matchHistory[0] && <MatchBoxes />} */}
   </div>
   );
 };

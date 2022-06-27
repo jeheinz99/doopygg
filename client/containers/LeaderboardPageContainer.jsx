@@ -27,16 +27,15 @@ const LeaderboardPageContainer = () => {
 
   return (
   <div className="LeaderboardPageBox">
-    <div className ="OuterSearchBox" id="welcome"> 
-      <p> doopy.gg Leaderboards <br></br>
-                Select Your Region
-      </p>
+    <div className ="OuterSearchBox" id="welcomeLeaderboard"> 
+      <h3> doopy.gg Leaderboards</h3>
+      <p> Select Your Region </p>
+
       <div className="LBButtonsBox">
-        <div className="LBButtonsBox1">
-          { regionsArr }
-          { regionsArr2 }
-        </div>
+        { regionsArr }
+        { regionsArr2 }
       </div>
+      
     </div>
     {leaderboardData[0] && <LeaderboardBoxes />}
   </div>

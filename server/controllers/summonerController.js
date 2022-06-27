@@ -167,12 +167,35 @@ summonerController.updateSummData = async (req, res, next) => {
     });
 
     // checks to see if 1 of the 2 arrays returned are for ranked solo or ranked flex
-    const rankData = [];
+    const rankData = {
+      rankedSolo: [],
+      rankedFlex: [],
+    };
     for (let i = 0; i < responseRankData.data.length; i++) {
       if (responseRankData.data[i].queueType === "RANKED_SOLO_5x5") {
-        rankData.push(responseRankData.data[i].tier);
-        rankData.push(responseRankData.data[i].leaguePoints); 
+
+        if (responseRankData.data[i].tier === undefined) {
+          rankData.rankedSolo.push('Unranked', 0, 'I');
+        }
+        else {
+          rankData.rankedSolo.push(responseRankData.data[i].tier);
+          rankData.rankedSolo.push(responseRankData.data[i].leaguePoints);
+          rankData.rankedSolo.push(responseRankData.data[i].rank);
+        }
+
       }
+
+      if (responseRankData.data[i].queueType === "RANKED_FLEX_SR") {
+        if (responseRankData.data[i].tier === undefined) {
+          rankData.rankedFlex.push('Unranked', 0, 'I');
+        }
+        else {
+          rankData.rankedFlex.push(responseRankData.data[i].tier);
+          rankData.rankedFlex.push(responseRankData.data[i].leaguePoints);
+          rankData.rankedFlex.push(responseRankData.data[i].rank);
+        }
+      }
+
     }
     
     const matchHistoryData = [];

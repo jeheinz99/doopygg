@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import DropDownBox from './DropDownBox.jsx';
+
+import { AiFillCaretDown } from 'react-icons/ai';
+import { AiFillCaretUp } from 'react-icons/ai';
 
 
 const Matches = props => {
@@ -54,52 +56,52 @@ const Matches = props => {
         <div className="MatchGroup5">
           <div className="leftSidePlayers">
             <div className="leftSideGroup">
-              <img id="player0Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[0].championId}.png`}/>
+              <img className="playerChampionIcon" id="player0Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[0].championId}.png`}/>
               <p>{otherPlayers[0].summonerName}</p>
             </div>
             <div className="leftSideGroup">
-              <img id="player1Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[1].championId}.png`}/>
+              <img className="playerChampionIcon" id="player1Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[1].championId}.png`}/>
               <p>{otherPlayers[1].summonerName}</p>
             </div>
             <div className="leftSideGroup">
-              <img id="player2Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[2].championId}.png`}/>
+              <img className="playerChampionIcon" id="player2Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[2].championId}.png`}/>
               <p>{otherPlayers[2].summonerName}</p>
             </div>
             <div className="leftSideGroup">
-              <img id="player3Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[3].championId}.png`}/>
+              <img className="playerChampionIcon" id="player3Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[3].championId}.png`}/>
               <p>{otherPlayers[3].summonerName}</p>
             </div>
             <div className="leftSideGroup">
-              <img id="player4Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[4].championId}.png`}/>
+              <img className="playerChampionIcon" id="player4Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[4].championId}.png`}/>
               <p>{otherPlayers[4].summonerName}</p>
             </div>
           </div>
             <div className="rightSidePlayers">
               <div className="rightSideGroup">
-                <img id="player5Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[5].championId}.png`}/>
+                <img className="playerChampionIcon" id="player5Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[5].championId}.png`}/>
                 <p>{otherPlayers[5].summonerName}</p>
               </div>
               <div className="rightSideGroup">
-                <img id="player6Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[6].championId}.png`}/>
+                <img className="playerChampionIcon" id="player6Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[6].championId}.png`}/>
                 <p>{otherPlayers[6].summonerName}</p>
               </div>
               <div className="rightSideGroup">
-                <img id="player7Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[7].championId}.png`}/>
+                <img className="playerChampionIcon" id="player7Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[7].championId}.png`}/>
                 <p>{otherPlayers[7].summonerName}</p>
               </div>
               <div className="rightSideGroup">
-                <img id="player8Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[8].championId}.png`}/>
+                <img className="playerChampionIcon" id="player8Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[8].championId}.png`}/>
                 <p>{otherPlayers[8].summonerName}</p>
               </div>
               <div className="rightSideGroup">
-                <img id="player9Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[9].championId}.png`}/>
+                <img className="playerChampionIcon" id="player9Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[9].championId}.png`}/>
                 <p>{otherPlayers[9].summonerName}</p>
               </div>
           </div>
         </div>
         <div className="MatchGroupButton">
-          <button id="DropDownButton" onClick={() => setOpen(!summonerOpen) }><img src={'https://upload.wikimedia.org/wikipedia/commons/d/db/Vector_down_arrow_link.svg'}/></button>
-        </div>
+          {!summonerOpen && <button className="SummonerDataBoxButton" id="SDBexpand" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretDown /></button>}
+          {summonerOpen && <button className="SummonerDataBoxButton" id="SDBcontract" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretUp /></button>}        </div>
         </div>
       <div className="DropDownBoxes">
         {summonerOpen && <DropDownBox otherPlayers={otherPlayers} id={id} kills={kills} deaths={deaths} assists={assists} items={items} cs={cs} summonerSpells={summonerSpells} visionScore={visionScore} champDamage={champDamage} champLevel={champLevel} runes={runes} championId={championId}/>}

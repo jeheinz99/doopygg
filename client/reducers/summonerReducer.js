@@ -3,7 +3,7 @@ import * as types from '../constants/actionTypes';
 const initialState = {
   summonerName: '',
   summonerLevel: 0,
-  summonerRank: '',
+  summonerRank: {},
   matchHistory: [],
   otherPlayersMatches: [],
   allMatchesPlayed: [],

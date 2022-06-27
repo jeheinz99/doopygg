@@ -7,8 +7,6 @@ const SummonerBox = () => {
   const summonerRank = useSelector(state => state.summoners.summonerRank);
   const summonerName = useSelector(state => state.summoners.summonerName);
 
-  const rank = summonerRank[0];
-
   return (
   <div className="outerSummonerBox">
     <div className="SummonerInfoBox">

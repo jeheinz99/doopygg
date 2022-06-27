@@ -11,7 +11,7 @@ const TeamsBoxes = props => {
   return (
       <div className="Team1DropDownBox">
         <div className="Team1Players">
-          <div className="Player0Team1">
+          <div className="Player0Team1" id={id}>
             <div className="Player0Team1ChampIcon">
               <img id="Player0Champion" src={championIcon}/>
             </div>

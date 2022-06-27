@@ -45,7 +45,7 @@ export const getLeaderboardData = regionName => async dispatch => {
 
 export const getSummonerData = summonerName => async dispatch => {
   document.getElementById('SearchBoxInput').value = '';
-  document.getElementById('SearchBoxInput').placeholder = `${summonerName}`;
+  document.getElementById('SearchBoxInput').placeholder = `Summoner Name`;
   const responseSummData = await axios.get(`/summoner/${summonerName}`);
   console.log('SUMM response from back-end', responseSummData.data);
   dispatch(addSummonerDataActionCreator(responseSummData.data));

@@ -3,11 +3,15 @@ import { useSelector } from "react-redux";
 import SummonerChampDataBoxEntry from "./SummonerChampDataBoxEntry";
 
 import { AiFillCaretDown } from 'react-icons/ai';
+import { AiFillCaretUp } from 'react-icons/ai';
 
 const SummonerChampDataBox = () => {
 
+  const summonerRank = useSelector(state => state.summoners.summonerRank);
+  const summonerLevel = useSelector(state => state.summoners.summonerLevel);
   const summonerName = useSelector(state => state.summoners.summonerName);
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
+  const matchHistory = useSelector(state => state.summoners.matchHistory);
 
   const champData = {};
   for (let i = 0; i < allMatchesPlayedData.length; i++) {
@@ -56,7 +60,7 @@ const SummonerChampDataBox = () => {
     }
   }
 
-  const findTop5 = data => {
+  const orderData = data => {
 
     const tempArr = [];
 
@@ -68,25 +72,45 @@ const SummonerChampDataBox = () => {
       return ((b.played - a.played) === 0 ? (((b.kills + b.assists) / b.deaths) - ((a.kills + a.assists) / a.deaths)) : b.played - a.played);
     });
 
-    return [tempArr[0], tempArr[1], tempArr[2], tempArr[3], tempArr[4]];
+    return {
+      top5Played: [tempArr[0], tempArr[1], tempArr[2], tempArr[3], tempArr[4]],
+      allPlayed: tempArr,
+    };
   };
 
-  const top5Played = findTop5(champData);
+  const orderedData = orderData(champData);
 
   const champEntries = [];
-  for (let i = 0; i < top5Played.length; i++) {
+  for (let i = 0; i < orderedData.top5Played.length; i++) {
     champEntries.push(<SummonerChampDataBoxEntry
+    key={`top5-champ-entry-${i}`}
+    championId={orderedData.top5Played[i].championId}
+    id={orderedData.top5Played[i].championName}
+    kills={orderedData.top5Played[i].kills}
+    deaths={orderedData.top5Played[i].deaths}
+    assists={orderedData.top5Played[i].assists}
+    played={orderedData.top5Played[i].played}
+    win={orderedData.top5Played[i].win}
+    loss={orderedData.top5Played[i].loss}
+    cs={orderedData.top5Played[i].cs}
+    champDamage={orderedData.top5Played[i].champDamage}
+    />);
+  }
+
+  const allChampEntries = [];
+  for (let i = 0; i < orderedData.allPlayed.length; i++) {
+    allChampEntries.push(<SummonerChampDataBoxEntry
     key={`champ-entry-${i}`}
-    championId={top5Played[i].championId}
-    id={top5Played[i].championName}
-    kills={top5Played[i].kills}
-    deaths={top5Played[i].deaths}
-    assists={top5Played[i].assists}
-    played={top5Played[i].played}
-    win={top5Played[i].win}
-    loss={top5Played[i].loss}
-    cs={top5Played[i].cs}
-    champDamage={top5Played[i].champDamage}
+    championId={orderedData.allPlayed[i].championId}
+    id={orderedData.allPlayed[i].championName}
+    kills={orderedData.allPlayed[i].kills}
+    deaths={orderedData.allPlayed[i].deaths}
+    assists={orderedData.allPlayed[i].assists}
+    played={orderedData.allPlayed[i].played}
+    win={orderedData.allPlayed[i].win}
+    loss={orderedData.allPlayed[i].loss}
+    cs={orderedData.allPlayed[i].cs}
+    champDamage={orderedData.allPlayed[i].champDamage}
     />);
   }
 
@@ -95,16 +119,48 @@ const SummonerChampDataBox = () => {
   return (
     <div className="outerSummonerDataBox">
 
+      <div className="SummonerInfoBox">
+
+        <div className="SummonerInfo">
+          <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${matchHistory[0].summonerIcon}.jpg`}/>
+          <div className="summonerInfoPtags">
+            <p>Name: {summonerName}</p>
+            <p>Level {summonerLevel}</p>
+          </div>
+        </div>
+
+        <div className="SummonerRankInfo">
+
+          <div className="RankedSoloDuo">
+            <h2> Ranked Solo/Duo </h2>
+            <img id="rankIcon" src={`https://opgg-static.akamaized.net/images/medals_new/${summonerRank.rankedSolo[0].toLowerCase()}.png`}/>
+            <p>{`${summonerRank.rankedSolo[0]} ${summonerRank.rankedSolo[2]} ${summonerRank.rankedSolo[1]} LP`}</p>
+          </div>
+
+          <div className="RankedFlex">
+            <h2> Ranked Flex </h2>
+            <img id="rankIcon" src={`https://opgg-static.akamaized.net/images/medals_new/${summonerRank.rankedFlex[0].toLowerCase()}.png`}/>
+            <p>{`${summonerRank.rankedFlex[0]} ${summonerRank.rankedFlex[2]} ${summonerRank.rankedFlex[1]} LP`}</p>
+          </div>
+
+        </div>
+
+      </div>
+
       <div className="DataBoxHeader">
         <h3> Most Played </h3>
         <p id="rankedsoloheader"> Ranked Solo </p>
       </div>
       
-      <div className="SummonerDataBoxEntries">
+      {!open && <div className="SummonerDataBoxEntries" id="topEntries">
         {champEntries}
-      </div>
+      </div>}
+      {open && <div className="SummonerDataBoxEntries" id="allEntries">
+        {allChampEntries}
+      </div>}
     
-      <button className="SummonerDataBoxExpand" onClick={ () => setOpen(!open) }><AiFillCaretDown /></button>
+      {!open && <button className="SummonerDataBoxButton" id="SDBexpand" onClick={ () => setOpen(!open) }><AiFillCaretDown /></button>}
+      {open && <button className="SummonerDataBoxButton" id="SDBcontract" onClick={ () => setOpen(!open) }><AiFillCaretUp /></button>}
 
     </div>
   );

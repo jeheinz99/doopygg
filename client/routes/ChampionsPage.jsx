@@ -36,6 +36,11 @@ const ChampionsPage = () => {
             <AiFillGithub color="white" id="githubLogo"/>
           </a>
         </div>
+
+        <div className="EndpointHeader">
+          <h3> doopy.gg </h3>
+        </div>
+
         <div className="Endpoints">
           <NavLink style={({isActive}) => ({color: isActive ? '#ED4252' : ''})} id="home" to="/"> <AiFillHome id="HomeLogo"/> </NavLink>
           <NavLink style={({isActive}) => ({filter: isActive ? 'invert(45%) sepia(76%) saturate(6132%) hue-rotate(337deg) brightness(108%) contrast(86%)' : ''})} id="valorant" to="/valorant"> <img id="valorantLogo" src={valorantLogo}/> </NavLink>

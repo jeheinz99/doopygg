@@ -13,7 +13,7 @@ html, body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: #16161b;
+  background: #171A21;
   width: 100%;
   height: 100%;
 }
@@ -23,13 +23,18 @@ html, body {
   justify-items: center;
 }
 #winMatch {
-  background: rgb(22,81,191);
-  background: linear-gradient(90deg, rgba(22,81,191,1) 0%, rgba(41,61,150,1) 10%, rgba(56,72,108,1) 51%, rgba(56,95,186,1) 100%);
+  background: rgb(19, 28, 43);
+}
+#dd-winMatch {
+  border: 2px solid #272d3a;
+  background: rgb(19, 28, 43);
+}
+#dd-loseMatch {
+  border: 2px solid #272d3a;
+  background: rgb(45, 17, 20);
 }
 #loseMatch {
-  background: rgb(173,44,72);
-  background: linear-gradient(90deg, rgba(173,44,72,1) 0%, rgba(150,41,64,1) 10%, rgba(108,56,67,1) 51%, rgba(186,56,86,1) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.80);
+  background: rgb(45, 17, 20);
 }
 .SearchBox {
   display: flex;
@@ -42,25 +47,26 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 95%;
+  width: 97%;
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border-radius: 0.2em;
+  /* border-radius: 0.2em; */
   border: 1px solid rgba(255, 255, 255, 0.861);
-  background: #16161b;
+  border-top: none;
+  background: #171A21;
   gap: 2em;
   padding: 10px;
+  margin-top: 6.2em;
 }
 
 #SearchBoxInput {
   font-family: Kanit;
   text-align: center;
-  border-radius: 0.2em;
-  padding: 0.5em;
   font-size: 1em;
-  border: 1px solid #1C6EA4;
-  background-color: #181A1B;
+  border: none;
+  border-bottom: 1px solid #C9F0FF;
+  background-color: #15161a;
   color:rgba(255, 255, 255, 0.861);
-  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  /* box-shadow: 2px 2px 15px rgb(0, 0, 0, 5); */
 }
 #SearchBoxInput:focus {
   outline: 0;
@@ -70,33 +76,28 @@ html, body {
 }
 
 #summonerUpdateButton {
-  background-color:#292828;
-  border:0.10em double #1C6EA4;
-  border-radius: 0.5em;
-  display:inline-block;
-  cursor:pointer;
+  background: none;
+  border: none;
+  margin: 0;
   color:#ffffff;
   font-family: Kanit;
-  letter-spacing: 0.05em;
-  font-size:15px;
-  font-weight:bold;
-  padding:9px 23px;
-  text-decoration:none;
-  text-shadow:0px -1px 0px #7a2a1d;
-  height: 3em;
+  font-size: 1em;
+  font-style: italic;
 }
 #summonerUpdateButton:hover {
-  background-color:#222020;
-  border: 0.10em double #a41c49;
+  cursor: pointer;
+  color: rgb(220, 49, 49);
 }
 #summonerUpdateButton:active {
   position:relative;
   top:1px;
 }
 .SummonerDataBoxGroup {
+  justify-content: center;
   display: flex;
-  align-items: center;
-  height: 21em;
+  gap: 1em;
+  width: 100%;
+  height: 100%;
 }
 .headerinfo {
   display: flex;
@@ -105,12 +106,18 @@ html, body {
 }
 
 #welcomeLeaderboard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 0.2em;
+}
+
+#welcomeLeaderboard h3 {
+  margin: 10px;
   font-size: 3em;
+}
+#welcomeLeaderboard p {
+  margin: 0;
+  font-size: 2em;
+  color:rgba(255, 255, 255, 0.80);
   font-family: Kanit;
-  color:rgba(255, 255, 255, 0.861);
 }
 
 #LeaderboardBoxButton {
@@ -238,27 +245,12 @@ html, body {
 }
 .LBButtons {
   display: flex;
-  width: 2em;
-  height: 0.9em;
-  justify-content: center;
+  width: 100%;
 }
 .LBButtonsBox {
   display: flex;
-  flex-direction: column;
+  width: 100%;
   gap: 0.5em;
-  align-items: center;
-}
-.LBButtonsBox1 {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-.LBButtonsBox2 {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 #welcome {
@@ -277,7 +269,7 @@ html, body {
 .MatchesWrapper {
   display: flex;
   flex-direction: column;
-  width: 98%;
+  width: 100%;
   align-items: center;
 }
 .MatchBoxes {
@@ -288,11 +280,15 @@ html, body {
   border-radius: 2em;
 }
 #MatchBoxes {
+  border: 2px solid #303b51;
+  border-radius: 0.5em;
+  width: 100%;
   gap: 0.5em;
   color:rgba(255, 255, 255, 0.80);
+  margin-top: 0;
 }
 #MatchBoxes h4 {
-  margin: 1.5em;
+  margin: 0.5em;
 }
 .Box20 {
   display: flex;
@@ -315,11 +311,13 @@ html, body {
 .Matches {
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-around;
   font-family: Kanit;
-  border: 1px solid rgba(255, 255, 255, 0.80);
-  gap: 2em;
+  border: 2px solid #272d3a;
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
+  border-radius: 0.2em;
+  gap: 1em;
 }
 .MatchGroup1 {
   display: flex;
@@ -327,38 +325,41 @@ html, body {
 }
 .MatchGroup1 p {
   margin: 0;
-  width: 7em;
+  width: 6em;
+  font-size: 0.8em;
   text-align: center;
 }
 .MatchGroup2 {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
+  gap: 0.2em;
 }
 .MatchGroup2div2 p {
   width: 7em;
   text-align: center;
 }
 .MatchGroup2div {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  gap: 5px;
 }
 .MatchGroup2div2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  line-height: 25%;
+}
+.MatchGroup2div2 p {
+  margin: 0;
+  font-size: 0.8em;
 }
 .MatchGroup2div3 {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  width: 30px;
 }
 .MatchGroupButton {
   display: flex;
@@ -373,24 +374,30 @@ html, body {
   filter: invert(20%);
 }
 #championIcon {
-  width: 88px;
-  height: 88px;
-  border-radius: 0.5em;
-  border:1px solid rgb(170, 170, 170);
+  width: 40px;
+  height: 40px;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
 }
 #keystoneIcon {
-  width: 100%;
+  width: 22px;
+  height: 22px;
 }
 #secondaryRuneIcon {
-  width: 70%;
+  width: 20px;
+  height: 20px;
 }
 #summonerSpellIcon1 {
+  width: 20px;
+  height: 20px;
   border-radius: 0.5em;
-  border: 1px solid rgb(111, 110, 110)
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
 }
 #summonerSpellIcon2 {
+  width: 20px;
+  height: 20px;
   border-radius: 0.5em;
-  border: 1px solid rgb(111, 110, 110)
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
 }
 .MatchGroup4 {
   display: flex;
@@ -401,25 +408,25 @@ html, body {
 .MatchGroup4div {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 .upperHalfItems {
   display: flex;
-  gap: 2px;
+  gap: 1px;
 }
 .lowerHalfItems {
   display: flex;
-  gap: 2px;
+  gap: 1px;
 }
 #item0, #item1, #item2, #item3, #item4, #item5, #item6 {
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   border-radius: 0.5em;
-  border: 2px solid #000;
+  border: 1px solid #000;
 }
 #item6 {
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
 }
 .MatchGroup5 {
   display: flex;
@@ -429,89 +436,83 @@ html, body {
 .leftSidePlayers {
   display: flex;
   flex-direction: column;
+  gap: 2px;
+  padding: 5px;
 }
 .rightSidePlayers {
   display: flex;
   flex-direction: column;
+  padding: 5px;
+  gap: 2px;
 }
-#player0Champion, #player1Champion, #player2Champion, #player3Champion, #player4Champion, #player5Champion, #player6Champion, #player7Champion, #player8Champion, #player9Champion {
-  width: 32px;
-  height: 32px;
+.playerChampionIcon {
+  width: 24px;
+  height: 24px;
 }
 .leftSideGroup, .rightSideGroup {
   display: flex;
   flex-direction: row;
-  align-content: center;
   align-items: center;
   font-size: 0.8em;
   gap: 0.5em;
 }
 
 .leftSideGroup p, .rightSideGroup p {
-  width: 7em;
+  width: 8em;
   margin: 0;
-  overflow: hidden;
 }
 
 .DropDownBoxMatch {
   display: flex;
   width: 100%;
-  gap: 3em;
+  gap: 0.5em;
   /* justify-items: center; */
   justify-content: space-around;
-  border: 1px solid rgba(255, 255, 255, 0.80);
+  border: 2px solid #272d3a;
   border-top: none;
 }
 .TeamInfoTextDD {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   font-size: 0.8em;
   font-family: Kanit;
-  border: 1px solid rgba(255, 255, 255, 0.80);
-  border-top: none;
   width: 100%;
+  border-left: 2px solid #272d3a;
+  border-right: 2px solid #272d3a;
+  justify-content: space-around;
 }
 .TeamInfoTextDD1 {
   display: flex;
-  margin-left: 36.5%;
 }
 #damageDD {
-  position: relative;
-  margin-left: 9%;
+  height: 16px;
+  width: 16px;
 }
 #csDD {
-  position: relative;
-  margin-left: 0.01%;
+  height: 32px;
+  width: 32px;
+  filter: brightness(50%) sepia(100) saturate(50) hue-rotate(45deg);
 }
 #visionDD {
-  position: relative;
-  margin-left: 2%;
 }
 .TeamInfoTextDD2 {
   display: flex;
-  margin-left: 42.5%;
-}
-#kdaDD2 {
-  position: relative;
-  margin-left: 0.1%;
 }
 #damageDD2 {
-  position: relative;
-  margin-left: 5%;
+  height: 16px;
+  width: 16px;
 }
 #csDD2 {
-  position: relative;
-  margin-left: 1%;
+  height: 32px;
+  width: 32px;
+  filter: brightness(50%) sepia(100) saturate(50) hue-rotate(45deg);
 }
 #visionDD2 {
-  position: relative;
-  margin-left: 2%;
 }
 .Team1DropDownBox {
-  margin-left: 1em;
-  margin-top: 0.3em;
   display: flex;
   flex-direction: column;
+  padding: 5px;
+  /* border: 1px solid #000; */
 }
 .Team1Players, .Team2Players {
   display: flex;
@@ -524,6 +525,9 @@ html, body {
   justify-content: space-between;
   width: 100%;
   font-family: Kanit;
+  border-radius: 0.5em;
+  padding: 5px;
+  /* box-shadow: 1px 1px 4px rgb(0, 0, 0, 5); */
 }
 .Player0Team1ChampIcon {
   display: flex;
@@ -531,36 +535,50 @@ html, body {
 .Player0Team1Info {
   display: flex;
   flex-direction: row;
-  min-width: 16%;
-  max-width: 16%;
-  overflow: hidden;
   align-items: center;
   font-size: 0.75em;
   justify-content: flex-start;
+  overflow: hidden;
 }
 .Player0Team1Info p {
   margin: 0;
+  width: 5em;
 }
 .Player0Team1Damage, .Player0Team1CS, .Player0Team1VisionScore {
-  min-width: 10%;
-  max-width: 30%;
   display: flex;
-  font-size: 0.75em;
+  font-size: 0.8em;
   justify-content: center;
   overflow: hidden;
+  text-align: center;
+}
+.Player0Team1Damage p {
+  margin: 0;
+  width: 3.5em;
+}
+.Player0Team1VisionScore p {
+  margin: 0;
+  width: 2em;
+}
+.Player0Team1CS p {
+  margin: 0;
+  width: 2em;
 }
 .Player0Team1KDA {
   display: flex;
   flex-direction: column;
   font-size: 0.75em;
-  min-width: 25%;
-  max-width: 25%;
+}
+.Player0Team1KDA p {
+  text-align: center;
+  margin: 0;
+  width: 6em;
+  font-size: 0.9em;
 }
 #summonerSpellIcon1DropDown, #summonerSpellIcon2DropDown {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 0.5em;
-  border: 1px solid rgb(111, 110, 110)
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
 }
 #Player0Champion {
   width: 32px;
@@ -573,8 +591,8 @@ html, body {
   width: 24px;
 }
 #Player0Team1SecondaryTree {
-  height: 20x;
-  width: 20px;
+  height: 16px;
+  width: 16px;
 }
 .Player0Team1Runes {
   display: flex;
@@ -605,9 +623,7 @@ html, body {
   border: 1px solid #000;
 } 
 .ObjectivesDD {
-  min-width: 2%;
-  max-width: 2%;
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   font-family: Kanit;
@@ -615,19 +631,19 @@ html, body {
 .MiddleIconsDD {
   display: flex;
   flex-direction: column;
-  gap: 2.8em;
+  gap: 2.5em;
 }
 .Team1ObjectivesDD {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2em;
+  gap: 1em;
 }
 .Team2ObjectivesDD {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2em;
+  gap: 1em;
 }
 #BaronIconDD {
   filter:hue-rotate(80deg)
@@ -678,26 +694,31 @@ html, body {
   width: 24px;
   height: 24px;
 }
+
 .outerSummonerBox {
   display: flex;
   justify-content: center;
   height: 100%;
 }
-
 .outerSummonerDataBox {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 50%;
+  align-items: flex-start;
+  width: 30em;
   height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.86);
   border-radius: 0.5em;
-  background-color: #232752;
+  background-color: #171A21;
   padding: 10px;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  border: 2px solid #303b51;
 }
+
+
 .outerSummonerDataBox h3 {
-  border-top: 2px solid #ffffff;
+  color:rgba(255, 255, 255, 0.80);
+  border-top: 2px solid rgba(255, 255, 255, 0.80);
   margin: 10px;
+  font-weight: 500;
   font-family: Kanit;
 }
 .SummonerDataBoxEntries {
@@ -705,14 +726,42 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  align-items: center;
+  align-items: flex-start;
 }
+#allEntries {
+}
+#topEntries {
+}
+#SDBexpand:hover #topEntries {
+  height: 0;
+  overflow: hidden;
+  /* transform: translateX(50px); */
+  /* animation: test 1s ease-in forwards; */
+}
+@keyframes test {
+  0% {
+  }
+  100% {
+    height: 0;
+    overflow: hidden;
+  }
+}
+#SDBcontract {
+  
+}
+
+
+
+
+
 .champEntryWrapper {
   display: flex;
   justify-content: center;
-  width: 85%;
-  background-color: #3c4071;
-  border-radius: 0.5em;
+  width: 100%;
+  background-color: #13161dde;
+  border: 2px solid #303b51;
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
+  border-radius: 0.2em;
 }
 .champEntry {
   display: flex;
@@ -723,6 +772,7 @@ html, body {
   width: 7em;
   margin: 0;
   font-family: Kanit;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.80);
 }
 .champEntryDiv1 {
@@ -737,19 +787,34 @@ html, body {
   display: flex;
   flex-direction: column;
   font-size: 0.9em;
+  text-align: center;
 }
 .champEntryDiv3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 .champEntryDiv4 {
   display: flex;
   width: 7.5em;
 }
+.SummonerDataBoxButton {
+  display: flex;
+  align-self: flex-end;
+  border: none;
+  background: none;
+  color:rgba(255, 255, 255, 0.80);
+}
+.SummonerDataBoxButton:hover {
+  filter: invert(20%);
+  cursor: pointer;
+}
 #champEntryChampIcon {
+  border-radius: 0.2em;
   width: 32px;
   height: 32px;
+  box-shadow: 1px 1px 1px rgb(0, 0, 0, 5);
 }
 
 .recent20Wrapper {
@@ -759,15 +824,20 @@ html, body {
   align-items: center;
   margin-bottom: 10px;
 }
+.recent20Wrapper h3 {
+  margin: 0.5em;
+}
 .recent20StatsBox {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
+  width: 99%;
   height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.80);
+  border: 2px solid #272d3a;
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
+  border-radius: 0.2em;
   gap: 2em;
-  background-color: #272c53;
+  background-color: #171A21;
 }
 .recent20TotalStats {
   display: flex;
@@ -775,34 +845,54 @@ html, body {
 }
 .recent20TotalStats p {
   font-family: Kanit;
-  width: 8em;
+  width: 7em;
+  font-size: 0.9em;
   text-align: center;
+  margin: 5px;
 }
 .recent20Champs {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.1em;
-  border-radius: 0.5em;
-  padding: 5px;
-  background-color: #3c4071;
   margin: 5px;
+  width: 37%;
+  /* border: 2px solid #303b51; */
 }
 .Recent20ChampCard {
   display: flex;
+  justify-content: center;
+  border-radius: 0.2em;
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
+  border: 2px solid #303b51;
   align-items: center;
+  padding: 5px;
+  gap: 0.5em;
+}
+.kdaAvgsR20 {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75em;
+  align-items: center;
+}
+.kdaAvgsR20 #lessthan3kda, .kdaAvgsR20 #between3and5kda, .kdaAvgsR20 #over5kda {
+  font-size: 1.2em;
 }
 
 .Recent20ChampCardDiv2box1 {
   display: flex;
   align-items: center;
   width: 100%;
+  gap: 0.5em;
 }
 .Recent20ChampCardDiv2box1 p {
   width: 7em;
   margin: 0;
   font-family: Kanit;
   text-align: center;
+}
+.Recent20ChampCardDiv2box1 #below60wr, .Recent20ChampCardDiv2box1 #above60wr, .Recent20ChampCardDiv2box1 #exact100wr {
+  width: 3em;
 }
 .gamesPlayedLast20 {
   display: flex;
@@ -811,9 +901,11 @@ html, body {
 }
 #gamesPlayedLast20ptag1 {
   font-size: 0.9em;
+  width: 5em;
 }
 #gamesPlayedLast20ptag2 {
   font-size: 0.75em;
+  width: 5em;
 }
 
 #championIconRecent20 {
@@ -827,14 +919,11 @@ html, body {
 
 #exact100wr {
   color: #FFC300;
-  width: 4em;
 }
 #above60wr {
   color: #C42402;
-  width: 4em;
 }
 #below60wr {
-  width: 4em;
 }
 
 #over5kda {
@@ -856,6 +945,7 @@ html, body {
 .WinLossBar {
   display: flex;
   width: 100%;
+  gap: 2px;
 }
 .winBar {
   color:rgba(255, 255, 255, 0.80);
@@ -863,11 +953,17 @@ html, body {
   align-items: center;
   justify-content: center;
   font-size: 0.55em;
-  height: 15px;
-  border: 2px solid #000;
-  background-color:#2d36b9;
+  height: 10px;
+  /* border: 1.5px solid #000; */
+  border-top-left-radius: 0.2em;
+  border-bottom-left-radius: 0.2em;
+  background-color:#47aad4;
   border-right: none;
   font-family: Kanit;
+}
+.winBar p {
+  text-align: center;
+  font-size: 0.5em;
 }
 .lossBar {
   color:rgba(255, 255, 255, 0.80);
@@ -875,17 +971,23 @@ html, body {
   align-items: center;
   justify-content: center;
   font-size: 0.55em;
-  border: 2px solid #000;
-  height: 15px;
+  border-top-right-radius: 0.2em;
+  border-bottom-right-radius: 0.2em;
+  /* border: 1.5px solid #000; */
+  height: 10px;
   border-left: none;
-  background-color: #b43215;
+  background-color: #c5472b;
   font-family: Kanit;
 }
+.lossBar p {
+  text-align: center;
+  font-size: 0.5em;
+}
 #RPWinBar {
-  font-size: 0.7em;
+  font-size: 0.55em;
 }
 #R20WinBar {
-  font-size: 0.85em;
+  font-size: 0.70em;
 }
 .DataBoxHeader {
   display: flex;
@@ -906,10 +1008,20 @@ html, body {
 
 .positionStats {
   display: flex;
-  gap: 3em;
+  flex-direction: column;
+  gap: 2em;
+}
+.positionStats h2 {
+  font-size: 1.1em;
+  margin: 0;
+  text-align: center;  
+}
+.pos-div-wrap {
+  display: flex;
+  width: 100%;
+  gap: 2em;
   height: 6.5em;
 }
-
 .pos-div {
   height: 100%;
   display: flex;
@@ -930,12 +1042,12 @@ html, body {
 }
 
 #non-filled-pos {
-  border: 2px solid rgb(19, 19, 19);
+  border: 2px solid #272d3a;
 }
 
 #filled-pos {
   background-color:#8287c7;
-  border: 2px solid rgb(19, 19, 19);
+  border: 2px solid #272d3a;
   border-top: none;
 }
 
@@ -951,69 +1063,85 @@ h4 {
   font-family: Kanit;
   color: rgba(255, 255, 255, 0.861);
 }
-.SummonerInfoBox {
+.SearchBoxInputandIcon {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.86);
-  width: 85%;
-  height: 100%;
-  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border: 1px solid rgba(255, 255, 255, 0.86);
-  border-radius: 0.5em;
-  font-family: Kanit;
-  background-color: #232752;
+}
+#SearchIcon {
+  width: 32px;
+  height: 32px;
 }
 #SearchBoxButton {
-  background-color:#292828;
-  border:0.10em double #1C6EA4;
-  border-radius: 0.5em;
-  display:inline-block;
-  cursor:pointer;
-  color:#ffffff;
-  font-family: Kanit;
-  letter-spacing: 0.05em;
-  font-size:15px;
-  font-weight:bold;
-  padding:9px 23px;
-  text-decoration:none;
-  text-shadow:0px -1px 0px #7a2a1d;
+  border: none;
+  background: none;
+  color:rgba(255, 255, 255, 0.80);
 }
-#SearchBoxButton:hover {
-  background-color:#222020;
-  border: 0.10em double #a41c49;
+
+#SearchIcon:hover {
+  filter: invert(20%);
+  cursor: pointer;
 }
 #SearchBoxButton:active {
   position:relative;
   top:1px;
 }
-#SummonerInfo {
+.SummonerInfoBox {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  font-size: 1.2em;
+  width: 100%;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  color: rgba(255, 255, 255, 0.861);
+  border-top: 2px solid rgba(255, 255, 255, 0.80);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.80);
+  justify-content: space-around;
+  /* border-radius: 0.5em; */
+  font-family: Kanit;
+  background-color: #171A21;
 }
-#summonerRankInfo {
+.SummonerInfo {
   display: flex;
-  width: 70%;
   flex-direction: column;
-  flex-shrink: 2;
   align-items: center;
+  padding: 10px;
+  gap: 2em;
+}
+.SummonerInfoPtags {
+  
+}
+.SummonerInfo p {
+  margin: 0;
+  width: 10em;
+  text-align: center;
+}
+.SummonerRankInfo {
+  display: flex;
+  gap: 3em;
+  margin-right: 1em;
+}
+.RankedSoloDuo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.RankedFlex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.RankedSoloDuo h2, .RankedSoloDuo p, .RankedFlex h2, .RankedFlex p {
+  text-align: center;
 }
 #summonerIcon {
-  display: flex;
-  flex-grow: 2;
-  width: 50%;
-  border-radius: 2em;
-  border: 2px solid rgba(255, 255, 255, 55);
+  height: 128px;
+  width: 128px;
+  border-radius: 1em;
+  border: 2px solid #303b51;
 }
 #rankIcon {
-  display: flex;
-  width: 55%;
+  height: 128px;
+  width: 128px;
 }
-p {
-  margin: 0.5em;
-}
+
 
 #HomeLogo {
   height: 32px;
@@ -1104,8 +1232,13 @@ p {
 .EndpointBar {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 90%;
+  justify-content: space-around;
+  width: 99.7%;
+  position: fixed;
+  border: 1px solid rgba(255, 255, 255, 0.861);
+  border-top: none;
+  background: #171A21;
+  /* height: 5em; */
 } 
 .EndpointLogos {
   display: flex;
@@ -1113,7 +1246,8 @@ p {
   gap: 2em;
   align-items: center;
   margin-top: 10px;
-  width: 100%;
+  width: 25%;
+  margin-left: 10px;
 }
 .Endpoints {
   display: flex;
@@ -1121,24 +1255,16 @@ p {
   gap: 2em;
   align-items: center;
   margin-top: 10px;
+  margin-right: 10px;
 }
-
-
-#welcomeValorant {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 3em;
-  font-family: Kanit;
-  color:rgba(255, 255, 255, 0.861);
-  padding: 10px;
+.EndpointHeader {
+  justify-content: center;
 }
 
 #ValorantBoxButton {
   background-color:#292828;
   border:0.10em double #1C6EA4;
   border-radius: 0.5em;
-  display:inline-block;
   cursor:pointer;
   color:#ffffff;
   font-family: Kanit;
@@ -1148,7 +1274,7 @@ p {
   padding:9px 23px;
   text-decoration:none;
   text-shadow:0px -1px 0px #7a2a1d;
-  width: 10%;
+  width: 6em;
 }
 #ValorantBoxButton:hover {
   background-color:#222020;
@@ -1186,11 +1312,16 @@ p {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-size: 3em;
 }
 .ValorantPageBox {
   display: flex;
   width: 100%;
   justify-content: center;
+}
+.ValorantPageBox h3 {
+  margin: 10px;
+  font-size: 3em;
 }
 
 #welcomeTFT {

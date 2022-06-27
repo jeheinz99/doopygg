@@ -22,13 +22,13 @@ const ValorantPageContainer = () => {
   return (
     <div className="ValorantPageBox">
       <div className="OuterSearchBox" id="welcomeValorant"> 
-        <p>doopy.gg VALORANT</p>
+        <h3>doopy.gg VALORANT</h3>
         <div className="ValorantSearchBox">
           <input id="ValBoxInput" placeholder="Riot ID" onChange={ riotIdData } required></input>
           <p> # </p>
           <input id="ValBoxInput" placeholder="Tag-line" onChange={ taglineData } required></input>
         </div>
-        <button className="OuterSearchBox" id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> Search! </button>
+        <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> Search! </button>
       </div>
     </div>
   );
