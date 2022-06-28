@@ -482,29 +482,123 @@ html, body {
 }
 .TeamInfoTextDD1 {
   display: flex;
+  width: 100%;
+}
+.goldBarDD {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+#goldBarDDWin {
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+  background: rgb(58, 131, 92);
+  border: 1px solid #000;
+}
+#goldBarDDLose {
+  border: 1px solid #000;
+  background: rgb(64, 37, 39);
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+#invis1 {
+  display: flex;
+  justify-content: flex-start;
+  width: 17.5em;
+}
+#invis1 p {
+  margin-left: 1em;
+  font-family: Kanit;
+  font-style: italic;
+  color:#47aad4;
+  text-align: center;
+  font-size: 1.2em;
+  width: 5em;
+  border-left: 2px solid #47aad4;
+}
+#invis3 p {
+  margin-left: 1.3em;
+  font-family: Kanit;
+  font-style: italic;
+  color: #c5472b;
+  text-align: center;
+  font-size: 1.2em;
+  width: 5em;
+  border-left: 2px solid #c5472b;
+}
+#invis2 {
+  width: 6.5em;
+}
+#invis3 {
+  width: 17.8em;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#damageDDIcon {
+  height: 24px;
+  width: 24px;
+}
+#csDDIcon {
+  height: 24px;
+  width: 24px;
+}
+#visionDDIcon {
+  height: 24px;
+  width: 24px;
+}
+
+#csDDIcon2 {
+  height: 24px;
+  width: 24px;
+}
+#visionDDIcon2 {
+  height: 24px;
+  width: 24px;
+}
+#damageDDIcon2 {
+  height: 24px;
+  width: 24px;
 }
 #damageDD {
-  height: 16px;
-  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5em;
 }
 #csDD {
-  height: 32px;
-  width: 32px;
-  filter: brightness(50%) sepia(100) saturate(50) hue-rotate(45deg);
+  display: flex;
+  align-items: center;
+  width: 2em;
 }
 #visionDD {
+  display: flex;
+  align-items: center;
+  width: 2em;
+}
+#damageDD2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5em;
+}
+#csDD2 {
+  display: flex;
+  align-items: center;
+  width: 2em;
+}
+#visionDD2 {
+  display: flex;
+  align-items: center;
+  width: 2em;
 }
 .TeamInfoTextDD2 {
   display: flex;
+  width: 100%;
 }
-#damageDD2 {
-  height: 16px;
-  width: 16px;
+#damageDD2 p {
 }
 #csDD2 {
-  height: 32px;
-  width: 32px;
-  filter: brightness(50%) sepia(100) saturate(50) hue-rotate(45deg);
 }
 #visionDD2 {
 }
@@ -624,32 +718,80 @@ html, body {
 } 
 .ObjectivesDD {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  justify-content: center;
   font-family: Kanit;
+  border-left: 2px solid #272d3a;
+  border-right: 2px solid #272d3a;
+  width: 100%;
+  gap: 1em;
+  border-bottom: 2px solid #272d3a;
 }
-.MiddleIconsDD {
+.ObjectivesDD p {
+  margin: 0;
+}
+.T1Obj1 {
   display: flex;
   flex-direction: column;
-  gap: 2.5em;
+  align-items: center;
 }
+.T1Obj2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.T1Obj3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.T1Obj4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.T2Obj1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.T2Obj2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.T2Obj3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.T2Obj4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
 .Team1ObjectivesDD {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: flex-end;
   gap: 1em;
+  width: 100%;
+  padding: 5px;
 }
 .Team2ObjectivesDD {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
   gap: 1em;
+  width: 100%;
+  padding: 5px;
 }
 #BaronIconDD {
-  filter:hue-rotate(80deg)
+  filter:hue-rotate(80deg);
 }
 #DragonIconDD {
-  filter: hue-rotate(180deg)
+  filter: hue-rotate(180deg);
 }
 #GoldIconDD {
   height: 32px;
@@ -668,23 +810,6 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-}
-#RuneDDButton {
-  padding: 7.5%;
-  width: 2.5em;
-  height: 2.5em;
-  border-radius: 1em;
-  background-color: #7a2a1d;
-}
-#StatDDButton {
-  padding: 7.5%;
-  width: 2.5em;
-  height: 2.5em;
-  border-radius: 1em;
-  background-color: #7a2a1d;
-}
-#RuneDDButton:hover, #StatDDButton:hover {
-  filter: invert(10%);
 }
 #StatDDImage {
   width: 24px;
@@ -1105,8 +1230,12 @@ h4 {
   padding: 10px;
   gap: 2em;
 }
-.SummonerInfoPtags {
-  
+.rankBorderDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
 }
 .SummonerInfo p {
   margin: 0;
@@ -1138,10 +1267,13 @@ h4 {
   border: 2px solid #303b51;
 }
 #rankIcon {
-  height: 128px;
-  width: 128px;
+  height: 64px;
+  width: 64px;
 }
-
+#unrankedIcon {
+  height: 48px;
+  width: 48px;
+}
 
 #HomeLogo {
   height: 32px;
@@ -1238,6 +1370,7 @@ h4 {
   border: 1px solid rgba(255, 255, 255, 0.861);
   border-top: none;
   background: #171A21;
+  z-index: 999;
   /* height: 5em; */
 } 
 .EndpointLogos {
@@ -1259,6 +1392,7 @@ h4 {
 }
 .EndpointHeader {
   justify-content: center;
+  margin-right: 2em;
 }
 
 #ValorantBoxButton {
@@ -1324,25 +1458,15 @@ h4 {
   font-size: 3em;
 }
 
-#welcomeTFT {
-  font-size: 2em;
-  font-family: Kanit;
-  color:rgba(255, 255, 255, 0.861);
-}
-
 #SearchBoxInputTFT {
   font-family: Kanit;
   text-align: center;
-  border-radius: 0.2em;
-  padding: 0.5em;
-  font-size: 0.5em;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #1C6EA4;
-  background-color: #181A1B;
+  font-size: 1em;
+  border: none;
+  border-bottom: 1px solid #C9F0FF;
+  background-color: #15161a;
   color:rgba(255, 255, 255, 0.861);
-  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  width: 20%;
+  /* box-shadow: 2px 2px 15px rgb(0, 0, 0, 5); */
 }
 #SearchBoxInputTFT:focus {
   outline: 0;
@@ -1351,6 +1475,19 @@ h4 {
   background-color: #22212174;
 }
 
+#TFTSummonerInfoBox {
+  gap: 2em;
+}
+.TFTRankedSolo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.TFTDoubleUp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .TFTDropDownBoxes {
   width: 100%;
 }
@@ -1465,6 +1602,7 @@ h4 {
 }
 .TFTTopHalfBox {
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -1479,11 +1617,9 @@ h4 {
   width: 90%;
   margin: 15px auto;
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border-radius: 0.3em;
-  border-width: 1px;
-  border-style: double;
-  border-color: #a41c49;
-  background: #181A1B;
+  border: 2px solid #303b51;
+  border-radius: 0.2em;
+  background: #171A21;
 }
 .TFTMatches {
   width: 100%;
@@ -1574,37 +1710,6 @@ h4 {
   padding: 1px;
 
 }
-/* #Trait-0 {
-  background-image: url('https://raw.communitydragon.org/pbe/game/assets/ux/tft/tft_traits_texture_atlas.png');
-  background-position: 33% 6%;
-  border-radius: 1em;
-  border: 1px solid #000;
-  object-fit: cover;
-}
-#Trait-1 {
-  background-image: url('https://raw.communitydragon.org/pbe/game/assets/ux/tft/tft_traits_texture_atlas.png');
-  background-position: 43% 6%;
-  border-radius: 1em;
-  border: 1px solid #000;
-  object-fit: cover;
-}
-#Trait-2 {
-  background-image: url('https://raw.communitydragon.org/pbe/game/assets/ux/tft/tft_traits_texture_atlas.png');
-  background-position: 73.8% 6%;
-  border-radius: 1em;
-  border: 1px solid #000;
-  object-fit: cover;
-}
-#Trait-3 {
-  background-image: url('https://raw.communitydragon.org/pbe/game/assets/ux/tft/tft_traits_texture_atlas.png');
-  background-position: 64% 31.5%;
-  border-radius: 1em;
-  border: 1px solid #000;
-  object-fit: cover;
-}
-#Trait-4 {
-
-} */
 
 .TFTunit {
   height: 64px;
@@ -1637,6 +1742,131 @@ h4 {
 }
 #Unit-8 {
   border-color: rgb(8, 213, 145);
+}
+.TFTRecentMatchesContainer {
+  display: flex;
+  border: 2px solid #272d3a;
+  width: 99%;
+  height: 15em;
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
+  border-radius: 0.2em;
+  background-color: #171A21;
+}
+.PlacementsBar {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1em;
+  padding: 5px;
+}
+#tftr10header {
+  display: flex;
+  align-items: center;
+  border-left: 2px solid rgba(255, 255, 255, 0.80);
+  gap: 6em;
+  height: 10%;
+}
+#tftR10WinBar {
+  
+}
+#tftr10header p {
+  margin: 0;
+  margin-left: 0.5em;
+  color: rgba(255, 255, 255, 0.80);
+  font-family: Kanit;
+}
+.PlacementInfo {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 2em;
+  border-left: 2px solid rgba(255, 255, 255, 0.80);
+}
+.PlacementInfoDiv1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5em;
+  margin-left: 0.5em;
+}
+.PlacementInfoDiv1 p {
+  font-family: Kanit;
+  color: rgba(255, 255, 255, 0.80);
+}
+#tftr10header #avgPlacementTag1 {
+  color: rgb(193, 171, 44);
+}
+#tftr10header #avgPlacementTag2 {
+  color: #b4b4b4;
+}
+#tftr10header #avgPlacementTag3 {
+  color: #7B3F00;
+}
+#tftr10header #avgPlacementTag4 {
+  color: #1C6EA4;
+}
+#tftr10header #avgPlacementTag5 {
+  color: rgba(184, 184, 184, 0.8);
+}
+#avgPlacementTag1, #avgPlacementTag2, #avgPlacementTag3, #avgPlacementTag4, #avgPlacementTag5 {
+  font-size: 2em;
+}
+#avgPlacementTag5 span {
+  font-size: 0.5em;
+  color: rgba(255, 255, 255, 0.80);
+}
+.PlacementInfoDiv1 p {
+  margin: 0;
+}
+
+.PlacementInfoDiv2 {
+  display: flex;
+  width: 10em;
+}
+.placementArr1 {
+  display: flex;
+  gap: 1em;
+}
+.placementArr2 {
+  display: flex;
+  gap: 1em;
+}
+.placementBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5em;
+  width: 3em;
+  border: 2px solid #303b51;
+  border-radius: 0.2em;
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
+  background-color: #16181c;
+}
+.placementBox p {
+  font-size: 2em;
+  font-family: Kanit;
+  margin: 0;
+}
+#placement-1 {
+  color: rgb(193, 171, 44);
+}
+
+#placement-2 {
+  color: #b4b4b4;
+}
+
+#placement-3 {
+  color: #7B3F00;
+}
+
+#placement-4 {
+  color: #1C6EA4;
+}
+
+#placement-5, #placement-6, #placement-7, #placement-8 {
+  color: #525252;
 }
 
 #tftplacement-1 {
@@ -1688,10 +1918,10 @@ h4 {
   border-radius: 1em;
   align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.80);
-  width: 20em;
+  width: 50em;
 }
 #kittisaurDuck {
-  width: 80%;
+  width: 50%;
   border-radius: 5em;
   border: 3px solid rgba(255, 255, 255, 0.80);
 }

@@ -5,8 +5,8 @@ import RecentMatchesBox from './TFTRecentMatchesBox.jsx';
 
 const TFTMatchBoxes = () => {
 
-  const TFTData = useSelector(state => state.tft.TFTData)
-  const otherPlayers = useSelector(state => state.tft.otherPlayersData);
+  const TFTData = useSelector(state => state.tft.TFTData);
+  const otherPlayers = useSelector(state => state.tft.otherPlayersMatches);
 
   const chunkArr = [];
   const chunkSize = (otherPlayers.length / TFTData.length);
@@ -14,8 +14,6 @@ const TFTMatchBoxes = () => {
     const chunk = otherPlayers.slice(i, i + chunkSize);
     chunkArr.push(chunk);
   }
-
-  console.log(chunkArr, 'chunkArr in TFTMatchBoxes');
 
   const matchList = [];
   for (let i = 0; i < TFTData.length; i++) {
@@ -25,7 +23,7 @@ const TFTMatchBoxes = () => {
   return (
     <div className="TFTMatchBoxes">
       <h4>Match History</h4>
-      {/* <RecentMatchesBox/> */}
+      <RecentMatchesBox/>
       { matchList }
     </div>
   );

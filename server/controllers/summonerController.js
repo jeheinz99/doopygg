@@ -273,7 +273,7 @@ summonerController.updateSummData = async (req, res, next) => {
             assists: player.assists,
             win: player.win,
             turretKills: player.turretKills,
-            // teamBarons: player.challenges.teamBaronKills,
+            barons: player.baronKills,
             dragons: player.dragonKills,
             goldEarned: player.goldEarned,
             position: player.teamPosition,
@@ -306,7 +306,7 @@ summonerController.updateSummData = async (req, res, next) => {
             assists: player.assists,
             win: player.win,
             turretKills: player.turretKills,
-            // teamBarons: player.challenges.teamBaronKills,
+            barons: player.baronKills,
             dragons: player.dragonKills,
             goldEarned: player.goldEarned,
             visionScore: player.visionScore,
@@ -394,8 +394,8 @@ summonerController.updateSummData = async (req, res, next) => {
       summonerName: responseSummData.data.name,
       summonerLevel: responseSummData.data.summonerLevel,
       summonerRank: rankData,
-      profileIcon: responseSummData.data.profileIconId,
       matchHistory: matchesData,
+      profileIcon: responseSummData.data.profileIconId,
       otherPlayersMatches: otherPlayersData,
       allMatchesPlayed: allS12MatchesArr,
       allMatchesPlayedData: [],
@@ -418,12 +418,12 @@ summonerController.updateSummData = async (req, res, next) => {
       await lolSummoner.findOneAndUpdate({summonerName: summonerName},
         { 
           $set: {
-          summonerName: summonerName,
-          summonerRank: rankData,
-          summonerLevel: responseSummData.data.summonerLevel,
-          profileIcon: responseSummData.data.profileIconId,
-          matchHistory: matchesData,
-          otherPlayersMatches: otherPlayersData
+            summonerName: summonerName,
+            summonerRank: rankData,
+            summonerLevel: responseSummData.data.summonerLevel,
+            profileIcon: responseSummData.data.profileIconId,
+            matchHistory: matchesData,
+            otherPlayersMatches: otherPlayersData
           }
         }
       );

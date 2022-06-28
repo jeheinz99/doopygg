@@ -57,14 +57,12 @@ export const updateSummonerData = summonerName => async dispatch => {
   dispatch(addSummonerDataActionCreator(responseSummUpdateData.data));
 };
 
-// asynchronous call to API to get info based on riot ID input
 export const getValorantData = (riotID, tagLine) => async dispatch => {
   const responseValData = await axios.get(`/valorant/${riotID}/${tagLine}`);
   console.log('VAL response from back-end', responseValData.data);
   dispatch(addValorantDataActionCreator(responseValData.data));  
 };
 
-// asynchronous call to API to get info based on summonerName input
 export const getTFTData = summonerName => async dispatch => {
   const responseTFTData = await axios.get(`/tft/${summonerName}`);
   console.log('TFT response from back-end', responseTFTData.data);

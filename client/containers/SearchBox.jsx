@@ -34,22 +34,22 @@ const SearchBox = () => {
           <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
         </div>
       </div>
+
       {matchHistory[0] && <div className="headerinfo">
         <h3> Summoner Information </h3>
         <button id="summonerUpdateButton" onClick={() => update(updateSummonerData(summName))}> Update </button>
       </div>}
+      
     {matchHistory[0] && allMatchesPlayedData[0] && <div className="SummonerDataBoxGroup">
       <SummonerChampDataBox />
       <MatchBoxes />
-      {/* <SummonerBox /> */}
     </div>}
 
     {matchHistory[0] && allMatchesPlayedData[0] === undefined && <div className="SummonerDataBoxGroup">
       <SummonerChampDataBoxTemp />
-      {/* <SummonerBox /> */}
-      </div>}
+      <MatchBoxes />
+    </div>}
 
-    {/* {matchHistory[0] && <MatchBoxes />} */}
   </div>
   );
 };

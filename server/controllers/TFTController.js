@@ -55,7 +55,15 @@ TFTController.checkTFTSummData = async (req, res, next) => {
     const summoner = await tftSummoner.findOne({summonerName: summonerName});
 
     if (summoner !== null) {
-      res.locals.TFTData = summoner.summonerRecentData;
+      res.locals.TFTData = {
+        summonerName: summoner.summonerName,
+        summonerLevel: summoner.summonerLevel,
+        summonerRank: summoner.summonerRank,
+        summonerIcon: summoner.summonerIcon,
+        profileIcon: summoner.profileIcon,
+        TFTData: summoner.TFTMatchHistory,
+        otherPlayersMatches: summoner.otherPlayersMatches,
+      };
       return next();
     }
     return next();
@@ -64,7 +72,7 @@ TFTController.checkTFTSummData = async (req, res, next) => {
     console.log('error in checkTFTSummData');
     return next(err);
   }
-}
+};
 
 // middleware to retrieve data for summoner search on TFT page
 TFTController.updateTFTSummData = async (req, res, next) => {
@@ -75,7 +83,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
 
   try {
     const { summonerName } = req.params;
-    // console.log('TFTData back-end', summonerName);
+    console.log('TFTData back-end', summonerName);
 
     const getSummData = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-name/${summonerName}?api_key=${api_key}`,
     {
@@ -88,8 +96,52 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     });
 
     const { data } = getSummData;
-    const { puuid } = data;
-    const { profileIconId } = data;
+    const { puuid, profileIconId, summonerLevel, id } = data;
+
+    const getRankData = await axios.get(`https://na1.api.riotgames.com/tft/league/v1/entries/by-summoner/${id}?api_key=${api_key}`,
+    {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Origin": "https://developer.riotgames.com"
+      }
+    });
+
+    const getRankData2 = await axios.get(`https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${api_key}`,
+    {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Origin": "https://developer.riotgames.com"
+      }
+    });
+
+    console.log(getRankData2.data, 'getRankData2');
+
+    const rankData = {
+      rankedSolo: [],
+      doubleUp: [],
+    };
+
+    for (let i = 0; i < getRankData2.data.length; i++) {
+      if (getRankData2.data[i].queueType === "RANKED_TFT_DOUBLE_UP") {
+        rankData.doubleUp.push(getRankData2.data[i].tier);
+        rankData.doubleUp.push(getRankData2.data[i].leaguePoints);
+        rankData.doubleUp.push(getRankData2.data[i].rank);
+      }
+    }
+
+    for (let i = 0; i < getRankData.data.length; i++) {
+      if (getRankData.data[i].queueType === "RANKED_TFT") {
+        rankData.rankedSolo.push(getRankData.data[i].tier);
+        rankData.rankedSolo.push(getRankData.data[i].leaguePoints);
+        rankData.rankedSolo.push(getRankData.data[i].rank);
+      }
+    }
+
+
     // returns a list of recent matches based on puuid 
     const getMatchList = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=5&api_key=${api_key}`,
     {
@@ -204,12 +256,13 @@ TFTController.updateTFTSummData = async (req, res, next) => {
 
     }
 
-
     const TFTData = {
       TFTData: TFTMatchHistory,
       summonerName: summonerName,
       summonerIcon: profileIconId,
-      otherPlayersData: otherPlayersData,
+      summonerLevel: summonerLevel,
+      summonerRank: rankData,
+      otherPlayersMatches: otherPlayersData,
     }
 
     const summoner = await tftSummoner.findOne({summonerName: summonerName});
@@ -217,14 +270,28 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     if (summoner === null) {
       await tftSummoner.create({
         summonerName: summonerName,
-        puuid: puuid,
-        summonerRecentData: TFTData,
+        summonerLevel: summonerLevel,
+        summonerRank: rankData,
+        summonerIcon: profileIconId,
+        TFTMatchHistory: TFTMatchHistory,
+        otherPlayersMatches: otherPlayersData,
       });
     }
-    else {
-      await tftSummoner.findOneAndUpdate({summonerName: summonerName}, {summonerRecentData: TFTData});
-    }
 
+    else {
+      await tftSummoner.findOneAndUpdate({summonerName: summonerName}, 
+        {
+          $set: {
+            summonerIcon: profileIconId,
+            summonerName: summonerName,
+            summonerRank: rankData,
+            summonerLevel: summonerLevel,
+            TFTMatchHistory: TFTMatchHistory,
+            otherPlayersMatches: otherPlayersData,
+          }
+        }
+      );
+    }
     res.locals.TFTData = TFTData;
     return next();
   } 

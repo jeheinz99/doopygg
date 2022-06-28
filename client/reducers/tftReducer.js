@@ -4,7 +4,9 @@ const initialState = {
   TFTData: [],
   summonerName: '',
   summonerIcon: 0,
-  otherPlayersData: [],
+  summonerLevel: 0,
+  summonerRank: {},
+  otherPlayersMatches: [],
 };
 
 const tftReducer = (state = initialState, action) => {
@@ -13,12 +15,6 @@ const tftReducer = (state = initialState, action) => {
 
   switch(type) {
     case types.ADD_TFT_DATA:
-      // console.log(Object.assign(
-      //   {},
-      //   state, {
-      //     TFTData: payload.TFTData,
-      //   }
-      // ));
 
       return Object.assign(
         {},
@@ -26,7 +22,9 @@ const tftReducer = (state = initialState, action) => {
           TFTData: payload.TFTData,
           summonerName: payload.summonerName,
           summonerIcon: payload.summonerIcon,
-          otherPlayersData: payload.otherPlayersData,
+          summonerLevel: payload.summonerLevel,
+          summonerRank: payload.summonerRank,
+          otherPlayersMatches: payload.otherPlayersMatches,
         }
       );
 

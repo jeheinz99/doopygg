@@ -133,20 +133,20 @@ const SummonerChampDataBox = () => {
 
           <div className="RankedSoloDuo">
             <h2> Ranked Solo/Duo </h2>
-            <img id="rankIcon" src={`https://opgg-static.akamaized.net/images/medals_new/${summonerRank.rankedSolo[0].toLowerCase()}.png`}/>
+            <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedSolo[0].toLowerCase()}.png`}/></div>
             <p>{`${summonerRank.rankedSolo[0]} ${summonerRank.rankedSolo[2]} ${summonerRank.rankedSolo[1]} LP`}</p>
           </div>
 
           <div className="RankedFlex">
             <h2> Ranked Flex </h2>
-            <img id="rankIcon" src={`https://opgg-static.akamaized.net/images/medals_new/${summonerRank.rankedFlex[0].toLowerCase()}.png`}/>
+            <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedFlex[0].toLowerCase()}.png`}/></div>
             <p>{`${summonerRank.rankedFlex[0]} ${summonerRank.rankedFlex[2]} ${summonerRank.rankedFlex[1]} LP`}</p>
           </div>
 
         </div>
 
       </div>
-
+    
       <div className="DataBoxHeader">
         <h3> Most Played </h3>
         <p id="rankedsoloheader"> Ranked Solo </p>
