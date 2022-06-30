@@ -1755,7 +1755,7 @@ h4 {
 .PlacementsBar {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 29%;
   align-items: flex-start;
   justify-content: center;
   gap: 1em;
@@ -1767,6 +1767,34 @@ h4 {
   border-left: 2px solid rgba(255, 255, 255, 0.80);
   gap: 6em;
   height: 10%;
+}
+.RecentTraits {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+}
+.RecentTraitsBox1 {
+  display: flex;
+}
+.RecentTraitsBox {
+  font-family: Kanit;
+  color: rgba(255, 255, 255, 0.80);
+}
+.RecentTraitsBox p {
+  margin: 0;
+}
+#tftr10traitheader {
+  display: flex;
+  border-left: 2px solid rgba(255, 255, 255, 0.80);
+  height: 10%;
+}
+#tftr10traitheader p {
+  margin: 0;
+  margin-left: 0.5em;
+  color: rgba(255, 255, 255, 0.80);
+  font-family: Kanit;
 }
 #tftR10WinBar {
   
