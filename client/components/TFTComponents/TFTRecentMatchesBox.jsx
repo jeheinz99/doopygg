@@ -166,7 +166,7 @@ const RecentMatchesBox = () => {
   const placementsArr = [];
   for (let i = 0; i < placements.placements.length; i++) {
     placementsArr.push(<div 
-    className="placementBox" 
+    className="placementBox"
     key={`placement-${i}`} 
     id={`placement-${placements.placements[i]}`}>
     <p>{placements.placements[i]}</p>
@@ -254,7 +254,7 @@ const RecentMatchesBox = () => {
         </div>
 
         <div className="RecentUnitsBoxes">
-          {/* {unitsArr} */}
+          {unitsArr}
         </div>
 
       </div>

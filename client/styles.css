@@ -8,6 +8,8 @@ html, body {
   width: 100vw;
   height: 100vw;
   background: #16161b;
+  font-family: Kanit;
+  scroll-behavior: smooth;
 }
 .AppBox {
   display: flex;
@@ -59,7 +61,6 @@ html, body {
 }
 
 #SearchBoxInput {
-  font-family: Kanit;
   text-align: center;
   font-size: 1em;
   border: none;
@@ -80,7 +81,6 @@ html, body {
   border: none;
   margin: 0;
   color:#ffffff;
-  font-family: Kanit;
   font-size: 1em;
   font-style: italic;
 }
@@ -117,7 +117,6 @@ html, body {
   margin: 0;
   font-size: 2em;
   color:rgba(255, 255, 255, 0.80);
-  font-family: Kanit;
 }
 
 #LeaderboardBoxButton {
@@ -126,7 +125,6 @@ html, body {
   border-radius: 0.2em;
   cursor:pointer;
   color:#ffffff;
-  font-family: Kanit;
   text-decoration:none;
   text-shadow:0px -1px 0px #7a2a1d;
   width: 5em;
@@ -148,7 +146,6 @@ html, body {
   border-radius: 1.5em;
   border: 2px solid rgb(255, 255, 255);
   width: 100%;
-  font-family: Kanit;
   border: 1px solid rgba(255, 255, 255, 0.80);
   gap: 2em;
 }
@@ -160,7 +157,6 @@ html, body {
 }
 .leaderboardBox p {
   text-align: center;
-  font-family: Kanit;
   font-size: 0.8em;
   width: 10em;
   margin: 0;
@@ -206,7 +202,6 @@ html, body {
   /* background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%); */
   border-radius: 1.5em;
   border: 2px solid rgb(255, 255, 255);
-  font-family: Kanit;
   justify-content: space-around;
 }
 .Rank1LB1 {
@@ -214,7 +209,6 @@ html, body {
   align-items: center;
   font-size: 2.5em;
   letter-spacing: 0.1em;
-  font-family: Kanit;
 }
 .Rank1LB2 {
   display: flex;
@@ -257,13 +251,11 @@ html, body {
   text-align: center;
   gap: 0;
   font-size: 3em;
-  font-family: Kanit;
   color:rgba(255, 255, 255, 0.861);
 }
 #inputSummonerName {
   font-size: 1.25em;
   font-weight: -200;
-  font-family: Kanit;
 }
 
 .MatchesWrapper {
@@ -313,7 +305,6 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  font-family: Kanit;
   border: 2px solid #272d3a;
   box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
   border-radius: 0.2em;
@@ -474,7 +465,6 @@ html, body {
 .TeamInfoTextDD {
   display: flex;
   font-size: 0.8em;
-  font-family: Kanit;
   width: 100%;
   border-left: 2px solid #272d3a;
   border-right: 2px solid #272d3a;
@@ -508,7 +498,6 @@ html, body {
 }
 #invis1 p {
   margin-left: 1em;
-  font-family: Kanit;
   font-style: italic;
   color:#47aad4;
   text-align: center;
@@ -518,7 +507,6 @@ html, body {
 }
 #invis3 p {
   margin-left: 1.3em;
-  font-family: Kanit;
   font-style: italic;
   color: #c5472b;
   text-align: center;
@@ -618,7 +606,6 @@ html, body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  font-family: Kanit;
   border-radius: 0.5em;
   padding: 5px;
   /* box-shadow: 1px 1px 4px rgb(0, 0, 0, 5); */
@@ -719,7 +706,6 @@ html, body {
 .ObjectivesDD {
   display: flex;
   justify-content: center;
-  font-family: Kanit;
   border-left: 2px solid #272d3a;
   border-right: 2px solid #272d3a;
   width: 100%;
@@ -844,7 +830,6 @@ html, body {
   border-top: 2px solid rgba(255, 255, 255, 0.80);
   margin: 10px;
   font-weight: 500;
-  font-family: Kanit;
 }
 .SummonerDataBoxEntries {
   width: 100%;
@@ -896,7 +881,6 @@ html, body {
 .champEntry p {
   width: 7em;
   margin: 0;
-  font-family: Kanit;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.80);
 }
@@ -969,7 +953,6 @@ html, body {
   flex-direction: column;
 }
 .recent20TotalStats p {
-  font-family: Kanit;
   width: 7em;
   font-size: 0.9em;
   text-align: center;
@@ -1013,7 +996,6 @@ html, body {
 .Recent20ChampCardDiv2box1 p {
   width: 7em;
   margin: 0;
-  font-family: Kanit;
   text-align: center;
 }
 .Recent20ChampCardDiv2box1 #below60wr, .Recent20ChampCardDiv2box1 #above60wr, .Recent20ChampCardDiv2box1 #exact100wr {
@@ -1084,7 +1066,6 @@ html, body {
   border-bottom-left-radius: 0.2em;
   background-color:#47aad4;
   border-right: none;
-  font-family: Kanit;
 }
 .winBar p {
   text-align: center;
@@ -1102,7 +1083,6 @@ html, body {
   height: 10px;
   border-left: none;
   background-color: #c5472b;
-  font-family: Kanit;
 }
 .lossBar p {
   text-align: center;
@@ -1121,7 +1101,6 @@ html, body {
   align-items: center;
 }
 #rankedsoloheader {
-  font-family: Kanit;
   padding: 5px;
   border-right: 2px solid rgba(255, 255, 255, 0.80);
   color:rgba(255, 255, 255, 0.80);
@@ -1139,7 +1118,7 @@ html, body {
 .positionStats h2 {
   font-size: 1.1em;
   margin: 0;
-  text-align: center;  
+  text-align: center;
 }
 .pos-div-wrap {
   display: flex;
@@ -1180,12 +1159,10 @@ html, body {
 h3 {
   font-size: 1.75em;
   text-align: center;
-  font-family: Kanit;
   color: rgba(255, 255, 255, 0.861);
 }
 h4 {
   font-size: 1.5em;
-  font-family: Kanit;
   color: rgba(255, 255, 255, 0.861);
 }
 .SearchBoxInputandIcon {
@@ -1220,7 +1197,6 @@ h4 {
   border-bottom: 2px solid rgba(255, 255, 255, 0.80);
   justify-content: space-around;
   /* border-radius: 0.5em; */
-  font-family: Kanit;
   background-color: #171A21;
 }
 .SummonerInfo {
@@ -1401,7 +1377,6 @@ h4 {
   border-radius: 0.5em;
   cursor:pointer;
   color:#ffffff;
-  font-family: Kanit;
   letter-spacing: 0.05em;
   font-size:15px;
   font-weight:bold;
@@ -1422,7 +1397,6 @@ h4 {
 #ValBoxInput {
   width: 20%;
   height: 25%;
-  font-family: Kanit;
   text-align: center;
   border-radius: 0.5em;
   padding: 0.5em;
@@ -1459,7 +1433,6 @@ h4 {
 }
 
 #SearchBoxInputTFT {
-  font-family: Kanit;
   text-align: center;
   font-size: 1em;
   border: none;
@@ -1509,14 +1482,12 @@ h4 {
   display: flex;
   flex-direction: column;
   color: rgba(255, 255, 255, 0.80);
-  font-family: Kanit;
   width: 12%;
 }
 .TFTDDB2 {
   display: flex;
   gap: 5px;
   align-items: center;
-  font-family: Kanit;
   width: 23em;
   justify-content: flex-start;
 }
@@ -1572,7 +1543,6 @@ h4 {
   flex-direction: column;
   color: rgba(255, 255, 255, 0.80);
   justify-content: center;
-  font-family: Kanit;
   align-items: center;
 }
 .TFTGoldIconDiv {
@@ -1628,7 +1598,6 @@ h4 {
   padding: 1px;
   align-items: center;
   color:rgba(255, 255, 255, 0.861);
-  font-family: Kanit;
   border: 1px solid rgba(255, 255, 255, 0.80);
   gap: 5em;
 }
@@ -1751,6 +1720,7 @@ h4 {
   box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
   border-radius: 0.2em;
   background-color: #171A21;
+  gap: 2em;
 }
 .PlacementsBar {
   display: flex;
@@ -1773,13 +1743,18 @@ h4 {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  gap: 1em;
   height: 100%;
 }
 .RecentTraitsBox1 {
   display: flex;
 }
+.RecentTraitsBoxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
 .RecentTraitsBox {
-  font-family: Kanit;
   color: rgba(255, 255, 255, 0.80);
 }
 .RecentTraitsBox p {
@@ -1794,16 +1769,49 @@ h4 {
   margin: 0;
   margin-left: 0.5em;
   color: rgba(255, 255, 255, 0.80);
-  font-family: Kanit;
-}
-#tftR10WinBar {
-  
 }
 #tftr10header p {
   margin: 0;
   margin-left: 0.5em;
   color: rgba(255, 255, 255, 0.80);
-  font-family: Kanit;
+}
+#tftr10unitheader {
+  border-left: 2px solid rgba(255, 255, 255, 0.80);
+  height: 10%;
+}
+#tftr10unitheader p {
+  margin: 0;
+  margin-left: 0.5em;
+  text-align: left;
+}
+.RecentUnits {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.80);
+}
+.RecentUnitsBoxes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2em;
+}
+.RecentUnits p {
+  margin: 0;
+}
+.RecentUnitsBox {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.RecentUnitsBox p {
+  margin: 0;
+}
+#unitIcon {
+  height: 32px;
+  width: 32px;
+  border-width: 1px;
 }
 .PlacementInfo {
   display: flex;
@@ -1820,7 +1828,6 @@ h4 {
   margin-left: 0.5em;
 }
 .PlacementInfoDiv1 p {
-  font-family: Kanit;
   color: rgba(255, 255, 255, 0.80);
 }
 #tftr10header #avgPlacementTag1 {
@@ -1874,7 +1881,6 @@ h4 {
 }
 .placementBox p {
   font-size: 2em;
-  font-family: Kanit;
   margin: 0;
 }
 #placement-1 {
