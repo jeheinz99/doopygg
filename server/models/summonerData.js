@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// MongoDB Schema to store Player Data
 const lolSummonerSchema = new mongoose.Schema({
   summonerName: {type: String, required: true},
   summonerLevel: {type: String, required: false},

@@ -49,28 +49,32 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 97%;
-  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  width: 98.4%;
+  box-shadow: 2px 15px 15px rgb(0, 0, 0, 5);
   /* border-radius: 0.2em; */
   border: 1px solid rgba(255, 255, 255, 0.861);
   border-top: none;
   background: #171A21;
   gap: 2em;
   padding: 10px;
-  margin-top: 6.2em;
+  margin-top: 0.4em;
 }
 
 #SearchBoxInput {
   text-align: center;
   font-size: 1em;
   border: none;
-  border-bottom: 1px solid #C9F0FF;
+  border-bottom: 1px solid #484848;
   background-color: #15161a;
   color:rgba(255, 255, 255, 0.861);
+  transition: 1s;
   /* box-shadow: 2px 2px 15px rgb(0, 0, 0, 5); */
 }
+
 #SearchBoxInput:focus {
   outline: 0;
+  background-color: #22212174;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.861);
 }
 #SearchBoxInput:hover {
   background-color: #22212174;
@@ -103,148 +107,6 @@ html, body {
   display: flex;
   align-items: center;
   gap: 2em;
-}
-
-#welcomeLeaderboard {
-  gap: 0.2em;
-}
-
-#welcomeLeaderboard h3 {
-  margin: 10px;
-  font-size: 3em;
-}
-#welcomeLeaderboard p {
-  margin: 0;
-  font-size: 2em;
-  color:rgba(255, 255, 255, 0.80);
-}
-
-#LeaderboardBoxButton {
-  background-color:#292828;
-  border:0.10em double #1C6EA4;
-  border-radius: 0.2em;
-  cursor:pointer;
-  color:#ffffff;
-  text-decoration:none;
-  text-shadow:0px -1px 0px #7a2a1d;
-  width: 5em;
-}
-#LeaderboardBoxButton:hover {
-  background-color:#222020;
-  border: 0.10em double #a41c49;
-}
-#LeaderboardBoxButton:active {
-  position:relative;
-  top:1px;
-}
-
-.leaderboardBox {
-  display: flex;
-  align-items: center;
-  background: rgb(206, 217, 183);
-  background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%);
-  border-radius: 1.5em;
-  border: 2px solid rgb(255, 255, 255);
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.80);
-  gap: 2em;
-}
-.LBBoxDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 7em;
-}
-.leaderboardBox p {
-  text-align: center;
-  font-size: 0.8em;
-  width: 10em;
-  margin: 0;
-}
-#LBRankNumberTag {
-  font-size: 1.5em;
-  padding: 10px;
-  margin: 0;
-  width: 1em;
-}
-#profileIcon {
-  height: 5%;
-  width: 5%;
-  border-radius: 2em;
-  border: 3px solid rgb(0, 0, 0)
-}
-#LBBoxes {
-  gap: 5px;
-  border-radius: 2em;
-  border-width: 4px;
-  border-style: double;
-  border-color: #1C6EA4;
-}
-.OuterLBBox {
-  width: 100%;
-  font-size: 1.3em;
-}
-.LeaderboardPageBox {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  width: 100%;
-}
-.Rank1LBBox {
-  display: inline-flex;
-  flex-direction: row;
-  font-size: 1.5em;
-  width: 100%;
-  background: url('https://cdna.artstation.com/p/assets/images/images/028/767/524/large/horace-hsu-spirit-blossom-kindred-final.jpg?1595445173');
-  object-fit: cover;
-  background-position: 1375px 2100px;
-  /* background: rgb(206, 217, 183); */
-  /* background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%); */
-  border-radius: 1.5em;
-  border: 2px solid rgb(255, 255, 255);
-  justify-content: space-around;
-}
-.Rank1LB1 {
-  display: flex;
-  align-items: center;
-  font-size: 2.5em;
-  letter-spacing: 0.1em;
-}
-.Rank1LB2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.Rank1LB3 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.Rank1LB3 p {
-  width: 5em;
-  margin: 0;
-  text-align: center;
-}
-.Rank1LB4 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-#Rank1LBIcon {
-  width: 128px;
-  height: 128px;
-  border-radius: 2em;
-  border: 3px solid rgb(0, 0, 0)
-}
-.LBButtons {
-  display: flex;
-  width: 100%;
-}
-.LBButtonsBox {
-  display: flex;
-  width: 100%;
-  gap: 0.5em;
 }
 
 #welcome {
@@ -824,7 +686,6 @@ html, body {
   border: 2px solid #303b51;
 }
 
-
 .outerSummonerDataBox h3 {
   color:rgba(255, 255, 255, 0.80);
   border-top: 2px solid rgba(255, 255, 255, 0.80);
@@ -845,16 +706,6 @@ html, body {
 #SDBexpand:hover #topEntries {
   height: 0;
   overflow: hidden;
-  /* transform: translateX(50px); */
-  /* animation: test 1s ease-in forwards; */
-}
-@keyframes test {
-  0% {
-  }
-  100% {
-    height: 0;
-    overflow: hidden;
-  }
 }
 #SDBcontract {
   
@@ -1251,699 +1102,6 @@ h4 {
   width: 48px;
 }
 
-#HomeLogo {
-  height: 32px;
-  width: 32px;
-}
-#HomeLogo:hover, #tftLogo:hover, #valorantLogo:hover, #LeaderboardLogo:hover, #RiotLogo:hover {
-  filter: invert(20%);
-}
-
-#tftLogo {
-  height: 46px;
-  width: 76px;
-}
-
-#valorantLogo {
-  width: 64px;
-  height: 64px;
-}
-
-#LeaderboardLogo {
-  height: 32px;
-  width: 32px;
-}
-
-#RiotLogo {
-  height: 32px;
-  width: 32px;
-}
-
-#valorant:link, #valorant:visited, #champions:link, #champions:visited, #leaderboards:link, #leaderboards:visited, #home:link, #home:visited, #tft:link, #tft:visited {
-  display: flex;
-  color: white;
-}
-#githubLogo {
-  height: 32px;
-  width: 32px;
-}
-#GithubLogoLink {
-  display: inline-block;
-}
-#githubLogo:hover {
-  filter: invert(20%);
-}
-#discordLogo {
-  height: 32px;
-  width: 32px;
-}
-#DiscordLogoLink {
-  display: inline-block;
-}
-#discordLogo:hover {
-  filter: invert(20%);
-}
-
-#youtubeLogo {
-  height: 32px;
-  width: 32px;
-}
-#YoutubeLogoLink {
-  display: inline-block;
-}
-#youtubeLogo:hover {
-  filter: invert(20%);
-}
-
-#twitterLogo {
-  height: 32px;
-  width: 32px;
-}
-#TwitterLogoLink { 
-  display: inline-block;
-}
-#twitterLogo:hover {
-  filter: invert(20%);
-}
-
-#LinkedInLogo {
-  height: 32px;
-  width: 32px;
-}
-#LinkedInLogoLink {
-  display: inline-block;
-}
-#LinkedInLogo:hover {
-  filter: invert(20%);
-}
-
-.EndpointBar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 99.7%;
-  position: fixed;
-  border: 1px solid rgba(255, 255, 255, 0.861);
-  border-top: none;
-  background: #171A21;
-  z-index: 999;
-  /* height: 5em; */
-} 
-.EndpointLogos {
-  display: flex;
-  justify-content: flex-start;
-  gap: 2em;
-  align-items: center;
-  margin-top: 10px;
-  width: 25%;
-  margin-left: 10px;
-}
-.Endpoints {
-  display: flex;
-  justify-content: center;
-  gap: 2em;
-  align-items: center;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-.EndpointHeader {
-  justify-content: center;
-  margin-right: 2em;
-}
-
-#ValorantBoxButton {
-  background-color:#292828;
-  border:0.10em double #1C6EA4;
-  border-radius: 0.5em;
-  cursor:pointer;
-  color:#ffffff;
-  letter-spacing: 0.05em;
-  font-size:15px;
-  font-weight:bold;
-  padding:9px 23px;
-  text-decoration:none;
-  text-shadow:0px -1px 0px #7a2a1d;
-  width: 6em;
-}
-#ValorantBoxButton:hover {
-  background-color:#222020;
-  border: 0.10em double #a41c49;
-}
-#ValorantBoxButton:active {
-  position:relative;
-  top:1px;
-}
-
-#ValBoxInput {
-  width: 20%;
-  height: 25%;
-  text-align: center;
-  border-radius: 0.5em;
-  padding: 0.5em;
-  font-size: 0.5em;
-  border-width: 4px;
-  border-style: double;
-  border-color: #1C6EA4;
-  background-color: #181A1B;
-  color:rgba(255, 255, 255, 0.861);
-  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-}
-#ValBoxInput:focus {
-  outline: 0;
-}
-#ValBoxInput:hover {
-  background-color: #22212174;
-}
-
-.ValorantSearchBox {
-  display: flex; 
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 3em;
-}
-.ValorantPageBox {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
-.ValorantPageBox h3 {
-  margin: 10px;
-  font-size: 3em;
-}
-
-#SearchBoxInputTFT {
-  text-align: center;
-  font-size: 1em;
-  border: none;
-  border-bottom: 1px solid #C9F0FF;
-  background-color: #15161a;
-  color:rgba(255, 255, 255, 0.861);
-  /* box-shadow: 2px 2px 15px rgb(0, 0, 0, 5); */
-}
-#SearchBoxInputTFT:focus {
-  outline: 0;
-}
-#SearchBoxInputTFT:hover {
-  background-color: #22212174;
-}
-
-#TFTSummonerInfoBox {
-  gap: 2em;
-}
-.TFTRankedSolo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.TFTDoubleUp {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.TFTDropDownBoxes {
-  width: 100%;
-}
-.TFTDDBoxWrap {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.80);
-  border-top: none;
-}
-.TFTDDPlayerBox {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.80);
-}
-.TFTDDB1 {
-  display: flex;
-  flex-direction: column;
-  color: rgba(255, 255, 255, 0.80);
-  width: 12%;
-}
-.TFTDDB2 {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  width: 23em;
-  justify-content: flex-start;
-}
-.AugListB2 {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-#DDAug1, #DDAug2, #DDAug3 {
-  height: 32px;
-  width: 32px;
-  border-radius: 0.5px;
-  border: 0.5px solid rgba(255, 255, 255, 0.403);
-}
-.LLIconDD {
-  color: rgba(255, 255, 255, 0.80);
-
-}
-#LittleLegendIconDD {
-  width: 64px;
-  height: 64px;
-  object-fit: cover;
-  border-radius: 2em;
-  border: 2px solid rgba(133, 133, 133, 0.403);
-}
-#DDTrait-0, #DDTrait-1, #DDTrait-2, #DDTrait-3, #DDTrait-4 {
-  height: 24px;
-  width: 24px;
-}
-.TFTDDB3 {
-  width: 15em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.DDTFTunit {
-  height: 40px;
-  width: 40px;
-  object-fit: cover;
-  object-position: 85%;
-  border-radius: 2em;
-  border: 2px solid rgba(255, 255, 255, 0.403);
-}
-.UnitsList1 {
-
-}
-.UnitsList2 {
-  
-}
-.TFTDDB4 {
-  width: 6.5em;
-  display: flex;
-  flex-direction: column;
-  color: rgba(255, 255, 255, 0.80);
-  justify-content: center;
-  align-items: center;
-}
-.TFTGoldIconDiv {
-  display: flex;
-  align-items: center;
-}
-.TFTStageIconDiv {
-  display: flex;
-  align-items: center;
-}
-#TFTGoldIconDDB4 {
-  height: 32px;
-  width: 32px;
-  filter: brightness(55%) sepia(100) saturate(55) hue-rotate(46deg);
-}
-#TFTStageIconDDB4 {
-  height: 32px;
-  width: 32px;
-}
-
-
-.TFTWrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-}
-.TFTTopHalfBox {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-.TFTMatchBoxes {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 5px;
-  padding: 10px;
-  width: 90%;
-  margin: 15px auto;
-  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
-  border: 2px solid #303b51;
-  border-radius: 0.2em;
-  background: #171A21;
-}
-.TFTMatches {
-  width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  padding: 1px;
-  align-items: center;
-  color:rgba(255, 255, 255, 0.861);
-  border: 1px solid rgba(255, 255, 255, 0.80);
-  gap: 5em;
-}
-
-.TFTMatchGroup1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 5px;
-}
-.TFTMatchGroup1 p {
-  width: 3em;
-  margin: 2px;
-  text-align: center;
-}
-.TFTMatchGroup2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 15em;
-}
-#LittleLegendIcon {
-  width: 64px;
-  height: 64px;
-  object-fit: cover;
-  border-radius: 2em;
-  border: 2px solid rgba(133, 133, 133, 0.403);
-}
-.TFTMatchGroup3 {
-  width: 25em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-.TFTAugGroup {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.TFTTraitGroup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-.TFTTraitGroup1 {
-  display: flex;
-  gap: 5px;
-}
-.TFTTraitGroup2 {
-  display: flex;
-  gap: 5px;
-}
-#TFTAug1, #TFTAug2, #TFTAug3 {
-  width: 32px;
-  height: 32px;
-  border-radius: 0.5px;
-  border: 0.5px solid rgba(255, 255, 255, 0.403);
-}
-.TFTMatchGroup4 {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-items: center;
-}
-.TFTUnitGroup1 {
-  display: flex;
-  gap: 5px;
-}
-.TFTUnitGroup2 {
-  display: flex;
-  gap: 5px;
-}
-
-.TFTtrait {
-  width: 32px;
-  height: 32px;
-  padding: 1px;
-
-}
-
-.TFTunit {
-  height: 64px;
-  width: 64px;
-  object-fit: cover;
-  object-position: 85%;
-  border-radius: 2em;
-  border: 2px solid rgba(255, 255, 255, 0.403);
-}
-#Unit-0 {
-  border-color:rgb(111, 110, 110);
-}
-#Unit-1 {
-  border-color: rgb(39, 125, 39);
-}
-#Unit-2 {
-  border-color:rgb(68, 92, 198);
-}
-#Unit-3 {
-  border-color: purple;
-}
-#Unit-4 {
-  border-color: orangered;
-}
-#Unit-5 {
-  border-color: gold;
-}
-#Unit-6 {
-  border-color: red;
-}
-#Unit-8 {
-  border-color: rgb(8, 213, 145);
-}
-.TFTRecentMatchesContainer {
-  display: flex;
-  border: 2px solid #272d3a;
-  width: 99%;
-  height: 15em;
-  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
-  border-radius: 0.2em;
-  background-color: #171A21;
-  gap: 2em;
-}
-.PlacementsBar {
-  display: flex;
-  flex-direction: column;
-  width: 29%;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1em;
-  padding: 5px;
-}
-#tftr10header {
-  display: flex;
-  align-items: center;
-  border-left: 2px solid rgba(255, 255, 255, 0.80);
-  gap: 6em;
-  height: 10%;
-}
-.RecentTraits {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1em;
-  height: 100%;
-}
-.RecentTraitsBox1 {
-  display: flex;
-}
-.RecentTraitsBoxes {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2em;
-}
-.RecentTraitsBox {
-  color: rgba(255, 255, 255, 0.80);
-}
-.RecentTraitsBox p {
-  margin: 0;
-}
-#tftr10traitheader {
-  display: flex;
-  border-left: 2px solid rgba(255, 255, 255, 0.80);
-  height: 10%;
-}
-#tftr10traitheader p {
-  margin: 0;
-  margin-left: 0.5em;
-  color: rgba(255, 255, 255, 0.80);
-}
-#tftr10header p {
-  margin: 0;
-  margin-left: 0.5em;
-  color: rgba(255, 255, 255, 0.80);
-}
-#tftr10unitheader {
-  border-left: 2px solid rgba(255, 255, 255, 0.80);
-  height: 10%;
-}
-#tftr10unitheader p {
-  margin: 0;
-  margin-left: 0.5em;
-  text-align: left;
-}
-.RecentUnits {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.80);
-}
-.RecentUnitsBoxes {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.2em;
-}
-.RecentUnits p {
-  margin: 0;
-}
-.RecentUnitsBox {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-}
-.RecentUnitsBox p {
-  margin: 0;
-}
-#unitIcon {
-  height: 32px;
-  width: 32px;
-  border-width: 1px;
-}
-.PlacementInfo {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 2em;
-  border-left: 2px solid rgba(255, 255, 255, 0.80);
-}
-.PlacementInfoDiv1 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5em;
-  margin-left: 0.5em;
-}
-.PlacementInfoDiv1 p {
-  color: rgba(255, 255, 255, 0.80);
-}
-#tftr10header #avgPlacementTag1 {
-  color: rgb(193, 171, 44);
-}
-#tftr10header #avgPlacementTag2 {
-  color: #b4b4b4;
-}
-#tftr10header #avgPlacementTag3 {
-  color: #7B3F00;
-}
-#tftr10header #avgPlacementTag4 {
-  color: #1C6EA4;
-}
-#tftr10header #avgPlacementTag5 {
-  color: rgba(184, 184, 184, 0.8);
-}
-#avgPlacementTag1, #avgPlacementTag2, #avgPlacementTag3, #avgPlacementTag4, #avgPlacementTag5 {
-  font-size: 2em;
-}
-#avgPlacementTag5 span {
-  font-size: 0.5em;
-  color: rgba(255, 255, 255, 0.80);
-}
-.PlacementInfoDiv1 p {
-  margin: 0;
-}
-
-.PlacementInfoDiv2 {
-  display: flex;
-  width: 10em;
-}
-.placementArr1 {
-  display: flex;
-  gap: 1em;
-}
-.placementArr2 {
-  display: flex;
-  gap: 1em;
-}
-.placementBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 2.5em;
-  width: 3em;
-  border: 2px solid #303b51;
-  border-radius: 0.2em;
-  box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
-  background-color: #16181c;
-}
-.placementBox p {
-  font-size: 2em;
-  margin: 0;
-}
-#placement-1 {
-  color: rgb(193, 171, 44);
-}
-
-#placement-2 {
-  color: #b4b4b4;
-}
-
-#placement-3 {
-  color: #7B3F00;
-}
-
-#placement-4 {
-  color: #1C6EA4;
-}
-
-#placement-5, #placement-6, #placement-7, #placement-8 {
-  color: #525252;
-}
-
-#tftplacement-1 {
-  border-color: rgb(247, 229, 125);
-}
-
-#tftplacement-2, #tftplacement-3, #tftplacement-4 {
-  border-color: #1C6EA4;
-} 
-
-#tftplacement-5, #tftplacement-6, #tftplacement-7 {
-  border-color: #c8114e;
-
-}
-
-#tftplacement-8 {
-  border-color: #564e50;
-}
-
-#placementnumber-1 {
-  color: rgb(247, 229, 125);
-  font-size: 1.5em;
-  font-family:Verdana, Geneva, Tahoma, sans-serif
-}
-
-#placementnumber-2, #placementnumber-3, #placementnumber-4 {
-  color: #1C6EA4;
-  font-size: 1.5em;
-  font-family:Verdana, Geneva, Tahoma, sans-serif
-}
-
-#placementnumber-5, #placementnumber-6, #placementnumber-7 {
-  color: #c8114e;
-  font-size: 1.5em;
-  font-family:Verdana, Geneva, Tahoma, sans-serif
-}
-
-#placementnumber-8 {
-  color:rgb(111, 110, 110);
-  font-size: 1.5em;
-  font-family:Verdana, Geneva, Tahoma, sans-serif
-}
-
 .donthavedatabox {
   padding: 5px;
   display: flex;
@@ -1958,4 +1116,46 @@ h4 {
   width: 50%;
   border-radius: 5em;
   border: 3px solid rgba(255, 255, 255, 0.80);
+}
+
+.activeRune {
+  width: 32px;
+  height: 32px;
+}
+.activeKeystone {
+  width: 64px;
+  height: 64px;
+}
+.RunesInfoDD {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 1em;
+}
+.TreeDiv {
+  border: 1px solid #000;
+}
+
+#swapDDbox {
+  border: none;
+  background: none;
+  transition: 0.5s;
+}
+#swapDDbox:hover {
+  cursor: pointer;
+  transform: translateY(-3px);
+  filter: drop-shadow(0 0 0.3rem rgb(11, 10, 11));
+}
+#swapDDbox:active {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 0.2rem rgb(11, 10, 11));
+}
+
+#runeButton, #historyButton {
+  height: 32px;
+  width: 32px;
+  color:rgba(255, 255, 255, 0.861);
+  position: relative;
+  margin: 0 20px;
 }

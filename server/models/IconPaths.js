@@ -6,6 +6,7 @@ const pool = new Pool({
     connectionString: PG_URI
 });
 
+// PostGresQL DB to store Icon Paths
 module.exports = {
     query: (text, params, callback) => {
         console.log('executed query', text);

@@ -1,0 +1,158 @@
+a {
+  text-decoration: none;
+}
+
+#NavbarBox {
+  position: fixed;
+  display: flex;
+  width: 99.7%;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.861);
+  border-right: 1px solid rgba(255, 255, 255, 0.861);
+  border-top: 1px solid rgba(255, 255, 255, 0.861);
+  transition: 1s !important;
+  z-index: 999;
+}
+@keyframes fade-out {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#NavbarHeader {
+  opacity: 0;
+  transition: 0.6s;
+}
+
+#ul1 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  margin-left: 40px;
+}
+#ul1 li {
+  position: relative;
+  list-style: none;
+  transition: 0.6s;
+  margin: 0 15px;
+}
+#ul1 li a {
+  position: relative;
+  text-decoration: none;
+}
+
+#ul2 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  margin-right: 40px;
+}
+#ul2 li {
+  position: relative;
+  list-style: none;
+  transition: 0.6s;
+  margin: 0 10px;
+}
+#ul2 li a {
+  position: relative;
+  text-decoration: none;
+}
+
+.sticky {
+  background: #171A21;
+  transition: 1s !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.861);
+}
+.stickyHeader {
+  opacity: 1 !important;
+}
+
+#HomeLogo {
+  height: 32px;
+  width: 32px;
+}
+
+.LogoLinks {
+  transition: 0.4s;
+}
+.LogoLinks:hover {
+  transform: translateY(-8px);
+  filter: drop-shadow(0 0 0.3rem rgb(11, 10, 11));
+}
+.LogoLinks:active {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 0 0.1rem rgb(11, 10, 11));
+}
+#tftLogo {
+  height: 46px;
+  width: 76px;
+  transition: 0.4s;
+}
+#valorantLogo {
+  width: 64px;
+  height: 64px;
+}
+
+#LeaderboardLogo {
+  height: 32px;
+  width: 32px;
+}
+
+#RiotLogo {
+  height: 32px;
+  width: 32px;
+}
+
+#valorant:link, #valorant:visited, #champions:link, #champions:visited, #leaderboards:link, #leaderboards:visited, #home:link, #home:visited, #tft:link, #tft:visited {
+  display: flex;
+  color: white;
+}
+
+#githubLogo {
+  height: 32px;
+  width: 32px;
+}
+#GithubLogoLink {
+  display: inline-block;
+}
+
+#discordLogo {
+  height: 32px;
+  width: 32px;
+}
+#DiscordLogoLink {
+  display: inline-block;
+}
+
+#youtubeLogo {
+  height: 32px;
+  width: 32px;
+}
+#YoutubeLogoLink {
+  display: inline-block;
+}
+
+#twitterLogo {
+  height: 32px;
+  width: 32px;
+}
+#TwitterLogoLink { 
+  display: inline-block;
+}
+
+#LinkedInLogo {
+  height: 32px;
+  width: 32px;
+}
+#LinkedInLogoLink {
+  display: inline-block;
+}

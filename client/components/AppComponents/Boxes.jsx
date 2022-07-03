@@ -28,8 +28,8 @@ const Matches = props => {
             <img id="summonerSpellIcon2" src={summonerSpells[1]}/>
         </div>
         <div className="MatchGroup2div">
-          <img id="keystoneIcon" src={runes[0]}/>
-          <img id="secondaryRuneIcon" src={runes[5]}/>
+          <img id="keystoneIcon" src={runes[0].icon}/>
+          <img id="secondaryRuneIcon" src={runes[5].icon}/>
         </div>
         <div className="MatchGroup2div2">
         <p>{kills} / {deaths} / {assists}</p>

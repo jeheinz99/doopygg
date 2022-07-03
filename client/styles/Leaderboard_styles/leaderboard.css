@@ -1,0 +1,141 @@
+#welcomeLeaderboard {
+  gap: 0.2em;
+}
+
+#welcomeLeaderboard h3 {
+  margin: 10px;
+  font-size: 3em;
+}
+#welcomeLeaderboard p {
+  margin: 0;
+  font-size: 2em;
+  color:rgba(255, 255, 255, 0.80);
+}
+
+#LeaderboardBoxButton {
+  background-color:#292828;
+  border:0.10em double #1C6EA4;
+  border-radius: 0.2em;
+  cursor:pointer;
+  color:#ffffff;
+  text-decoration:none;
+  text-shadow:0px -1px 0px #7a2a1d;
+  width: 5em;
+}
+#LeaderboardBoxButton:hover {
+  background-color:#222020;
+  border: 0.10em double #a41c49;
+}
+#LeaderboardBoxButton:active {
+  position:relative;
+  top:1px;
+}
+
+.leaderboardBox {
+  display: flex;
+  align-items: center;
+  background: rgb(206, 217, 183);
+  background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%);
+  border-radius: 1.5em;
+  border: 2px solid rgb(255, 255, 255);
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  gap: 2em;
+}
+.LBBoxDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 7em;
+}
+.leaderboardBox p {
+  text-align: center;
+  font-size: 0.8em;
+  width: 10em;
+  margin: 0;
+}
+#LBRankNumberTag {
+  font-size: 1.5em;
+  padding: 10px;
+  margin: 0;
+  width: 1em;
+}
+#profileIcon {
+  height: 5%;
+  width: 5%;
+  border-radius: 2em;
+  border: 3px solid rgb(0, 0, 0)
+}
+#LBBoxes {
+  gap: 5px;
+  border-radius: 2em;
+  border-width: 4px;
+  border-style: double;
+  border-color: #1C6EA4;
+}
+.OuterLBBox {
+  width: 100%;
+  font-size: 1.3em;
+}
+.LeaderboardPageBox {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+}
+.Rank1LBBox {
+  display: inline-flex;
+  flex-direction: row;
+  font-size: 1.5em;
+  width: 100%;
+  background: url('https://cdna.artstation.com/p/assets/images/images/028/767/524/large/horace-hsu-spirit-blossom-kindred-final.jpg?1595445173');
+  object-fit: cover;
+  background-position: 1375px 2100px;
+  /* background: rgb(206, 217, 183); */
+  /* background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%); */
+  border-radius: 1.5em;
+  border: 2px solid rgb(255, 255, 255);
+  justify-content: space-around;
+}
+.Rank1LB1 {
+  display: flex;
+  align-items: center;
+  font-size: 2.5em;
+  letter-spacing: 0.1em;
+}
+.Rank1LB2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.Rank1LB3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Rank1LB3 p {
+  width: 5em;
+  margin: 0;
+  text-align: center;
+}
+.Rank1LB4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#Rank1LBIcon {
+  width: 128px;
+  height: 128px;
+  border-radius: 2em;
+  border: 3px solid rgb(0, 0, 0)
+}
+.LBButtons {
+  display: flex;
+  width: 100%;
+}
+.LBButtonsBox {
+  display: flex;
+  width: 100%;
+  gap: 0.5em;
+}

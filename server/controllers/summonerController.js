@@ -67,7 +67,10 @@ const mapRuneIcons = async runes => {
   for (let i = 0; i < runes.length; i++) {
     for (let j = 0; j < path.rows.length; j++) {
       if (runes[i] === path.rows[j].id) {
-        outputArr.push(path.rows[j].path);
+        outputArr.push({
+          id: runes[i],
+          icon: path.rows[j].path
+        });
       }
     }
   }

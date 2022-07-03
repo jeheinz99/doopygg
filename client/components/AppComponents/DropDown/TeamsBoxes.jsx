@@ -20,8 +20,8 @@ const TeamsBoxes = props => {
               <img id="summonerSpellIcon2DropDown" src={summonerSpells[1]}/>
             </div>
             <div className="Player0Team1Runes">
-              <img id="Player0Team1Keystone" src={runes[0]}/>
-              <img id="Player0Team1SecondaryTree" src={runes[5]}/>
+              <img id="Player0Team1Keystone" src={runes[0].icon}/>
+              <img id="Player0Team1SecondaryTree" src={runes[5].icon}/>
             </div>
             <div className="Player0Team1Info">
               <p>{summonerName}</p>

@@ -1,14 +1,24 @@
-import React from 'react';
-import TeamsBoxes from './TeamsBoxes';
+import React, { useState } from 'react';
+import TeamsBoxes from './DropDown/TeamsBoxes.jsx';
+import Runes1 from './DropDown/Runes1.jsx';
+import Runes2 from './DropDown/Runes2.jsx';
+import Runes3 from './DropDown/Runes3.jsx';
+
 
 import { RiSwordFill } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
+import { RiCameraSwitchFill } from 'react-icons/ri';
+import { RiCameraSwitchLine } from 'react-icons/ri';
 
 const DropDownBox = props => {
   
   const { otherPlayers, id } = props;
+  const summonerName = useSelector(state => state.summoners.summonerName);
 
   const team1Box = [];
   const team2Box = [];
+
+  const [currBox, toggleBox] = useState(false);
 
   const team1Objs = {
     barons: 0,
@@ -23,8 +33,14 @@ const DropDownBox = props => {
     turrets: 0,
   };
 
-
-  console.log(otherPlayers, 'otherPlayers DDBox');
+  // finds the current player's rune data for the current match
+  const getRuneInfo = data => {
+    for (let i = 0; i < data.length; i++) {
+      if (summonerName === data[i].summonerName) {
+        return data[i].runes;
+      }
+    }
+  };
   
   for (let i = 0; i < otherPlayers.length; i++) {
     (otherPlayers[i].win ? 
@@ -83,11 +99,23 @@ const DropDownBox = props => {
     }
   }
 
+  const runeInfo = getRuneInfo(otherPlayers);
+
   const goldPercent = ((team1Objs.goldEarned / (team1Objs.goldEarned + team2Objs.goldEarned))*100).toFixed(0);
 
   return (
     <div className="DDBoxWrap">
 
+      {currBox && <button id="swapDDbox" onClick={() => toggleBox(!currBox)}> <RiCameraSwitchLine id="historyButton"/> </button>}
+
+      {currBox && 
+        <div className="RunesInfoDD">
+        <Runes1 runeInfo={runeInfo}/>
+        <Runes2 runeInfo={runeInfo}/>
+        <Runes3 runeInfo={runeInfo}/>
+        </div>}
+
+      {!currBox && 
       <div className="ObjectivesDD">
 
         <div className="Team1ObjectivesDD">
@@ -126,6 +154,8 @@ const DropDownBox = props => {
 
         <div className="Team2ObjectivesDD">
 
+          <button id="swapDDbox" onClick={() => toggleBox(!currBox)}> <RiCameraSwitchFill id="runeButton"/> </button>
+
           <div className="T2Obj1">
             <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-match-history/global/default/baron-100.png'/>
             <p> {team2Objs.barons} </p>
@@ -149,7 +179,9 @@ const DropDownBox = props => {
         </div>
         
       </div>
+      }
 
+      {!currBox &&
       <div className="TeamInfoTextDD">
 
         <div className="TeamInfoTextDD1">
@@ -169,28 +201,9 @@ const DropDownBox = props => {
         </div>
 
       </div>
-
-        {/* <div className="ObjectivesDD">
-          <div className="Team1ObjectivesDD">
-              <p>{team1Barons}</p>
-              <p>{team1Dragons}</p>
-              <p>{team1Gold}</p>
-              <p>{team1Turrets}</p>
-          </div>
-          <div className="MiddleIconsDD">
-            <img id="BaronIconDD" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-match-history/global/default/baron-100.png'/>
-            <img id="DragonIconDD" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-match-history/global/default/dragon-100.png'/>
-            <img id="GoldIconDD" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-postgame/global/default/mask-icon-gold.png'/>
-            <img id="TurretIconDD" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-match-history/global/default/tower-100.png'/>
-          </div>
-          <div className="Team2ObjectivesDD">
-              <p>{team2Barons}</p>
-              <p>{team2Dragons}</p>
-              <p>{team1Gold}</p>
-              <p>{team2Turrets}</p>
-          </div>
-        </div> */}
-        
+      }
+      
+      {!currBox &&
       <div className="DropDownBoxMatch">
         <div className="team1BoxDD">
           { team1Box }
@@ -204,6 +217,8 @@ const DropDownBox = props => {
           <button id="StatDDButton"><img id="StatDDImage" src='https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodscdrscalingicon.png'/></button>
         </div> */}
       </div>
+      }
+
     </div>
   );
 }; 
