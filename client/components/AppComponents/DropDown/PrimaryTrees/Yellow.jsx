@@ -16,7 +16,7 @@ const Yellow = props => {
 
     document.getElementById(`${runeInfo[3].id}`).classList.remove('inactiveRune');
     document.getElementById(`${runeInfo[3].id}`).classList.add('activeRune');
-  });
+  }, []);
   
   return (
     <div className="TreeBox">
