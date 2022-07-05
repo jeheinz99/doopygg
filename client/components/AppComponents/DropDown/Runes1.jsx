@@ -6,14 +6,12 @@ import Blue from './PrimaryTrees/Blue.jsx';
 import White from './PrimaryTrees/White.jsx';
 import Green from './PrimaryTrees/Green.jsx';
 
-
 const Runes1 = props => {
 
   const { runeInfo } = props;
-  console.log(runeInfo, 'rune info in Runes1');
 
   return (
-    <div className="TreeDiv">
+    <div className="TreeDiv" id={`div-${runeInfo[4].id}`}>
       {runeInfo[4].id === 8000 && <Yellow runeInfo={runeInfo}/>}
       {runeInfo[4].id === 8100 && <Red runeInfo={runeInfo}/>}
       {runeInfo[4].id === 8200 && <Blue runeInfo={runeInfo}/>}

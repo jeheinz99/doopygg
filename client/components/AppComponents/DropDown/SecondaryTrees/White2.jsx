@@ -1,33 +1,25 @@
 import React, { useEffect } from 'react';
 
-const White = props => {
+const White2 = props => {
 
   const { runeInfo } = props;
 
   useEffect(() => {
-    document.getElementById(`${runeInfo[0].id}`).classList.remove('inactiveKeystone');
-    document.getElementById(`${runeInfo[0].id}`).classList.add('activeKeystone');
+    document.getElementById(`${runeInfo[6].id}`).classList.remove('inactiveRune');
+    document.getElementById(`${runeInfo[6].id}`).classList.add('activeRune');
 
-    document.getElementById(`${runeInfo[1].id}`).classList.remove('inactiveRune');
-    document.getElementById(`${runeInfo[1].id}`).classList.add('activeRune');
-
-    document.getElementById(`${runeInfo[2].id}`).classList.remove('inactiveRune');
-    document.getElementById(`${runeInfo[2].id}`).classList.add('activeRune');
-
-    document.getElementById(`${runeInfo[3].id}`).classList.remove('inactiveRune');
-    document.getElementById(`${runeInfo[3].id}`).classList.add('activeRune');
+    document.getElementById(`${runeInfo[7].id}`).classList.remove('inactiveRune');
+    document.getElementById(`${runeInfo[7].id}`).classList.add('activeRune');
   });
 
   return (
     <div className="TreeBox">
 
-      <div className="Keystone">
-        <img className="inactiveKeystone" id="8351" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/inspiration/glacialaugment/glacialaugment.png"/>
-        <img className="inactiveKeystone" id="8360" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/inspiration/unsealedspellbook/unsealedspellbook.png"/>
-        <img className="inactiveKeystone" id="8369" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/inspiration/firststrike/firststrike.png"/>
-      </div>
+    <div className="Keystone">
+      <img className="TreeStyle" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/7203_whimsy.png"/>
+    </div>
 
-      <div className="minorRuneRow" id="White">
+    <div className="minorRuneRow" id="White">
         <img className="inactiveRune" id="8306" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/inspiration/hextechflashtraption/hextechflashtraption.png"/>
         <img className="inactiveRune" id="8304" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/inspiration/magicalfootwear/magicalfootwear.png"/>
         <img className="inactiveRune" id="8313" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/inspiration/perfecttiming/perfecttiming.png"/>
@@ -45,8 +37,8 @@ const White = props => {
         <img className="inactiveRune" id="8352" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/inspiration/timewarptonic/timewarptonic.png"/>
       </div>
 
-    </div>
+  </div>
   );
 };
 
-export default White;
+export default White2;

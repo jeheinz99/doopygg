@@ -1,31 +1,22 @@
 import React, { useEffect } from 'react';
 
-const Red = props => {
+const Red2 = props => {
 
   const { runeInfo } = props;
 
   useEffect(() => {
-    document.getElementById(`${runeInfo[0].id}`).classList.remove('inactiveKeystone');
-    document.getElementById(`${runeInfo[0].id}`).classList.add('activeKeystone');
+    document.getElementById(`${runeInfo[6].id}`).classList.remove('inactiveRune');
+    document.getElementById(`${runeInfo[6].id}`).classList.add('activeRune');
 
-    document.getElementById(`${runeInfo[1].id}`).classList.remove('inactiveRune');
-    document.getElementById(`${runeInfo[1].id}`).classList.add('activeRune');
-
-    document.getElementById(`${runeInfo[2].id}`).classList.remove('inactiveRune');
-    document.getElementById(`${runeInfo[2].id}`).classList.add('activeRune');
-
-    document.getElementById(`${runeInfo[3].id}`).classList.remove('inactiveRune');
-    document.getElementById(`${runeInfo[3].id}`).classList.add('activeRune');
+    document.getElementById(`${runeInfo[7].id}`).classList.remove('inactiveRune');
+    document.getElementById(`${runeInfo[7].id}`).classList.add('activeRune');
   });
 
   return (
     <div className="TreeBox">
 
       <div className="Keystone">
-        <img className="inactiveKeystone" id="8112" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/domination/electrocute/electrocute.png"/>
-        <img className="inactiveKeystone" id="8124" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/domination/predator/predator.png"/>
-        <img className="inactiveKeystone" id="8128" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/domination/darkharvest/darkharvest.png"/>
-        <img className="inactiveKeystone" id="9923" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/domination/hailofblades/hailofblades.png"/>
+        <img className="TreeStyle" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/7200_domination.png"/>
       </div>
 
       <div className="minorRuneRow" id="Red">
@@ -51,4 +42,4 @@ const Red = props => {
   );
 };
 
-export default Red;
+export default Red2;

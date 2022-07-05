@@ -156,6 +156,8 @@ html, body {
   align-items: center;
   justify-content: center;
   width: 100%;
+  border: 2px solid #272d3a;
+  border-top: none;
 }
 .DropDownBoxes {
   box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
@@ -1118,23 +1120,98 @@ h4 {
   border: 3px solid rgba(255, 255, 255, 0.80);
 }
 
+.inactiveRune {
+  width: 32px;
+  height: 32px;
+  filter: opacity(.2);
+}
 .activeRune {
   width: 32px;
   height: 32px;
 }
+.inactiveKeystone {
+  width: 48px;
+  height: 48px;
+  filter: opacity(.2);
+}
 .activeKeystone {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
 }
 .RunesInfoDD {
   width: 100%;
   justify-content: center;
   align-items: center;
   display: flex;
-  gap: 1em;
+  gap: 0.5em;
 }
 .TreeDiv {
-  border: 1px solid #000;
+  border: 1px solid #272d3a;
+  border-radius: 0.2em;
+  padding: 0.5em;
+  margin: 0.5em;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+}
+#div-8000 {
+  background-color:rgba(113, 113, 38, 0.2);
+}
+#div-8100 {
+  background-color:rgba(86, 29, 29, 0.2);
+}
+#div-8200 {
+  background-color:rgba(37, 52, 119, 0.2);
+}
+#div-8300 {
+  background-color:rgba(42, 81, 104, 0.2);
+}
+#div-8400 {
+  background-color:rgba(42, 104, 53, 0.2);
+}
+.TreeBox {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5em;
+}
+#Blue {
+  background-color:rgb(68, 92, 198, 0.2);
+  border: 2px solid #272d3a;
+  /* box-shadow: 1px 1px 10px rgb(0, 0, 0, 5); */
+}
+#White {
+  background-color:rgb(69, 169, 211, 0.3);
+  border: 2px solid #272d3a;
+  /* box-shadow: 1px 1px 10px rgb(0, 0, 0, 5); */
+}
+#Yellow {
+  background-color:rgb(255, 195, 0, 0.1);
+  border: 2px solid rgba(66, 63, 25, 0.2);
+  /* box-shadow: 1px 1px 10px rgb(0, 0, 0, 5); */
+}
+#Red {
+  background-color:rgb(196, 36, 2, 0.1);
+  border: 2px solid #272d3a;
+  /* box-shadow: 1px 1px 10px rgb(0, 0, 0, 5); */
+}
+#Green {
+  background-color:rgb(0, 100, 0, 0.2);
+  border: 2px solid #272d3a;
+  /* box-shadow: 1px 1px 10px rgb(0, 0, 0, 5); */
+}
+
+.minorRuneRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+.minorShardRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
 }
 
 #swapDDbox {

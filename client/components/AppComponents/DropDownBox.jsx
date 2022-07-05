@@ -3,6 +3,7 @@ import TeamsBoxes from './DropDown/TeamsBoxes.jsx';
 import Runes1 from './DropDown/Runes1.jsx';
 import Runes2 from './DropDown/Runes2.jsx';
 import Runes3 from './DropDown/Runes3.jsx';
+import OtherPlayersRunes from './DropDown/OtherPlayersRunes.jsx';
 
 
 import { RiSwordFill } from 'react-icons/ri';
@@ -35,11 +36,19 @@ const DropDownBox = props => {
 
   // finds the current player's rune data for the current match
   const getRuneInfo = data => {
+
+    const runeInfo = {};
+    
     for (let i = 0; i < data.length; i++) {
       if (summonerName === data[i].summonerName) {
-        return data[i].runes;
+        runeInfo.mainPlayer = data[i].runes;
+      }
+
+      else {
+        runeInfo.otherPlayers = data[i].runes;
       }
     }
+    return runeInfo;
   };
   
   for (let i = 0; i < otherPlayers.length; i++) {
@@ -101,6 +110,14 @@ const DropDownBox = props => {
 
   const runeInfo = getRuneInfo(otherPlayers);
 
+  const otherPlayersRunes = [];
+  for (let i = 0; i < runeInfo.otherPlayers.length; i++) {
+    otherPlayersRunes.push(
+    <OtherPlayersRunes
+    key={`playerRunes-${i}`}
+    runes={runeInfo.otherPlayers[i]} />);
+  }
+
   const goldPercent = ((team1Objs.goldEarned / (team1Objs.goldEarned + team2Objs.goldEarned))*100).toFixed(0);
 
   return (
@@ -110,9 +127,14 @@ const DropDownBox = props => {
 
       {currBox && 
         <div className="RunesInfoDD">
-        <Runes1 runeInfo={runeInfo}/>
-        <Runes2 runeInfo={runeInfo}/>
-        <Runes3 runeInfo={runeInfo}/>
+        <Runes1 runeInfo={runeInfo.mainPlayer}/>
+        <Runes2 runeInfo={runeInfo.mainPlayer}/>
+        <Runes3 runeInfo={runeInfo.mainPlayer}/>
+
+        <div className="OtherPlayersRunes">
+          { otherPlayersRunes }
+        </div>
+
         </div>}
 
       {!currBox && 

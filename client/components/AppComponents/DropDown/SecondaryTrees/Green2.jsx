@@ -1,30 +1,22 @@
 import React, { useEffect } from 'react';
 
-const Green = props => {
+const Green2 = props => {
 
   const { runeInfo } = props;
 
   useEffect(() => {
-    document.getElementById(`${runeInfo[0].id}`).classList.remove('inactiveKeystone');
-    document.getElementById(`${runeInfo[0].id}`).classList.add('activeKeystone');
+    document.getElementById(`${runeInfo[6].id}`).classList.remove('inactiveRune');
+    document.getElementById(`${runeInfo[6].id}`).classList.add('activeRune');
 
-    document.getElementById(`${runeInfo[1].id}`).classList.remove('inactiveRune');
-    document.getElementById(`${runeInfo[1].id}`).classList.add('activeRune');
-
-    document.getElementById(`${runeInfo[2].id}`).classList.remove('inactiveRune');
-    document.getElementById(`${runeInfo[2].id}`).classList.add('activeRune');
-
-    document.getElementById(`${runeInfo[3].id}`).classList.remove('inactiveRune');
-    document.getElementById(`${runeInfo[3].id}`).classList.add('activeRune');
+    document.getElementById(`${runeInfo[7].id}`).classList.remove('inactiveRune');
+    document.getElementById(`${runeInfo[7].id}`).classList.add('activeRune');
   });
 
   return (
     <div className="TreeBox">
 
       <div className="Keystone">
-        <img className="inactiveKeystone" id="8437" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/graspoftheundying/graspoftheundying.png"/>
-        <img className="inactiveKeystone" id="8439" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/veteranaftershock/veteranaftershock.png"/>
-        <img className="inactiveKeystone" id="8465" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/guardian/guardian.png"/>
+        <img className="TreeStyle" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/7204_resolve.png"/>
       </div>
 
       <div className="minorRuneRow" id="Green">
@@ -49,4 +41,4 @@ const Green = props => {
   );
 };
 
-export default Green;
+export default Green2;
