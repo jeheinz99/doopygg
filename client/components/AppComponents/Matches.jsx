@@ -7,7 +7,7 @@ import { AiFillCaretUp } from 'react-icons/ai';
 
 const Matches = props => {
 
-  const { otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
+  const { matchNum, otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
   
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 
@@ -32,10 +32,10 @@ const Matches = props => {
           <img id="secondaryRuneIcon" src={runes[5].icon}/>
         </div>
         <div className="MatchGroup2div2">
-        <p>{kills} / {deaths} / {assists}</p>
-        <p>K/D/A: {`${((kills + assists) / deaths).toFixed(2)}`}</p>
-        <p>CS: {cs}</p>
-        <p>vision: {visionScore}</p>
+          <p>{kills} / {deaths} / {assists}</p>
+          <p>K/D/A: {`${((kills + assists) / deaths).toFixed(2)}`}</p>
+          <p>CS: {cs}</p>
+          <p>vision: {visionScore}</p>
         </div>
         </div>
         <div className="MatchGroup4">
@@ -101,10 +101,11 @@ const Matches = props => {
         </div>
         <div className="MatchGroupButton">
           {!summonerOpen && <button className="SummonerDataBoxButton" id="SDBexpand" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretDown /></button>}
-          {summonerOpen && <button className="SummonerDataBoxButton" id="SDBcontract" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretUp /></button>}        </div>
+          {summonerOpen && <button className="SummonerDataBoxButton" id="SDBcontract" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretUp /></button>}
         </div>
+      </div>
       <div className="DropDownBoxes">
-        {summonerOpen && <DropDownBox otherPlayers={otherPlayers} id={id} kills={kills} deaths={deaths} assists={assists} items={items} cs={cs} summonerSpells={summonerSpells} visionScore={visionScore} champDamage={champDamage} champLevel={champLevel} runes={runes} championId={championId}/>}
+        {summonerOpen && <DropDownBox matchNum={matchNum} otherPlayers={otherPlayers} id={id}/>}
       </div>
     </div>
   );

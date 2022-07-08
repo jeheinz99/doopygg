@@ -13,7 +13,7 @@ import { RiCameraSwitchLine } from 'react-icons/ri';
 
 const DropDownBox = props => {
   
-  const { otherPlayers, id } = props;
+  const { matchNum, otherPlayers, id } = props;
   const summonerName = useSelector(state => state.summoners.summonerName);
 
   const team1Box = [];
@@ -38,16 +38,29 @@ const DropDownBox = props => {
   const getRuneInfo = data => {
 
     const runeInfo = {};
+    const otherPlayers = [];
     
     for (let i = 0; i < data.length; i++) {
       if (summonerName === data[i].summonerName) {
+        const newObj = {};
+        newObj.name = data[i].summonerName;
+        newObj.runes = data[i].runes;
+        newObj.championId = data[i].championId;
+
+        otherPlayers.push(newObj);
         runeInfo.mainPlayer = data[i].runes;
       }
 
       else {
-        runeInfo.otherPlayers = data[i].runes;
+        const newObj = {};
+        newObj.name = data[i].summonerName;
+        newObj.runes = data[i].runes;
+        newObj.championId = data[i].championId;
+        
+        otherPlayers.push(newObj);
       }
     }
+    runeInfo.otherPlayers = otherPlayers;
     return runeInfo;
   };
   
@@ -111,11 +124,25 @@ const DropDownBox = props => {
   const runeInfo = getRuneInfo(otherPlayers);
 
   const otherPlayersRunes = [];
+  const otherPlayersRunes2 = [];
   for (let i = 0; i < runeInfo.otherPlayers.length; i++) {
+    (otherPlayersRunes.length < 5 ?
     otherPlayersRunes.push(
     <OtherPlayersRunes
-    key={`playerRunes-${i}`}
-    runes={runeInfo.otherPlayers[i]} />);
+      key={`playerRunes-${i}`}
+      id={`otherPlayerRunes-${i}`}
+      championId={runeInfo.otherPlayers[i].championId}
+      name={runeInfo.otherPlayers[i].name}
+      runes={runeInfo.otherPlayers[i].runes} 
+    />) : 
+    otherPlayersRunes2.push(
+    <OtherPlayersRunes
+      key={`playerRunes-${i}`}
+      id={`otherPlayerRunes-${i}`}
+      championId={runeInfo.otherPlayers[i].championId}
+      name={runeInfo.otherPlayers[i].name}
+      runes={runeInfo.otherPlayers[i].runes} 
+      />));
   }
 
   const goldPercent = ((team1Objs.goldEarned / (team1Objs.goldEarned + team2Objs.goldEarned))*100).toFixed(0);
@@ -127,15 +154,24 @@ const DropDownBox = props => {
 
       {currBox && 
         <div className="RunesInfoDD">
-        <Runes1 runeInfo={runeInfo.mainPlayer}/>
-        <Runes2 runeInfo={runeInfo.mainPlayer}/>
-        <Runes3 runeInfo={runeInfo.mainPlayer}/>
 
-        <div className="OtherPlayersRunes">
-          { otherPlayersRunes }
+          <div className="RunesInfoMain">
+            <Runes1 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+            <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+            <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+          </div>
+
+          <div className="OtherPlayersRunes">
+            <div id="otherPlayers1">
+              { otherPlayersRunes }
+            </div>
+            <div id="otherPlayers2">
+              { otherPlayersRunes2 }
+            </div> 
+          </div>
+
         </div>
-
-        </div>}
+        }
 
       {!currBox && 
       <div className="ObjectivesDD">

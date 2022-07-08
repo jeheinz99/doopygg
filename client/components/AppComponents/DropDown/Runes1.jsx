@@ -8,15 +8,15 @@ import Green from './PrimaryTrees/Green.jsx';
 
 const Runes1 = props => {
 
-  const { runeInfo } = props;
+  const { matchNum, runeInfo } = props;
 
   return (
     <div className="TreeDiv" id={`div-${runeInfo[4].id}`}>
-      {runeInfo[4].id === 8000 && <Yellow runeInfo={runeInfo}/>}
-      {runeInfo[4].id === 8100 && <Red runeInfo={runeInfo}/>}
-      {runeInfo[4].id === 8200 && <Blue runeInfo={runeInfo}/>}
-      {runeInfo[4].id === 8300 && <White runeInfo={runeInfo}/>}
-      {runeInfo[4].id === 8400 && <Green runeInfo={runeInfo}/>}
+      {runeInfo[4].id === 8000 && <Yellow matchNum={matchNum} runeInfo={runeInfo}/>}
+      {runeInfo[4].id === 8100 && <Red matchNum={matchNum} runeInfo={runeInfo}/>}
+      {runeInfo[4].id === 8200 && <Blue matchNum={matchNum} runeInfo={runeInfo}/>}
+      {runeInfo[4].id === 8300 && <White matchNum={matchNum} runeInfo={runeInfo}/>}
+      {runeInfo[4].id === 8400 && <Green matchNum={matchNum} runeInfo={runeInfo}/>}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import Matches from './Boxes.jsx';
+import Matches from './Matches.jsx';
 import Recent20StatsBox from './Recent20StatsBox.jsx';
 import { useSelector } from 'react-redux';
 
@@ -22,7 +22,8 @@ const MatchBoxes = () => {
       matchList.push(<Matches 
         id="winMatch" 
         outcome={'Victory'} 
-        key={i} 
+        key={`match-${i}`}
+        matchNum={`matchBox-${i}`}
         otherPlayers={chunkArr[i]} 
         visionScore={matchHistory[i].visionScore} 
         summonerSpells={matchHistory[i].summonerSpells} 
@@ -45,7 +46,8 @@ const MatchBoxes = () => {
       matchList.push(<Matches 
         id="loseMatch" 
         outcome={'Defeat'} 
-        key={i} 
+        key={`match-${i}`}
+        matchNum={`matchBox-${i}`}
         otherPlayers={chunkArr[i]} 
         visionScore={matchHistory[i].visionScore} 
         summonerSpells={matchHistory[i].summonerSpells} 

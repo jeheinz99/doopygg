@@ -8,15 +8,15 @@ import White2 from './SecondaryTrees/White2.jsx';
 
 const Runes2 = props => {
 
-  const { runeInfo } = props;
+  const { matchNum, runeInfo } = props;
 
   return (
     <div className="TreeDiv" id={`div-${runeInfo[5].id}`}>
-      {runeInfo[5].id === 8000 && <Yellow2 runeInfo={runeInfo}/>}
-      {runeInfo[5].id === 8100 && <Red2 runeInfo={runeInfo}/>}
-      {runeInfo[5].id === 8200 && <Blue2 runeInfo={runeInfo}/>}
-      {runeInfo[5].id === 8300 && <White2 runeInfo={runeInfo}/>}
-      {runeInfo[5].id === 8400 && <Green2 runeInfo={runeInfo}/>}
+      {runeInfo[5].id === 8000 && <Yellow2 matchNum={matchNum} runeInfo={runeInfo}/>}
+      {runeInfo[5].id === 8100 && <Red2 matchNum={matchNum} runeInfo={runeInfo}/>}
+      {runeInfo[5].id === 8200 && <Blue2 matchNum={matchNum} runeInfo={runeInfo}/>}
+      {runeInfo[5].id === 8300 && <White2 matchNum={matchNum} runeInfo={runeInfo}/>}
+      {runeInfo[5].id === 8400 && <Green2 matchNum={matchNum} runeInfo={runeInfo}/>}
     </div>
   );
 };
