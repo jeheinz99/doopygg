@@ -1164,7 +1164,7 @@ h4 {
   justify-content: center;
 }
 .TreeDiv {
-  border: 1px solid #272d3a;
+  border: 3px solid #272d3a;
   border-radius: 0.2em;
   padding: 0.5em;
   margin: 0.5em;
@@ -1259,6 +1259,7 @@ h4 {
   width: 75px;
   text-align: center;
   font-size: 0.8em;
+  overflow: hidden;
 }
 .otherPlayersRunesDiv2 {
   display: flex;
@@ -1319,12 +1320,74 @@ h4 {
   background: none;
   transition: 0.5s;
 }
+#otherPlayers-8000 {
+  background-color: rgba(212, 205, 71, 0.2);
+}
+#otherPlayers-8100 {
+  background-color: rgba(212, 71, 87, 0.2);
+}
+#otherPlayers-8200 {
+  background-color: rgba(71, 87, 212, 0.2);
+}
+#otherPlayers-8300 {
+  background-color: rgb(71, 170, 212, 0.2);
+}
+#otherPlayers-8400 {
+  background-color: rgba(71, 212, 92, 0.2);
+}
+.IconAndBuild {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #272d3a;
+  border-radius: 0.2em;
+  padding: 8px;
+  box-shadow: 2px 2px 10px rgb(0, 0, 0, 5);
+  margin: 0.5em;
+}
+#upperDDbox img {
+  width: 40px;
+  height: 40px;
+  margin: 1px;
+}
+#lowerDDbox img {
+  width: 40px;
+  height: 40px;
+  margin: 1px;
+
+}
+#temp {
+  margin-bottom: 10px;
+  border-radius: 0.2em;
+}
 #swapDDbox:hover {
   cursor: pointer;
   transform: translateY(-3px);
   filter: drop-shadow(0 0 0.3rem rgb(11, 10, 11));
 }
 #swapDDbox:active {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 0.2rem rgb(11, 10, 11));
+}
+#test {
+  display: flex;
+  justify-content: flex-end;
+  width: 89%;
+}
+#swapDDbox2 {
+  margin-top: 1em;
+  display: flex;
+  border: none;
+  background: none;
+  transition: 0.5s;
+}
+#swapDDbox2:hover {
+  cursor: pointer;
+  transform: translateY(-3px);
+  filter: drop-shadow(0 0 0.3rem rgb(11, 10, 11));
+}
+#swapDDbox2:active {
   transform: translateY(-1px);
   filter: drop-shadow(0 0 0.2rem rgb(11, 10, 11));
 }

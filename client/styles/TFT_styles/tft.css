@@ -88,6 +88,17 @@
   height: 24px;
   width: 24px;
 }
+.TFTUnitBox {
+  position: relative;
+}
+.TFTItemsDiv {
+  display: flex;
+  justify-content: center;
+}
+#item-img {
+  height: 16px;
+  width: 16px;
+}
 .TFTDDB3 {
   width: 15em;
   display: flex;
@@ -101,6 +112,14 @@
   object-position: 85%;
   border-radius: 2em;
   border: 2px solid rgba(255, 255, 255, 0.403);
+}
+.DDR10TFTunit {
+  height: 32px;
+  width: 32px;
+  object-fit: cover;
+  object-position: 85%;
+  border-radius: 2em;
+  border: 1px solid rgba(255, 255, 255, 0.403);
 }
 .UnitsList1 {
 
@@ -170,7 +189,6 @@
   align-items: center;
   color:rgba(255, 255, 255, 0.861);
   border: 1px solid rgba(255, 255, 255, 0.80);
-  gap: 5em;
 }
 
 .TFTMatchGroup1 {
@@ -186,9 +204,18 @@
 }
 .TFTMatchGroup2 {
   display: flex;
-  flex-direction: column;
   align-items: center;
   width: 15em;
+}
+.TFTMatchGroup2Div2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.TFTMatchGroup2Div2 p {
+  margin: 0;
+  width: 10em;
 }
 #LittleLegendIcon {
   width: 64px;
@@ -200,12 +227,13 @@
 .TFTMatchGroup3 {
   width: 25em;
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 10px;
 }
 .TFTAugGroup {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 4px;
 }
@@ -214,6 +242,8 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  width: 70%;
+  justify-content: center;
 }
 .TFTTraitGroup1 {
   display: flex;
@@ -233,7 +263,9 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
+  width: 50em;
 }
 .TFTUnitGroup1 {
   display: flex;
@@ -252,8 +284,8 @@
 }
 
 .TFTunit {
-  height: 64px;
-  width: 64px;
+  height: 54px;
+  width: 54px;
   object-fit: cover;
   object-position: 85%;
   border-radius: 2em;
@@ -262,26 +294,50 @@
 #Unit-0 {
   border-color:rgb(111, 110, 110);
 }
+#star-Unit-0 {
+  color:rgb(111, 110, 110);
+}
 #Unit-1 {
   border-color: rgb(39, 125, 39);
+}
+#star-Unit-1 {
+  color: rgb(39, 125, 39);
 }
 #Unit-2 {
   border-color:rgb(68, 92, 198);
 }
+#star-Unit-2 {
+  color:rgb(68, 92, 198);
+}
 #Unit-3 {
   border-color: purple;
+}
+#star-Unit-3 {
+  color: purple;
 }
 #Unit-4 {
   border-color: orangered;
 }
+#star-Unit-4 {
+  color: orangered;
+}
 #Unit-5 {
   border-color: gold;
+}
+#star-Unit-5 {
+  color: gold;
 }
 #Unit-6 {
   border-color: red;
 }
+#star-Unit-6 {
+  color: red;
+}
 #Unit-8 {
   border-color: rgb(8, 213, 145);
+}
+#star-Unit-8 {
+  color: rgb(8, 213, 145);
 }
 .TFTRecentMatchesContainer {
   display: flex;
@@ -291,12 +347,11 @@
   box-shadow: 1px 1px 4px rgb(0, 0, 0, 5);
   border-radius: 0.2em;
   background-color: #171A21;
-  gap: 2em;
 }
 .PlacementsBar {
   display: flex;
   flex-direction: column;
-  width: 29%;
+  width: 27%;
   align-items: flex-start;
   justify-content: center;
   gap: 1em;
@@ -312,10 +367,10 @@
 .RecentTraits {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1em;
-  height: 100%;
+  color:rgba(255, 255, 255, 0.80);
+  margin: 0;
+  gap: 0.5em;
+  padding: 0.5em;
 }
 .RecentTraitsBox1 {
   display: flex;
@@ -332,14 +387,16 @@
   margin: 0;
 }
 #tftr10traitheader {
-  display: flex;
   border-left: 2px solid rgba(255, 255, 255, 0.80);
   height: 10%;
+  margin-right: 10px;
 }
-#tftr10traitheader p {
-  margin: 0;
-  margin-left: 0.5em;
-  color: rgba(255, 255, 255, 0.80);
+#tftr10traitheader ul li {
+  text-decoration: underline;
+}
+#tftr10traitheader ul p {
+  text-decoration: none;
+  margin-left: 0.3em;
 }
 #tftr10header p {
   margin: 0;
@@ -349,40 +406,78 @@
 #tftr10unitheader {
   border-left: 2px solid rgba(255, 255, 255, 0.80);
   height: 10%;
+  margin-right: 10px;
 }
-#tftr10unitheader p {
-  margin: 0;
-  margin-left: 0.5em;
-  text-align: left;
+#tftr10unitheader ul li {
+  text-decoration: underline;
+}
+#tftr10unitheader ul p {
+  text-decoration: none;
+  margin-left: 0.3em;
 }
 .RecentUnits {
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  justify-content: center;
   color: rgba(255, 255, 255, 0.80);
+  margin: 0;
+  gap: 0.5em;
+  padding: 0.5em;
+}
+.RecentUnits ul {
+  display: flex;
+  gap: 1em;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.RecentTraits ul {
+  display: flex;
+  gap: 1em;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.RecentUnits ul li {
+  display: flex;
+  justify-content: center;
+  width: 6em;
+  margin: 0;
+}
+.RecentTraits ul li {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  width: 6em;
+}
+.RecentTraitsBoxes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4em;
 }
 .RecentUnitsBoxes {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.2em;
+  gap: 0.4em;
+}
+.RecentTraits p {
+  margin: 0;
 }
 .RecentUnits p {
   margin: 0;
+}
+.RecentTraitsBox {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
 .RecentUnitsBox {
   display: flex;
   align-items: center;
   gap: 0.5em;
-}
-.RecentUnitsBox p {
-  margin: 0;
-}
-#unitIcon {
-  height: 32px;
-  width: 32px;
-  border-width: 1px;
 }
 .PlacementInfo {
   display: flex;
@@ -461,7 +556,15 @@
 #placement-2 {
   color: #b4b4b4;
 }
-
+#Trait-1 {
+  filter: invert(70%) sepia(30%) saturate(2504%) hue-rotate(2deg) brightness(109%) contrast(102%);
+}
+#Trait-2 {
+  filter: invert(30%);
+}
+#Trait-3 {
+  filter: invert(20%) sepia(34%) saturate(2504%) hue-rotate(2deg) brightness(109%) contrast(102%);
+}
 #placement-3 {
   color: #7B3F00;
 }

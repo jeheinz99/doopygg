@@ -20,8 +20,6 @@ const SearchBox = () => {
       summonerNameInput = e.target.value;
       return summonerNameInput;
     }
-
-    console.log(allMatchesPlayedData[0]);
   
   return (
     <div className="OuterSearchBox">

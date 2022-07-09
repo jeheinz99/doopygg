@@ -13,7 +13,7 @@ const OtherPlayerRunes = props => {
   }
 
   return (
-    <div className="otherPlayerRunesBox">
+    <div className="otherPlayerRunesBox" id={`otherPlayers-${runes[4].id}`}>
 
       <div className="otherPlayersRunesDiv1">
         <img id="champIconRunesDD" src={championIcon}/>
@@ -25,7 +25,7 @@ const OtherPlayerRunes = props => {
         <img className="keystoneRunesDD" src={runes[0].icon}/>
         
         <div className="minorRunesDD">
-          
+
           <div className="maintreeDD">
             <img className="minorRuneDD" src={runes[1].icon}/>
             <img className="minorRuneDD" src={runes[2].icon}/>

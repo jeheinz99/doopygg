@@ -2,17 +2,20 @@ import React from 'react';
 
 const TraitsBox = props => {
 
-  const { id, name, count, styleCount, unitCount, tierFreq, traitIcon } = props;
-  
+  const { id, name, count, styleCount, unitCount, tierFreq, traitIcon, placements } = props;
+
+  const top4Percent = ((placements.top4 / count)*100).toFixed();
+  const nameCopy = name.replace('Set7_', '');
+
   return (
     <div className="RecentTraitsBox">
+      <ul>
+        <li> <img id="r10trait" src={traitIcon}/> </li>
+        <li> {nameCopy} </li>
+        <li> {count} Games </li>
+        <li> {top4Percent} % </li>
+      </ul>
 
-      <div className="RecentTraitsBox1">
-        <img id="r10trait" src={traitIcon}/>
-        <p>{name}</p>
-      </div>
-
-      {/* <p>{count}  Games</p> */}
       
     </div>
   );

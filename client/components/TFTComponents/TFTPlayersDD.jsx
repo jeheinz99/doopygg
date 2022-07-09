@@ -24,7 +24,7 @@ const TFTPlayersDD = props => {
     secondNum = 6;
     firstNum -= 1;
   }
-  const stage = `${firstNum} - ${secondNum}`
+  const stage = `${firstNum} - ${secondNum}`;
 
   return (
     <div className="TFTDDPlayerBox">

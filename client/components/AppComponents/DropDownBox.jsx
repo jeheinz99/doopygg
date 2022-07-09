@@ -13,7 +13,7 @@ import { RiCameraSwitchLine } from 'react-icons/ri';
 
 const DropDownBox = props => {
   
-  const { matchNum, otherPlayers, id } = props;
+  const { matchNum, otherPlayers, id, championIcon, items } = props;
   const summonerName = useSelector(state => state.summoners.summonerName);
 
   const team1Box = [];
@@ -56,7 +56,7 @@ const DropDownBox = props => {
         newObj.name = data[i].summonerName;
         newObj.runes = data[i].runes;
         newObj.championId = data[i].championId;
-        
+
         otherPlayers.push(newObj);
       }
     }
@@ -150,12 +150,29 @@ const DropDownBox = props => {
   return (
     <div className="DDBoxWrap">
 
-      {currBox && <button id="swapDDbox" onClick={() => toggleBox(!currBox)}> <RiCameraSwitchLine id="historyButton"/> </button>}
+      {currBox && <div id="test"><button id="swapDDbox2" onClick={() => toggleBox(!currBox)}> <RiCameraSwitchLine id="historyButton"/> </button></div>}
 
       {currBox && 
         <div className="RunesInfoDD">
 
           <div className="RunesInfoMain">
+
+            <div className="IconAndBuild">
+              <img id="temp" src={championIcon}/>
+
+              <div className="upperHalfItems" id="upperDDbox">
+                <img id="item0" src={items[0]}/>
+                <img id="item1" src={items[1]}/>
+                <img id="item2" src={items[2]}/>
+              </div>
+
+              <div className="lowerHalfItems" id="lowerDDbox">
+                <img id="item3" src={items[3]}/>
+                <img id="item4" src={items[4]}/>
+                <img id="item5" src={items[5]}/>
+              </div>
+            </div>
+
             <Runes1 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
             <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
             <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>

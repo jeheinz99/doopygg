@@ -105,7 +105,7 @@ const Matches = props => {
         </div>
       </div>
       <div className="DropDownBoxes">
-        {summonerOpen && <DropDownBox matchNum={matchNum} otherPlayers={otherPlayers} id={id}/>}
+        {summonerOpen && <DropDownBox championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/>}
       </div>
     </div>
   );
