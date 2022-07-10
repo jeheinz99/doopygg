@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TFTDropDownBox from './TFTDropDownBox.jsx';
+import TFTDropDownBox from './TFTDropDown/TFTDropDownBox.jsx';
 import TFTUnitsBox from './TFTUnitsBox.jsx';
 
 import { AiFillCaretUp } from 'react-icons/ai';
@@ -18,8 +18,6 @@ const TFTBoxes = props => {
     return outputArr;
   };
 
-  console.log(units, 'units');
-
   const unitsArr = [];
 
   const traitsArr = [];
@@ -27,13 +25,14 @@ const TFTBoxes = props => {
 
   let activeTraits = getActiveTraits(traits);
 
-  if (activeTraits.length < 6) 
-  for (let i = 0; i < activeTraits.length; i++) {
-    traitsArr.push(<img key={`trait-${i}`} className="TFTtrait" id={`Trait-${activeTraits[i].style}`} src={activeTraits[i].traitIcon}/>);
+  if (activeTraits.length <= 5) {
+    for (let i = 0; i < activeTraits.length; i++) {
+      traitsArr.push(<img key={`trait-${i}`} className="TFTtrait" id={`Trait-${activeTraits[i].style}`} src={activeTraits[i].traitIcon}/>);
+    }
   }
   else {
     for (let i = 0; i < activeTraits.length; i++) {
-      (traitsArr.length < (traitsArr / 2).length ? traitsArr.push(<img key={`trait-${i}`} className="TFTtrait" id={`Trait-${activeTraits[i].style}`} src={activeTraits[i].traitIcon}/>) : traitsArr2.push(<img key={`trait-${i}`} className="TFTtrait" id={`Trait-${activeTraits[i].style}`} src={activeTraits[i].traitIcon}/>));
+      (traitsArr.length < (activeTraits.length / 2) ? traitsArr.push(<img key={`trait-${i}`} className="TFTtrait" id={`Trait-${activeTraits[i].style}`} src={activeTraits[i].traitIcon}/>) : traitsArr2.push(<img key={`trait-${i}`} className="TFTtrait" id={`Trait-${activeTraits[i].style}`} src={activeTraits[i].traitIcon}/>));
     }
   }
 
@@ -51,14 +50,15 @@ const TFTBoxes = props => {
   return (
     <div className="TFTWrapper">
       <div className="TFTMatches" id={id}>
-
         <div className="TFTMatchGroup1">
           <p>Ranked TFT</p>
           <p>{`${Math.floor(Number(matchLength / 60))}:${(Number(matchLength) % 60).toFixed()}`}</p>
-          <p id={`placementnumber-${placement}`}>{placement}/8</p>
+          { placement === 1 && <p id={`placementnumber-${placement}`}>{placement}st</p> }
+          { placement === 2 && <p id={`placementnumber-${placement}`}>{placement}nd</p> }
+          { placement === 3 && <p id={`placementnumber-${placement}`}>{placement}rd</p> }
+          { placement > 3 && <p id={`placementnumber-${placement}`}>{placement}th</p> }
           <p>Set {setNumber} </p>
         </div>
-
         <div className="TFTMatchGroup2">
           <img id="LittleLegendIcon" src={companion}/>
           <div className="TFTMatchGroup2Div2">
@@ -66,7 +66,6 @@ const TFTBoxes = props => {
             <p>Damage Dealt: { damageDealt} </p>
           </div>
         </div>
-
         <div className="TFTMatchGroup3">
           <div className="TFTAugGroup">
             <img id="TFTAug1" src={augments[0]}/>
@@ -90,8 +89,8 @@ const TFTBoxes = props => {
 
         </div>
         <div className="TFTMatchGroupButton">
-          {!tftOpen && <button className="SummonerDataBoxButton" onClick={() => setOpen(!tftOpen) }><AiFillCaretDown /></button>}
-          {tftOpen && <button className="SummonerDataBoxButton" onClick={() => setOpen(!tftOpen) }><AiFillCaretUp /></button>}
+          {!tftOpen && <button className="TFTDataBoxButton" onClick={() => setOpen(!tftOpen) }><AiFillCaretDown /></button>}
+          {tftOpen && <button className="TFTDataBoxButton" onClick={() => setOpen(!tftOpen) }><AiFillCaretUp /></button>}
         </div>
       </div>
       <div className="TFTDropDownBoxes">

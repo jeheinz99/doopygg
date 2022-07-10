@@ -1,7 +1,7 @@
 import React from 'react';
 import TFTBoxes from './TFTBoxes.jsx'
 import { useSelector } from 'react-redux';
-import RecentMatchesBox from './TFTRecentMatchesBox.jsx';
+import RecentMatchesBox from './TFTRecentMatches/TFTRecentMatchesBox.jsx';
 
 const TFTMatchBoxes = () => {
 

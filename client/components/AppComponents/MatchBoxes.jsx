@@ -1,6 +1,6 @@
 import React from 'react';
 import Matches from './Matches.jsx';
-import Recent20StatsBox from './Recent20StatsBox.jsx';
+import Recent20StatsBox from './RecentMatches/Recent20StatsBox.jsx';
 import { useSelector } from 'react-redux';
 
 const MatchBoxes = () => {

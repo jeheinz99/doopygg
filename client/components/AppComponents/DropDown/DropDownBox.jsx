@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import TeamsBoxes from './DropDown/TeamsBoxes.jsx';
-import Runes1 from './DropDown/Runes1.jsx';
-import Runes2 from './DropDown/Runes2.jsx';
-import Runes3 from './DropDown/Runes3.jsx';
-import OtherPlayersRunes from './DropDown/OtherPlayersRunes.jsx';
+import TeamsBoxes from './TeamsBoxes.jsx';
+import Runes1 from './Runes1.jsx';
+import Runes2 from './Runes2.jsx';
+import Runes3 from './Runes3.jsx';
+import OtherPlayersRunes from './OtherPlayersRunes.jsx';
 
 
 import { RiSwordFill } from 'react-icons/ri';

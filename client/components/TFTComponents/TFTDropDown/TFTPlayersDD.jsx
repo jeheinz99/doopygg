@@ -1,22 +1,41 @@
 import React from 'react';
+import TFTDDUnitsBox from './TFTDDUnitsBox.jsx';
 
 const TFTPlayersDD = props => {
 
-  const { augments, level, companion, placement, damageDealt, traits, units, goldLeft, lastRound } = props;
+  const { name, augments, level, companion, placement, damageDealt, traits, units, goldLeft, lastRound } = props;
+  
+  const getActiveTraits = data => {
+    const outputArr = [];
+    for (let i = 0; i < data.length; i++) {
+      (data[i].tier_current > 0 ? outputArr.push(data[i]) : null);
+    }
+    outputArr.sort((a, b) => b.style - a.style);
+    return outputArr;
+  };
 
   const unitsArr = [];
-  const unitsArr2 =[];
 
   const traitsArr = [];
   const traitsArr2 = [];
 
-  for (let i = 0; i < traits.length; i++) {
-    (traitsArr.length < (traits.length / 2) ? traitsArr.push(<img key={`ddtrait-${i}`} className="TFTtrait" id={`DDTrait-${traits[i].style}`} src={traits[i].traitIcon}/>) : traitsArr2.push(<img key={`trait-${i}`} className="TFTtrait" id={`DDTrait-${traits[i].style}`} src={traits[i].traitIcon}/>));
+  const activeTraits = getActiveTraits(traits);
+
+  if (activeTraits.length <= 5) {
+    for (let i = 0; i < activeTraits.length; i++) {
+      traitsArr.push(<img key={`ddtrait-${i}`} className="TFTtrait" id={`DDTrait-${activeTraits[i].style}`} src={activeTraits[i].traitIcon}/>);
+    }
+  }
+  else {
+    for (let i = 0; i < activeTraits.length; i++) {
+      (traitsArr.length < (activeTraits.length / 2) ? traitsArr.push(<img key={`ddtrait-${i}`} className="TFTtrait" id={`DDTrait-${activeTraits[i].style}`} src={activeTraits[i].traitIcon}/>) : traitsArr2.push(<img key={`trait-${i}`} className="TFTtrait" id={`DDTrait-${activeTraits[i].style}`} src={activeTraits[i].traitIcon}/>));
+    }
   }
 
   for (let i = 0; i < units.length; i++) {
-    (unitsArr.length < (units.length / 2) ? unitsArr.push(<img key={`ddunit-${i}`} className="DDTFTunit" id={`Unit-${units[i].rarity}`} src={units[i].unitIcon}/>) : unitsArr2.push(<img key={`unit-${i}`} className="DDTFTunit" id={`Unit-${units[i].rarity}`} src={units[i].unitIcon}/>));
+    unitsArr.push(<TFTDDUnitsBox unit={units[i]} key={`ddunit-${i}`} id={`Unit-${units[i].rarity}`} src={units[i].unitIcon}/>);
   }
+
   // converts last round to stage number
   let firstNum = 1 + Math.floor(lastRound / 6);
   let secondNum = (lastRound % 6);
@@ -30,14 +49,17 @@ const TFTPlayersDD = props => {
     <div className="TFTDDPlayerBox">
 
       <div className="TFTDDB1">
-        <p>{placement}/8</p>
+        { placement === 1 && <p id={`placementnumber-${placement}`}>{placement}st</p> }
+        { placement === 2 && <p id={`placementnumber-${placement}`}>{placement}nd</p> }
+        { placement === 3 && <p id={`placementnumber-${placement}`}>{placement}rd</p> }
+        { placement > 3 && <p id={`placementnumber-${placement}`}>{placement}th</p> }
         <p>Level: {level}</p>
         <p>Damage Dealt: {damageDealt}</p>
       </div>
 
       <div className="TFTDDB2">
         <div className="LLIconDD">
-          <p>summoner name</p>
+          <p> {name} </p>
           <img id="LittleLegendIconDD" src={companion}/>
         </div>
         <div className="AugListB2">
@@ -57,12 +79,7 @@ const TFTPlayersDD = props => {
 
       <div className="TFTDDB3">
         <div className="UnitListB3">
-          <div className="UnitsList1">
             { unitsArr }
-          </div>
-          <div className="UnitsList2">
-            { unitsArr2 }
-          </div>
         </div>
       </div>
 

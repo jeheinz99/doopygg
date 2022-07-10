@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DropDownBox from './DropDownBox.jsx';
+import DropDownBox from './DropDown/DropDownBox.jsx';
 
 import { AiFillCaretDown } from 'react-icons/ai';
 import { AiFillCaretUp } from 'react-icons/ai';
