@@ -10,10 +10,10 @@ const TFTDDUnitsBox = props => {
     stars.push(<AiFillStar key={`star-${i}`} className='tft-star' id={`star-${id}`}/>);
   }
 
-  const items = [];
-  for (let i = 0; i < unit.itemIcons.length; i++) {
-    items.push(<img key={`item-img-${i}`} id="item-img" src={unit.itemIcons[i]}/>);
-  }
+  // const items = [];
+  // for (let i = 0; i < unit.itemIcons.length; i++) {
+  //   items.push(<img key={`item-img-${i}`} id="item-img" src={unit.itemIcons[i]}/>);
+  // }
   
   return (
     <div className="OuterTFTDDUnitBox">
@@ -23,9 +23,9 @@ const TFTDDUnitsBox = props => {
 
       <img className="TFTunit" id={id} src={unit.unitIcon}/>
       
-      <div className="TFTitemsDiv">
+      {/* <div className="TFTitemsDiv">
         {items}
-      </div>
+      </div> */}
       
     </div>
   );

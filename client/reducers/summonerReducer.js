@@ -29,15 +29,6 @@ const summonerReducer = (state = initialState, action) => {
         allMatchesPlayedData: payload.allMatchesPlayedData,
         }
       );
-    
-    case types.ADD_SUMM_CHAMP_DATA:
-
-        return Object.assign(
-          {},
-          state, {
-            playerChampData: payload.playerChampData,
-          }
-        );
 
   // returning default state if no case is met
   default: {

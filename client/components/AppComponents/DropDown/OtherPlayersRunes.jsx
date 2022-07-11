@@ -40,9 +40,9 @@ const OtherPlayerRunes = props => {
         </div>
 
         <div className="shardsDD">
-          <img className="shardDD" src={runes[8].icon}/>
-          <img className="shardDD" src={runes[9].icon}/>
           <img className="shardDD" src={runes[10].icon}/>
+          <img className="shardDD" src={runes[9].icon}/>
+          <img className="shardDD" src={runes[8].icon}/>
         </div>
       </div>
 

@@ -81,12 +81,16 @@ html, body {
 }
 
 #summonerUpdateButton {
-  background: none;
   border: none;
+  border-left: 3px solid rgba(255, 255, 255, 0.80);
+  width: 5%;
+  display: flex;
+  justify-self: flex-start;
+  background: none;
   margin: 0;
   color:#ffffff;
-  font-size: 1em;
-  font-style: italic;
+  font-size: 1.5em;
+  font-weight: 500;
 }
 #summonerUpdateButton:hover {
   cursor: pointer;
@@ -105,8 +109,9 @@ html, body {
 }
 .headerinfo {
   display: flex;
-  align-items: center;
-  gap: 2em;
+  width: 99%;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #welcome {

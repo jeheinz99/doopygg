@@ -111,7 +111,7 @@ const Recent20StatsBox = props => {
         
         <div className="recent20TotalStats">
           <p> {totalWins + totalLosses}G </p>
-          <p> {totalWinPercent}% W/L </p>
+          <p> {Math.round(totalWinPercent)}% W/L </p>
           {/* {`( ${totalWins}`}<span id="winTag">{`W`}</span> - {totalLosses}<span id="lossTag">{`L`}</span>{' )'} */}
 
           <div className="WinLossBar">

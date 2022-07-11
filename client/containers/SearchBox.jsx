@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getSummonerData, updateSummonerData } from '../actions/actions.js';
 import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
-import SummonerBox from '../components/AppComponents/SummonerBox.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataBox.jsx';
 import SummonerChampDataBoxTemp from '../components/AppComponents/SummonerChampDataBoxTemp.jsx';
+import { PulseLoader } from 'react-spinners';
 
 import { BiSearch } from 'react-icons/bi';
 
@@ -12,7 +12,11 @@ const SearchBox = () => {
   const summName = useSelector(state => state.summoners.summonerName);
   const matchHistory = useSelector(state => state.summoners.matchHistory);
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
+
+  const [loading, setLoading] = useState(false);
+
   const loadSummonerData = useDispatch();
+
   const update = useDispatch();
 
   let summonerNameInput;
@@ -20,6 +24,10 @@ const SearchBox = () => {
       summonerNameInput = e.target.value;
       return summonerNameInput;
     }
+
+  const updateLoading = async () => {
+    
+  };
   
   return (
     <div className="OuterSearchBox">
@@ -33,9 +41,17 @@ const SearchBox = () => {
         </div>
       </div>
 
-      {matchHistory[0] && <div className="headerinfo">
+      {matchHistory[0] && !loading && <div className="headerinfo">
         <h3> Summoner Information </h3>
         <button id="summonerUpdateButton" onClick={() => update(updateSummonerData(summName))}> Update </button>
+      </div>}
+
+      {matchHistory[0] && loading && <div className="headerinfo">
+        <h3> Summoner Information </h3>
+          <div className="updatingDiv">
+            <p id="updatingText"> Updating... </p>
+            <PulseLoader color="#ffffff" size={15} speedMultiplier={0.6}/>
+          </div>
       </div>}
       
     {matchHistory[0] && allMatchesPlayedData[0] && <div className="SummonerDataBoxGroup">

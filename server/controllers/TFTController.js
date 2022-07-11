@@ -27,7 +27,7 @@ const mapLittleLegendIcons = async legendId => {
 };
 
 const mapUnitIcons = async units => {
-
+  
   for (let i = 0; i < units.length; i++) {
     const query = `SELECT path FROM tftchamps WHERE name IN ('${units[i].character_id}')`;
     const path = await db.query(query);
@@ -48,9 +48,11 @@ const mapUnitIcons = async units => {
 const mapTraitIcons = async traits => {
 
   for (let i = 0; i < traits.length; i++) {
-    const query = `SELECT path FROM traits WHERE name IN ('${traits[i].name}')`;
-    const path = await db.query(query);
-    traits[i]["traitIcon"] = path.rows[0].path;
+    if (traits[i].tier_current > 0) {
+      const query = `SELECT path FROM traits WHERE name IN ('${traits[i].name}')`;
+      const path = await db.query(query);
+      traits[i]["traitIcon"] = path.rows[0].path;
+    }
   }
   return traits;
 };
@@ -191,23 +193,12 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       }
     };
 
+    
     const TFTMatchHistory = [];
     const otherPlayersData = [];
     for (let i = 0; i < matchData.length; i++) {
       for (let j = 0; j < 8; j++) {
 
-        const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${matchData[i].participants[j].puuid}?api_key=${api_key}`,
-        {
-          headers: {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-            "Origin": "https://developer.riotgames.com"
-            }
-        });
-
-        const playerName = playerNameRes.data.name;
-        
         if (matchData[i].participants[j].puuid === puuid) {
           const player = matchData[i].participants[j];
           TFTMatchHistory.push({
@@ -222,7 +213,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
             units: player.units,
           });
           otherPlayersData.push({
-            name: playerName,
+            puuid: player.puuid,
             augments: player.augments,
             companion: player.companion.content_ID,
             level: player.level,
@@ -237,7 +228,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
         else {
           const player = matchData[i].participants[j];
           otherPlayersData.push({
-            name: playerName,
+            puuid: player.puuid,
             augments: player.augments,
             companion: player.companion.content_ID,
             level: player.level,
@@ -265,20 +256,6 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       TFTMatchHistory[i].companion = littleLegendMap;
 
     };
-
-    for (let i = 0; i < otherPlayersData.length; i++) {
-      
-      const augmentsMap = await mapAugmentIcons(otherPlayersData[i].augments);
-      const littleLegendMap = await mapLittleLegendIcons(otherPlayersData[i].companion);
-      const unitsMap = await mapUnitIcons(otherPlayersData[i].units);
-      const traitsMap = await mapTraitIcons(otherPlayersData[i].traits);
-
-      otherPlayersData[i].traits = traitsMap;
-      otherPlayersData[i].units = unitsMap;
-      otherPlayersData[i].companion = littleLegendMap;
-      otherPlayersData[i].augments = augmentsMap;
-
-    }
 
     const TFTData = {
       TFTData: TFTMatchHistory,
@@ -325,4 +302,56 @@ TFTController.updateTFTSummData = async (req, res, next) => {
   };
 };
 
+TFTController.getTFTDDBoxSummData = async (req, res, next) => {
+  try {
+    const { body } = req;
+
+    for (let i = 0; i < body.length; i++) {
+      const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${body[i].puuid}?api_key=${api_key}`,
+      {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+          "Accept-Language": "en-US,en;q=0.9",
+          "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+          "Origin": "https://developer.riotgames.com"
+          }
+      });
+      body[i].name = playerNameRes.data.name;
+    }
+
+    for (let i = 0; i < body.length; i++) {
+      
+      const augmentsMap = await mapAugmentIcons(body[i].augments);
+      const littleLegendMap = await mapLittleLegendIcons(body[i].companion);
+      const unitsMap = await mapUnitIcons(body[i].units);
+      const traitsMap = await mapTraitIcons(body[i].traits);
+
+      body[i].traits = traitsMap;
+      body[i].units = unitsMap;
+      body[i].companion = littleLegendMap;
+      body[i].augments = augmentsMap;
+
+    }
+
+    res.locals.DDBoxData = (body);
+    return next();
+  }
+  catch(err) {
+    console.log(err, 'err in getDDBoxSummData');
+    return next(err);
+  }
+};
+
 module.exports = TFTController;
+
+// const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${matchData[i].participants[j].puuid}?api_key=${api_key}`,
+// {
+//   headers: {
+//     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+//     "Accept-Language": "en-US,en;q=0.9",
+//     "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+//     "Origin": "https://developer.riotgames.com"
+//     }
+// });
+
+// const playerName = playerNameRes.data.name;

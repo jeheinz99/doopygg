@@ -13,16 +13,9 @@ mongoose.connect(MONGO_URI, {
 .then(() => console.log('Connected to Mongo DB.'))
 .catch(err => console.log(err));
 
-// require summoner controllers
 const summonerController = require('./controllers/summonerController');
-
-// require valorant controllers
 const valorantController = require('./controllers/valorantController');
-
-// require tft controllers
 const TFTController = require('./controllers/TFTController');
-
-// require leaderboard controllers
 const leaderboardController = require('./controllers/leaderboardController');
 
 // parsing request body
@@ -45,10 +38,33 @@ app.use(function(req, res, next) {
   next();
 });
 
+// SUMMONER ENDPOINT
+// router handler to handle all requests to main app endpoint with summoners
+const summonerRouter = express.Router();
+app.use('/summoner', summonerRouter);
+
+summonerRouter.get('/test', summonerController.testSummData, (req, res) => {
+  return res.status(200).send(res.locals.summonerTestData);
+});
+
+summonerRouter.get('/update/:summonerName', summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
+  // console.log(res.locals.recentSummoner, ' recent summoner in server js');
+  return res.status(200).send(res.locals.summonerData);
+});
+
+summonerRouter.get('/:summonerName', summonerController.checkSummData, summonerController.updateSummData, (req, res) => {
+  // console.log(res.locals.summonerData);
+  return res.status(200).send(res.locals.summonerData);
+});
+
 // TFT ENDPOINT 
 // router handler to handle all request to /tft endpoint
 const TFTRouter = express.Router();
 app.use('/tft', TFTRouter);
+
+TFTRouter.post('/ddboxdata', TFTController.getTFTDDBoxSummData, (req, res) => {
+  return res.status(200).send(res.locals.DDBoxData);
+});
 
 TFTRouter.get('/update/:summonerName', TFTController.updateTFTSummData, (req, res) => {
   // console.log(res.locals.TFTData);
@@ -79,25 +95,6 @@ app.use('/valorant', valorantRouter);
 valorantRouter.get('/:riotId/:tagLine', valorantController.valData, (req, res) => {
   // console.log(res.locals.valData);
   return res.status(200).send(res.locals.valData);
-});
-
-// SUMMONER ENDPOINT
-// router handler to handle all requests to main app endpoint with summoners
-const summonerRouter = express.Router();
-app.use('/summoner', summonerRouter);
-
-summonerRouter.get('/test', summonerController.testSummData, (req, res) => {
-  return res.status(200).send(res.locals.summonerTestData);
-});
-
-summonerRouter.get('/update/:summonerName', summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
-  // console.log(res.locals.recentSummoner, ' recent summoner in server js');
-  return res.status(200).send(res.locals.summonerData);
-});
-
-summonerRouter.get('/:summonerName', summonerController.checkSummData, summonerController.updateSummData, (req, res) => {
-  // console.log(res.locals.summonerData);
-  return res.status(200).send(res.locals.summonerData);
 });
 
 // catch-all route handler for any requests to an unknown route

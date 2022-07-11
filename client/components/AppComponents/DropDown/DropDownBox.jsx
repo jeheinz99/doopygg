@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TeamsBoxes from './TeamsBoxes.jsx';
 import Runes1 from './Runes1.jsx';
 import Runes2 from './Runes2.jsx';
 import Runes3 from './Runes3.jsx';
 import OtherPlayersRunes from './OtherPlayersRunes.jsx';
 
-
 import { RiSwordFill } from 'react-icons/ri';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RiCameraSwitchFill } from 'react-icons/ri';
 import { RiCameraSwitchLine } from 'react-icons/ri';
 
 const DropDownBox = props => {
   
   const { matchNum, otherPlayers, id, championIcon, items } = props;
+
   const summonerName = useSelector(state => state.summoners.summonerName);
+
+  const [currBox, toggleBox] = useState(false);
 
   const team1Box = [];
   const team2Box = [];
 
-  const [currBox, toggleBox] = useState(false);
 
   const team1Objs = {
     barons: 0,

@@ -547,6 +547,15 @@ summonerController.testSummData = async (req, res, next) => {
   }
 };
 
+summonerController.getDDBoxSummData = async (req, res, next) => {
+  try {
+    console.log('in back-end ddboxsummdata');
+  }
+  catch(err) {
+    console.log(err, 'err in getDDBoxSummData');
+    return next(err);
+  }
+};
 
 module.exports = summonerController;
 
