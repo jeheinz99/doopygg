@@ -333,7 +333,7 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
 
     }
 
-    res.locals.DDBoxData = (body);
+    res.locals.DDBoxData = body;
     return next();
   }
   catch(err) {

@@ -22,7 +22,6 @@ const Recent20Champion = props => {
       
       <div className="Recent20ChampCardDiv2">
         <div className="Recent20ChampCardDiv2box1">
-          {/* <p> {id} </p> */}
           <div className="kdaAvgsR20">
             {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
             {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}

@@ -35,7 +35,6 @@ const SummonerChampDataBoxEntry = props => {
           {!isNaN(winPercent) && winPercent >= 60 && <p id="above60wr"> {winPercent}% </p>}
           {!isNaN(winPercent) && winPercent < 60 && <p id="below60wr"> {winPercent}% </p>}
           {played === 1 ? <p id="gamesPlayedLast20ptag1"> {played} Game</p> : <p id="gamesPlayedLast20ptag1"> {played} Games</p>}
-          {/* <p id="gamesPlayedLast20ptag2"> {`(${win}W`} - {`${loss}L)`} </p> */}
         </div>
 
         <div className="champEntryDiv4">

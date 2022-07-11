@@ -47,13 +47,15 @@ const TFTDropDownBox = props => {
 
   return (
     <div className="TFTDDBoxWrap">
+
       { playersArr.length === 0 ? 
       <div className="LoadingDiv">
         <PulseLoader color="#ffffff" size={15} speedMultiplier={0.6}/>
         <p> Loading... </p>
       </div> 
         : 
-      <div className="temp-111">{playersArr}</div>}
+      <div>{playersArr}</div>}
+
     </div>
   );
 };

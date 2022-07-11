@@ -43,6 +43,10 @@ app.use(function(req, res, next) {
 const summonerRouter = express.Router();
 app.use('/summoner', summonerRouter);
 
+summonerRouter.post('/ddboxdata', summonerController.getDDBoxSummData, (req, res) => {
+  return res.status(200).send(res.locals.DDBoxData);
+});
+
 summonerRouter.get('/test', summonerController.testSummData, (req, res) => {
   return res.status(200).send(res.locals.summonerTestData);
 });

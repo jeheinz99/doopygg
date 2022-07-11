@@ -4,9 +4,11 @@ import Runes1 from './Runes1.jsx';
 import Runes2 from './Runes2.jsx';
 import Runes3 from './Runes3.jsx';
 import OtherPlayersRunes from './OtherPlayersRunes.jsx';
+import axios from 'axios';
+import { PulseLoader } from 'react-spinners';
 
 import { RiSwordFill } from 'react-icons/ri';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RiCameraSwitchFill } from 'react-icons/ri';
 import { RiCameraSwitchLine } from 'react-icons/ri';
 
@@ -17,10 +19,27 @@ const DropDownBox = props => {
   const summonerName = useSelector(state => state.summoners.summonerName);
 
   const [currBox, toggleBox] = useState(false);
+  const [lolDDboxData, lolSetDDboxData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.post('/summoner/ddboxdata', 
+      otherPlayers, 
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      lolSetDDboxData(res.data);
+      console.log(lolDDboxData, 'lolDDboxData');
+      console.log(team1Box, 'team1Box');
+      console.log(otherPlayersRunes, 'otherplayesrunes');
+    }
+    getData();
+  }, [lolDDboxData]);
 
   const team1Box = [];
   const team2Box = [];
-
 
   const team1Objs = {
     barons: 0,
@@ -65,7 +84,7 @@ const DropDownBox = props => {
     return runeInfo;
   };
   
-  for (let i = 0; i < otherPlayers.length; i++) {
+  for (let i = 0; i < lolDDboxData.length; i++) {
     (otherPlayers[i].win ? 
       team1Box.push(<TeamsBoxes 
         key={i} 
@@ -122,7 +141,7 @@ const DropDownBox = props => {
     }
   }
 
-  const runeInfo = getRuneInfo(otherPlayers);
+  const runeInfo = getRuneInfo(lolDDboxData);
 
   const otherPlayersRunes = [];
   const otherPlayersRunes2 = [];
@@ -148,12 +167,15 @@ const DropDownBox = props => {
 
   const goldPercent = ((team1Objs.goldEarned / (team1Objs.goldEarned + team2Objs.goldEarned))*100).toFixed(0);
 
+  console.log(lolDDboxData, 'lolDDboxData out of effect');
+  console.log(team1Box, 'team1Box out of effect');
+  console.log(otherPlayersRunes, 'otherplayesrunes out of effect');
   return (
     <div className="DDBoxWrap">
 
-      {currBox && <div id="test"><button id="swapDDbox2" onClick={() => toggleBox(!currBox)}> <RiCameraSwitchLine id="historyButton"/> </button></div>}
+      {currBox && otherPlayersRunes.length > 0 && <div id="test"><button id="swapDDbox2" onClick={() => toggleBox(!currBox)}> <RiCameraSwitchLine id="historyButton"/> </button></div>}
 
-      {currBox && 
+      {currBox && otherPlayersRunes.length > 0 && 
         <div className="RunesInfoDD">
 
           <div className="RunesInfoMain">
@@ -173,7 +195,6 @@ const DropDownBox = props => {
                 <img id="item5" src={items[5]}/>
               </div>
             </div>
-
             <Runes1 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
             <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
             <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
@@ -191,7 +212,7 @@ const DropDownBox = props => {
         </div>
         }
 
-      {!currBox && 
+      {!currBox && team1Box.length > 0 && 
       <div className="ObjectivesDD">
 
         <div className="Team1ObjectivesDD">
@@ -257,7 +278,7 @@ const DropDownBox = props => {
       </div>
       }
 
-      {!currBox &&
+      {!currBox && team1Box.length > 0 && 
       <div className="TeamInfoTextDD">
 
         <div className="TeamInfoTextDD1">
@@ -279,7 +300,7 @@ const DropDownBox = props => {
       </div>
       }
       
-      {!currBox &&
+      {!currBox && team1Box.length > 0 && 
       <div className="DropDownBoxMatch">
         <div className="team1BoxDD">
           { team1Box }
@@ -292,6 +313,13 @@ const DropDownBox = props => {
           <button id="RuneDDButton"><img id="RuneDDImage" src='https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/runesicon.png'/></button>
           <button id="StatDDButton"><img id="StatDDImage" src='https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodscdrscalingicon.png'/></button>
         </div> */}
+      </div>
+      }
+
+      {team1Box.length === 0 && 
+      <div className="LoadingDiv">
+        <PulseLoader color="#ffffff" size={15} speedMultiplier={0.6}/>
+        <p> Loading... </p>
       </div>
       }
 

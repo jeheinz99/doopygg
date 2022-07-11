@@ -176,16 +176,9 @@ summonerController.updateSummData = async (req, res, next) => {
     };
     for (let i = 0; i < responseRankData.data.length; i++) {
       if (responseRankData.data[i].queueType === "RANKED_SOLO_5x5") {
-
-        if (responseRankData.data[i].tier === undefined) {
-          rankData.rankedSolo.push('Unranked', 0, 'I');
-        }
-        else {
           rankData.rankedSolo.push(responseRankData.data[i].tier);
           rankData.rankedSolo.push(responseRankData.data[i].leaguePoints);
           rankData.rankedSolo.push(responseRankData.data[i].rank);
-        }
-
       }
 
       if (responseRankData.data[i].queueType === "RANKED_FLEX_SR") {
@@ -353,17 +346,17 @@ summonerController.updateSummData = async (req, res, next) => {
     }
 
     // maps icons for other players
-    for (let i = 0; i < otherPlayersData.length; i++) {
+    // for (let i = 0; i < otherPlayersData.length; i++) {
 
-      const itemsMap = await mapItemIcons(otherPlayersData[i].items); // 7 items total
-      const runesMap = await mapRuneIcons(otherPlayersData[i].runes); // 11 runes total
-      const summSpellMap = await mapSummonerIcons(otherPlayersData[i].summonerSpells); // 2 items total
+    //   const itemsMap = await mapItemIcons(otherPlayersData[i].items); // 7 items total
+    //   const runesMap = await mapRuneIcons(otherPlayersData[i].runes); // 11 runes total
+    //   const summSpellMap = await mapSummonerIcons(otherPlayersData[i].summonerSpells); // 2 items total
 
-      otherPlayersData[i].items = itemsMap;
-      otherPlayersData[i].runes = runesMap;
-      otherPlayersData[i].summonerSpells = summSpellMap;
+    //   otherPlayersData[i].items = itemsMap;
+    //   otherPlayersData[i].runes = runesMap;
+    //   otherPlayersData[i].summonerSpells = summSpellMap;
 
-    }
+    // }
 
     const allS12MatchesArr = [];
 
@@ -549,7 +542,19 @@ summonerController.testSummData = async (req, res, next) => {
 
 summonerController.getDDBoxSummData = async (req, res, next) => {
   try {
-    console.log('in back-end ddboxsummdata');
+    const { body } = req;
+    console.log(body, 'body in back-end');
+    for (let i = 0; i < body.length; i++) {
+      const itemsMap = await mapItemIcons(body[i].items); // 7 items total
+      const runesMap = await mapRuneIcons(body[i].runes); // 11 runes total
+      const summSpellMap = await mapSummonerIcons(body[i].summonerSpells); // 2 items total
+
+      body[i].items = itemsMap;
+      body[i].runes = runesMap;
+      body[i].summonerSpells = summSpellMap;
+    }
+    res.locals.DDBoxData = body;
+    return next();
   }
   catch(err) {
     console.log(err, 'err in getDDBoxSummData');

@@ -48,6 +48,7 @@
   align-items: center;
 }
 .TFTDropDownBoxes {
+  transition: 1s;
   width: 100%;
 }
 .TFTDDBoxWrap {
@@ -678,7 +679,10 @@
   font-size: 1.5em;
   font-family:Verdana, Geneva, Tahoma, sans-serif
 }
-
+.hidden-true {
+  display: none;
+  transition: 1s;
+}
 .LoadingDiv {
   display: flex;
   flex-direction: column;
