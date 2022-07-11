@@ -18,12 +18,6 @@ const TFTBoxes = props => {
     return outputArr;
   };
 
-  const test = () => {
-    console.log(hidden, 'hidden');
-    console.log(tftOpen, 'tftOpen');
-    setHidden(!hidden);
-  }
-
   const [tftOpen, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
 
@@ -97,9 +91,8 @@ const TFTBoxes = props => {
         </div>
         <div className="TFTMatchGroupButton">
           {!tftOpen && <button className="TFTDataBoxButton" onClick={() => setOpen(!tftOpen) }><AiFillCaretDown /></button>}
-          {tftOpen && hidden && <button className="TFTDataBoxButton" onClick={() => test() }><AiFillCaretDown/></button>}
-          {tftOpen && !hidden && <button className="TFTDataBoxButton" onClick={() => test() }><AiFillCaretUp/></button>}
-          {/* {tftOpen && <button className="TFTDataBoxButton" onClick={() => setOpen(!tftOpen) }><AiFillCaretUp /></button>} */}
+          {tftOpen && hidden && <button className="TFTDataBoxButton" onClick={() => setHidden(!hidden)}><AiFillCaretDown/></button>}
+          {tftOpen && !hidden && <button className="TFTDataBoxButton" onClick={() => setHidden(!hidden)}><AiFillCaretUp/></button>}
         </div>
       </div>
       <div className="TFTDropDownBoxes">

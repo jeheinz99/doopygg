@@ -1324,6 +1324,12 @@ h4 {
   border: none;
   background: none;
   transition: 0.5s;
+  display: flex;
+  width: 65%;
+  align-items: center;
+  height: 8%;
+  position: absolute;
+  justify-content: flex-end;
 }
 #otherPlayers-8000 {
   background-color: rgba(212, 205, 71, 0.2);
@@ -1403,4 +1409,8 @@ h4 {
   color:rgba(255, 255, 255, 0.861);
   position: relative;
   margin: 0 20px;
+}
+
+.DDbox {
+  width: 100%;
 }

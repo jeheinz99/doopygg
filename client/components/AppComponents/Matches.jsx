@@ -12,6 +12,7 @@ const Matches = props => {
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 
   const [summonerOpen, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   return (
     <div className="MatchesWrapper">
@@ -100,12 +101,13 @@ const Matches = props => {
           </div>
         </div>
         <div className="MatchGroupButton">
-          {!summonerOpen && <button className="SummonerDataBoxButton" id="SDBexpand" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretDown /></button>}
-          {summonerOpen && <button className="SummonerDataBoxButton" id="SDBcontract" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretUp /></button>}
+          {!summonerOpen && <button className="SummonerDataBoxButton" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretDown /></button>}
+          {summonerOpen && hidden && <button className="SummonerDataBoxButton" onClick={ () => setHidden(!hidden) }><AiFillCaretDown /></button>}
+          {summonerOpen && !hidden && <button className="SummonerDataBoxButton" onClick={ () => setHidden(!hidden) }><AiFillCaretUp /></button>}
         </div>
       </div>
       <div className="DropDownBoxes">
-        {summonerOpen && <DropDownBox championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/>}
+        {summonerOpen && <div className={`hidden-${hidden}`}><DropDownBox championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/></div>}
       </div>
     </div>
   );
