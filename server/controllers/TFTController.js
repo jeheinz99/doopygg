@@ -14,7 +14,6 @@ const mapAugmentIcons = async augments => {
   end;`
 
   const path = await db.query(query);
-  // console.log(path.rows, 'path rows after query');
   return [path.rows[0].path, path.rows[1].path, path.rows[2].path];
 };
 
@@ -26,18 +25,47 @@ const mapLittleLegendIcons = async legendId => {
 };
 
 const mapUnitIcons = async units => {
+
+  const matchItemIcons = (items, queryRes) => {
+    const tempArr = [];
+    for (let i = 0; i < items.length; i++) {
+      for (let j = 0; j < queryRes.length; j++) {
+        if (items[i] === queryRes[j].id) {
+          tempArr.push(queryRes[j].path);
+        }
+      }
+    }
+    return tempArr;
+  };
   
+  const unitsArr = [];
+  const itemsArr = [];
+
   for (let i = 0; i < units.length; i++) {
-    const query = `SELECT path FROM tftchamps WHERE name IN ('${units[i].character_id}')`;
-    const path = await db.query(query);
-    units[i]["unitIcon"] = path.rows[0].path;
-    
-    units[i]["itemIcons"] = [];
+    unitsArr.push(`'${units[i].character_id}'`);
+
     if (units[i].items.length > 0) {
+
       for (let j = 0; j < units[i].items.length; j++) {
-        const itemsQuery = `SELECT path FROM tftitems WHERE id IN ('${units[i].items[j]}')`;
-        const itemPath = await db.query(itemsQuery);
-        units[i]["itemIcons"].push(itemPath.rows[0].path);
+        itemsArr.push(units[i].items[j]);
+      }
+
+    }
+  }
+
+  const query = `SELECT * FROM tftchamps WHERE name = any(array[${unitsArr}])`;
+  const query2 = `SELECT * FROM tftitems WHERE id = any(array[${itemsArr}])`;
+  const path = await db.query(query);
+  console.log(path.rows, 'path.rows');
+  const path2 = await db.query(query2);
+
+  for (let i = 0; i < units.length; i++) {
+    for (let j = 0; j < path.rows.length; j++) {
+      if (units[i].character_id === path.rows[j].name) {
+        units[i].unitIcon = path.rows[j].path;
+      }
+      if (units[i].items.length > 0) {
+        units[i].itemIcons = matchItemIcons(units[i].items, path2.rows);
       }
     }
   }
@@ -46,11 +74,21 @@ const mapUnitIcons = async units => {
 
 const mapTraitIcons = async traits => {
 
+  const tempArr = [];
   for (let i = 0; i < traits.length; i++) {
     if (traits[i].tier_current > 0) {
-      const query = `SELECT path FROM traits WHERE name IN ('${traits[i].name}')`;
-      const path = await db.query(query);
-      traits[i]["traitIcon"] = path.rows[0].path;
+      tempArr.push(`'${traits[i].name}'`);
+    }
+  }
+
+  const query = `SELECT * FROM traits WHERE name = any(array[${tempArr}])`;
+  const path = await db.query(query);
+
+  for (let i = 0; i < traits.length; i++) {
+    for (let j = 0; j < path.rows.length; j++) {
+      if (traits[i].name === path.rows[j].name) {
+        traits[i].traitIcon = path.rows[j].path;
+      }
     }
   }
   return traits;
@@ -92,7 +130,6 @@ TFTController.updateTFTSummData = async (req, res, next) => {
 
   try {
     const { summonerName } = req.params;
-    console.log('TFTData back-end', summonerName);
 
     const getSummData = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`,
     {
@@ -126,8 +163,6 @@ TFTController.updateTFTSummData = async (req, res, next) => {
         "Origin": "https://developer.riotgames.com"
       }
     });
-
-    console.log(getRankData2.data, 'getRankData2');
 
     const rankData = {
       rankedSolo: [],
@@ -163,7 +198,6 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     });
 
     const matchIdList = getMatchList.data;
-    // console.log(matchIdList);
 
     const matchData = [];
     for (let i = 0; i < matchIdList.length; i++) {
@@ -305,18 +339,18 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
   try {
     const { body } = req;
 
-    for (let i = 0; i < body.length; i++) {
-      const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${body[i].puuid}?api_key=${process.env.api_key}`,
-      {
-        headers: {
-          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-          "Accept-Language": "en-US,en;q=0.9",
-          "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-          "Origin": "https://developer.riotgames.com"
-          }
-      });
-      body[i].name = playerNameRes.data.name;
-    }
+    // for (let i = 0; i < body.length; i++) {
+    //   const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${body[i].puuid}?api_key=${process.env.api_key}`,
+    //   {
+    //     headers: {
+    //       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+    //       "Accept-Language": "en-US,en;q=0.9",
+    //       "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+    //       "Origin": "https://developer.riotgames.com"
+    //       }
+    //   });
+    //   body[i].name = playerNameRes.data.name;
+    // }
 
     for (let i = 0; i < body.length; i++) {
       
@@ -324,7 +358,7 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
       const littleLegendMap = await mapLittleLegendIcons(body[i].companion);
       const unitsMap = await mapUnitIcons(body[i].units);
       const traitsMap = await mapTraitIcons(body[i].traits);
-
+      
       body[i].traits = traitsMap;
       body[i].units = unitsMap;
       body[i].companion = littleLegendMap;
