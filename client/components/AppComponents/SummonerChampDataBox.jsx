@@ -22,6 +22,24 @@ const SummonerChampDataBox = () => {
     }
     return data; 
   };
+  
+  const orderData = data => {
+
+    const tempArr = [];
+
+    for (let i in data) {
+      tempArr.push(data[i]);
+    }
+    
+    tempArr.sort((a, b) => {
+      return ((b.played - a.played) === 0 ? (((b.kills + b.assists) / b.deaths) - ((a.kills + a.assists) / a.deaths)) : b.played - a.played);
+    });
+
+    return {
+      top5Played: [tempArr[0], tempArr[1], tempArr[2], tempArr[3], tempArr[4]],
+      allPlayed: tempArr,
+    };
+  };
 
   const champData = {};
 
@@ -71,24 +89,6 @@ const SummonerChampDataBox = () => {
       }
     }
   }
-
-  const orderData = data => {
-
-    const tempArr = [];
-
-    for (let i in data) {
-      tempArr.push(data[i]);
-    }
-    
-    tempArr.sort((a, b) => {
-      return ((b.played - a.played) === 0 ? (((b.kills + b.assists) / b.deaths) - ((a.kills + a.assists) / a.deaths)) : b.played - a.played);
-    });
-
-    return {
-      top5Played: [tempArr[0], tempArr[1], tempArr[2], tempArr[3], tempArr[4]],
-      allPlayed: tempArr,
-    };
-  };
 
   const checkedRankedData = checkRankData(summonerRank);
 

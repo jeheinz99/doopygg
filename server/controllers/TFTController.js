@@ -1,6 +1,5 @@
 const TFTController = {};
 const axios = require('axios');
-const { api_key } = require('../data');
 const db = require('../models/IconPaths');
 const tftSummoner = require('../models/TFTSummonerData');
 const tftMatches = require('../models/TFTMatchesModel');
@@ -95,7 +94,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const { summonerName } = req.params;
     console.log('TFTData back-end', summonerName);
 
-    const getSummData = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-name/${summonerName}?api_key=${api_key}`,
+    const getSummData = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -108,7 +107,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const { data } = getSummData;
     const { puuid, profileIconId, summonerLevel, id } = data;
 
-    const getRankData = await axios.get(`https://na1.api.riotgames.com/tft/league/v1/entries/by-summoner/${id}?api_key=${api_key}`,
+    const getRankData = await axios.get(`https://na1.api.riotgames.com/tft/league/v1/entries/by-summoner/${id}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
@@ -118,7 +117,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       }
     });
 
-    const getRankData2 = await axios.get(`https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${api_key}`,
+    const getRankData2 = await axios.get(`https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
@@ -153,7 +152,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
 
 
     // returns a list of recent matches based on puuid 
-    const getMatchList = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${api_key}`,
+    const getMatchList = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -172,7 +171,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       const match = await tftMatches.findOne({matchId: matchIdList[i]});
       // if match returns null (doesn't exist in DB), ping API and then store it
       if (match === null) {
-        const getMatchData = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/${matchIdList[i]}?api_key=${api_key}`,
+        const getMatchData = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/${matchIdList[i]}?api_key=${process.env.api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -307,7 +306,7 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
     const { body } = req;
 
     for (let i = 0; i < body.length; i++) {
-      const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${body[i].puuid}?api_key=${api_key}`,
+      const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${body[i].puuid}?api_key=${process.env.api_key}`,
       {
         headers: {
           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",

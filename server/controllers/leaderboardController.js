@@ -1,6 +1,5 @@
 const leaderboardController = {};
 const axios = require('axios');
-const { api_key } = require('../data')
 
 // middleware to retrieve data for top 25 on NA leaderboards
 leaderboardController.leaderboardData = async (req, res, next) => {
@@ -11,7 +10,7 @@ leaderboardController.leaderboardData = async (req, res, next) => {
 
   try {
     // async call to API to get summonerName, tier, wins/losses, leaguePoints about top 25 Challengers in N/A
-    const leaderboardDataResponse = await axios.get(`https://${regionName}.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/I?page=1&api_key=${api_key}`,
+    const leaderboardDataResponse = await axios.get(`https://${regionName}.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/I?page=1&api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -29,7 +28,7 @@ leaderboardController.leaderboardData = async (req, res, next) => {
     for (let i = 0; i < 25; i++) {
       const { summonerId } = data[i];
       // console.log(summonerId);
-    const leaderboardDataResponseTwo = await axios.get(`https://${regionName}.api.riotgames.com/lol/summoner/v4/summoners/${summonerId}?api_key=${api_key}`,
+    const leaderboardDataResponseTwo = await axios.get(`https://${regionName}.api.riotgames.com/lol/summoner/v4/summoners/${summonerId}?api_key=${process.env.api_key}`,
     {
       headers: {
           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",

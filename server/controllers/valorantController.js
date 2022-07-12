@@ -1,6 +1,5 @@
 const valorantController = {};
 const axios = require('axios');
-const { api_key } = require('../data');
 
 valorantController.valData = async (req, res, next) => {
 
@@ -8,7 +7,7 @@ valorantController.valData = async (req, res, next) => {
   // console.log('riotId and tagLine in controller', riotId, tagLine);
 
   try {
-    const valDataResponse = await axios.get(`https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${riotId}/${tagLine}?api_key=${api_key}`,
+    const valDataResponse = await axios.get(`https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${riotId}/${tagLine}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",

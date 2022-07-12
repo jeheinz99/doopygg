@@ -1,9 +1,7 @@
 const { Pool } = require('pg');
 
-const { PG_URI } = require('../data');
-
 const pool = new Pool({
-    connectionString: PG_URI
+    connectionString: process.env.PG_URI
 });
 
 // PostGresQL DB to store Icon Paths
