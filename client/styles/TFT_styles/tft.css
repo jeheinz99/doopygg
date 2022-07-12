@@ -336,7 +336,6 @@
   width: 32px;
   height: 32px;
   padding: 1px;
-
 }
 
 .TFTunit {
@@ -616,13 +615,19 @@
   color: #b4b4b4;
 }
 #Trait-1 {
-  filter: invert(70%) sepia(30%) saturate(2504%) hue-rotate(2deg) brightness(109%) contrast(102%);
+  background: rgb(128, 78, 25);
+  border: 1px solid white;
+  /* filter: invert(70%) sepia(30%) saturate(2504%) hue-rotate(2deg) brightness(109%) contrast(102%); */
 }
 #Trait-2 {
-  filter: invert(30%);
+  background: rgb(83, 83, 83);
+  border: 1px solid white;
+  /* filter: invert(30%); */
 }
 #Trait-3 {
-  filter: invert(20%) sepia(34%) saturate(2504%) hue-rotate(2deg) brightness(109%) contrast(102%);
+  background: rgb(108, 102, 20);
+  border: 1px solid white;
+  /* filter: invert(20%) sepia(34%) saturate(2504%) hue-rotate(2deg) brightness(109%) contrast(102%); */
 }
 #Trait-4 {
   filter: invert(20%) sepia(24%) saturate(385%) hue-rotate(302deg) brightness(105%) contrast(103%);

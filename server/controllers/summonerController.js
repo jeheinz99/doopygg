@@ -87,6 +87,7 @@ const mapSummonerIcons = async summSpells => {
   return [path.rows[0].path, path.rows[1].path];
 };
 
+// checks whether summoner currently has data in database
 summonerController.checkSummData = async (req, res, next) => {
 
   const { summonerName } = req.params;
@@ -115,6 +116,7 @@ summonerController.checkSummData = async (req, res, next) => {
   }
 };
 
+// if no summoner data is found in checkSummData or if update button is pressed
 summonerController.updateSummData = async (req, res, next) => {
 
   const { summonerName } = req.params;
@@ -525,6 +527,7 @@ summonerController.testSummData = async (req, res, next) => {
   }
 };
 
+// gets dropdown box data when dropdownbox is clicked
 summonerController.getDDBoxSummData = async (req, res, next) => {
   try {
     const { body } = req;

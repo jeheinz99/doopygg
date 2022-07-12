@@ -4,7 +4,9 @@ const db = require('../models/IconPaths');
 const tftSummoner = require('../models/TFTSummonerData');
 const tftMatches = require('../models/TFTMatchesModel');
 
+// HELPER FUNCTIONS ---> USED TO GET DATA FROM SQL DATABASE FROM RIOT API DATA
 
+// maps augment icon based on augment name passed in
 const mapAugmentIcons = async augments => {
   const query = `SELECT path FROM tftaugments WHERE name IN ('${augments[0]}', '${augments[1]}', '${augments[2]}')
   ORDER BY CASE name
@@ -17,6 +19,7 @@ const mapAugmentIcons = async augments => {
   return [path.rows[0].path, path.rows[1].path, path.rows[2].path];
 };
 
+// maps little legend icon from id
 const mapLittleLegendIcons = async legendId => {
   const query = `SELECT path FROM littlelegends WHERE id IN ('${legendId}')`;
 
@@ -24,6 +27,7 @@ const mapLittleLegendIcons = async legendId => {
   return path.rows[0].path;
 };
 
+// maps tft unit icons from name
 const mapUnitIcons = async units => {
 
   const matchItemIcons = (items, queryRes) => {
@@ -56,7 +60,6 @@ const mapUnitIcons = async units => {
   const query = `SELECT * FROM tftchamps WHERE name = any(array[${unitsArr}])`;
   const query2 = `SELECT * FROM tftitems WHERE id = any(array[${itemsArr}])`;
   const path = await db.query(query);
-  console.log(path.rows, 'path.rows');
   const path2 = await db.query(query2);
 
   for (let i = 0; i < units.length; i++) {
@@ -72,6 +75,7 @@ const mapUnitIcons = async units => {
   return units;
 };
 
+// maps trait icons from name
 const mapTraitIcons = async traits => {
 
   const tempArr = [];
@@ -94,6 +98,7 @@ const mapTraitIcons = async traits => {
   return traits;
 };
 
+// checks if tft summoner is found in database
 TFTController.checkTFTSummData = async (req, res, next) => {
 
   const { summonerName } = req.params;
@@ -121,7 +126,7 @@ TFTController.checkTFTSummData = async (req, res, next) => {
   }
 };
 
-// middleware to retrieve data for summoner search on TFT page
+// if no data is found in checkTFTSummData or update button is pressed
 TFTController.updateTFTSummData = async (req, res, next) => {
 
   if (res.locals.TFTData) {
@@ -335,6 +340,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
   };
 };
 
+// gets TFT dropdown box data when dropdownbox is clicked
 TFTController.getTFTDDBoxSummData = async (req, res, next) => {
   try {
     const { body } = req;
@@ -349,11 +355,13 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
     //       "Origin": "https://developer.riotgames.com"
     //       }
     //   });
+    //   console.log(`${i} call`);
     //   body[i].name = playerNameRes.data.name;
     // }
 
     for (let i = 0; i < body.length; i++) {
       
+      console.log('hi');
       const augmentsMap = await mapAugmentIcons(body[i].augments);
       const littleLegendMap = await mapLittleLegendIcons(body[i].companion);
       const unitsMap = await mapUnitIcons(body[i].units);

@@ -6,8 +6,6 @@ leaderboardController.leaderboardData = async (req, res, next) => {
 
   const { regionName } = req.params;
 
-  // console.log('region name in back-end', regionName);
-
   try {
     // async call to API to get summonerName, tier, wins/losses, leaguePoints about top 25 Challengers in N/A
     const leaderboardDataResponse = await axios.get(`https://${regionName}.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/I?page=1&api_key=${process.env.api_key}`,
@@ -21,13 +19,11 @@ leaderboardController.leaderboardData = async (req, res, next) => {
     });
     
     const { data } = leaderboardDataResponse;
-    // console.log(data);
     
     // async call to API using summonerId from first call to get profile icon
     const profileIconArr = [];
     for (let i = 0; i < 25; i++) {
       const { summonerId } = data[i];
-      // console.log(summonerId);
     const leaderboardDataResponseTwo = await axios.get(`https://${regionName}.api.riotgames.com/lol/summoner/v4/summoners/${summonerId}?api_key=${process.env.api_key}`,
     {
       headers: {
@@ -58,7 +54,6 @@ leaderboardController.leaderboardData = async (req, res, next) => {
       leaderboardData: leaderboardDataArray,
       profileIcon: profileIconArr,
     };
-    // console.log('IN BACK END', leaderboardData);
     res.locals.leaderboardData = leaderboardData;
     next();
   }
