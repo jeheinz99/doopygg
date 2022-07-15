@@ -27,12 +27,12 @@ app.use(express.static(path.join(__dirname, "../dist")));
 
 // allows requests with headers to back-end from our localhost endpoint
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Origin', 'https://doopygg-sigma.vercel.app/');
   res.header('Access-Control-Allow-Credentials', true);
   next();
 });
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Origin', 'https://doopygg-sigma.vercel.app/');
   res.header('Access-Control-Allow-Credentials', true);
   next();
 });
