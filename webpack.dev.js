@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = merge(common, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'eval',
   devServer: {
     static: './client/dist',
     host: 'localhost',
@@ -13,10 +13,8 @@ module.exports = merge(common, {
     compress: true,
     port: 8080,
     historyApiFallback: true,
+    // proxy: {
+    //   '/summoner/*': 'http://localhost:3000/summoner/*',
+    // },
   },
 });
-
-//      directory: path.resolve(__dirname, './dist/index.html')
-//     proxy: {
-//   '/': 'http://localhost:3000',
-// },
