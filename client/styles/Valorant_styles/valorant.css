@@ -33,7 +33,7 @@
   border-color: #1C6EA4;
   background-color: #181A1B;
   color:rgba(255, 255, 255, 0.861);
-  box-shadow: 2px 2px 15px rgb(0, 0, 0, 5);
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
 }
 #ValBoxInput:focus {
   outline: 0;
