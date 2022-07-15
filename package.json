@@ -2,10 +2,10 @@
   "name": "doopygg",
   "version": "1.0.0",
   "description": "\"doopygg\"",
-  "main": "client.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "concurrently \" webpack-dev-server --open --hot --progress --color \" \"nodemon ./server/server.js\"",
-    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "dev": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "start": "node server/server.js"
   },
   "repository": {

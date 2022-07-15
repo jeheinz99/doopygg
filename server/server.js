@@ -23,9 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // // handles requests for static files
-app.use(express.static(path.join(__dirname, "../dist/index.html")));
-// app.use('/', express.static(path.join(__dirname, ' ../dist')));
-console.log(path.join(__dirname, '../dist'));
+app.use(express.static(path.join(__dirname, "../dist")));
 
 // allows requests with headers to back-end from our localhost endpoint
 app.use(function(req, res, next) {

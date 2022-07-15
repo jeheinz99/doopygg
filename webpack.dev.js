@@ -1,22 +1,13 @@
 const { merge } = require('webpack-merge');
-const common = require('./webpack.common');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const common = require('./webpack.common.js');
+const path = require('path');
 
 module.exports = merge(common, {
   mode: 'development',
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'development',
-    }),
-  ],
+  devtool: 'inline-source-map',
   devServer: {
-    proxy: {
-      '/': 'http://localhost:3000',
-    },
+    static: './client/dist',
     host: 'localhost',
-    static: {
-      directory: path.resolve(__dirname, './dist/index.html')
-    },
     open: true,
     hot: true,
     compress: true,
@@ -24,3 +15,8 @@ module.exports = merge(common, {
     historyApiFallback: true,
   },
 });
+
+//      directory: path.resolve(__dirname, './dist/index.html')
+//     proxy: {
+//   '/': 'http://localhost:3000',
+// },
