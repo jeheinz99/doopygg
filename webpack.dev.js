@@ -13,8 +13,12 @@ module.exports = merge(common, {
     compress: true,
     port: 8080,
     historyApiFallback: true,
-    // proxy: {
-    //   '/summoner/*': 'http://localhost:3000/summoner/*',
-    // },
+    proxy: {
+      '/': {
+        target: 'http://localhost:3000/',
+        // secure: false,
+        // changeOrigin: true,
+      }
+    },
   },
 });
