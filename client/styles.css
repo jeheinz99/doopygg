@@ -141,7 +141,7 @@ html, body {
 #MatchBoxes {
   border: 2px solid #303b51;
   border-radius: 0.5em;
-  width: 100%;
+  width: 98%;
   gap: 0.5em;
   color:rgba(255, 255, 255, 0.80);
   margin-top: 0;
@@ -1415,3 +1415,46 @@ h4 {
 .DDbox {
   width: 100%;
 }
+.R2andR3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 1400px) {
+  .SummonerDataBoxGroup {
+    flex-direction: column;
+    align-items: center;
+  }
+  .OuterSearchBox {
+    margin-top: 0;
+    width: 99.7vw;
+    padding: 0;
+    margin-bottom: 1em;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 5);
+  }
+  .MatchesWrapper {
+    width: 98%;
+  }
+  #NavbarBox {
+    border-left: none;
+    border-right: none;
+  }
+  .SearchBox {
+    margin-top: 5em;
+  }
+}
+
+/* display: flex;
+flex-direction: column;
+align-items: center;
+width: 98.5vw;
+box-shadow: 2px 15px 15px rgba(0, 0, 0, 5);
+border-radius: 0.2em;
+border: 1px solid rgba(255, 255, 255, 0.861);
+border-top: none;
+background: #171A21;
+gap: 2em;
+padding: 10px;
+margin-top: 0.4em;*/

@@ -120,8 +120,10 @@ const DropDownBox = props => {
               </div>
             </div>
             <Runes1 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
-            <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
-            <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+            <div className="R2andR3">
+              <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+              <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+            </div>
           </div>
 
           <div className="OtherPlayersRunes">

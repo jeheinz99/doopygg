@@ -69,6 +69,7 @@ a {
 
 .sticky {
   background: #171A21;
+  width: 99.7vw !important;
   transition: 1s !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.861);
 }
