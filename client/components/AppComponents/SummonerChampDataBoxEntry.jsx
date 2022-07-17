@@ -2,7 +2,7 @@ import React from 'react';
 
 const SummonerChampDataBoxEntry = props => {
 
-  const { kills, deaths, assists, champDamage, win, loss, championName, championId, id, cs, played } = props;
+  const { kills, deaths, assists, win, loss, championId, id, played } = props;
 
   const KDA = ((kills + assists) / deaths).toFixed(2);
   const winPercent = ((win / (win + loss))*100).toFixed(0);
@@ -41,12 +41,13 @@ const SummonerChampDataBoxEntry = props => {
           <div className="WinLossBar">
             <div className="winBar" id="RPWinBar" style={{width: `${winPercent}%`}}>
               {win !== 0 && <p>{win}W</p>}
-              </div>
+            </div>
             <div className="lossBar" id="RPWinBar" style={{width: `${100 - winPercent}%`}}>
               {loss !== 0 && <p>{loss}L</p>}
-              </div>
+            </div>
           </div>
         </div>
+        
       </div>
     </div>
   );

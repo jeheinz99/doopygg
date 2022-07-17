@@ -3,7 +3,6 @@ import React from 'react';
 const OtherPlayerRunes = props => {
 
   const { name, id, runes, championId } = props;
-  console.log(runes, 'runes in otherplayersrunes');
 
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 

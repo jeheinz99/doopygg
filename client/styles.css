@@ -1411,6 +1411,146 @@ h4 {
   padding: 10px;
   color: white;
 }
+.searchbox-tabs {
+  width: 100%;
+}
+.searchbox-tab {
+  border: 2px solid #303b51;
+  border-bottom: 1px solid #303b51;
+  background: none;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 1.2em;
+}
+.searchbox-tab:hover {
+  cursor: pointer;
+  background-color: #24252a;
+}
+.ci-summoner-info {
+  border: 2px solid #303b51;
+  padding: 5px;
+  display: flex;
+  gap: 2em;
+  align-items: center;
+  justify-content: flex-start;
+}
+.ci-name-level {
+  font-size: 1.2em;
+}
+.ci-summoner-info h3 {
+  margin-left: 10em;
+  text-align: center;
+}
+.ci-summoner-info p {
+  width: 10em;
+  text-align: center;
+  margin: 0;
+}
+#ci-profile-icon {
+  border: 1px solid #303b51;
+  border-radius: 0.2em;
+  height: 128px;
+  width: 128px;
+}
+.championsInfoEntryBox {
+  display: flex;
+  border: 3px solid #303b51;
+  border-radius: 0.2em;
+  padding: 5px;
+}
+.ChampionsInfoBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  color: rgba(255, 255, 255, 0.80);
+}
+.ChampionsInfoBox ul {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 99.7%;
+  border: 2px solid #303b51;
+  list-style: none;
+  color: rgba(255, 255, 255, 0.80);
+  text-align: center;
+  margin: 0;
+}
+#ci-champion {
+  text-align: left;
+  margin-left: 3em;
+}
+#ci-winbar {
+  height: 20px;
+  font-size: 1.5em;
+}
+#ci-played p, #ci-kda p, #ci-gold p, #ci-damage p, #ci-cs p {
+  margin: 0;
+}
+.ci-kda-tag {
+  font-size: 1.2em;
+}
+.ci-kda-subtag {
+  color: rgba(207, 205, 205, 0.8);
+}
+.ChampionsInfoBox ul li {
+  width: 10em;
+  text-decoration: none;
+}
+.championsInfoEntry1 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 16px;
+  width: 10em;
+  gap: 0.5em;
+}
+.championsInfoEntry2 {
+  display: flex;
+  flex-direction: column;
+  width: 7em;
+  gap: 0.2em;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3.2em;
+}
+.championsInfoEntry2 p {
+  justify-content: center;
+  margin: 0;
+}
+#ci-wl-percent {
+  color: rgba(207, 205, 205, 0.8);
+}
+.championsInfoEntry3 {
+  display: flex;
+  flex-direction: column;
+  width: 10em;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1.3em;
+}
+.championsInfoEntry3 p {
+  margin: 0;
+}
+#champions-entry-icon {
+  height: 64px;
+  width: 64px;
+}
+
+.championsInfoEntry4, .championsInfoEntry5, .championsInfoEntry6 {
+  display: flex;
+  width: 10em;
+  align-items: center;
+  justify-content: center;
+}
+.championsInfoEntry4 p {
+  margin: 0;
+}
+.championsInfoEntry5 p span {
+  font-size: 0.9em;
+  color: rgba(207, 205, 205, 0.8);
+}
+
 
 @media only screen and (max-width: 1400px) {
   .SummonerDataBoxGroup {

@@ -31,7 +31,6 @@ const DropDownBox = props => {
           'Content-Type': 'application/json',
         }
       });
-      console.log(res.data, 'res.data');
       lolSetDDboxData(res.data);
     }
     if (lolDDboxData.length === 0) {

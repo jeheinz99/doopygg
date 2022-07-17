@@ -95,8 +95,6 @@ const SummonerChampDataBox = () => {
       played={orderedData.top5Played[i].played}
       win={orderedData.top5Played[i].win}
       loss={orderedData.top5Played[i].loss}
-      cs={orderedData.top5Played[i].cs}
-      champDamage={orderedData.top5Played[i].champDamage}
       />);
     }
   }
@@ -114,15 +112,11 @@ const SummonerChampDataBox = () => {
       played={orderedData.allPlayed[i].played}
       win={orderedData.allPlayed[i].win}
       loss={orderedData.allPlayed[i].loss}
-      cs={orderedData.allPlayed[i].cs}
-      champDamage={orderedData.allPlayed[i].champDamage}
       />);
     }
   }
 
   const [ open, setOpen ] = useState(false);
-
-  console.log(summonerRank, 'summonerRank in ')
 
   return (
     <div className="outerSummonerDataBox">

@@ -39,7 +39,7 @@ export const addTFTDataActionCreator = TFTData => ({
 // async thunks
 export const getLeaderboardData = regionName => async dispatch => {
   const responseLeaderboardData = await axios.get(`/leaderboards/${regionName}`);
-  console.log('LEADERBOARDS response from back-end', responseLeaderboardData.data);
+  // console.log('LEADERBOARDS response from back-end', responseLeaderboardData.data);
   dispatch(addLeaderboardDataActionCreator(responseLeaderboardData.data));
 };
 
@@ -47,31 +47,31 @@ export const getSummonerData = summonerName => async dispatch => {
   document.getElementById('SearchBoxInput').value = '';
   document.getElementById('SearchBoxInput').placeholder = `Summoner Name`;
   const responseSummData = await axios.get(`/summoner/${summonerName}`);
-  console.log('SUMM response from back-end', responseSummData.data);
+  // console.log('SUMM response from back-end', responseSummData.data);
   dispatch(addSummonerDataActionCreator(responseSummData.data));
 };
 
 export const updateSummonerData = summonerName => async dispatch => {
   const responseSummUpdateData = await axios.get(`/summoner/update/${summonerName}`);
-  console.log('SUMM UPDATE response from back-end', responseSummUpdateData.data);
+  // console.log('SUMM UPDATE response from back-end', responseSummUpdateData.data);
   dispatch(addSummonerDataActionCreator(responseSummUpdateData.data));
 };
 
 export const getValorantData = (riotID, tagLine) => async dispatch => {
   const responseValData = await axios.get(`/valorant/${riotID}/${tagLine}`);
-  console.log('VAL response from back-end', responseValData.data);
+  // console.log('VAL response from back-end', responseValData.data);
   dispatch(addValorantDataActionCreator(responseValData.data));  
 };
 
 export const getTFTData = summonerName => async dispatch => {
   const responseTFTData = await axios.get(`/tft/${summonerName}`);
-  console.log('TFT response from back-end', responseTFTData.data);
+  // console.log('TFT response from back-end', responseTFTData.data);
   dispatch(addTFTDataActionCreator(responseTFTData.data));
 };
 
 export const updateTFTData = summonerName => async dispatch => {
   const responseTFTUpdateData = await axios.get(`/tft/update/${summonerName}`);
-  console.log('TFT UPDATE response from back-end', responseTFTUpdateData.data);
+  // console.log('TFT UPDATE response from back-end', responseTFTUpdateData.data);
   dispatch(addSummonerDataActionCreator(responseTFTUpdateData.data));
 };
 
@@ -81,8 +81,7 @@ export const getChampionData = championName => async dispatch => {
 };
 
 export const testAsyncFunc = () => async dispatch => {
-  console.log('hi in testasyncfunc');
   const responseSummTestData = await axios.get(`/summoner/test`);
-  console.log('SUMM TEST response from back-end', responseSummTestData.data);
+  // console.log('SUMM TEST response from back-end', responseSummTestData.data);
   // dispatch(addSummonerDataActionCreator(responseSummTestData.data));
 };

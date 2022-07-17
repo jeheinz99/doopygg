@@ -213,7 +213,6 @@ summonerController.updateSummData = async (req, res, next) => {
       }
       // if match doesn't return null, it is in DB 
       else {
-        console.log(match.matchData, 'match.matchData');
         matchHistoryData.push(match.matchData);
       }
     }
@@ -420,10 +419,6 @@ summonerController.updateSummData = async (req, res, next) => {
   }
 };
 
-summonerController.getS12MatchesData = async (req, res, next) => {
-
-}
-
 summonerController.addSummMatchesData = async (req, res, next) => {
 
   const { summonerName, allMatchesPlayed, } = res.locals.summonerData;
@@ -445,9 +440,11 @@ summonerController.addSummMatchesData = async (req, res, next) => {
               kills: player.kills,
               deaths: player.deaths,
               assists: player.assists,
-              cs: player.totalMinionsKilled,
+              cs: (player.totalMinionsKilled + player.neutralMinionsKilled),
+              csPerMin: (player.totalMinionsKilled + player.neutralMinionsKilled)/(arrayOfObjs[i].matchData.gameDuration/60),
               win: player.win,
               position: player.teamPosition,
+              gold: player.goldEarned,
             });
           }
         }
@@ -481,14 +478,14 @@ summonerController.testSummData = async (req, res, next) => {
     const summoner = await lolSummoner.findOne({summonerName: 'SkiTzee'});
     
     const objs = await lolMatches.find({matchId:{$in: [...summoner.S12MatchesPlayed[0]]}});
-    console.log(objs, 'objs in test');
+    // console.log(objs, 'objs in test');
 
     if (summoner !== null) {
       const rankedMatchesArr = [];
       for (let i = 0; i < summoner.S12MatchesPlayed.length; i++) {
         for (let j = 0; j < summoner.S12MatchesPlayed[i].length; j++) {
 
-          console.log(`match testing ${summoner.S12MatchesPlayed[i][j]}`);
+          // console.log(`match testing ${summoner.S12MatchesPlayed[i][j]}`);
 
           const matchObj = await lolMatches.findOne({matchId: summoner.S12MatchesPlayed[i][j]});
           
@@ -514,7 +511,6 @@ summonerController.testSummData = async (req, res, next) => {
             }
         }
       }
-      console.log(rankedMatchesArr);
       res.locals.summonerTestData = rankedMatchesArr;
       return next();
     }
@@ -533,7 +529,6 @@ summonerController.testSummData = async (req, res, next) => {
 summonerController.getDDBoxSummData = async (req, res, next) => {
   try {
     const { body } = req;
-    console.log(body, 'body in back-end');
     for (let i = 0; i < body.length; i++) {
       const itemsMap = await mapItemIcons(body[i].items); // 7 items total
       const runesMap = await mapRuneIcons(body[i].runes); // 11 runes total
