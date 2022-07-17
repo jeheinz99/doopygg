@@ -19,10 +19,8 @@ const TFTSummonerBox = () => {
         <div className="SummonerRankInfo">
           <div className="TFTRankedSolo">
             <h2> Ranked Solo/Duo </h2>
-            {summonerRank.rankedSolo[1] === undefined && <div className="rankBorderDiv"><img id="unrankedIcon" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/unranked.png"/></div>}
-            {summonerRank.rankedSolo[1] === undefined && <p> Unranked </p>}
-            {summonerRank.rankedSolo[1] && <div className="rankBorderDiv"><img id="unrankedIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedSolo[0].toLowerCase()}.png`}/></div>}
-            {summonerRank.rankedSolo[1] && <p>{`${summonerRank.rankedSolo[0]} ${summonerRank.rankedSolo[2]} ${summonerRank.rankedSolo[1]} LP`}</p>}
+            <div className="rankBorderDiv"><img id="unrankedIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedSolo[0].toLowerCase()}.png`}/></div>
+            <p>{`${summonerRank.rankedSolo[0]} ${summonerRank.rankedSolo[2]} ${summonerRank.rankedSolo[1]} LP`}</p>
           </div>
 
           <div className="TFTDoubleUp">

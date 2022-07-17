@@ -240,6 +240,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
         if (matchData[i].participants[j].puuid === puuid) {
           const player = matchData[i].participants[j];
           TFTMatchHistory.push({
+            gameEnd: (matchData[i].game_datetime - Math.round(matchData[i].game_length)*1000),
             matchLength: matchData[i].game_length,
             setNumber: matchData[i].tft_set_number,
             augments: player.augments,
@@ -345,23 +346,21 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
   try {
     const { body } = req;
 
-    // for (let i = 0; i < body.length; i++) {
-    //   const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${body[i].puuid}?api_key=${process.env.api_key}`,
-    //   {
-    //     headers: {
-    //       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-    //       "Accept-Language": "en-US,en;q=0.9",
-    //       "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-    //       "Origin": "https://developer.riotgames.com"
-    //       }
-    //   });
-    //   console.log(`${i} call`);
-    //   body[i].name = playerNameRes.data.name;
-    // }
+    for (let i = 0; i < body.length; i++) {
+      const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${body[i].puuid}?api_key=${process.env.api_key}`,
+      {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+          "Accept-Language": "en-US,en;q=0.9",
+          "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+          "Origin": "https://developer.riotgames.com"
+          }
+      });
+      body[i].name = playerNameRes.data.name;
+    }
 
     for (let i = 0; i < body.length; i++) {
       
-      console.log('hi');
       const augmentsMap = await mapAugmentIcons(body[i].augments);
       const littleLegendMap = await mapLittleLegendIcons(body[i].companion);
       const unitsMap = await mapUnitIcons(body[i].units);

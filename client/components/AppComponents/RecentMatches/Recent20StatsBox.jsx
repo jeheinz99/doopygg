@@ -64,8 +64,14 @@ const Recent20StatsBox = props => {
       return ((b.played - a.played) === 0 ? (((b.kills + b.assists) / b.deaths) - ((a.kills + a.assists) / a.deaths)) : b.played - a.played);
     });
 
+    if (tempArr.length === 1) {
+      return [tempArr[0]];
+    }
+    if (tempArr.length === 2) {
+      return [tempArr[0], tempArr[1]];
+    }
+    
     return [tempArr[0], tempArr[1], tempArr[2]];
-
   };
 
   const top3Played = findTop3(recent20Data);

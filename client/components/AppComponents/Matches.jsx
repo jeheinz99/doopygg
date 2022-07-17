@@ -7,10 +7,42 @@ import { AiFillCaretUp } from 'react-icons/ai';
 
 const Matches = props => {
 
-  const { matchNum, otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
+  const { gameEnd, matchNum, otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
   
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 
+  // function that compares todays unix timestamp to the match timestamp
+  const getTimeAgo = gameEndTime => {
+    const gameDateStamp = new Date(gameEndTime);
+    const todaysDateStamp = Date.now();
+
+    const diff = todaysDateStamp - gameDateStamp;
+    if (diff >= 3600000 && diff < 86400000) {
+      if (Math.round(diff/3600000) === 1) return ('1 hour ago');
+      return (`${Math.round(diff/3600000)} hours ago`);
+    }
+    if (diff >= 60000 && diff < 3600000) {
+      if (Math.round(diff/60000) === 1) return ('1 minute ago');
+      return (`${Math.round(diff/60000)} minutes ago`);
+    }
+    if (diff >= 86400000 && diff < 2592000000) {
+      if (Math.round(diff/86400000) === 1) return ('1 day ago');
+      return (`${Math.round(diff/86400000)} days ago`);
+    }
+    if (diff < 60000) {
+      return (`${Math.round(diff/1000)} seconds ago`);
+    }
+    if (diff >= 2592000000 && diff < 31540000000) {
+      if (Math.round(diff/2592000000) === 1) return ('1 month ago');
+      return (`${Math.round(diff/2592000000)} months ago`);
+    }
+    else {
+      return ('over 1 year ago');
+    }
+  }
+
+  const timeAgo = getTimeAgo(gameEnd);
+  
   const [summonerOpen, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
 
@@ -19,7 +51,8 @@ const Matches = props => {
       <div className="Matches" id={id}>
         <div className="MatchGroup1">
           <p>{gameMode}</p>
-          <p>{`${Math.floor(Number(matchLength / 60))}:${Number(matchLength) % 60}`}</p>
+          <p id="p2-mg1">{timeAgo}</p>
+          <p id="p3-mg1">{`${Math.floor(Number(matchLength / 60))}:${Number(matchLength) % 60}`}</p>
           {id === "winMatch" ? <p style={{color: 'blue'}}>{outcome}</p> : <p style={{color: 'red'}}>{outcome}</p>}
         </div>
         <div className="MatchGroup2">
@@ -35,7 +68,7 @@ const Matches = props => {
         <div className="MatchGroup2div2">
           <p>{kills} / {deaths} / {assists}</p>
           <p>K/D/A: {`${((kills + assists) / deaths).toFixed(2)}`}</p>
-          <p>CS: {cs}</p>
+          <p>CS: {cs} <span id="cs-m-span">({`${(cs/(matchLength/60)).toFixed(1)}`}/m)</span></p>
           <p>vision: {visionScore}</p>
         </div>
         </div>

@@ -59,8 +59,7 @@ const TFTPlayersDD = props => {
 
       <div className="TFTDDB2">
         <div className="LLIconDD">
-          {/* <p> {name} </p> */}
-          <p> temp </p>
+          <p> {name} </p>
           <img id="LittleLegendIconDD" src={companion}/>
         </div>
         <div className="AugListB2">

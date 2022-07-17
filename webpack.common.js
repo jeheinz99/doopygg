@@ -1,5 +1,4 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -31,7 +30,8 @@ module.exports = {
   },
   plugins: [new HtmlWebpackPlugin({ 
     template: './client/index.html'
-  })],
+  }),
+],
   resolve: {
     extensions: ['.js', '.jsx']
   },

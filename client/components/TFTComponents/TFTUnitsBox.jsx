@@ -11,7 +11,7 @@ const TFTUnitsBox = props => {
   }
   
   const items = [];
-    for (let i = 0; i < unit.itemIcons.length; i++) {
+    for (let i = 0; i < unit.items.length; i++) {
       items.push(<img key={`item-img-${i}`} id="item-img" src={unit.itemIcons[i]}/>);
     }
 

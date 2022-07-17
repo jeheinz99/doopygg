@@ -95,6 +95,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 5px;
+}
+.TraitsList1 {
+  display: flex;
+  gap: 3px;
+
+}
+.TraitsList2 {
+  display: flex;
+  gap: 3px;
 }
 #DDAug1, #DDAug2, #DDAug3 {
   height: 32px;
@@ -125,22 +135,26 @@
 #DDTrait-1 {
   height: 24px;
   width: 24px;
-  filter: invert(70%) sepia(30%) saturate(2504%) hue-rotate(2deg) brightness(109%) contrast(102%);
+  background: rgb(128, 78, 25);
+  border: 1px solid white;
 }
 #DDTrait-2 {
   height: 24px;
   width: 24px;
-  filter: invert(30%);
+  background: rgb(83, 83, 83);
+  border: 1px solid white;
 }
 #DDTrait-3 {
   height: 24px;
   width: 24px;
-  filter: invert(20%) sepia(34%) saturate(2504%) hue-rotate(2deg) brightness(109%) contrast(102%);
+  background: rgb(163, 155, 38);
+  border: 1px solid white;
 }
 #DDTrait-4 {
   height: 24px;
   width: 24px;
-  filter: invert(20%) sepia(24%) saturate(385%) hue-rotate(302deg) brightness(105%) contrast(103%);
+  background: linear-gradient(315deg, rgba(244, 133, 198, 0.7) 0%, rgba(127, 236, 255, 0.7) 74%);
+  border: 1px solid white;
 }
 .TFTUnitBox {
   position: relative;
@@ -253,11 +267,15 @@
   flex-direction: column;
   align-items: center;
   padding: 5px;
+  width: 7em;
 }
 .TFTMatchGroup1 p {
-  width: 3em;
+  width: 100%;
   margin: 2px;
   text-align: center;
+}
+#tft-mg1-p2, #tft-mg1-p3, #tft-mg1-p4 {
+  font-size: 0.9em;
 }
 .TFTMatchGroup2 {
   display: flex;
@@ -630,7 +648,8 @@
   /* filter: invert(20%) sepia(34%) saturate(2504%) hue-rotate(2deg) brightness(109%) contrast(102%); */
 }
 #Trait-4 {
-  filter: invert(20%) sepia(24%) saturate(385%) hue-rotate(302deg) brightness(105%) contrast(103%);
+  background: linear-gradient(315deg, rgba(244, 133, 198, 0.7) 0%, rgba(127, 236, 255, 0.7) 74%);
+  border: 1px solid white;
 }
 #placement-3 {
   color: #7B3F00;
@@ -687,13 +706,4 @@
 .hidden-true {
   display: none;
   transition: 1s;
-}
-.LoadingDiv {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  color: white;
 }

@@ -12,16 +12,6 @@ const SummonerChampDataBox = () => {
   const summonerName = useSelector(state => state.summoners.summonerName);
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
   const matchHistory = useSelector(state => state.summoners.matchHistory);
-
-  const checkRankData = data => {
-    if (data.rankedSolo[0] === undefined) {
-      data.rankedSolo = ['Unranked', 0, 'I'];
-    }
-    if (data.rankedFlex[0] === undefined) {
-      data.rankedFlex = ['Unranked', 0, 'I'];
-    }
-    return data; 
-  };
   
   const orderData = data => {
 
@@ -90,8 +80,6 @@ const SummonerChampDataBox = () => {
     }
   }
 
-  const checkedRankedData = checkRankData(summonerRank);
-
   const orderedData = orderData(champData);
 
   const champEntries = [];
@@ -134,6 +122,8 @@ const SummonerChampDataBox = () => {
 
   const [ open, setOpen ] = useState(false);
 
+  console.log(summonerRank, 'summonerRank in ')
+
   return (
     <div className="outerSummonerDataBox">
 
@@ -151,14 +141,18 @@ const SummonerChampDataBox = () => {
 
           <div className="RankedSoloDuo">
             <h2> Ranked Solo/Duo </h2>
-            <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedSolo[0].toLowerCase()}.png`}/></div>
-            <p>{`${checkedRankedData.rankedSolo[0]} ${checkedRankedData.rankedSolo[2]} ${checkedRankedData.rankedSolo[1]} LP`}</p>
+            {summonerRank.rankedSolo[0] === undefined && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/unranked.png`}/></div>}
+            {summonerRank.rankedSolo[0] === undefined && <p> Unranked </p>}
+            {summonerRank.rankedSolo[0] && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedSolo[0].toLowerCase()}.png`}/></div>}
+            {summonerRank.rankedSolo[0] && <p>{`${summonerRank.rankedSolo[0]} ${summonerRank.rankedSolo[2]} ${summonerRank.rankedSolo[1]} LP`}</p>}
           </div>
 
           <div className="RankedFlex">
             <h2> Ranked Flex </h2>
-            <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedFlex[0].toLowerCase()}.png`}/></div>
-            <p>{`${summonerRank.rankedFlex[0]} ${summonerRank.rankedFlex[2]} ${summonerRank.rankedFlex[1]} LP`}</p>
+            {summonerRank.rankedFlex[0] === undefined && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/unranked.png`}/></div>}
+            {summonerRank.rankedFlex[0] === undefined && <p> Unranked </p>}
+            {summonerRank.rankedFlex[0] && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedFlex[0].toLowerCase()}.png`}/></div>}
+            {summonerRank.rankedFlex[0] && <p>{`${summonerRank.rankedFlex[0]} ${summonerRank.rankedFlex[2]} ${summonerRank.rankedFlex[1]} LP`}</p>}
           </div>
 
         </div>

@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "\"doopygg\"",
   "main": "index.js",
-  "engines": {
-    "node": "16.x"
-  },
   "scripts": {
     "dev": "concurrently \" webpack serve --open --config webpack.dev.js\" \"nodemon ./server/server.js\"",
     "build": "webpack --config webpack.prod.js",

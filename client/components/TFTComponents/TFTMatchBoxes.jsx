@@ -32,8 +32,10 @@ const TFTMatchBoxes = () => {
       placement={TFTData[i].placement} 
       setNumber={TFTData[i].setNumber} 
       traits={TFTData[i].traits} 
-      units={TFTData[i].units}/>);
-  };
+      units={TFTData[i].units}
+      gameEnd={TFTData[i].gameEnd}
+      />);
+  }
 
   return (
     <div className="TFTMatchBoxes">

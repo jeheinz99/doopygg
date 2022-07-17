@@ -7,8 +7,9 @@ import { AiFillCaretDown } from 'react-icons/ai';
 
 const TFTBoxes = props => {
 
-  const { augments, companion, damageDealt, level, matchLength, placement, setNumber, traits, units, id, otherPlayers } = props;
+  const { augments, companion, damageDealt, level, matchLength, placement, setNumber, traits, units, id, otherPlayers, gameEnd } = props;
 
+  // function that omits all of the players' non-active traits
   const getActiveTraits = data => {
     const outputArr = [];
     for (let i = 0; i < data.length; i++) {
@@ -18,6 +19,38 @@ const TFTBoxes = props => {
     return outputArr;
   };
 
+  // function that compares todays unix timestamp to the match timestamp
+  const getTimeAgo = gameEndTime => {
+    const gameDateStamp = new Date(gameEndTime);
+    const todaysDateStamp = Date.now();
+
+    const diff = todaysDateStamp - gameDateStamp;
+    if (diff >= 3600000 && diff < 86400000) {
+      if (Math.round(diff/3600000) === 1) return ('1 hour ago');
+      return (`${Math.round(diff/3600000)} hours ago`);
+    }
+    if (diff >= 60000 && diff < 3600000) {
+      if (Math.round(diff/60000) === 1) return ('1 minute ago');
+      return (`${Math.round(diff/60000)} minutes ago`);
+    }
+    if (diff >= 86400000 && diff < 2592000000) {
+      if (Math.round(diff/86400000) === 1) return ('1 day ago');
+      return (`${Math.round(diff/86400000)} days ago`);
+    }
+    if (diff < 60000) {
+      return (`${Math.round(diff/1000)} seconds ago`);
+    }
+    if (diff >= 2592000000 && diff < 31540000000) {
+      if (Math.round(diff/2592000000) === 1) return ('1 month ago');
+      return (`${Math.round(diff/2592000000)} months ago`);
+    }
+    else {
+      return ('over 1 year ago');
+    }
+  }
+
+  const timeAgo = getTimeAgo(gameEnd);
+
   const [tftOpen, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
 
@@ -26,7 +59,7 @@ const TFTBoxes = props => {
   const traitsArr = [];
   const traitsArr2 = [];
 
-  let activeTraits = getActiveTraits(traits);
+  const activeTraits = getActiveTraits(traits);
 
   if (activeTraits.length <= 5) {
     for (let i = 0; i < activeTraits.length; i++) {
@@ -52,13 +85,14 @@ const TFTBoxes = props => {
     <div className="TFTWrapper">
       <div className="TFTMatches" id={id}>
         <div className="TFTMatchGroup1">
-          <p>Ranked TFT</p>
-          <p>{`${Math.floor(Number(matchLength / 60))}:${(Number(matchLength) % 60).toFixed()}`}</p>
+          <p id="tft-mg1-p1">Ranked TFT</p>
+          <p id="tft-mg1-p2">{timeAgo}</p>
           { placement === 1 && <p id={`placementnumber-${placement}`}>{placement}st</p> }
           { placement === 2 && <p id={`placementnumber-${placement}`}>{placement}nd</p> }
           { placement === 3 && <p id={`placementnumber-${placement}`}>{placement}rd</p> }
+          <p id="tft-mg1-p3">{`${Math.floor(Number(matchLength / 60))}:${(Number(matchLength) % 60).toFixed()}`}</p>
           { placement > 3 && <p id={`placementnumber-${placement}`}>{placement}th</p> }
-          <p>Set {setNumber} </p>
+          <p id="tft-mg1-p4">Set {setNumber} </p>
         </div>
         <div className="TFTMatchGroup2">
           <img id="LittleLegendIcon" src={companion}/>

@@ -8,6 +8,9 @@ const MatchBoxes = () => {
   const matchHistory = useSelector(state => state.summoners.matchHistory);
   const otherPlayersMatches = useSelector(state => state.summoners.otherPlayersMatches);
 
+  /* there are only 10 players per match, the 'otherPlayersMatches' players are in order by match played in,
+  this function will split 10 players for each match based on the amount of matches that were queried
+  (i.e. if 20 matches are queried, splits 10 players to each match box component) */
   const chunkArr = [];
   const chunkSize = (otherPlayersMatches.length / matchHistory.length);
   for (let i = 0; i < otherPlayersMatches.length; i+= chunkSize) {
@@ -39,7 +42,9 @@ const MatchBoxes = () => {
         matchLength={matchHistory[i].matchLength} 
         champion={matchHistory[i].champion} 
         gameMode={matchHistory[i].gameMode} 
-        championId={matchHistory[i].championId}/>);
+        championId={matchHistory[i].championId}
+        gameEnd={matchHistory[i].gameEnd}/>
+        );
     }
 
     else {
@@ -63,7 +68,8 @@ const MatchBoxes = () => {
         matchLength={matchHistory[i].matchLength} 
         champion={matchHistory[i].champion} 
         gameMode={matchHistory[i].gameMode} 
-        championId={matchHistory[i].championId}/>);
+        championId={matchHistory[i].championId}
+        gameEnd={matchHistory[i].gameEnd}/>);
     }
     
     if (recent20Data[matchHistory[i].champion]) {
@@ -107,9 +113,6 @@ const MatchBoxes = () => {
       recent20Data[matchHistory[i].champion] = newObj;
     }
   }
-
-  console.log(recent20Data, 'recent20Data');
-
 
   return (
     <div id="MatchBoxes" className="OuterSearchBox">

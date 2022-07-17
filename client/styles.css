@@ -68,7 +68,6 @@ html, body {
   background-color: #15161a;
   color:rgba(255, 255, 255, 0.861);
   transition: 1s;
-  /* box-shadow: 2px 2px 15px rgba(0, 0, 0, 5); */
 }
 
 #SearchBoxInput:focus {
@@ -141,6 +140,7 @@ html, body {
 #MatchBoxes {
   border: 2px solid #303b51;
   border-radius: 0.5em;
+  border-top-left-radius: 0;
   width: 98%;
   gap: 0.5em;
   color:rgba(255, 255, 255, 0.80);
@@ -166,7 +166,6 @@ html, body {
 }
 .DropDownBoxes {
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
-  /* border-radius: 2em; */
   width: 100%;
 }
 .Matches {
@@ -185,9 +184,18 @@ html, body {
 }
 .MatchGroup1 p {
   margin: 0;
-  width: 6em;
-  font-size: 0.8em;
+  width: 10em;
+  font-size: 1em;
   text-align: center;
+}
+#p2-mg1, #p3-mg1 {
+  width: 100%;
+  font-size: 0.9em;
+  text-align: center;
+}
+#cs-m-span {
+  font-size: 1em;
+  color: rgb(155, 155, 155);
 }
 .MatchGroup2 {
   display: flex;
@@ -234,28 +242,22 @@ html, body {
   filter: invert(20%);
 }
 #championIcon {
-  width: 40px;
-  height: 40px;
+  width: 64px;
+  height: 64px;
   border-radius: 0.3em;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
 }
 #keystoneIcon {
+  width: 26px;
+  height: 26px;
+}
+#secondaryRuneIcon {
   width: 22px;
   height: 22px;
 }
-#secondaryRuneIcon {
-  width: 20px;
-  height: 20px;
-}
-#summonerSpellIcon1 {
-  width: 20px;
-  height: 20px;
-  border-radius: 0.5em;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
-}
-#summonerSpellIcon2 {
-  width: 20px;
-  height: 20px;
+#summonerSpellIcon1, #summonerSpellIcon2 {
+  width: 24px;
+  height: 24px;
   border-radius: 0.5em;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
 }
@@ -270,23 +272,19 @@ html, body {
   flex-direction: column;
   gap: 1px;
 }
-.upperHalfItems {
-  display: flex;
-  gap: 1px;
-}
-.lowerHalfItems {
+.upperHalfItems, .lowerHalfItems {
   display: flex;
   gap: 1px;
 }
 #item0, #item1, #item2, #item3, #item4, #item5, #item6 {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 0.5em;
   border: 1px solid #000;
 }
 #item6 {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 .MatchGroup5 {
   display: flex;
@@ -475,7 +473,6 @@ html, body {
   flex-direction: column;
   padding: 5px;
   width: 90%;
-  /* border: 1px solid #000; */
 }
 .Team1Players, .Team2Players {
   display: flex;
@@ -489,7 +486,6 @@ html, body {
   width: 100%;
   border-radius: 0.5em;
   padding: 5px;
-  /* box-shadow: 1px 1px 4px rgba(0, 0, 0, 5); */
 }
 .Player0Team1ChampIcon {
   display: flex;
@@ -664,14 +660,10 @@ html, body {
   height: 32px;
   width: 32px;
   filter: brightness(50%) sepia(100) saturate(50) hue-rotate(45deg);
-  /* border-radius: 2em; */
-  /* border: 2px solid rgb(7, 7, 7); */
 }
 #BaronIconDD, #DragonIconDD, #TurretIconDD {
   height: 32px;
   width: 32px;
-  /* border-radius: 2em; */
-  /* border: 2px solid rgb(7, 7, 7); */
 }
 .DDButtonDiv {
   display: flex;
@@ -718,19 +710,10 @@ html, body {
   gap: 0.5em;
   align-items: flex-start;
 }
-#allEntries {
-}
-#topEntries {
-}
 #SDBexpand:hover #topEntries {
   height: 0;
   overflow: hidden;
 }
-#SDBcontract {
-  
-}
-
-
 
 
 
@@ -913,11 +896,9 @@ html, body {
 }
 #winTag {
   color: rgb(68, 92, 198);
-  /* font-size: 0.75em; */
 }
 #lossTag {
   color:#C42402;
-  /* font-size: 0.75em; */
 }
 .WinLossBar {
   display: flex;
@@ -931,7 +912,6 @@ html, body {
   justify-content: center;
   font-size: 0.55em;
   height: 10px;
-  /* border: 1.5px solid #000; */
   border-top-left-radius: 0.2em;
   border-bottom-left-radius: 0.2em;
   background-color:#47aad4;
@@ -1421,6 +1401,16 @@ h4 {
   align-items: center;
   justify-content: center;
 }
+.LoadingDiv {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: white;
+}
 
 @media only screen and (max-width: 1400px) {
   .SummonerDataBoxGroup {
@@ -1445,16 +1435,3 @@ h4 {
     margin-top: 5em;
   }
 }
-
-/* display: flex;
-flex-direction: column;
-align-items: center;
-width: 98.5vw;
-box-shadow: 2px 15px 15px rgba(0, 0, 0, 5);
-border-radius: 0.2em;
-border: 1px solid rgba(255, 255, 255, 0.861);
-border-top: none;
-background: #171A21;
-gap: 2em;
-padding: 10px;
-margin-top: 0.4em;*/

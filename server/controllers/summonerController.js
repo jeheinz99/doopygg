@@ -14,6 +14,7 @@ const mapQueueType = (queueId, queueData) => {
     if (queueId === queueData.data[i].queueId) {
       str = queueData.data[i].description;
       str = str.replace(' games', '');
+      str = str.replace('5v5 ', '');
       return str;
     }
   }
@@ -142,7 +143,7 @@ summonerController.updateSummData = async (req, res, next) => {
     const { puuid } = data;
 
     
-    // uses summoner's puuid to get summoner's match history list of past 10 games to an array
+    // uses summoner's puuid to get summoner's match history list of past 20 games to an array
     let responseMatchData = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20&api_key=${process.env.api_key}`,
     {
       headers: {
@@ -169,11 +170,11 @@ summonerController.updateSummData = async (req, res, next) => {
       }
     });
 
-    // checks to see if 1 of the 2 arrays returned are for ranked solo or ranked flex
     const rankData = {
       rankedSolo: [],
       rankedFlex: [],
     };
+    // checks to see if 1 of the 2 arrays returned are for ranked solo or ranked flex
     for (let i = 0; i < responseRankData.data.length; i++) {
       if (responseRankData.data[i].queueType === "RANKED_SOLO_5x5") {
           rankData.rankedSolo.push(responseRankData.data[i].tier);
@@ -182,16 +183,10 @@ summonerController.updateSummData = async (req, res, next) => {
       }
 
       if (responseRankData.data[i].queueType === "RANKED_FLEX_SR") {
-        if (responseRankData.data[i].tier === undefined) {
-          rankData.rankedFlex.push('Unranked', 0, 'I');
-        }
-        else {
           rankData.rankedFlex.push(responseRankData.data[i].tier);
           rankData.rankedFlex.push(responseRankData.data[i].leaguePoints);
           rankData.rankedFlex.push(responseRankData.data[i].rank);
-        }
       }
-
     }
     
     const matchHistoryData = [];
@@ -218,21 +213,23 @@ summonerController.updateSummData = async (req, res, next) => {
       }
       // if match doesn't return null, it is in DB 
       else {
+        console.log(match.matchData, 'match.matchData');
         matchHistoryData.push(match.matchData);
       }
     }
 
     // iterates through the matchHistoryData list to find the summoner being-
     // looked up so you only find their statistics for each match and push an object 
-    // with statistics from the last 10 matches 
+    // with statistics from the last 20 matches 
     const matchesData = [];
     const otherPlayersData = [];
 
-    for (let i = 0; i < matchHistoryData.length; i++) {
+    for (let i = 0; i < matchHistoryData.length; i++) {      
       for (let j = 0; j < 10; j++) {
         if (matchHistoryData[i].participants[j].summonerName === summonerName) {
           const player = matchHistoryData[i].participants[j];
           matchesData.push({
+            gameEnd: matchHistoryData[i].gameEndTimestamp,
             championId: player.championId,
             summonerIcon: player.profileIcon,
             kills: player.kills,
@@ -244,7 +241,7 @@ summonerController.updateSummData = async (req, res, next) => {
             position: player.teamPosition,
             win: player.win,
             visionScore: player.visionScore,
-            cs: player.totalMinionsKilled,
+            cs: (player.totalMinionsKilled + player.neutralMinionsKilled),
             champDamage: player.totalDamageDealtToChampions,
             champLevel: player.champLevel,
             summonerSpells: [player.summoner1Id, player.summoner2Id],
@@ -348,7 +345,6 @@ summonerController.updateSummData = async (req, res, next) => {
     const allS12MatchesArr = [];
 
     try {
-
       for (let i = 0; i < 2000; i+=100) {
         const getRankedS12Matches = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1641531600&queue=420&type=ranked&start=${i}&count=100&api_key=${process.env.api_key}`,
         {
@@ -360,9 +356,11 @@ summonerController.updateSummData = async (req, res, next) => {
           }
         });
 
-        allS12MatchesArr.push(getRankedS12Matches.data);
+        // cannot access length property with getRankedS12Matches.data.length, so initialize temp variable
+        const temp = getRankedS12Matches.data;
+        allS12MatchesArr.push(temp);
 
-        if (getRankedS12Matches.data.length !== 100) {
+        if (temp.length !== 100) {
           await lolSummoner.findOneAndUpdate({summonerName: summonerName}, {S12MatchesPlayed: allS12MatchesArr});
           break;
         }
@@ -394,7 +392,8 @@ summonerController.updateSummData = async (req, res, next) => {
         summonerLevel: responseSummData.data.summonerLevel,
         profileIcon: responseSummData.data.profileIconId,
         matchHistory: matchesData,
-        otherPlayersMatches: otherPlayersData
+        otherPlayersMatches: otherPlayersData,
+        S12MatchesPlayed: allS12MatchesArr,
       });
     }
     else {
@@ -406,7 +405,8 @@ summonerController.updateSummData = async (req, res, next) => {
             summonerLevel: responseSummData.data.summonerLevel,
             profileIcon: responseSummData.data.profileIconId,
             matchHistory: matchesData,
-            otherPlayersMatches: otherPlayersData
+            otherPlayersMatches: otherPlayersData,
+            S12MatchesPlayed: allS12MatchesArr,
           }
         }
       );
@@ -420,13 +420,17 @@ summonerController.updateSummData = async (req, res, next) => {
   }
 };
 
+summonerController.getS12MatchesData = async (req, res, next) => {
+
+}
+
 summonerController.addSummMatchesData = async (req, res, next) => {
 
-  const { summonerName, allMatchesPlayed } = res.locals.summonerData;
+  const { summonerName, allMatchesPlayed, } = res.locals.summonerData;
 
   try {
     const summoner = await lolSummoner.findOne({summonerName: summonerName});
-
+    // function to extract data from match objects that we do have
     const getObjData = (arrayOfObjs, summonerName) => {
       const tempArr = [];
 
@@ -455,10 +459,8 @@ summonerController.addSummMatchesData = async (req, res, next) => {
     
     for (let i = 0; i < allMatchesPlayed.length; i++) {
       const objs = await lolMatches.find({matchId:{$in: [...summoner.S12MatchesPlayed[i]]}});
-      
       const objData = getObjData(objs, summonerName);
       S12MatchesInfoArr.push(objData);
-
     }
 
     await lolSummoner.findOneAndUpdate({summonerName: summonerName}, {S12MatchesPlayedData: S12MatchesInfoArr});
