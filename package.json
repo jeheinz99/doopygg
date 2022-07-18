@@ -2,7 +2,7 @@
   "name": "doopygg",
   "version": "1.0.0",
   "description": "\"doopygg\"",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "concurrently \" webpack serve --open --config webpack.dev.js\" \"nodemon ./server/server.js\"",
     "build": "webpack --config webpack.prod.js",
@@ -35,8 +35,7 @@
     "react-spinners": "^0.13.3",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.1",
-    "vercel": "^27.1.5"
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.0",

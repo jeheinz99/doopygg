@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const PORT = 3000;
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -23,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // // handles requests for static files
-app.use(express.static(path.join(__dirname, "../dist")));
+// app.use(express.static(path.join(__dirname, "../dist")));
 
 // allows requests with headers to back-end from our localhost endpoint
 app.use(function(req, res, next) {
@@ -74,7 +73,6 @@ TFTRouter.get('/update/:summonerName', TFTController.updateTFTSummData, (req, re
   return res.status(200).send(res.locals.TFTData);
 });
 
-// summonerController.checkSummData, summonerController.updateSummData
 TFTRouter.get('/:summonerName', TFTController.checkTFTSummData, TFTController.updateTFTSummData, (req, res) => {
   // console.log(res.locals.TFTData);
   return res.status(200).send(res.locals.TFTData);
@@ -101,7 +99,14 @@ valorantRouter.get('/:riotId/:tagLine', valorantController.valData, (req, res) =
 });
 
 // catch-all route handler for any requests to an unknown route
-app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
+// app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, "../dist")));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../dist/index.html"));
+  });
+}
 
 // global error handler - only invoked when next passes in an arg
 app.use((err, req, res, next) => {
@@ -117,8 +122,8 @@ app.use((err, req, res, next) => {
 });
 
 // starts server
-app.listen(PORT, () => {
-  console.log(`Server listening on port: ${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server listening on port: ${process.env.PORT}`);
 });
 
 module.exports = app;

@@ -81,7 +81,7 @@ export const getChampionData = championName => async dispatch => {
 };
 
 export const testAsyncFunc = () => async dispatch => {
-  const responseSummTestData = await axios.get(`/summoner/test`)
+  const responseSummTestData = await axios.get(`/summoner/test`);
   // console.log('SUMM TEST response from back-end', responseSummTestData.data);
   // dispatch(addSummonerDataActionCreator(responseSummTestData.data));
 };
