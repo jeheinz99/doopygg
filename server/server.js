@@ -107,9 +107,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.get('///riot.txt', (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../riot.txt"));
-});
+// was for riot verification, getting rid of now
+// app.get('///riot.txt', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "../riot.txt"));
+// });
 
 // global error handler - only invoked when next passes in an arg
 app.use((err, req, res, next) => {
