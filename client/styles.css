@@ -5,8 +5,8 @@
 
 html, body {
   margin: 0;
-  width: 100vw;
-  height: 100vw;
+  width: 100%;
+  height: 100vh;
   background: #16161b;
   font-family: Kanit;
   scroll-behavior: smooth;
@@ -49,11 +49,9 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 98.5vw;
+  width: 98.8%;
   box-shadow: 2px 15px 15px rgba(0, 0, 0, 5);
-  /* border-radius: 0.2em; */
-  border: 1px solid rgba(255, 255, 255, 0.861);
-  border-top: none;
+  /* border: 1px solid rgba(255, 255, 255, 0.861); */
   background: #171A21;
   gap: 2em;
   padding: 10px;
@@ -1559,7 +1557,7 @@ h4 {
   }
   .OuterSearchBox {
     margin-top: 0;
-    width: 99.7vw;
+    width: 99.8%;
     padding: 0;
     margin-bottom: 1em;
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 5);

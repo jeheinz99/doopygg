@@ -5,12 +5,9 @@ a {
 #NavbarBox {
   position: fixed;
   display: flex;
-  width: 99.7%;
+  width: 99.8%;
   justify-content: space-between;
   align-items: center;
-  border-left: 1px solid rgba(255, 255, 255, 0.861);
-  border-right: 1px solid rgba(255, 255, 255, 0.861);
-  border-top: 1px solid rgba(255, 255, 255, 0.861);
   transition: 1s !important;
   z-index: 999;
 }
@@ -69,7 +66,6 @@ a {
 
 .sticky {
   background: #171A21;
-  width: 99.7vw !important;
   transition: 1s !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.861);
 }
