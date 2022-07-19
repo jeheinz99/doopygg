@@ -19,6 +19,7 @@
   cursor:pointer;
   color:#ffffff;
   text-decoration:none;
+  box-shadow: 2px 5px 5px rgb(0 0 0);
   text-shadow:0px -1px 0px #7a2a1d;
   width: 5em;
 }
@@ -136,6 +137,6 @@
 }
 .LBButtonsBox {
   display: flex;
-  width: 100%;
   gap: 0.5em;
+  padding: 10px;
 }

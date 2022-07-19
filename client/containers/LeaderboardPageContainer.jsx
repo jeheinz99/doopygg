@@ -33,6 +33,8 @@ const LeaderboardPageContainer = () => {
 
       <div className="LBButtonsBox">
         { regionsArr }
+      </div>
+      <div className="LBButtonsBox">
         { regionsArr2 }
       </div>
       

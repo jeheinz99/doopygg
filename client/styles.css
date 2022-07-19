@@ -15,7 +15,7 @@ html, body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: #171A21;
+  /* background: #171A21; */
   width: 100%;
   height: 100%;
 }
@@ -51,7 +51,7 @@ html, body {
   align-items: center;
   width: 98.8%;
   box-shadow: 2px 15px 15px rgba(0, 0, 0, 5);
-  /* border: 1px solid rgba(255, 255, 255, 0.861); */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.861);
   background: #171A21;
   gap: 2em;
   padding: 10px;
@@ -1548,7 +1548,18 @@ h4 {
   font-size: 0.9em;
   color: rgba(207, 205, 205, 0.8);
 }
-
+#disclaimerdiv {
+  display: flex;
+  font-style: italic;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.6);
+  width: 100%;
+  justify-content: flex-end;
+}
+#disclaimer {
+  display: flex;
+  width: 90%;
+}
 
 @media only screen and (max-width: 1400px) {
   .SummonerDataBoxGroup {
