@@ -11,7 +11,8 @@ const ChampPageContainer = () => {
   // };
 
   return (
-    <div className ="OuterSearchBox" id="welcome"> doopy.gg Champions 
+    <div className ="OuterSearchBox" id="welcome"> doopy.gg Champions
+            <p id="in-development2"> in development </p> 
       {/* <button className="testButton" onClick={() => testFunc()}></button> */}
     </div>
   );

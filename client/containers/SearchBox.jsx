@@ -34,6 +34,10 @@ const SearchBox = () => {
           <input id="SearchBoxInput" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
           <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
         </div>
+        <div className="test-button">
+          <p>Don't have a summoner name?</p>
+          <button id="SearchBoxDemoButton" onClick={() => loadSummonerData(getSummonerData('Doopliss2'))}> Demo </button>
+        </div>
       </div>
 
       {matchHistory[0] && <div className="headerinfo">

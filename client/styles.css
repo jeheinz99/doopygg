@@ -1560,6 +1560,37 @@ h4 {
   display: flex;
   width: 90%;
 }
+.test-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+#SearchBoxDemoButton {
+  background: #16181a;
+  border: 2px solid #303b51;
+  height: 3em;
+  transition: 0.5s;
+  color: rgba(255, 255, 255, 0.861);
+}
+#SearchBoxDemoButton:hover {
+  cursor: pointer;
+  filter: invert(10%);
+}
+#SearchBoxDemoButton:active {
+  transform: translateY(3px);
+}
+#in-development {
+  color: white;
+  margin: 0.2em;
+  font-size: 2em;
+  font-style: italic;
+}
+#in-development2 {
+  color: white;
+  margin: 0.2em;
+  font-size: 0.9em;
+  font-style: italic;
+}
 
 @media only screen and (max-width: 1400px) {
   .SummonerDataBoxGroup {

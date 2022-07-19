@@ -28,7 +28,8 @@ const ValorantPageContainer = () => {
           <p> # </p>
           <input id="ValBoxInput" placeholder="Tag-line" onChange={ taglineData } required></input>
         </div>
-        <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> Search! </button>
+        <p id="in-development"> in development </p>
+        {/* <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> Search! </button> */}
       </div>
     </div>
   );
