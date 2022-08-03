@@ -101,16 +101,7 @@ valorantRouter.get('/:riotId/:tagLine', valorantController.valData, (req, res) =
 // app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, "../dist")));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../riot.txt"));
-  });
 }
-
-// was for riot verification, getting rid of now
-// app.get('///riot.txt', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "../riot.txt"));
-// });
 
 // global error handler - only invoked when next passes in an arg
 app.use((err, req, res, next) => {

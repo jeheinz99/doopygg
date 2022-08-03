@@ -2,6 +2,8 @@ import React from 'react';
 import ChampPageContainer from '../containers/ChampPageContainer';
 import Navbar from '../containers/Navbar';
 
+import '../styles/Champions_styles/champions.css';
+
 const ChampionsPage = () => {
   return (
     <div className="AppBox">

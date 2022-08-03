@@ -5,6 +5,8 @@ const ChampionsInfoBoxEntry = props => {
   const { championId, id, kills, deaths, assists, played, win, loss, cs, champDamage, gold, csPerMin } = props;
 
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
+  
+  const numFormat = new Intl.NumberFormat('en-US');
 
   const KDA = ((kills + assists) / deaths).toFixed(2);
   const winPercent = ((win / played)*100).toFixed(0);
@@ -50,7 +52,7 @@ const ChampionsInfoBoxEntry = props => {
       </div>
 
       <div className="championsInfoEntry4">
-        <p>{avgGold}</p>
+        <p>{numFormat.format(avgGold)}</p>
       </div>
 
       <div className="championsInfoEntry5">
@@ -58,7 +60,7 @@ const ChampionsInfoBoxEntry = props => {
       </div>
 
       <div className="championsInfoEntry6">
-        <p>{avgDamage}</p>
+        <p>{numFormat.format(avgDamage)}</p>
       </div>
     </div>
   );

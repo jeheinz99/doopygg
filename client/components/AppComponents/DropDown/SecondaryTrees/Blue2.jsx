@@ -15,9 +15,9 @@ const Blue2 = props => {
   return (
     <div className="TreeBox">
 
-      <div className="Keystone">
+      {/* <div className="Keystone">
         <img className="TreeStyle" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/7202_sorcery.png"/>
-      </div>
+      </div> */}
 
       <div className="minorRuneRow" id="Blue">
         <img className="inactiveRune" id={`${matchNum}-8224`} src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/nullifyingorb/pokeshield.png"/>
