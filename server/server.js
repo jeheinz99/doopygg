@@ -56,7 +56,7 @@ summonerRouter.get('/update/:summonerName', summonerController.updateSummData, s
 });
 
 summonerRouter.get('/livegamedata/:summonerName', summonerController.getLiveGameData, (req, res) => {
-  console.log(res.locals.liveGameData, 'live game data in server js');
+  // console.log(res.locals.liveGameData, 'live game data in server js');
   return res.status(200).send(res.locals.liveGameData);
 });
 
