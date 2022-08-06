@@ -158,8 +158,8 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  border: 2px solid #272d3a;
+  width: 99.6%;
+  border: 3px solid #272d3a;
   border-top: none;
 }
 .DropDownBoxes {
@@ -314,7 +314,7 @@ html, body {
 }
 
 .leftSideGroup p, .rightSideGroup p {
-  width: 8em;
+  width: 10em;
   margin: 0;
 }
 
@@ -323,7 +323,6 @@ html, body {
   width: 100%;
   gap: 0.5em;
   justify-content: space-around;
-  border: 2px solid #272d3a;
   border-top: none;
 }
 .team1BoxDD {
@@ -342,8 +341,6 @@ html, body {
   display: flex;
   font-size: 0.8em;
   width: 100%;
-  border-left: 2px solid #272d3a;
-  border-right: 2px solid #272d3a;
   justify-content: space-around;
 }
 .TeamInfoTextDD1 {
@@ -370,7 +367,7 @@ html, body {
 #invis1 {
   display: flex;
   justify-content: flex-start;
-  width: 17.5em;
+  width: 23em;
 }
 #invis1 p {
   margin-left: 1em;
@@ -394,7 +391,7 @@ html, body {
   width: 6.5em;
 }
 #invis3 {
-  width: 17.8em;
+  width: 23.3em;
   display: flex;
   justify-content: flex-start;
 }
@@ -432,8 +429,9 @@ html, body {
 }
 #csDD {
   display: flex;
+  justify-content: center;
   align-items: center;
-  width: 2em;
+  width: 3.5em;
 }
 #visionDD {
   display: flex;
@@ -449,7 +447,8 @@ html, body {
 #csDD2 {
   display: flex;
   align-items: center;
-  width: 2em;
+  justify-content: center;
+  width: 3.6em;
 }
 #visionDD2 {
   display: flex;
@@ -480,7 +479,6 @@ html, body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   border-radius: 0.5em;
   padding: 5px;
@@ -498,18 +496,30 @@ html, body {
 }
 .Player0Team1Info p {
   margin: 0;
-  width: 5em;
+  width: 9em;
 }
-.Player0Team1Damage, .Player0Team1CS, .Player0Team1VisionScore {
+.Player0Team1Damage, .Player0Team1VisionScore {
   display: flex;
   font-size: 0.8em;
   justify-content: center;
   overflow: hidden;
   text-align: center;
 }
+.Player0Team1CS {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8em;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+#dd-cs-m {
+  color: rgb(155, 155, 155);
+  width: 100%;
+}
 .Player0Team1Damage p {
   margin: 0;
-  width: 3.5em;
+  width: 4em;
 }
 .Player0Team1VisionScore p {
   margin: 0;
@@ -517,7 +527,7 @@ html, body {
 }
 .Player0Team1CS p {
   margin: 0;
-  width: 2em;
+  width: 3.5em;
 }
 .Player0Team1KDA {
   display: flex;
@@ -527,7 +537,7 @@ html, body {
 .Player0Team1KDA p {
   text-align: center;
   margin: 0;
-  width: 6em;
+  width: 6.5em;
   font-size: 0.9em;
 }
 #summonerSpellIcon1DropDown, #summonerSpellIcon2DropDown {
@@ -581,8 +591,6 @@ html, body {
 .ObjectivesDD {
   display: flex;
   justify-content: center;
-  border-left: 2px solid #272d3a;
-  border-right: 2px solid #272d3a;
   width: 100%;
   gap: 1em;
   border-bottom: 2px solid #272d3a;
@@ -816,7 +824,6 @@ html, body {
   gap: 0.1em;
   margin: 5px;
   width: 37%;
-  /* border: 2px solid #303b51; */
 }
 .Recent20ChampCard {
   display: flex;
@@ -927,7 +934,6 @@ html, body {
   font-size: 0.55em;
   border-top-right-radius: 0.2em;
   border-bottom-right-radius: 0.2em;
-  /* border: 1.5px solid #000; */
   height: 10px;
   border-left: none;
   background-color: #c5472b;
@@ -1044,7 +1050,6 @@ h4 {
   border-top: 2px solid rgba(255, 255, 255, 0.80);
   border-bottom: 2px solid rgba(255, 255, 255, 0.80);
   justify-content: space-around;
-  /* border-radius: 0.5em; */
   background-color: #171A21;
 }
 .SummonerInfo {
@@ -1142,10 +1147,12 @@ h4 {
   gap: 0.5em;
 }
 .RunesInfoMain {
-  width: 90%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 3px solid #272d3a;
+  border-top: none;
 }
 .TreeDiv {
   border: 3px solid #272d3a;
@@ -1296,25 +1303,28 @@ h4 {
   gap: 1em;
   width: 100%;
 }
-#swapDDbox {
+.dd-box-routes {
+  width: 98.9%;
+  padding: 5px;
   display: flex;
-  height: 13%;
-  position: absolute;
-  border: none;
+  gap: 1em;
+  border-bottom: 2px solid #272d3a;
+}
+.dd-box-nav-btn {
   background: none;
-  transition: 0.5s;
-  align-items: center;
-  justify-content: flex-end;
-  width: 65%;
+  border: 3px solid #4d525f;
+  border-radius: 0.5em;
+  height: 3em;
+  width: 6em;
+  font-family: Kanit;
+  color:rgba(255, 255, 255, 0.861);
 }
-#swapDDbox:hover {
+.dd-box-nav-btn:hover {
   cursor: pointer;
-  transform: translateY(-3px);
-  filter: drop-shadow(0 0 0.3rem rgb(11, 10, 11));
+  filter: invert(30%);
 }
-#swapDDbox:active {
-  transform: translateY(-1px);
-  filter: drop-shadow(0 0 0.2rem rgb(11, 10, 11));
+#dd-box-etc-btn {
+
 }
 #otherPlayers-8000 {
   background-color: rgba(212, 205, 71, 0.2);
@@ -1453,7 +1463,7 @@ h4 {
   padding: 5px;
 }
 .ChampionsInfoBox {
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
@@ -1532,7 +1542,7 @@ h4 {
   width: 64px;
 }
 
-.championsInfoEntry4, .championsInfoEntry5, .championsInfoEntry6 {
+.championsInfoEntry4, .championsInfoEntry5, .championsInfoEntry6, .championsInfoEntry7 {
   display: flex;
   width: 10em;
   align-items: center;
@@ -1545,6 +1555,16 @@ h4 {
   font-size: 0.9em;
   color: rgba(207, 205, 205, 0.8);
 }
+#ci-double-kills, #ci-triple-kills, #ci-quadra-kills, #ci-penta-kills {
+  width: 6.4em;
+}
+.championsInfoEntry8, .championsInfoEntry9, .championsInfoEntry10, .championsInfoEntry11 {
+  display: flex;
+  width: 6.4em;
+  align-items: center;
+  justify-content: center;
+}
+
 #disclaimerdiv {
   display: flex;
   font-style: italic;

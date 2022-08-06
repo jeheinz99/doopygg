@@ -36,11 +36,17 @@ const ChampionsInfoBox = () => {
           champData[allMatchesPlayedData[i][j].championName].deaths += allMatchesPlayedData[i][j].deaths;
           champData[allMatchesPlayedData[i][j].championName].assists += allMatchesPlayedData[i][j].assists;
           champData[allMatchesPlayedData[i][j].championName].champDamage += allMatchesPlayedData[i][j].champDamage;
+          champData[allMatchesPlayedData[i][j].championName].damageTaken += allMatchesPlayedData[i][j].damageTaken;
           champData[allMatchesPlayedData[i][j].championName].cs += allMatchesPlayedData[i][j].cs;
           champData[allMatchesPlayedData[i][j].championName].gold += allMatchesPlayedData[i][j].gold;
           champData[allMatchesPlayedData[i][j].championName].csPerMin += allMatchesPlayedData[i][j].csPerMin;
           champData[allMatchesPlayedData[i][j].championName].positions[allMatchesPlayedData[i][j].position] += 1;
+          champData[allMatchesPlayedData[i][j].championName].doubleKills += allMatchesPlayedData[i][j].doubleKills;
+          champData[allMatchesPlayedData[i][j].championName].tripleKills += allMatchesPlayedData[i][j].tripleKills;
+          champData[allMatchesPlayedData[i][j].championName].quadraKills += allMatchesPlayedData[i][j].quadraKills;
+          champData[allMatchesPlayedData[i][j].championName].pentaKills += allMatchesPlayedData[i][j].pentaKills;
           champData[allMatchesPlayedData[i][j].championName].played += 1;
+
   
           (allMatchesPlayedData[i][j].win === true ? champData[allMatchesPlayedData[i][j].championName].win += 1 : champData[allMatchesPlayedData[i][j].championName].loss += 1);
   
@@ -56,8 +62,13 @@ const ChampionsInfoBox = () => {
           newObj.deaths = allMatchesPlayedData[i][j].deaths;
           newObj.assists = allMatchesPlayedData[i][j].assists;
           newObj.champDamage = allMatchesPlayedData[i][j].champDamage;
+          newObj.damageTaken = allMatchesPlayedData[i][j].damageTaken;
           newObj.cs = allMatchesPlayedData[i][j].cs;
           newObj.csPerMin = allMatchesPlayedData[i][j].csPerMin;
+          newObj.doubleKills = allMatchesPlayedData[i][j].doubleKills;
+          newObj.tripleKills = allMatchesPlayedData[i][j].tripleKills;
+          newObj.quadraKills = allMatchesPlayedData[i][j].quadraKills;
+          newObj.pentaKills = allMatchesPlayedData[i][j].pentaKills;
           newObj.played = 1;
   
           newObj.positions = {'TOP': 0, 'JUNGLE': 0, 'MIDDLE': 0, 'BOTTOM': 0, 'UTILITY': 0, '': 0, 'Invalid': 0};
@@ -98,6 +109,11 @@ const ChampionsInfoBox = () => {
       csPerMin={orderedData.allPlayed[i].csPerMin}
       champDamage={orderedData.allPlayed[i].champDamage}
       gold={orderedData.allPlayed[i].gold}
+      damageTaken={orderedData.allPlayed[i].damageTaken}
+      doubleKills={orderedData.allPlayed[i].doubleKills}
+      tripleKills={orderedData.allPlayed[i].tripleKills}
+      quadraKills={orderedData.allPlayed[i].quadraKills}
+      pentaKills={orderedData.allPlayed[i].pentaKills}
       />);
     }
   }
@@ -128,6 +144,11 @@ const ChampionsInfoBox = () => {
         <li id="ci-gold"><p>Gold</p></li>
         <li id="ci-cs"><p>CS</p></li>
         <li id="ci-damage"><p>Damage Dealt</p></li>
+        <li id="ci-damage-taken"><p>Damage Taken</p></li>
+        <li id="ci-double-kills"><p>Doubles</p></li>
+        <li id="ci-triple-kills"><p>Triples</p></li>
+        <li id="ci-quadra-kills"><p>Quadras</p></li>
+        <li id="ci-penta-kills"><p>Pentas</p></li>
       </ul>
       {allChampEntries}
     </div>

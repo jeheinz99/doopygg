@@ -41,12 +41,13 @@ app.use(function(req, res, next) {
 const summonerRouter = express.Router();
 app.use('/summoner', summonerRouter);
 
-summonerRouter.post('/ddboxdata', summonerController.getDDBoxSummData, (req, res) => {
-  return res.status(200).send(res.locals.DDBoxData);
+summonerRouter.get('/:summonerName', summonerController.checkSummData, summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
+  // console.log(res.locals.summonerData);
+  return res.status(200).send(res.locals.summonerData);
 });
 
-summonerRouter.get('/test', summonerController.testSummData, (req, res) => {
-  return res.status(200).send(res.locals.summonerTestData);
+summonerRouter.post('/ddboxdata', summonerController.getDDBoxSummData, (req, res) => {
+  return res.status(200).send(res.locals.DDBoxData);
 });
 
 summonerRouter.get('/update/:summonerName', summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
@@ -54,9 +55,13 @@ summonerRouter.get('/update/:summonerName', summonerController.updateSummData, s
   return res.status(200).send(res.locals.summonerData);
 });
 
-summonerRouter.get('/:summonerName', summonerController.checkSummData, summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
-  // console.log(res.locals.summonerData);
-  return res.status(200).send(res.locals.summonerData);
+summonerRouter.get('/livegamedata/:summonerName', summonerController.getLiveGameData, (req, res) => {
+  console.log(res.locals.liveGameData, 'live game data in server js');
+  return res.status(200).send(res.locals.liveGameData);
+});
+
+summonerRouter.get('/test', summonerController.testSummData, (req, res) => {
+  return res.status(200).send(res.locals.summonerTestData);
 });
 
 // TFT ENDPOINT 

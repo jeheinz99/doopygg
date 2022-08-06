@@ -3,7 +3,8 @@ import TeamsBoxes from './TeamsBoxes.jsx';
 
 const DDBoxPlayers = props => {
 
-  const { lolDDboxData } = props;
+  const { lolDDboxData, matchLength } = props;
+  console.log(lolDDboxData);
 
   const team1Box = [];
   const team2Box = [];
@@ -29,7 +30,8 @@ const DDBoxPlayers = props => {
         champDamage={lolDDboxData[i].champDamage} 
         champLevel={lolDDboxData[i].champLevel} 
         runes={lolDDboxData[i].runes} 
-        championId={lolDDboxData[i].championId}/>) : 
+        championId={lolDDboxData[i].championId}
+        matchLength={matchLength}/>) : 
       team2Box.push(<TeamsBoxes 
         key={i} 
         id={`dd-loseMatch`} 
@@ -49,7 +51,8 @@ const DDBoxPlayers = props => {
         champDamage={lolDDboxData[i].champDamage} 
         champLevel={lolDDboxData[i].champLevel} 
         runes={lolDDboxData[i].runes} 
-        championId={lolDDboxData[i].championId}/>));
+        championId={lolDDboxData[i].championId}
+        matchLength={matchLength}/>));
   }
   
   return (

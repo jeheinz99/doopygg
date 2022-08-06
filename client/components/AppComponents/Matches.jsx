@@ -39,7 +39,7 @@ const Matches = props => {
     else {
       return ('over 1 year ago');
     }
-  }
+  };
 
   const timeAgo = getTimeAgo(gameEnd);
   
@@ -140,7 +140,7 @@ const Matches = props => {
         </div>
       </div>
       <div className="DropDownBoxes">
-        {summonerOpen && <div className={`hidden-${hidden}`}><DropDownBox championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/></div>}
+        {summonerOpen && <div className={`hidden-${hidden}`}><DropDownBox matchLength={ matchLength } championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/></div>}
       </div>
     </div>
   );

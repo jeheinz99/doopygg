@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux';
 
 const TeamsBoxes = props => {
 
-  const {id, otherPlayers, kills, deaths, assists, items, cs, summonerSpells, visionScore, champDamage, champLevel, runes, championId, summonerName } = props;
+  const {id, matchLength, otherPlayers, kills, deaths, assists, items, cs, summonerSpells, visionScore, champDamage, champLevel, runes, championId, summonerName } = props;
+
+  // allows to get commas in large numbers
+  const numFormat = new Intl.NumberFormat('en-US');
   
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
   const KDA = ((kills + assists) / deaths).toFixed(2);
@@ -34,10 +37,11 @@ const TeamsBoxes = props => {
               {KDA < 3 && <p id="lessthan3kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
             </div>
             <div className="Player0Team1Damage">
-              <p>{champDamage}</p>
+              <p>{numFormat.format(champDamage)}</p>
             </div>
             <div className="Player0Team1CS">
               <p>{cs}</p>
+              <p id="dd-cs-m">{`(${(cs / (matchLength/60)).toFixed(1)})`}</p>
             </div>
             <div className="Player0Team1VisionScore">
               <p>{visionScore}</p>

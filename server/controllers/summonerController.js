@@ -445,6 +445,11 @@ summonerController.addSummMatchesData = async (req, res, next) => {
               win: player.win,
               position: player.teamPosition,
               gold: player.goldEarned,
+              damageTaken: player.totalDamageTaken,
+              doubleKills: player.doubleKills,
+              tripleKills: player.tripleKills,
+              quadraKills: player.quadraKills,
+              pentaKills: player.pentaKills, 
             });
           }
         }
@@ -454,6 +459,7 @@ summonerController.addSummMatchesData = async (req, res, next) => {
 
     const S12MatchesInfoArr = [];
     
+    // iterate through all s12 ranked matches and see matches that are cached in db
     for (let i = 0; i < allMatchesPlayed.length; i++) {
       const objs = await lolMatches.find({matchId:{$in: [...summoner.S12MatchesPlayed[i]]}});
       const objData = getObjData(objs, summonerName);
@@ -543,6 +549,45 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
   }
   catch(err) {
     console.log(err, 'err in getDDBoxSummData');
+    return next(err);
+  }
+};
+
+// gets user's current live game data
+summonerController.getLiveGameData = async (req, res, next) => {
+  try {
+    const { summonerName } = req.params;
+    const getEncryptedId = await axios.get(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`,
+    {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Origin": "https://developer.riotgames.com"
+      }
+    });
+    const { id } = getEncryptedId.data;
+
+    const liveGameData = await axios.get(`https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${id}?api_key=${process.env.api_key}`,
+    {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Origin": "https://developer.riotgames.com"
+      }
+    });
+
+    if (liveGameData.data.status.status_code === 404) {
+      res.locals.liveGameData = null;
+      return next();
+    }
+
+    res.locals.liveGameData = liveGameData.data;
+    return next();
+  }
+  catch(err) {
+    console.log(err, 'err in getLiveGameData');
     return next(err);
   }
 };

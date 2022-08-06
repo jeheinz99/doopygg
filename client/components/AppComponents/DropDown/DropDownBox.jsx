@@ -9,13 +9,12 @@ import axios from 'axios';
 import { PulseLoader } from 'react-spinners';
 
 import { useSelector } from 'react-redux';
-import { RiCameraSwitchFill } from 'react-icons/ri';
 import { RiCameraSwitchLine } from 'react-icons/ri';
 import DDBoxPlayers from './DDBoxPlayers.jsx';
 
 const DropDownBox = props => {
   
-  const { matchNum, otherPlayers, id, championIcon, items } = props;
+  const { matchNum, matchLength, otherPlayers, id, championIcon, items } = props;
 
   const summonerName = useSelector(state => state.summoners.summonerName);
 
@@ -96,7 +95,11 @@ const DropDownBox = props => {
   return (
     <div className="DDBoxWrap">
 
-      {currBox && otherPlayersRunes.length > 0 && <div id="test"><button id="swapDDbox2" onClick={() => toggleBox(!currBox)}> <RiCameraSwitchLine id="historyButton"/> </button></div>}
+      {currBox && otherPlayersRunes.length > 0 && 
+        <div className="dd-box-routes">
+          <button className="dd-box-nav-btn" onClick={() => toggleBox(!currBox)}> Overview </button>
+          <button className="dd-box-nav-btn" onClick={() => toggleBox(!currBox)}> etc. </button>
+        </div>}
 
       {currBox && otherPlayersRunes.length > 0 && 
         <div className="RunesInfoDD">
@@ -145,12 +148,18 @@ const DropDownBox = props => {
 
       {!currBox && lolDDboxData.length > 0 &&
       <div className="DDbox">
-        <button id="swapDDbox" onClick={() => toggleBox(!currBox)}> <RiCameraSwitchFill id="runeButton"/> </button>
+
+        <div className="dd-box-routes">
+          <button className="dd-box-nav-btn" onClick={() => toggleBox(!currBox)}> Runes </button>
+          <button className="dd-box-nav-btn" onClick={() => toggleBox(!currBox)}> etc. </button>
+        </div>
+
         <div className="objectives-1">
           <ObjectivesDD otherPlayers={otherPlayers}/>
         </div>
+
         <InfoBar/>
-        <DDBoxPlayers lolDDboxData={lolDDboxData}/>
+        <DDBoxPlayers matchLength={matchLength} lolDDboxData={lolDDboxData}/>
       </div>}
       
     </div>
