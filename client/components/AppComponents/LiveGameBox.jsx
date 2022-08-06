@@ -22,7 +22,7 @@ const LiveGameBox = () => {
     <div>
       {liveGameData === null && 
       <div>
-        <p>Summoner is not currently in a live game</p>  
+        <p>Summoner is not currently in a live game.</p>  
       </div>
       }
       hello
