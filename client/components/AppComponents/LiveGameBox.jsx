@@ -26,7 +26,7 @@ const LiveGameBox = () => {
       {liveGameData === null && 
       <div className="not-in-live-game">
         <p>{`${summonerName}`} is not currently in game</p>
-        <p>If you are currently in game, please refresh the page or try again later</p>  
+        <p>If you are currently in game, please refresh the page or try again later.</p>  
       </div>}
 
       {liveGameData !== null && 

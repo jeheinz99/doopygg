@@ -93,7 +93,6 @@ const mapSummonerIcons = async summSpells => {
 summonerController.checkSummData = async (req, res, next) => {
 
   const { summonerName } = req.params;
-
   try {
     const summoner = await lolSummoner.findOne({summonerName: summonerName});
 

@@ -1582,11 +1582,25 @@ h4 {
   font-size: 0.9em;
   color: rgba(255, 255, 255, 0.6);
   width: 100%;
-  justify-content: flex-end;
+  justify-content: center;
+  text-align: center;
 }
 #disclaimer {
-  display: flex;
+  /* display: flex; */
   width: 90%;
+}
+#privacy-policy {
+  margin-left: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: underline;
+}
+#privacy-policy:hover {
+  filter: invert(20%);
+}
+#privacy-policy:active {
+  margin-left: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: underline;
 }
 .test-button {
   display: flex;

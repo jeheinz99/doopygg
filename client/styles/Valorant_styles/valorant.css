@@ -22,21 +22,19 @@
 }
 
 #ValBoxInput {
-  width: 20%;
-  height: 25%;
+  width: 7em;
   text-align: center;
-  border-radius: 0.5em;
-  padding: 0.5em;
-  font-size: 0.5em;
-  border-width: 4px;
-  border-style: double;
-  border-color: #1C6EA4;
-  background-color: #181A1B;
-  color:rgba(255, 255, 255, 0.861);
-  box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
+  font-size: 0.7em;
+  border: none;
+  border-bottom: 1px solid #484848;
+  background-color: #15161a;
+  color: rgba(255, 255, 255, 0.861);
+  transition: 1s;
 }
 #ValBoxInput:focus {
   outline: 0;
+  background-color: #22212174;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.861);
 }
 #ValBoxInput:hover {
   background-color: #22212174;
@@ -48,6 +46,11 @@
   justify-content: center;
   align-items: center;
   font-size: 3em;
+  gap: 0.2em;
+}
+.ValorantSearchBox p {
+  color: rgba(255, 255, 255, 0.861);
+  font-size: 0.8em;
 }
 .ValorantPageBox {
   display: flex;

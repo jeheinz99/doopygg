@@ -22,7 +22,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // // handles requests for static files
-// app.use(express.static(path.join(__dirname, "../dist")));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, "../dist")));
+}
 
 // allows requests with headers to back-end from our localhost endpoint
 app.use(function(req, res, next) {
@@ -104,9 +106,6 @@ valorantRouter.get('/:riotId/:tagLine', valorantController.valData, (req, res) =
 });
 // catch-all route handler for any requests to an unknown route
 // app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, "../dist")));
-}
 
 // global error handler - only invoked when next passes in an arg
 app.use((err, req, res, next) => {
