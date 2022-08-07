@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getSummonerData, updateSummonerData } from '../actions/actions.js';
 import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,10 +20,20 @@ const SearchBox = () => {
   const update = useDispatch();
 
   let summonerNameInput;
-    function summonerNameData (e) {
-      summonerNameInput = e.target.value;
-      return summonerNameInput;
-    }
+  const summonerNameData = (e) => {
+    summonerNameInput = e.target.value;
+    return summonerNameInput;
+  };
+
+  useEffect(() => {
+    const input = document.getElementById('SearchBoxInput');
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault;
+        document.getElementById('SearchBoxButton').click();
+      }
+    });
+  });
   
   return (
     <div className="OuterSearchBox">
