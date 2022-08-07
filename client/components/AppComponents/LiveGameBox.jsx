@@ -10,22 +10,30 @@ const LiveGameBox = () => {
 
   useEffect(() => {
     const getLiveGameData = async () => {
-      const res = await axios.get(`/summoner/livegamedata/${summonerName}`);
-      setLiveGameData(res.data);
+      try {
+        const res = await axios.get(`/summoner/livegamedata/${summonerName}`);
+        setLiveGameData(res.data);
+      }
+      catch(err) {
+        setLiveGameData(null);
+      }
     };
-    if (liveGameData === null) {
-      getLiveGameData();
-    }
+    getLiveGameData();
   }, []);
 
   return (
     <div>
       {liveGameData === null && 
-      <div>
-        <p>Summoner is not currently in a live game.</p>  
-      </div>
-      }
-      hello
+      <div className="not-in-live-game">
+        <p>{`${summonerName}`} is not currently in game</p>
+        <p>If you are currently in game, please refresh the page or try again later</p>  
+      </div>}
+
+      {liveGameData !== null && 
+      <div className="not-in-live-game">
+        <p> {`${summonerName}`} is currently in-game!</p>
+        <p> But this tab is still currently under development.</p>
+      </div>}
     </div>
   )
 };

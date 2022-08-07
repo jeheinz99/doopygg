@@ -1564,6 +1564,17 @@ h4 {
   align-items: center;
   justify-content: center;
 }
+.not-in-live-game {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 3px solid #272d3a;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 1.5em;
+}
+.not-in-live-game {
+}
 
 #disclaimerdiv {
   display: flex;

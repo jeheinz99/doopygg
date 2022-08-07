@@ -3,6 +3,7 @@ const axios = require('axios');
 const db = require('../models/IconPaths');
 const lolSummoner = require('../models/summonerData');
 const lolMatches = require('../models/LoLMatchesModel');
+const queueData = require('../../queues.json');
 
 // HELPER FUNCTIONS ---> USED TO GET DATA FROM SQL DATABASE FROM RIOT API DATA
 
@@ -10,9 +11,9 @@ const lolMatches = require('../models/LoLMatchesModel');
 const mapQueueType = (queueId, queueData) => {
   let str = '';
   // reverse iterate through the array because most queues are high numbers, lower ids are deprecated
-  for (let i = queueData.data.length-1; i >= 0; i--) {
-    if (queueId === queueData.data[i].queueId) {
-      str = queueData.data[i].description;
+  for (let i = queueData.length-1; i >= 0; i--) {
+    if (queueId === queueData[i].queueId) {
+      str = queueData[i].description;
       str = str.replace(' games', '');
       str = str.replace('5v5 ', '');
       return str;
@@ -324,8 +325,6 @@ summonerController.updateSummData = async (req, res, next) => {
       };
     };
     
-    const queueData = await axios.get('https://static.developer.riotgames.com/docs/lol/queues.json');
-
     // maps icons for main player being searched for
     for (let i = 0; i < matchHistoryData.length; i++) {
 
@@ -557,6 +556,7 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
 summonerController.getLiveGameData = async (req, res, next) => {
   try {
     const { summonerName } = req.params;
+    // gets users encrypted summoner id from summoner name, needed to make next api call for live game
     const getEncryptedId = await axios.get(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`,
     {
       headers: {
@@ -568,7 +568,8 @@ summonerController.getLiveGameData = async (req, res, next) => {
     });
     const { id } = getEncryptedId.data;
 
-    const liveGameData = await axios.get(`https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${id}?api_key=${process.env.api_key}`,
+    // request to get user's live game data using their encrypted summoner id
+    const getLiveGameData = await axios.get(`https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${id}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -577,13 +578,28 @@ summonerController.getLiveGameData = async (req, res, next) => {
         "Origin": "https://developer.riotgames.com"
       }
     });
-
-    if (liveGameData.data.status.status_code === 404) {
-      res.locals.liveGameData = null;
-      return next();
+    const { data } = getLiveGameData;
+    // gets queue type (ranked, normals, aram, etc)
+    const queueMap = await mapQueueType(data.gameQueueConfigId, queueData);
+    // iterates through participants to get their summoners, champions, profileIcons, names, and runes
+    const playerInfoArr = [];
+    for (let i = 0; i < data.participants.length; i++) {
+      const player = data.participants[i];
+      playerInfoArr.push({
+        summonerSpells: [player.spell1Id, player.spell2Id],
+        championId: player.championId,
+        profileIconId: player.profileIconId,
+        summonerName: player.summonerName,
+        runes: player.perks,
+      });
     }
-
-    res.locals.liveGameData = liveGameData.data;
+    const liveGameData = {
+      queueType: queueMap,
+      bans: data.bannedChampions,
+      region: data.platformId,
+      playerInfo: playerInfoArr,
+    };
+    res.locals.liveGameData = liveGameData;
     return next();
   }
   catch(err) {
