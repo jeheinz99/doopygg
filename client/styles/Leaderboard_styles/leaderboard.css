@@ -1,5 +1,6 @@
 #welcomeLeaderboard {
   gap: 0.2em;
+  border-bottom: 2px solid #5f677a;
 }
 
 #welcomeLeaderboard h3 {
@@ -35,13 +36,13 @@
 .leaderboardBox {
   display: flex;
   align-items: center;
-  background: rgb(206, 217, 183);
-  background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%);
-  border-radius: 1.5em;
-  border: 2px solid rgb(255, 255, 255);
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.80);
+  width: 98.4%;
+  height: 80px;
+  background-color: #141522;
+  color: rgba(255, 255, 255, 0.80);
+  /* border: 1px solid rgba(255, 255, 255, 0.80); */
   gap: 2em;
+  padding: 10px;
 }
 .LBBoxDiv {
   display: flex;
@@ -55,46 +56,53 @@
   width: 10em;
   margin: 0;
 }
+#lb-name {
+  font-size: 1em;
+}
 #LBRankNumberTag {
-  font-size: 1.5em;
+  font-size: 1.2em;
   padding: 10px;
   margin: 0;
   width: 1em;
 }
 #profileIcon {
-  height: 5%;
-  width: 5%;
-  border-radius: 2em;
-  border: 3px solid rgb(0, 0, 0)
+  height: 64px;
+  width: 64px;
+  border: 2px solid #303b51;
 }
 #LBBoxes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
   gap: 5px;
-  border-radius: 2em;
-  border-width: 4px;
-  border-style: double;
-  border-color: #1C6EA4;
 }
 .OuterLBBox {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 96%;
+  height: 105px;
   font-size: 1.3em;
+  background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%);
 }
 .LeaderboardPageBox {
   display: flex;
   flex-flow: column;
   align-items: center;
-  width: 100%;
+  width: 99.7%;
 }
 .Rank1LBBox {
   display: inline-flex;
   flex-direction: row;
   font-size: 1.5em;
-  width: 100%;
+  width: 96%;
   background: url('https://cdna.artstation.com/p/assets/images/images/028/767/524/large/horace-hsu-spirit-blossom-kindred-final.jpg?1595445173');
   object-fit: cover;
   background-position: 1375px 2100px;
   /* background: rgb(206, 217, 183); */
   /* background: linear-gradient(90deg, rgb(162, 191, 83) 0%, rgb(68, 92, 198) 10%, rgb(177, 207, 118) 51%, rgb(100, 131, 203) 100%); */
-  border-radius: 1.5em;
+  /* border-radius: 1.5em; */
   border: 2px solid rgb(255, 255, 255);
   justify-content: space-around;
 }
@@ -139,4 +147,16 @@
   display: flex;
   gap: 0.5em;
   padding: 10px;
+}
+#lb-winbar {
+  border-top-left-radius: 2em;
+  border-bottom-left-radius: 2em;
+  height: 20px;
+  font-size: 0.75em;
+}
+#lb-lossbar {
+  border-top-right-radius: 2em;
+  border-bottom-right-radius: 2em;
+  height: 20px;
+  font-size: 0.75em;
 }

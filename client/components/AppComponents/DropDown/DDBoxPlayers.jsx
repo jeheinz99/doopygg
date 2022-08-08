@@ -4,7 +4,6 @@ import TeamsBoxes from './TeamsBoxes.jsx';
 const DDBoxPlayers = props => {
 
   const { lolDDboxData, matchLength } = props;
-  console.log(lolDDboxData);
 
   const team1Box = [];
   const team2Box = [];
