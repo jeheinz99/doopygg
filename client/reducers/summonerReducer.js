@@ -17,7 +17,6 @@ const summonerReducer = (state = initialState, action) => {
 
   switch (type) {
     case types.ADD_SUMMONER_DATA:
-
       return Object.assign(
         {}, 
         state, {

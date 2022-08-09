@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import TFTPlayersDD from "./TFTPlayersDD";
 import { PulseLoader } from 'react-spinners';
 import axios from 'axios';
-
+import { useSelector } from 'react-redux';
 
 const TFTDropDownBox = props => {
 
   const { otherPlayers } = props;
+  const summonerName = useSelector(state => state.tft.summonerName);
 
   const [DDboxData, setDDboxData] = useState([]);
 
@@ -22,10 +23,9 @@ const TFTDropDownBox = props => {
       const sortedData = res.data.sort((a, b) => a.placement - b.placement);
       setDDboxData(sortedData);
     }
-    if (DDboxData.length === 0) {
-      getData();
-    }
-  }, [DDboxData]);
+    console.log('hi');
+    getData();
+  }, [summonerName]);
 
   const playersArr = [];
   for (let i = 0; i < DDboxData.length; i++) {

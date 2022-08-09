@@ -53,6 +53,7 @@ html, body {
   box-shadow: 2px 15px 15px rgba(0, 0, 0, 5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.861);
   background: #171A21;
+  /* min-height: 43vw; */
   gap: 2em;
   padding: 10px;
   margin-top: 0.4em;
@@ -1420,15 +1421,21 @@ h4 {
   width: 100%;
 }
 .searchbox-tab {
-  border: 2px solid #303b51;
-  border-bottom: 1px solid #303b51;
+  border: none;
   background: none;
   color: rgba(255, 255, 255, 0.80);
   font-size: 1.2em;
+  margin: 5px;
+  border-bottom: 2px solid #171A21;
+  transition: 0.5s;
 }
 .searchbox-tab:hover {
   cursor: pointer;
-  background-color: #24252a;
+  /* background-color: #24252a; */
+  border-bottom: 3px solid #303b51;
+}
+#active-btn-tab {
+  border-bottom: 3px solid #303b51;
 }
 .ci-summoner-info {
   border: 2px solid #303b51;
@@ -1573,7 +1580,67 @@ h4 {
   color: rgba(255, 255, 255, 0.80);
   font-size: 1.5em;
 }
-.not-in-live-game {
+.in-live-game-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 3px solid #272d3a;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 1.2em;
+}
+.lg-teams {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  padding: 5px;
+}
+.lg-team {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  gap: 0.5em;
+}
+#lg-champicon {
+  width: 48px;
+  height: 48px;
+}
+.live-game-player {
+  display: flex;
+  width: 100%;
+  gap: 0.2em;
+  padding: 5px;
+  border: 2px solid #303b51;
+  width: 35em;
+  align-items: center;
+}
+.lg-div1 {
+
+}
+.lg-div2 {
+
+}
+.lg-queue-bg-div {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  margin: 10px;
+  border-left: 3px solid white;
+  height: 25px;
+}
+.lg-queue-bg-div p {
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+.one-temp {
+  /* display: flex; */
+  /* width: 90%; */
+  /* justify-content: flex-start; */
+  /* text-align: left; */
 }
 
 #disclaimerdiv {

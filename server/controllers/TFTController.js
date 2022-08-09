@@ -77,14 +77,13 @@ const mapUnitIcons = async units => {
 
 // maps trait icons from name
 const mapTraitIcons = async traits => {
-
   const tempArr = [];
   for (let i = 0; i < traits.length; i++) {
     if (traits[i].tier_current > 0) {
       tempArr.push(`'${traits[i].name}'`);
     }
   }
-
+  if (!tempArr.length) return [];
   const query = `SELECT * FROM traits WHERE name = any(array[${tempArr}])`;
   const path = await db.query(query);
 

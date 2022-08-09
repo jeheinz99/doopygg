@@ -118,7 +118,7 @@ const ChampionsInfoBox = () => {
     }
   }
 
-  const profileIcon = `https://opgg-static.akamaized.net/images/profile_icons/profileIcon${profileIconId}.jpg`;
+  const profileIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${profileIconId}.jpg`;
 
   return (
     <div className="ChampionsInfoBox">

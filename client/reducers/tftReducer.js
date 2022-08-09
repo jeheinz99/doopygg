@@ -15,7 +15,6 @@ const tftReducer = (state = initialState, action) => {
 
   switch(type) {
     case types.ADD_TFT_DATA:
-
       return Object.assign(
         {},
         state, {

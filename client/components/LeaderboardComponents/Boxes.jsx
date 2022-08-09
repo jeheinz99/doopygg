@@ -4,7 +4,8 @@ const Boxes = props => {
 
   const { id, wins, losses, summonerName, leaguePoints, rank, profileIcon } = props;
 
-  const image = `https://opgg-static.akamaized.net/images/profile_icons/profileIcon${profileIcon}.jpg`
+  const image = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${profileIcon}.jpg`;
+
   const winPercent = ((wins / (wins + losses))*100).toFixed(2);
   const ladderNumber = id + 1;
   

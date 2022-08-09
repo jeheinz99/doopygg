@@ -4,7 +4,7 @@ import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataBox.jsx';
 import ChampionsInfoBox from '../components/AppComponents/ChampionsInfoBox.jsx';
-import LiveGameBox from '../components/AppComponents/LiveGameBox.jsx';
+import LiveGameBox from '../components/AppComponents/LiveGame/LiveGameBox.jsx';
 
 import { BiSearch } from 'react-icons/bi';
 
@@ -60,6 +60,7 @@ const SearchBox = () => {
     <div className="SummonerDataBoxGroup">
       <SummonerChampDataBox />
       <div className="searchbox-tabs">
+        <button id="active-btn-tab" className="searchbox-tab">Matches</button>
         <button className="searchbox-tab" onClick={() => setCurrBox('champions')}>Champions</button>
         <button className="searchbox-tab" onClick={() => setCurrBox('live-game')}>Live Game</button>
         <MatchBoxes />
@@ -72,6 +73,7 @@ const SearchBox = () => {
       {/* <SummonerChampDataBox /> */}
       <div className="searchbox-tabs">
         <button className="searchbox-tab" onClick={() => setCurrBox('matchHistory')}>Matches</button>
+        <button id="active-btn-tab" className="searchbox-tab">Champions</button>
         <button className="searchbox-tab" onClick={() => setCurrBox('live-game')}>Live Game</button>
         <ChampionsInfoBox />
       </div>
@@ -84,6 +86,7 @@ const SearchBox = () => {
       <div className="searchbox-tabs">
         <button className="searchbox-tab" onClick={() => setCurrBox('matchHistory')}>Matches</button>
         <button className="searchbox-tab" onClick={() => setCurrBox('champions')}>Champions</button>
+        <button id="active-btn-tab" className="searchbox-tab">Live Game</button>
         <LiveGameBox />
       </div>
     </div>

@@ -9,7 +9,6 @@ import axios from 'axios';
 import { PulseLoader } from 'react-spinners';
 
 import { useSelector } from 'react-redux';
-import { RiCameraSwitchLine } from 'react-icons/ri';
 import DDBoxPlayers from './DDBoxPlayers.jsx';
 
 const DropDownBox = props => {
@@ -32,10 +31,8 @@ const DropDownBox = props => {
       });
       lolSetDDboxData(res.data);
     }
-    if (lolDDboxData.length === 0) {
-      getData();
-    }
-  }, [lolDDboxData]);
+    getData();
+  }, [summonerName]);
 
   // finds the current player's rune data for the current match
   const getRuneInfo = data => {

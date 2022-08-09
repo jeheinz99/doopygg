@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTFTData, updateTFTData } from '../actions/actions.js';
 import TFTMatchBoxes from '../components/TFTComponents/TFTMatchBoxes.jsx';
-
-import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx'
+import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx';
 
 import { BiSearch } from 'react-icons/bi';
 
@@ -15,10 +14,21 @@ const TFTPageContainer = () => {
   const TFTData = useSelector(state => state.tft.TFTData);
 
   let summonerNameInput;
-    function summonerNameData (e) {
-      summonerNameInput = e.target.value;
-      return summonerNameInput;
-    }
+  const summonerNameData = e => {
+    summonerNameInput = e.target.value;
+    return summonerNameInput;
+  };
+
+  useEffect(() => {
+    console.log('hi');
+    const input = document.getElementById('SearchBoxInputTFT');
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault;
+        document.getElementById('SearchBoxButton').click();
+      }
+    });
+  }, []);
 
   return (
     <div className="OuterSearchBox">

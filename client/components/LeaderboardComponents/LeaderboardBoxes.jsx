@@ -18,7 +18,7 @@ const LeaderboardBoxes = () => {
       <div className="Rank1LBBox">
         <div className="Rank1LB1">
           <p>#1</p>
-          <img id="Rank1LBIcon" src={`https://opgg-static.akamaized.net/images/profile_icons/profileIcon${leaderboardData[0].profileIcon}.jpg`}/>
+          <img id="Rank1LBIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${leaderboardData[0].profileIcon}.jpg`}/>
         </div>
         <div className="Rank1LB2">
           <p>{leaderboardData[0].summonerName}</p>

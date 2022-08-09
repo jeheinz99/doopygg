@@ -109,7 +109,7 @@ summonerController.checkSummData = async (req, res, next) => {
       };
       return next();
     }
-    return next();
+    return next(); 
   }
   catch(err) {
     console.log('error in checkSummData');
@@ -578,6 +578,7 @@ summonerController.getLiveGameData = async (req, res, next) => {
       }
     });
     const { data } = getLiveGameData;
+    console.log(data, 'data');
     // gets queue type (ranked, normals, aram, etc)
     const queueMap = await mapQueueType(data.gameQueueConfigId, queueData);
     // iterates through participants to get their summoners, champions, profileIcons, names, and runes
@@ -590,6 +591,8 @@ summonerController.getLiveGameData = async (req, res, next) => {
         profileIconId: player.profileIconId,
         summonerName: player.summonerName,
         runes: player.perks,
+        queue: queueMap,
+        team: player.teamId,
       });
     }
     const liveGameData = {
