@@ -1516,6 +1516,7 @@ h4 {
 }
 .championsInfoEntryBox {
   display: flex;
+  justify-content: space-evenly;
   border: 3px solid #303b51;
   border-radius: 0.2em;
   padding: 5px;
@@ -1531,7 +1532,7 @@ h4 {
   padding: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   width: 99.7%;
   border: 2px solid #303b51;
   list-style: none;
