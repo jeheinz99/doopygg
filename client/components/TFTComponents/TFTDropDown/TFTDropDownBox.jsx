@@ -23,7 +23,6 @@ const TFTDropDownBox = props => {
       const sortedData = res.data.sort((a, b) => a.placement - b.placement);
       setDDboxData(sortedData);
     }
-    console.log('hi');
     getData();
   }, [summonerName]);
 

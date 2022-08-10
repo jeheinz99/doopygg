@@ -27,7 +27,8 @@ const MatchBoxes = () => {
         outcome={'Victory'} 
         key={`match-${i}`}
         matchNum={`matchBox-${i}`}
-        otherPlayers={chunkArr[i]} 
+        matchId={matchHistory[i].matchId}
+        otherPlayers={chunkArr[i]}
         visionScore={matchHistory[i].visionScore} 
         summonerSpells={matchHistory[i].summonerSpells} 
         items={matchHistory[i].items} 
@@ -53,6 +54,7 @@ const MatchBoxes = () => {
         outcome={'Defeat'} 
         key={`match-${i}`}
         matchNum={`matchBox-${i}`}
+        matchId={matchHistory[i].matchId}
         otherPlayers={chunkArr[i]} 
         visionScore={matchHistory[i].visionScore} 
         summonerSpells={matchHistory[i].summonerSpells} 

@@ -7,36 +7,38 @@ import ObjectivesDD from './ObjectivesDD.jsx';
 import InfoBar from './InfoBar.jsx';
 import axios from 'axios';
 import { PulseLoader } from 'react-spinners';
-
 import { useSelector } from 'react-redux';
 import DDBoxPlayers from './DDBoxPlayers.jsx';
+import SkillBox from './SkillBox.jsx';
 
 const DropDownBox = props => {
   
-  const { matchNum, matchLength, otherPlayers, id, championIcon, items } = props;
+  const { matchId, matchNum, matchLength, otherPlayers, id, championIcon, items } = props;
 
   const summonerName = useSelector(state => state.summoners.summonerName);
+  const puuid = useSelector(state => state.summoners.puuid);
 
   const [currBox, toggleBox] = useState(false);
   const [lolDDboxData, lolSetDDboxData] = useState([]);
+  const [timelineData, setTimelineData] = useState({});
 
   useEffect(() => {
     const getData = async () => {
       const res = await axios.post('/summoner/ddboxdata', 
-      otherPlayers, 
+      {otherPlayers, matchId, puuid}, 
       {
         headers: {
           'Content-Type': 'application/json',
         }
       });
-      lolSetDDboxData(res.data);
+      lolSetDDboxData(res.data.otherPlayers);
+      setTimelineData(res.data.timelineData);
     }
     getData();
   }, [summonerName]);
 
   // finds the current player's rune data for the current match
   const getRuneInfo = data => {
-
     const runeInfo = {};
     const otherPlayers = [];
     
@@ -63,12 +65,10 @@ const DropDownBox = props => {
     runeInfo.otherPlayers = otherPlayers;
     return runeInfo;
   };
-
   const runeInfo = getRuneInfo(lolDDboxData);
 
   const otherPlayersRunes = [];
   const otherPlayersRunes2 = [];
-
   for (let i = 0; i < runeInfo.otherPlayers.length; i++) {
     (otherPlayersRunes.length < 5 ?
     otherPlayersRunes.push(
@@ -89,6 +89,14 @@ const DropDownBox = props => {
       />));
   }
 
+  const skillLevels = [];
+  if (Object.keys(timelineData).length !== 0) {
+    for (let i = 0; i < timelineData.skillLevels.length; i++) {
+      const skills = {1: 'Q', 2: 'W', 3: 'E', 4: 'R'};
+      skillLevels.push(<SkillBox key={`skill-${i}`} id={skills[timelineData.skillLevels[i].skillSlot]}/>);
+    }
+  }
+
   return (
     <div className="DDBoxWrap">
 
@@ -100,31 +108,50 @@ const DropDownBox = props => {
 
       {currBox && otherPlayersRunes.length > 0 && 
         <div className="RunesInfoDD">
+          <div className="RunesInfoMainWrap">
 
-          <div className="RunesInfoMain">
+            <div className="RunesInfoMain">
+              <div className="IconAndBuild">
+                <div className="wrap-1">
+                  <div className="runes-items-champicon">
+                    <img id="temp" src={championIcon}/>
 
-            <div className="IconAndBuild">
-              <img id="temp" src={championIcon}/>
+                    <div className="runes-itemsDiv">
 
-              <div className="upperHalfItems" id="upperDDbox">
-                <img id="item0" src={items[0]}/>
-                <img id="item1" src={items[1]}/>
-                <img id="item2" src={items[2]}/>
-              </div>
+                      <div className="upperHalfItems" id="upperDDbox">
+                        <img id="item0" src={items[0]}/>
+                        <img id="item1" src={items[1]}/>
+                        <img id="item2" src={items[2]}/>
+                      </div>
 
-              <div className="lowerHalfItems" id="lowerDDbox">
-                <img id="item3" src={items[3]}/>
-                <img id="item4" src={items[4]}/>
-                <img id="item5" src={items[5]}/>
+                      <div className="lowerHalfItems" id="lowerDDbox">
+                        <img id="item3" src={items[3]}/>
+                        <img id="item4" src={items[4]}/>
+                        <img id="item5" src={items[5]}/>
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <Runes1 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+                </div>
+                <div className="R2andR3">
+                  <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+                  <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+                </div>
               </div>
             </div>
-            <Runes1 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
-            <div className="R2andR3">
-              <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
-              <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+
+            <div className="Match-timeline-main">
+              <div className="match-timeline-skills-header">
+                <p> Skill Order </p>
+              </div>
+              <div className="match-timeline-skills-div">
+                { skillLevels }
+              </div>
             </div>
+
           </div>
-
           <div className="OtherPlayersRunes">
             <div id="otherPlayers1">
               { otherPlayersRunes }

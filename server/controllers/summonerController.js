@@ -1,7 +1,7 @@
 const summonerController = {};
 const axios = require('axios');
 const db = require('../models/IconPaths');
-const lolSummoner = require('../models/summonerData');
+const lolSummoner = require('../models/LoLSummonerData');
 const lolMatches = require('../models/LoLMatchesModel');
 const queueData = require('../../queues.json');
 
@@ -23,7 +23,7 @@ const mapQueueType = (queueId, queueData) => {
 
 // maps item icons for 6 items for player from ids from SQL DB
 const mapItemIcons = async items => {
-  const query = `SELECT id, path FROM items WHERE id IN (${items[0]}, ${items[1]}, ${items[2]}, ${items[3]}, ${items[4]}, ${items[5]}, ${items[6]})
+  const query = `SELECT id, path FROM items WHERE id = any(array[${items}])
   ORDER BY CASE id
   WHEN ${items[0]} then 1
   WHEN ${items[1]} then 2
@@ -79,7 +79,7 @@ const mapRuneIcons = async runes => {
 
 // maps summoner spell icons from ids from SQL DB
 const mapSummonerIcons = async summSpells => {
-  const query = `SELECT path FROM summonerspells WHERE id IN (${summSpells[0]}, ${summSpells[1]})
+  const query = `SELECT path FROM summonerspells WHERE id = any(array[${summSpells}])
   ORDER BY CASE id
   WHEN ${summSpells[0]} then 1
   WHEN ${summSpells[1]} then 2
@@ -101,6 +101,7 @@ summonerController.checkSummData = async (req, res, next) => {
         summonerName: summoner.summonerName,
         summonerLevel: summoner.summonerLevel,
         summonerRank: summoner.summonerRank,
+        puuid: summoner.puuid,
         profileIcon: summoner.profileIcon,
         matchHistory: summoner.matchHistory,
         otherPlayersMatches: summoner.otherPlayersMatches,
@@ -228,6 +229,7 @@ summonerController.updateSummData = async (req, res, next) => {
         if (matchHistoryData[i].participants[j].summonerName === summonerName) {
           const player = matchHistoryData[i].participants[j];
           matchesData.push({
+            matchId: matchIdList[i],
             gameEnd: matchHistoryData[i].gameEndTimestamp,
             championId: player.championId,
             summonerIcon: player.profileIcon,
@@ -372,6 +374,7 @@ summonerController.updateSummData = async (req, res, next) => {
       summonerName: responseSummData.data.name,
       summonerLevel: responseSummData.data.summonerLevel,
       summonerRank: rankData,
+      puuid: puuid,
       matchHistory: matchesData,
       profileIcon: responseSummData.data.profileIconId,
       otherPlayersMatches: otherPlayersData,
@@ -379,9 +382,10 @@ summonerController.updateSummData = async (req, res, next) => {
       allMatchesPlayedData: [],
     };
 
+    // checks mongo DB if summoner exists
     const summoner = await lolSummoner.findOne({summonerName: summonerName});
 
-
+    // if summoner is null, aka does not exist, create new entry
     if (summoner === null) {
       await lolSummoner.create({
         summonerName: summonerName,
@@ -391,8 +395,10 @@ summonerController.updateSummData = async (req, res, next) => {
         matchHistory: matchesData,
         otherPlayersMatches: otherPlayersData,
         S12MatchesPlayed: allS12MatchesArr,
+        puuid: puuid,
       });
     }
+    // if summoner is not null, they exist - so update existing entry
     else {
       await lolSummoner.findOneAndUpdate({summonerName: summonerName},
         { 
@@ -404,6 +410,7 @@ summonerController.updateSummData = async (req, res, next) => {
             matchHistory: matchesData,
             otherPlayersMatches: otherPlayersData,
             S12MatchesPlayed: allS12MatchesArr,
+            puuid: puuid,
           }
         }
       );
@@ -532,17 +539,78 @@ summonerController.testSummData = async (req, res, next) => {
 // gets dropdown box data when dropdownbox is clicked
 summonerController.getDDBoxSummData = async (req, res, next) => {
   try {
-    const { body } = req;
-    for (let i = 0; i < body.length; i++) {
-      const itemsMap = await mapItemIcons(body[i].items); // 7 items total
-      const runesMap = await mapRuneIcons(body[i].runes); // 11 runes total
-      const summSpellMap = await mapSummonerIcons(body[i].summonerSpells); // 2 items total
+    const { otherPlayers, matchId, puuid } = req.body;
 
-      body[i].items = itemsMap;
-      body[i].runes = runesMap;
-      body[i].summonerSpells = summSpellMap;
+    // helper function to parse through timeline and get relevant timeline info
+    const getTimelineData = timeline => {
+      // init player Id & output object containing item timeline info and skill level up info
+      let playerId = 0;
+      // iterate through match players to find current player id by matching puuid
+      for (let i = 0; i < timeline.participants.length; i++) {
+        if (timeline.participants[i].puuid === puuid) {
+          playerId = timeline.participants[i].participantId;
+        }
+      }
+
+      // init arrays to push different events to
+      const itemTimelineArr = [];
+      const skillLevelsArr = [];
+
+      // each match timeline has X frames for the length of the game 
+      // (i.e. if a game is 25 mins long & the frame interval is 1 min, there would be 26 frames)
+      for (let i = 0; i < timeline.frames.length; i++) {
+        // for each frame, iterate through the events array to find events for current player
+        // there are different event types that can occur?? (i.e. ITEM_PURCHASED, LEVEL_UP, )
+        for (let j = 0; j < timeline.frames[i].events.length; j++) {
+          // check if the event corresponds to correct player
+          if (timeline.frames[i].events[j].participantId === playerId) {
+            // if it does, check the type and push to respective array
+            if (timeline.frames[i].events[j].type === "ITEM_PURCHASED" || timeline.frames[i].events[j].type === "ITEM_SOLD" || timeline.frames[i].events[j].type === "ITEM_DESTROYED") {
+              itemTimelineArr.push(timeline.frames[i].events[j]);
+            }
+            else if (timeline.frames[i].events[j].type === "SKILL_LEVEL_UP" && timeline.frames[i].events[j].participantId === playerId) {
+              skillLevelsArr.push(timeline.frames[i].events[j]);
+            }
+          }
+        }
+      }
+      // return object containing both arrays
+      return {
+        itemTimeline: itemTimelineArr,
+        skillLevels: skillLevelsArr,
+      };
+    };
+
+    const getMatchTimeline = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline?api_key=${process.env.api_key}`,
+    {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Origin": "https://developer.riotgames.com"
+      }
+    });
+    
+    const matchTimeline = getMatchTimeline.data.info;
+
+    const timelineData = getTimelineData(matchTimeline);
+
+    for (let i = 0; i < otherPlayers.length; i++) {
+      const itemsMap = await mapItemIcons(otherPlayers[i].items); // 7 items total
+      const runesMap = await mapRuneIcons(otherPlayers[i].runes); // 11 runes total
+      const summSpellMap = await mapSummonerIcons(otherPlayers[i].summonerSpells); // 2 items total
+      
+      // const itemTimelineMap = await mapItemIcons(timelineData.itemTimeline);
+
+      // timelineData.itemTimeline = itemTimelineMap;
+      otherPlayers[i].items = itemsMap;
+      otherPlayers[i].runes = runesMap;
+      otherPlayers[i].summonerSpells = summSpellMap;
     }
-    res.locals.DDBoxData = body;
+    res.locals.DDBoxData = {
+      otherPlayers: otherPlayers,
+      timelineData: timelineData,
+    };
     return next();
   }
   catch(err) {
@@ -578,7 +646,6 @@ summonerController.getLiveGameData = async (req, res, next) => {
       }
     });
     const { data } = getLiveGameData;
-    console.log(data, 'data');
     // gets queue type (ranked, normals, aram, etc)
     const queueMap = await mapQueueType(data.gameQueueConfigId, queueData);
     // iterates through participants to get their summoners, champions, profileIcons, names, and runes

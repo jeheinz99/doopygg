@@ -3,8 +3,9 @@ import * as types from '../constants/actionTypes';
 const initialState = {
   summonerName: '',
   summonerLevel: 0,
-  profileIconId: 0,
   summonerRank: {},
+  puuid: '',
+  profileIconId: 0,
   matchHistory: [],
   otherPlayersMatches: [],
   allMatchesPlayed: [],
@@ -22,9 +23,10 @@ const summonerReducer = (state = initialState, action) => {
         state, {
         summonerName: payload.summonerName,
         summonerLevel: payload.summonerLevel,
+        summonerRank: payload.summonerRank,
+        puuid: payload.puuid,
         matchHistory: payload.matchHistory,
         profileIconId: payload.profileIcon,
-        summonerRank: payload.summonerRank,
         otherPlayersMatches: payload.otherPlayersMatches,
         allMatchesPlayed: payload.allMatchesPlayed,
         allMatchesPlayedData: payload.allMatchesPlayedData,

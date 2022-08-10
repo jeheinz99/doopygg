@@ -20,7 +20,6 @@ const TFTPageContainer = () => {
   };
 
   useEffect(() => {
-    console.log('hi');
     const input = document.getElementById('SearchBoxInputTFT');
     input.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {

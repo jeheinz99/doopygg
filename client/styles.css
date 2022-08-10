@@ -50,7 +50,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   width: 98.8%;
-  box-shadow: 2px 15px 15px rgba(0, 0, 0, 5);
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.861);
   background: #171A21;
   /* min-height: 43vw; */
@@ -279,7 +279,8 @@ html, body {
   width: 32px;
   height: 32px;
   border-radius: 0.5em;
-  border: 1px solid #000;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
+  border: 2px solid #2f3138;
 }
 #item6 {
   width: 24px;
@@ -1147,19 +1148,28 @@ h4 {
   align-items: center;
   gap: 0.5em;
 }
+.RunesInfoMainWrap {
+  display: flex;
+  width: 92%;
+  justify-content: center;
+}
 .RunesInfoMain {
-  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+}
+.wrap-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  border: 3px solid #272d3a;
-  border-top: none;
+  gap: 1em;
 }
 .TreeDiv {
+  width: 90%;
   border: 3px solid #272d3a;
   border-radius: 0.2em;
   padding: 0.5em;
-  margin: 0.5em;
   height: 100%;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
 }
@@ -1209,12 +1219,17 @@ h4 {
   border: 2px solid #272d3a;
   /* box-shadow: 1px 1px 10px rgba(0, 0, 0, 5); */
 }
+.TreeStyle {
+  width: 32px;
+  height: 32px;
+}
 
 .minorRuneRow {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1em;
+  width: 85%;
   padding: 0.5em;
   border-radius: 0.5em;
 }
@@ -1224,35 +1239,38 @@ h4 {
   align-items: center;
   gap: 1em;
 }
+.OtherPlayersRunes {
+  display: flex;
+  gap: 2em;
+  width: 95%;
+  border-top: 1px solid #272d3a;
+  padding: 10px;
+}
 .otherPlayerRunesBox {
   display: flex;
-  width: 95%;
-  justify-content: center;
+  width: 100%;
+  justify-content: flex-start;
   border: 2px solid #303b51;
   border-radius: 0.2em;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 5);
 }
-.OtherPlayersRunes {
-  display: flex;
-  gap: 2em;
-  width: 90%;
-  border-top: 1px solid #272d3a;
-  padding: 10px;
-}
 .otherPlayersRunesDiv1 {
   display: flex;
   align-items: center;
+  margin-left: 5px;
 }
 .otherPlayersRunesDiv1 p {
   margin: 0;
-  width: 75px;
-  text-align: center;
+  width: 11em;
+  margin-left: 5px;
+  text-align: left;
   font-size: 0.8em;
   overflow: hidden;
 }
 .otherPlayersRunesDiv2 {
   display: flex;
   align-items: center;
+  width: 100%;
   gap: 0.5em;
 }
 .keystoneRunesDD {
@@ -1271,6 +1289,7 @@ h4 {
 .shardsDD {
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
 }
 .shardDD {
   width: 24px;
@@ -1279,6 +1298,10 @@ h4 {
 .maintreeDD {
   display: flex;
   align-items: center;
+  /* background-color:rgba(212, 205, 71, 0.2);
+  border: 2px solid rgba(175, 169, 51, 0.2);
+  padding: 4px;
+  border-radius: 0.5em; */
 }
 .secondtreeDD {
   display: flex;
@@ -1292,7 +1315,6 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 1em;
   width: 100%;
 }
@@ -1344,14 +1366,28 @@ h4 {
 }
 .IconAndBuild {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
+  /* border: 2px solid #272d3a; */
+  /* border-radius: 0.2em; */
+  padding: 8px;
+  gap: 2em;
+  /* box-shadow: 2px 2px 10px rgba(0, 0, 0, 5); */
+  margin: 0.5em;
+}
+.runes-itemsDiv {
+  display: flex;
+  flex-direction: column;
+}
+.runes-items-champicon {
+  display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 1.1em;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 5);
   border: 3px solid #272d3a;
   border-radius: 0.2em;
-  padding: 8px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 5);
-  margin: 0.5em;
+  padding: 5px;
 }
 #upperDDbox img {
   width: 40px;
@@ -1365,7 +1401,8 @@ h4 {
 
 }
 #temp {
-  margin-bottom: 10px;
+  width: 64px;
+  height: 64px;
   border-radius: 0.2em;
 }
 #test {
@@ -1397,16 +1434,21 @@ h4 {
   position: relative;
   margin: 0 20px;
 }
+#runes3 {
+  height: 50%;
+}
 
 .DDbox {
   width: 100%;
 }
-/* .R2andR3 {
+.R2andR3 {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-} */
+  gap: 1em;
+}
 .LoadingDiv {
   display: flex;
   flex-direction: column;
@@ -1636,11 +1678,55 @@ h4 {
   font-size: 1.2em;
   margin-left: 10px;
 }
-.one-temp {
-  /* display: flex; */
-  /* width: 90%; */
-  /* justify-content: flex-start; */
-  /* text-align: left; */
+.Match-timeline-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 1em;
+  gap: 1em;
+  border: 3px solid #272d3a;
+  border-radius: 0.2em;
+  padding: 10px;
+  height: 50%;
+}
+.match-timeline-skills-header {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 1.75em;
+  border-left: 2px solid rgba(255, 255, 255, 0.8);
+  /* border-bottom: 1px solid #272d3a; */
+}
+.match-timeline-skills-header p {
+  font-size: 1.2em;
+  margin: 0;
+  margin-left: 0.5em;
+}
+.match-timeline-skills-div {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1em;
+}
+.skill-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #303b51;
+  border-radius: 0.2em;
+}
+#skill-box-Q {
+  color:#1C6EA4;
+}
+#skill-box-W {
+  color: rgb(243, 157, 51);
+}
+#skill-box-E {
+  color: rgb(101, 200, 43);
+}
+#skill-box-R {
+  color: rgb(243, 54, 51);
 }
 
 #disclaimerdiv {

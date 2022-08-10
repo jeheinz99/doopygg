@@ -7,7 +7,7 @@ import { AiFillCaretUp } from 'react-icons/ai';
 
 const Matches = props => {
 
-  const { gameEnd, matchNum, otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
+  const { matchId, gameEnd, matchNum, otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
   
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 
@@ -140,7 +140,7 @@ const Matches = props => {
         </div>
       </div>
       <div className="DropDownBoxes">
-        {summonerOpen && <div className={`hidden-${hidden}`}><DropDownBox matchLength={ matchLength } championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/></div>}
+        {summonerOpen && <div className={`hidden-${hidden}`}><DropDownBox matchId={ matchId } matchLength={ matchLength } championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/></div>}
       </div>
     </div>
   );

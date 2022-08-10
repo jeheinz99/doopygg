@@ -331,8 +331,7 @@
 #TFTAug1, #TFTAug2, #TFTAug3 {
   width: 32px;
   height: 32px;
-  border-radius: 0.5px;
-  border: 0.5px solid rgba(255, 255, 255, 0.403);
+  border: 1px solid rgba(255, 255, 255, 0.403);
 }
 .TFTMatchGroup4 {
   display: flex;
