@@ -103,12 +103,28 @@ const Recent20StatsBox = props => {
 
   const totalWinPercent = (totalWins / (totalWins + totalLosses))*100;
 
+  // get total position games played, check if each position is NaN, if they are then set to 0
   const totalPositionGames = (totalTop + totalJungle + totalMid + totalBottom + totalSupport);
-  const totalTopPercent = (totalTop / totalPositionGames)*100;
-  const totalJunglePercent = (totalJungle / totalPositionGames)*100;
-  const totalMidPercent = (totalMid / totalPositionGames)*100;
-  const totalBottomPercent = (totalBottom / totalPositionGames)*100;
-  const totalSupportPercent = (totalSupport / totalPositionGames)*100;
+  let totalTopPercent = (totalTop / totalPositionGames)*100;
+  if (isNaN(totalTopPercent)) {
+    totalTopPercent = 0;
+  }
+  let totalJunglePercent = (totalJungle / totalPositionGames)*100;
+  if (isNaN(totalJunglePercent)) {
+    totalJunglePercent = 0;
+  }
+  let totalMidPercent = (totalMid / totalPositionGames)*100;
+  if (isNaN(totalMidPercent)) {
+    totalMidPercent = 0;
+  }
+  let totalBottomPercent = (totalBottom / totalPositionGames)*100;
+  if (isNaN(totalBottomPercent)) {
+    totalBottomPercent = 0;
+  }
+  let totalSupportPercent = (totalSupport / totalPositionGames)*100;
+  if (isNaN(totalSupportPercent)) {
+    totalSupportPercent = 0;
+  }
 
   return (
     <div className="recent20Wrapper">

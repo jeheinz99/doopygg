@@ -10,6 +10,7 @@ const initialState = {
   otherPlayersMatches: [],
   allMatchesPlayed: [],
   allMatchesPlayedData: [],
+  lastUpdated: 0,
 }
 
 const summonerReducer = (state = initialState, action) => {
@@ -30,6 +31,7 @@ const summonerReducer = (state = initialState, action) => {
         otherPlayersMatches: payload.otherPlayersMatches,
         allMatchesPlayed: payload.allMatchesPlayed,
         allMatchesPlayedData: payload.allMatchesPlayedData,
+        lastUpdated: payload.lastUpdated,
         }
       );
 

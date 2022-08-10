@@ -10,6 +10,7 @@ import { PulseLoader } from 'react-spinners';
 import { useSelector } from 'react-redux';
 import DDBoxPlayers from './DDBoxPlayers.jsx';
 import SkillBox from './SkillBox.jsx';
+import ItemTimelineBox from './ItemTimelineBox.jsx';
 
 const DropDownBox = props => {
   
@@ -90,10 +91,16 @@ const DropDownBox = props => {
   }
 
   const skillLevels = [];
+  const itemsArr = [];
   if (Object.keys(timelineData).length !== 0) {
     for (let i = 0; i < timelineData.skillLevels.length; i++) {
       const skills = {1: 'Q', 2: 'W', 3: 'E', 4: 'R'};
       skillLevels.push(<SkillBox key={`skill-${i}`} id={skills[timelineData.skillLevels[i].skillSlot]}/>);
+    }
+    for (let i = 0; i < timelineData.itemTimeline.length; i++) {
+      if (timelineData.itemTimeline[i].length > 0) {
+        itemsArr.push(<ItemTimelineBox key={`box-${i}`} events={timelineData.itemTimeline[i]} minute={i-1}/>);
+      }
     }
   }
 
@@ -148,6 +155,14 @@ const DropDownBox = props => {
               </div>
               <div className="match-timeline-skills-div">
                 { skillLevels }
+              </div>
+
+              <div className="match-timeline-items-header">
+                <p> Item Build </p>
+              </div>
+
+              <div className="match-timeline-items-div">
+                { itemsArr }
               </div>
             </div>
 

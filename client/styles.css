@@ -54,7 +54,7 @@ html, body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.861);
   background: #171A21;
   /* min-height: 43vw; */
-  gap: 2em;
+  gap: 1.5em;
   padding: 10px;
   margin-top: 0.4em;
 }
@@ -110,6 +110,13 @@ html, body {
   width: 99%;
   flex-direction: column;
   justify-content: center;
+}
+.headerinfo p {
+  font-size: 0.8em;
+  margin: 0;
+  margin-top: 0.5em;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 #welcome {
@@ -1150,7 +1157,7 @@ h4 {
 }
 .RunesInfoMainWrap {
   display: flex;
-  width: 92%;
+  width: 93%;
   justify-content: center;
 }
 .RunesInfoMain {
@@ -1686,7 +1693,7 @@ h4 {
   gap: 1em;
   border: 3px solid #272d3a;
   border-radius: 0.2em;
-  padding: 10px;
+  padding: 6px;
   height: 50%;
 }
 .match-timeline-skills-header {
@@ -1728,7 +1735,62 @@ h4 {
 #skill-box-R {
   color: rgb(243, 54, 51);
 }
-
+.match-timeline-items-header {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 1.75em;
+  border-left: 2px solid rgba(255, 255, 255, 0.8);
+  /* border-bottom: 1px solid #272d3a; */
+}
+.match-timeline-items-header p {
+  font-size: 1.2em;
+  margin: 0;
+  margin-left: 0.5em;
+}
+.match-timeline-items-div {
+  display: flex;
+  flex-flow: wrap;
+  gap: 0.5em;
+}
+.timeline-item-box {
+  border-radius: 0.3em;
+  border: 1px solid #303b51;
+  height: 32px;
+  width: 32px;
+}
+.timeline-events-outer {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
+.timeline-events-outer p {
+  font-size: 0.9em;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+.timeline-events-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  border: 2px solid #303b51;
+  padding: 5px;
+  background: #16161b;
+  border-radius: 0.5em;
+}
+.timeline-item-box-div {
+  display: flex;
+}
+.timeline-item-box-counter {
+  width: 0;
+  height: 0;
+  transform: translateX(-10px) translateY(15px);
+}
+#timeline-event-ITEM_SOLD {
+  border: 2px solid red;
+}
 #disclaimerdiv {
   display: flex;
   font-style: italic;

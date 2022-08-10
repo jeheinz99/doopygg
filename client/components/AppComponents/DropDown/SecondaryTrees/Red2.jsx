@@ -10,7 +10,7 @@ const Red2 = props => {
 
     document.getElementById(`${matchNum}-${runeInfo[7].id}`).classList.remove('inactiveRune');
     document.getElementById(`${matchNum}-${runeInfo[7].id}`).classList.add('activeRune');
-  });
+  }, []);
 
   return (
     <div className="TreeBox">

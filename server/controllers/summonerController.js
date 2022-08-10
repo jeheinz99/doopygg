@@ -45,6 +45,30 @@ const mapItemIcons = async items => {
   return outputArr;
 };
 
+// maps item icons from match timeline using item ids
+const mapItemTimelineIcons = async items => {
+  const itemsArr = [];
+  for (let i = 0; i < items.length; i++) {
+    for (let j = 0; j < items[i].length; j++) {
+      itemsArr.push(items[i][j].itemId);
+    }
+  }
+  const query = `SELECT id, path FROM items WHERE id = any(array[${itemsArr}]);`
+  const path = await db.query(query);
+  // iterate through array of arrays
+  // for each index in each array, check if id matches and set corresponding path
+  for (let i = 0; i < items.length; i++) {
+    for (let j = 0; j < items[i].length; j++) {
+      for (let k = 0; k < path.rows.length; k++) {
+        if (items[i][j].itemId === path.rows[k].id) {
+          items[i][j].path = path.rows[k].path;
+        }
+      }
+    }
+  }
+  return items;
+};
+
 // maps rune icons for keystone and secondary tree from ids from SQL DB
 const mapRuneIcons = async runes => {
   const query = `SELECT id, path FROM runes WHERE id IN (${runes[0]}, ${runes[1]}, ${runes[2]}, ${runes[3]}, ${runes[4]}, ${runes[5]}, ${runes[6]}, ${runes[7]}, ${runes[8]}, ${runes[9]}, ${runes[10]})
@@ -107,6 +131,7 @@ summonerController.checkSummData = async (req, res, next) => {
         otherPlayersMatches: summoner.otherPlayersMatches,
         allMatchesPlayed: summoner.S12MatchesPlayed,
         allMatchesPlayedData: summoner.S12MatchesPlayedData,
+        lastUpdated: summoner.lastUpdated,
       };
       return next();
     }
@@ -370,6 +395,7 @@ summonerController.updateSummData = async (req, res, next) => {
       return next(err);
     }
 
+    // summoner data to send back to front end as response
     const summonerData = {
       summonerName: responseSummData.data.name,
       summonerLevel: responseSummData.data.summonerLevel,
@@ -380,6 +406,7 @@ summonerController.updateSummData = async (req, res, next) => {
       otherPlayersMatches: otherPlayersData,
       allMatchesPlayed: allS12MatchesArr,
       allMatchesPlayedData: [],
+      lastUpdated: Date.now(),
     };
 
     // checks mongo DB if summoner exists
@@ -396,6 +423,7 @@ summonerController.updateSummData = async (req, res, next) => {
         otherPlayersMatches: otherPlayersData,
         S12MatchesPlayed: allS12MatchesArr,
         puuid: puuid,
+        lastUpdated: Date.now(),
       });
     }
     // if summoner is not null, they exist - so update existing entry
@@ -411,6 +439,7 @@ summonerController.updateSummData = async (req, res, next) => {
             otherPlayersMatches: otherPlayersData,
             S12MatchesPlayed: allS12MatchesArr,
             puuid: puuid,
+            lastUpdated: Date.now(),
           }
         }
       );
@@ -559,20 +588,23 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
       // each match timeline has X frames for the length of the game 
       // (i.e. if a game is 25 mins long & the frame interval is 1 min, there would be 26 frames)
       for (let i = 0; i < timeline.frames.length; i++) {
+        // init tempArr for item timeline frames
+        const tempItemArr = [];
         // for each frame, iterate through the events array to find events for current player
         // there are different event types that can occur?? (i.e. ITEM_PURCHASED, LEVEL_UP, )
         for (let j = 0; j < timeline.frames[i].events.length; j++) {
           // check if the event corresponds to correct player
           if (timeline.frames[i].events[j].participantId === playerId) {
             // if it does, check the type and push to respective array
-            if (timeline.frames[i].events[j].type === "ITEM_PURCHASED" || timeline.frames[i].events[j].type === "ITEM_SOLD" || timeline.frames[i].events[j].type === "ITEM_DESTROYED") {
-              itemTimelineArr.push(timeline.frames[i].events[j]);
+            if (timeline.frames[i].events[j].type === "ITEM_PURCHASED" || timeline.frames[i].events[j].type === "ITEM_SOLD") {
+              tempItemArr.push(timeline.frames[i].events[j]);
             }
             else if (timeline.frames[i].events[j].type === "SKILL_LEVEL_UP" && timeline.frames[i].events[j].participantId === playerId) {
               skillLevelsArr.push(timeline.frames[i].events[j]);
             }
           }
         }
+        itemTimelineArr.push(tempItemArr);
       }
       // return object containing both arrays
       return {
@@ -594,15 +626,15 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
     const matchTimeline = getMatchTimeline.data.info;
 
     const timelineData = getTimelineData(matchTimeline);
-
+    
     for (let i = 0; i < otherPlayers.length; i++) {
       const itemsMap = await mapItemIcons(otherPlayers[i].items); // 7 items total
       const runesMap = await mapRuneIcons(otherPlayers[i].runes); // 11 runes total
       const summSpellMap = await mapSummonerIcons(otherPlayers[i].summonerSpells); // 2 items total
       
-      // const itemTimelineMap = await mapItemIcons(timelineData.itemTimeline);
-
-      // timelineData.itemTimeline = itemTimelineMap;
+      const itemTimelineMap = await mapItemTimelineIcons(timelineData.itemTimeline);
+      
+      timelineData.itemTimeline = itemTimelineMap;
       otherPlayers[i].items = itemsMap;
       otherPlayers[i].runes = runesMap;
       otherPlayers[i].summonerSpells = summSpellMap;

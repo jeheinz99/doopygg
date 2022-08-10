@@ -13,7 +13,7 @@ const Runes3 = props => {
 
     document.getElementById(`${matchNum}-r1-${runeInfo[10].id}`).classList.remove('inactiveRune');
     document.getElementById(`${matchNum}-r1-${runeInfo[10].id}`).classList.add('activeRune');
-  });
+  }, []);
 
   return (
     <div className="TreeDiv" id="runes3">

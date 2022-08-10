@@ -12,6 +12,7 @@ const SearchBox = () => {
   const summName = useSelector(state => state.summoners.summonerName);
   const matchHistory = useSelector(state => state.summoners.matchHistory);
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
+  const lastUpdated = useSelector(state => state.summoners.lastUpdated);
 
   const [currBox, setCurrBox] = useState('matchHistory');
 
@@ -19,8 +20,38 @@ const SearchBox = () => {
 
   const update = useDispatch();
 
+  const getTimeAgo = lastUpdated => {
+    const todaysDateStamp = Date.now();
+
+    const diff = todaysDateStamp - lastUpdated;
+    if (diff >= 3600000 && diff < 86400000) {
+      if (Math.round(diff/3600000) === 1) return ('1 hour ago');
+      return (`${Math.round(diff/3600000)} hours ago`);
+    }
+    if (diff >= 60000 && diff < 3600000) {
+      if (Math.round(diff/60000) === 1) return ('1 minute ago');
+      return (`${Math.round(diff/60000)} minutes ago`);
+    }
+    if (diff >= 86400000 && diff < 2592000000) {
+      if (Math.round(diff/86400000) === 1) return ('1 day ago');
+      return (`${Math.round(diff/86400000)} days ago`);
+    }
+    if (diff < 60000) {
+      return (`${Math.round(diff/1000)} seconds ago`);
+    }
+    if (diff >= 2592000000 && diff < 31540000000) {
+      if (Math.round(diff/2592000000) === 1) return ('1 month ago');
+      return (`${Math.round(diff/2592000000)} months ago`);
+    }
+    else {
+      return ('over 1 year ago');
+    }
+  };
+
+  const timeAgo = getTimeAgo(lastUpdated);
+
   let summonerNameInput;
-  const summonerNameData = (e) => {
+  const summonerNameData = e => {
     summonerNameInput = e.target.value;
     return summonerNameInput;
   };
@@ -33,7 +64,7 @@ const SearchBox = () => {
         document.getElementById('SearchBoxButton').click();
       }
     });
-  });
+  }, []);
   
   return (
     <div className="OuterSearchBox">
@@ -54,6 +85,7 @@ const SearchBox = () => {
       {matchHistory[0] && <div className="headerinfo">
         <h3> Summoner Information </h3>
         <button id="summonerUpdateButton" onClick={() => update(updateSummonerData(summName))}> Update </button>
+        <p>Last Updated {timeAgo}</p>
       </div>}
     
     {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'matchHistory' && 
