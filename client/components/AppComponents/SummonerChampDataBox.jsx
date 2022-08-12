@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import SummonerChampDataBoxEntry from "./SummonerChampDataBoxEntry";
+import SummonerChampDataBoxEntry from "./SummonerChampDataBoxEntry.jsx";
+import Recent20PlayedWith from "./RecentMatches/Recent20PlayedWith.jsx";
 
 import { AiFillCaretDown } from 'react-icons/ai';
 import { AiFillCaretUp } from 'react-icons/ai';
@@ -119,56 +120,56 @@ const SummonerChampDataBox = () => {
   const [ open, setOpen ] = useState(false);
 
   return (
-    <div className="outerSummonerDataBox">
-
-      <div className="SummonerInfoBox">
-
-        <div className="SummonerInfo">
-          <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${matchHistory[0].summonerIcon}.jpg`}/>
-          <div className="summonerInfoPtags">
-            <p>Name: {summonerName}</p>
-            <p>Level {summonerLevel}</p>
+    <div className="test-one">
+      <div className="outerSummonerDataBox">
+        <div className="SummonerInfoBox">
+          <div className="SummonerInfo">
+            <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${matchHistory[0].summonerIcon}.jpg`}/>
+            <div className="summonerInfoPtags">
+              <p>{summonerName}</p>
+              <p>Level {summonerLevel}</p>
+            </div>
           </div>
+
+          <div className="SummonerRankInfo">
+
+            <div className="RankedSoloDuo">
+              <h2> Ranked Solo/Duo </h2>
+              {summonerRank.rankedSolo[0] === undefined && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/unranked.png`}/></div>}
+              {summonerRank.rankedSolo[0] === undefined && <p> Unranked </p>}
+              {summonerRank.rankedSolo[0] && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedSolo[0].toLowerCase()}.png`}/></div>}
+              {summonerRank.rankedSolo[0] && <p>{`${summonerRank.rankedSolo[0]} ${summonerRank.rankedSolo[2]} ${summonerRank.rankedSolo[1]} LP`}</p>}
+            </div>
+
+            <div className="RankedFlex">
+              <h2> Ranked Flex </h2>
+              {summonerRank.rankedFlex[0] === undefined && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/unranked.png`}/></div>}
+              {summonerRank.rankedFlex[0] === undefined && <p> Unranked </p>}
+              {summonerRank.rankedFlex[0] && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedFlex[0].toLowerCase()}.png`}/></div>}
+              {summonerRank.rankedFlex[0] && <p>{`${summonerRank.rankedFlex[0]} ${summonerRank.rankedFlex[2]} ${summonerRank.rankedFlex[1]} LP`}</p>}
+            </div>
+
+          </div>
+
         </div>
-
-        <div className="SummonerRankInfo">
-
-          <div className="RankedSoloDuo">
-            <h2> Ranked Solo/Duo </h2>
-            {summonerRank.rankedSolo[0] === undefined && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/unranked.png`}/></div>}
-            {summonerRank.rankedSolo[0] === undefined && <p> Unranked </p>}
-            {summonerRank.rankedSolo[0] && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedSolo[0].toLowerCase()}.png`}/></div>}
-            {summonerRank.rankedSolo[0] && <p>{`${summonerRank.rankedSolo[0]} ${summonerRank.rankedSolo[2]} ${summonerRank.rankedSolo[1]} LP`}</p>}
-          </div>
-
-          <div className="RankedFlex">
-            <h2> Ranked Flex </h2>
-            {summonerRank.rankedFlex[0] === undefined && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/unranked.png`}/></div>}
-            {summonerRank.rankedFlex[0] === undefined && <p> Unranked </p>}
-            {summonerRank.rankedFlex[0] && <div className="rankBorderDiv"><img id="rankIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${summonerRank.rankedFlex[0].toLowerCase()}.png`}/></div>}
-            {summonerRank.rankedFlex[0] && <p>{`${summonerRank.rankedFlex[0]} ${summonerRank.rankedFlex[2]} ${summonerRank.rankedFlex[1]} LP`}</p>}
-          </div>
-
-        </div>
-
-      </div>
     
-      <div className="DataBoxHeader">
-        <h3> Most Played </h3>
-        <p id="rankedsoloheader"> Ranked Solo </p>
-      </div>
+        <div className="DataBoxHeader">
+          <h3> Most Played </h3>
+          <p id="rankedsoloheader"> Ranked Solo </p>
+        </div>
       
-      {!open && <div className="SummonerDataBoxEntries" id="topEntries">
-        {champEntries}
-      </div>}
-      {open && <div className="SummonerDataBoxEntries" id="allEntries">
-        {allChampEntries}
-      </div>}
+        {!open && <div className="SummonerDataBoxEntries" id="topEntries">
+          {champEntries}
+        </div>}
+        {open && <div className="SummonerDataBoxEntries" id="allEntries">
+          {allChampEntries}
+        </div>}
     
-      {!open && <button className="SummonerDataBoxButton" id="SDBexpand" onClick={ () => setOpen(!open) }><AiFillCaretDown /></button>}
-      {open && <button className="SummonerDataBoxButton" id="SDBcontract" onClick={ () => setOpen(!open) }><AiFillCaretUp /></button>}
-
-    </div>
+        {!open && <button className="SummonerDataBoxButton" id="SDBexpand" onClick={ () => setOpen(!open) }><AiFillCaretDown /></button>}
+        {open && <button className="SummonerDataBoxButton" id="SDBcontract" onClick={ () => setOpen(!open) }><AiFillCaretUp /></button>}
+      </div>
+    <Recent20PlayedWith />
+  </div>
   );
 };
 

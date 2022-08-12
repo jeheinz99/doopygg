@@ -297,6 +297,7 @@ summonerController.updateSummData = async (req, res, next) => {
             goldEarned: player.goldEarned,
             position: player.teamPosition,
             visionScore: player.visionScore,
+            profileIcon: player.profileIcon,
             cs: player.totalMinionsKilled,
             champDamage: player.totalDamageDealtToChampions,
             champLevel: player.champLevel,
@@ -324,6 +325,7 @@ summonerController.updateSummData = async (req, res, next) => {
             deaths: player.deaths,
             assists: player.assists,
             win: player.win,
+            profileIcon: player.profileIcon,
             turretKills: player.turretKills,
             barons: player.baronKills,
             dragons: player.dragonKills,
@@ -678,6 +680,8 @@ summonerController.getLiveGameData = async (req, res, next) => {
       }
     });
     const { data } = getLiveGameData;
+    // console.log(data, 'data for live game');
+    
     // gets queue type (ranked, normals, aram, etc)
     const queueMap = await mapQueueType(data.gameQueueConfigId, queueData);
     // iterates through participants to get their summoners, champions, profileIcons, names, and runes
@@ -687,7 +691,7 @@ summonerController.getLiveGameData = async (req, res, next) => {
       playerInfoArr.push({
         summonerSpells: [player.spell1Id, player.spell2Id],
         championId: player.championId,
-        profileIconId: player.profileIconId,
+        // profileIconId: player.profileIconId,
         summonerName: player.summonerName,
         runes: player.perks,
         queue: queueMap,

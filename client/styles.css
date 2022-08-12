@@ -705,7 +705,7 @@ html, body {
   flex-direction: column;
   align-items: flex-start;
   width: 30em;
-  height: 100%;
+  /* height: 100%; */
   border-radius: 0.5em;
   background-color: #171A21;
   padding: 10px;
@@ -1658,8 +1658,13 @@ h4 {
   gap: 0.5em;
 }
 #lg-champicon {
+  border-radius: 0.2em;
+  /* border: 1px solid #303b51; */
   width: 48px;
   height: 48px;
+}
+#lg-summoner-name {
+  width: 10em;
 }
 .live-game-player {
   display: flex;
@@ -1670,23 +1675,37 @@ h4 {
   width: 35em;
   align-items: center;
 }
-.lg-div1 {
+#lg-team-100 {
+  background: rgb(19, 28, 43);
+}
+#lg-team-200 {
+  background: rgb(45, 17, 20);
 
 }
-.lg-div2 {
-
+.lg-team-bans {
+  width: 96%;
+  display: flex;
+  align-items: center;
+  border: 2px solid #303b51;
+  padding: 5px;
+  gap: 1.5em;
+}
+.lg-ban {
+  width: 48px;
+  height: 48px;
 }
 .lg-queue-bg-div {
   display: flex;
   width: 90%;
   align-items: center;
-  margin: 10px;
+  margin-left: 5px;
+  margin-bottom: 10px;
   border-left: 3px solid white;
   height: 25px;
 }
 .lg-queue-bg-div p {
   font-size: 1.2em;
-  margin-left: 10px;
+  margin-left: 7px;
 }
 .Match-timeline-main {
   display: flex;
@@ -1790,6 +1809,85 @@ h4 {
   width: 0;
   height: 0;
   transform: translateX(-10px) translateY(15px);
+}
+.test-one {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2em;
+  /* align-items: center; */
+}
+.recent-20-played-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 30em;
+  padding: 10px;
+  border: 2px solid #303b51;
+  background-color: #171A21;
+  border-radius: 0.5em;
+  box-shadow: 2px 2px 15px rgb(0 0 0);
+}
+.recent-20-played-box ul {
+  margin: 0;
+  border-top: 2px solid #272d3a;
+  border-bottom: 2px solid #272d3a;
+  width: 100%;
+  gap: 1em;
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+.recent-20-played-box ul li p {
+  width: 3.8em;
+  text-align: center;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.861);
+}
+#id1 {
+  width: 15em;
+  text-align: center;
+}
+.recent-20-played-header {
+  border-top: 2px solid rgba(255, 255, 255, 0.861);
+}
+.recent-20-played-header p {
+  margin: 0;
+  margin-left: 5px;
+  font-size: 1.5em;
+  color: rgba(255, 255, 255, 0.861);
+}
+.recent-played-with-entry {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  border: 2px solid #303b51;
+  border-radius: 0.2em;
+  box-shadow: 1px 1px 4px rgb(0 0 0);
+  padding: 5px;
+}
+.recent-played-with-entry p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.861);
+  width: 4em;
+  text-align: center;
+}
+.recent-played-with-1 {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  width: 15em;
+}
+.recent-played-with-1 p {
+  text-align: left;
+  width: 100%;
+}
+
+#recent-played-profile-icon {
+  border: 1px solid #272b34;
+  height: 32px;
+  width: 32px;
 }
 #timeline-event-ITEM_SOLD {
   border: 2px solid red;

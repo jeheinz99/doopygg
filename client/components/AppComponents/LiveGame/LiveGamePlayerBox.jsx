@@ -2,12 +2,12 @@ import React from 'react';
 
 const LiveGamePlayerBox = props => {
 
-  const { championId, profileIconId, runes, summonerName, summonerSpells } = props;
+  const { championId, profileIconId, runes, summonerName, summonerSpells, team } = props;
 
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 
   return (
-    <div className="live-game-player">
+    <div className="live-game-player" id={`lg-team-${team}`}>
       
       <div className="lg-div1">
         <img id="lg-champicon" src={championIcon}/>
