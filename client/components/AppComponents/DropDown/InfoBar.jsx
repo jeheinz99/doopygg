@@ -10,7 +10,7 @@ const InfoBar = () => {
         <p id="damageDD"><RiSwordFill id="damageDDIcon" /></p>
         <p id="csDD"><img id="csDDIcon" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-postgame/global/default/mask-icon-cs.png'/></p>
         <p id="visionDD"><img id="visionDDIcon" src='https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png'/></p>
-        <div className="invisDiv" id="invis2"></div>
+        {/* <div className="invisDiv" id="invis2"></div> */}
       </div>
 
       <div className="TeamInfoTextDD2">

@@ -49,6 +49,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 98.8%;
   box-shadow: 2px 5px 5px rgba(0, 0, 0, 5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.861);
@@ -99,8 +100,8 @@ html, body {
   top:1px;
 }
 .SummonerDataBoxGroup {
-  justify-content: center;
   display: flex;
+  justify-content: center;
   gap: 1em;
   width: 100%;
   height: 100%;
@@ -178,11 +179,10 @@ html, body {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   border: 2px solid #272d3a;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
   border-radius: 0.2em;
-  gap: 1em;
 }
 .MatchGroup1 {
   display: flex;
@@ -190,7 +190,7 @@ html, body {
 }
 .MatchGroup1 p {
   margin: 0;
-  width: 10em;
+  width: 7em;
   font-size: 1em;
   text-align: center;
 }
@@ -323,7 +323,7 @@ html, body {
 }
 
 .leftSideGroup p, .rightSideGroup p {
-  width: 10em;
+  width: 7em;
   margin: 0;
 }
 
@@ -338,13 +338,11 @@ html, body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  align-items: center;
 }
 .team2BoxDD {
   display: flex;
   flex-direction: column;
   width: 100%;
-  align-items: center;
 }
 .TeamInfoTextDD {
   display: flex;
@@ -376,7 +374,8 @@ html, body {
 #invis1 {
   display: flex;
   justify-content: flex-start;
-  width: 23em;
+  width: 20em;
+
 }
 #invis1 p {
   margin-left: 1em;
@@ -396,11 +395,8 @@ html, body {
   width: 5em;
   border-left: 2px solid #c5472b;
 }
-#invis2 {
-  width: 6.5em;
-}
 #invis3 {
-  width: 23.3em;
+  width: 21em;
   display: flex;
   justify-content: flex-start;
 }
@@ -704,7 +700,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 30em;
+  width: 96%;
   /* height: 100%; */
   border-radius: 0.5em;
   background-color: #171A21;
