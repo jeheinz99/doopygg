@@ -700,7 +700,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 96%;
+  width: 30em;
   /* height: 100%; */
   border-radius: 0.5em;
   background-color: #171A21;
@@ -1265,7 +1265,7 @@ h4 {
 }
 .otherPlayersRunesDiv1 p {
   margin: 0;
-  width: 11em;
+  width: 7em;
   margin-left: 5px;
   text-align: left;
   font-size: 0.8em;
