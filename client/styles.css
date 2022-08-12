@@ -78,6 +78,15 @@ html, body {
 #SearchBoxInput:hover {
   background-color: #22212174;
 }
+#region-select {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.861);
+  margin-right: 10px;
+}
+#region-select:focus-visible {
+  outline: none;
+}
 
 #summonerUpdateButton {
   border: none;
@@ -1845,6 +1854,7 @@ h4 {
   text-align: center;
 }
 .recent-20-played-header {
+  width: 50%;
   border-top: 2px solid rgba(255, 255, 255, 0.861);
 }
 .recent-20-played-header p {

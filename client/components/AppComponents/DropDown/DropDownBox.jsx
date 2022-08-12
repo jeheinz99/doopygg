@@ -18,6 +18,7 @@ const DropDownBox = props => {
 
   const summonerName = useSelector(state => state.summoners.summonerName);
   const puuid = useSelector(state => state.summoners.puuid);
+  const regionId = useSelector(state => state.summoners.region);
 
   const [currBox, toggleBox] = useState(false);
   const [lolDDboxData, lolSetDDboxData] = useState([]);
@@ -26,7 +27,7 @@ const DropDownBox = props => {
   useEffect(() => {
     const getData = async () => {
       const res = await axios.post('/summoner/ddboxdata', 
-      {otherPlayers, matchId, puuid}, 
+      {otherPlayers, matchId, puuid, regionId}, 
       {
         headers: {
           'Content-Type': 'application/json',

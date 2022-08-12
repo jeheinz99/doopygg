@@ -43,7 +43,7 @@ app.use(function(req, res, next) {
 const summonerRouter = express.Router();
 app.use('/summoner', summonerRouter);
 
-summonerRouter.get('/:summonerName', summonerController.checkSummData, summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
+summonerRouter.get('/:regionId/:summonerName', summonerController.checkSummData, summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
   // console.log(res.locals.summonerData);
   return res.status(200).send(res.locals.summonerData);
 });
@@ -52,12 +52,12 @@ summonerRouter.post('/ddboxdata', summonerController.getDDBoxSummData, (req, res
   return res.status(200).send(res.locals.DDBoxData);
 });
 
-summonerRouter.get('/update/:summonerName', summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
+summonerRouter.get('/update/:regionId/:summonerName', summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
   // console.log(res.locals.recentSummoner, ' recent summoner in server js');
   return res.status(200).send(res.locals.summonerData);
 });
 
-summonerRouter.get('/livegamedata/:summonerName', summonerController.getLiveGameData, (req, res) => {
+summonerRouter.get('/livegamedata/:regionId/:summonerName', summonerController.getLiveGameData, (req, res) => {
   // console.log(res.locals.liveGameData, 'live game data in server js');
   return res.status(200).send(res.locals.liveGameData);
 });

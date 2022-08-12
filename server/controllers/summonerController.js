@@ -113,19 +113,35 @@ const mapSummonerIcons = async summSpells => {
   return [path.rows[0].path, path.rows[1].path];
 };
 
+// inits a region Obj to assign a platform routing value based on user inputted region
+const regionObj = {
+  "br1": "americas",
+  "eun1": "europe",
+  "euw1": "europe",
+  "jp1": "asia",
+  "kr": "asia",
+  "la1": "americas",
+  "la2": "americas",
+  "na1": "americas",
+  "oc1": "americas",
+  "ru": "europe",
+  "tr1": "europe",
+};
+
 // checks whether summoner currently has data in database
 summonerController.checkSummData = async (req, res, next) => {
-
-  const { summonerName } = req.params;
+  const { summonerName, regionId } = req.params;
   try {
-    const summoner = await lolSummoner.findOne({summonerName: summonerName});
-
+    const summoner = await lolSummoner.findOne({summonerName: summonerName, region: regionId});
     if (summoner !== null) {
       res.locals.summonerData = {
         summonerName: summoner.summonerName,
         summonerLevel: summoner.summonerLevel,
         summonerRank: summoner.summonerRank,
         puuid: summoner.puuid,
+        region: summoner.region,
+        summonerId: summoner.summonerId,
+        accountId: summoner.accountId,
         profileIcon: summoner.profileIcon,
         matchHistory: summoner.matchHistory,
         otherPlayersMatches: summoner.otherPlayersMatches,
@@ -145,8 +161,8 @@ summonerController.checkSummData = async (req, res, next) => {
 
 // if no summoner data is found in checkSummData or if update button is pressed
 summonerController.updateSummData = async (req, res, next) => {
-
-  const { summonerName } = req.params;
+  const { summonerName, regionId } = req.params;
+  const regionRoute = regionObj[regionId];
 
   // checks if res.locals.summonerData exists, if it does then just skips this controller -
   // determined by whether the user pressed 'search' or 'update'
@@ -155,7 +171,7 @@ summonerController.updateSummData = async (req, res, next) => {
   }
 
   try {
-    let responseSummData = await axios.get(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`, 
+    let responseSummData = await axios.get(`https://${regionId}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`, 
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -165,12 +181,13 @@ summonerController.updateSummData = async (req, res, next) => {
       }
     });
 
+    // gets user's puuid, summoner id, and account id from api call
     const { data } = responseSummData;
-    const { puuid } = data;
+    const { puuid, id, accountId } = data;
 
     
-    // uses summoner's puuid to get summoner's match history list of past 20 games to an array
-    let responseMatchData = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20&api_key=${process.env.api_key}`,
+    // uses summoner's puuid to get summoner's match history id list of past 20 games to an array
+    let responseMatchData = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20&api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -186,7 +203,7 @@ summonerController.updateSummData = async (req, res, next) => {
     // summonerId from first API request used to get rank information
     const summonerId = responseSummData.data.id;
     
-    let responseRankData = await axios.get(`https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${process.env.api_key}`,
+    let responseRankData = await axios.get(`https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -222,7 +239,7 @@ summonerController.updateSummData = async (req, res, next) => {
       const match = await lolMatches.findOne({matchId: matchIdList[i]});
       // if match returns null (doesn't exist in DB), ping API and then store it
       if (match === null) {
-        const responseMatchHistory = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchIdList[i]}?api_key=${process.env.api_key}`,
+        const responseMatchHistory = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${matchIdList[i]}?api_key=${process.env.api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -248,10 +265,9 @@ summonerController.updateSummData = async (req, res, next) => {
     // with statistics from the last 20 matches 
     const matchesData = [];
     const otherPlayersData = [];
-
     for (let i = 0; i < matchHistoryData.length; i++) {      
       for (let j = 0; j < 10; j++) {
-        if (matchHistoryData[i].participants[j].summonerName === summonerName) {
+        if ((matchHistoryData[i].participants[j].summonerName).toLowerCase() === summonerName.toLowerCase()) {
           const player = matchHistoryData[i].participants[j];
           matchesData.push({
             matchId: matchIdList[i],
@@ -352,10 +368,10 @@ summonerController.updateSummData = async (req, res, next) => {
         }
       };
     };
-    
+    // console.log(matchHistoryData, 'match history data');
+    // console.log(matchesData, 'matches data');
     // maps icons for main player being searched for
     for (let i = 0; i < matchHistoryData.length; i++) {
-
       const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
       const runesMap = await mapRuneIcons(matchesData[i].runes); // 11 runes total
       const summSpellMap = await mapSummonerIcons(matchesData[i].summonerSpells); // 2 items total
@@ -372,7 +388,7 @@ summonerController.updateSummData = async (req, res, next) => {
 
     try {
       for (let i = 0; i < 2000; i+=100) {
-        const getRankedS12Matches = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1641531600&queue=420&type=ranked&start=${i}&count=100&api_key=${process.env.api_key}`,
+        const getRankedS12Matches = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1641531600&queue=420&type=ranked&start=${i}&count=100&api_key=${process.env.api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -403,7 +419,10 @@ summonerController.updateSummData = async (req, res, next) => {
       summonerLevel: responseSummData.data.summonerLevel,
       summonerRank: rankData,
       puuid: puuid,
+      summonerId: id,
+      accountId: accountId,
       matchHistory: matchesData,
+      region: regionId,
       profileIcon: responseSummData.data.profileIconId,
       otherPlayersMatches: otherPlayersData,
       allMatchesPlayed: allS12MatchesArr,
@@ -425,6 +444,9 @@ summonerController.updateSummData = async (req, res, next) => {
         otherPlayersMatches: otherPlayersData,
         S12MatchesPlayed: allS12MatchesArr,
         puuid: puuid,
+        region: regionId,
+        summonerId: id,
+        accountId: accountId,
         lastUpdated: Date.now(),
       });
     }
@@ -441,6 +463,9 @@ summonerController.updateSummData = async (req, res, next) => {
             otherPlayersMatches: otherPlayersData,
             S12MatchesPlayed: allS12MatchesArr,
             puuid: puuid,
+            summonerId: id,
+            accountId: accountId,
+            region: regionId,
             lastUpdated: Date.now(),
           }
         }
@@ -533,7 +558,7 @@ summonerController.testSummData = async (req, res, next) => {
           
           if (matchObj === null) {
 
-            const getMatchObj = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${summoner.S12MatchesPlayed[i][j]}?api_key=${process.env.api_key}`,
+            const getMatchObj = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${summoner.S12MatchesPlayed[i][j]}?api_key=${process.env.api_key}`,
             {
               headers: {
                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -570,7 +595,8 @@ summonerController.testSummData = async (req, res, next) => {
 // gets dropdown box data when dropdownbox is clicked
 summonerController.getDDBoxSummData = async (req, res, next) => {
   try {
-    const { otherPlayers, matchId, puuid } = req.body;
+    const { otherPlayers, matchId, puuid, regionId } = req.body;
+    const regionRoute = regionObj[regionId];
 
     // helper function to parse through timeline and get relevant timeline info
     const getTimelineData = timeline => {
@@ -615,7 +641,7 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
       };
     };
 
-    const getMatchTimeline = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline?api_key=${process.env.api_key}`,
+    const getMatchTimeline = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -656,9 +682,11 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
 // gets user's current live game data
 summonerController.getLiveGameData = async (req, res, next) => {
   try {
-    const { summonerName } = req.params;
+    const { summonerName, regionId } = req.params;
+    const regionRoute = regionObj[regionId];
+
     // gets users encrypted summoner id from summoner name, needed to make next api call for live game
-    const getEncryptedId = await axios.get(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`,
+    const getEncryptedId = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -670,7 +698,7 @@ summonerController.getLiveGameData = async (req, res, next) => {
     const { id } = getEncryptedId.data;
 
     // request to get user's live game data using their encrypted summoner id
-    const getLiveGameData = await axios.get(`https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${id}?api_key=${process.env.api_key}`,
+    const getLiveGameData = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${id}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",

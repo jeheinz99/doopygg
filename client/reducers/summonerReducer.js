@@ -5,12 +5,15 @@ const initialState = {
   summonerLevel: 0,
   summonerRank: {},
   puuid: '',
+  summonerId: '',
+  accountId: '',
   profileIconId: 0,
   matchHistory: [],
   otherPlayersMatches: [],
   allMatchesPlayed: [],
   allMatchesPlayedData: [],
   lastUpdated: 0,
+  region: '',
 }
 
 const summonerReducer = (state = initialState, action) => {
@@ -26,12 +29,15 @@ const summonerReducer = (state = initialState, action) => {
         summonerLevel: payload.summonerLevel,
         summonerRank: payload.summonerRank,
         puuid: payload.puuid,
+        summonerId: payload.summonerId,
+        accountId: payload.accountId,
         matchHistory: payload.matchHistory,
         profileIconId: payload.profileIcon,
         otherPlayersMatches: payload.otherPlayersMatches,
         allMatchesPlayed: payload.allMatchesPlayed,
         allMatchesPlayedData: payload.allMatchesPlayedData,
         lastUpdated: payload.lastUpdated,
+        region: payload.region,
         }
       );
 

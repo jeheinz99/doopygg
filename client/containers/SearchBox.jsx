@@ -13,6 +13,7 @@ const SearchBox = () => {
   const matchHistory = useSelector(state => state.summoners.matchHistory);
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
   const lastUpdated = useSelector(state => state.summoners.lastUpdated);
+  const region = useSelector(state => state.summoners.region);
 
   const [currBox, setCurrBox] = useState('matchHistory');
 
@@ -73,6 +74,18 @@ const SearchBox = () => {
         <div id="inputSummonerName"> Input your Summoner Name Below </div>
         <br></br>
         <div className="SearchBoxInputandIcon">
+          <select id="region-select" name="region">
+            <option value="na1">NA</option>
+            <option value="euw1">EUW</option>
+            <option value="eun1">EUN</option>
+            <option value="oc1">OCE</option>
+            <option value="kr">KR</option>
+            <option value="jp1">JP</option>
+            <option value="la1">LAS</option>
+            <option value="la2">LAN</option>
+            <option value="tr1">TR</option>
+            <option value="ru">RU</option>
+          </select>
           <input id="SearchBoxInput" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
           <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
         </div>

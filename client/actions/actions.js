@@ -45,15 +45,17 @@ export const getLeaderboardData = regionName => async dispatch => {
 
 export const getSummonerData = summonerName => async dispatch => {
   const input = document.getElementById('SearchBoxInput');
+  const region = document.getElementById('region-select').value;
   input.value = '';
   input.placeholder = 'Summoner Name';
-  const responseSummData = await axios.get(`/summoner/${summonerName}`);
+  const responseSummData = await axios.get(`/summoner/${region}/${summonerName}`);
   // console.log('SUMM response from back-end', responseSummData.data);
   dispatch(addSummonerDataActionCreator(responseSummData.data));
 };
 
 export const updateSummonerData = summonerName => async dispatch => {
-  const responseSummUpdateData = await axios.get(`/summoner/update/${summonerName}`);
+  const region = document.getElementById('region-select').value;
+  const responseSummUpdateData = await axios.get(`/summoner/update/${region}/${summonerName}`);
   // console.log('SUMM UPDATE response from back-end', responseSummUpdateData.data);
   dispatch(addSummonerDataActionCreator(responseSummUpdateData.data));
 };

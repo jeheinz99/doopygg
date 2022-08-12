@@ -9,13 +9,14 @@ import LiveGameBansBox from './LiveGameBansBox.jsx';
 const LiveGameBox = () => {
 
   const summonerName = useSelector(state => state.summoners.summonerName);
+  const region = useSelector(state => state.summoners.region);
   const [liveGameData, setLiveGameData] = useState('loading');
 
   useEffect(() => {
     const getLiveGameData = async () => {
       try {
-        const res = await axios.get(`/summoner/livegamedata/${summonerName}`);
-        console.log(res.data, 'res.data');
+        const res = await axios.get(`/summoner/livegamedata/${region}/${summonerName}`);
+        // console.log(res.data, 'res.data');
         setLiveGameData(res.data);
       }
       catch(err) {
