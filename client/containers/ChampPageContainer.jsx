@@ -5,6 +5,12 @@ import ChampionsHeader from '../components/ChampionsComponents/ChampionsHeader';
 
 const ChampPageContainer = () => {
 
+  const dispatch = useDispatch();
+
+  const testFunc = async () => {
+    dispatch(testAsyncFunc());
+  };
+
   return (
     <div className ="OuterSearchBox">
 
@@ -13,6 +19,7 @@ const ChampPageContainer = () => {
 
       <div className="champ-stats-mainpage">
          <ChampionsHeader />
+         {<button className="testButton" onClick={() => testFunc()}></button>}
       </div>
 
     </div>
