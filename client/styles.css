@@ -78,7 +78,7 @@ html, body {
 #SearchBoxInput:hover {
   background-color: #22212174;
 }
-#region-select {
+#tft-region-select, #region-select {
   background: none;
   border: none;
   color: rgba(255, 255, 255, 0.861);
@@ -327,12 +327,12 @@ html, body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 0.8em;
+  font-size: 0.7em;
   gap: 0.5em;
 }
 
 .leftSideGroup p, .rightSideGroup p {
-  width: 7em;
+  width: 80px;
   margin: 0;
 }
 

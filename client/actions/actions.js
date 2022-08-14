@@ -67,15 +67,17 @@ export const getValorantData = (riotID, tagLine) => async dispatch => {
 };
 
 export const getTFTData = summonerName => async dispatch => {
+  const region = document.getElementById('tft-region-select').value;
   const input = document.getElementById('SearchBoxInputTFT');
   input.value = '';
   input.placeholder = 'Summoner Name';
-  const responseTFTData = await axios.get(`/tft/${summonerName}`);
+  const responseTFTData = await axios.get(`/tft/${region}/${summonerName}`);
   // console.log('TFT response from back-end', responseTFTData.data);
   dispatch(addTFTDataActionCreator(responseTFTData.data));
 };
 
 export const updateTFTData = summonerName => async dispatch => {
+  const region = document.getElementById('tft-region-select').value;
   const responseTFTUpdateData = await axios.get(`/tft/update/${summonerName}`);
   // console.log('TFT UPDATE response from back-end', responseTFTUpdateData.data);
   dispatch(addTFTDataActionCreator(responseTFTUpdateData.data));

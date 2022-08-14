@@ -97,14 +97,27 @@ const mapTraitIcons = async traits => {
   return traits;
 };
 
+// inits a region Obj to assign a platform routing value based on user inputted region
+const regionObj = {
+  "br1": "americas",
+  "eun1": "europe",
+  "euw1": "europe",
+  "jp1": "asia",
+  "kr": "asia",
+  "la1": "americas",
+  "la2": "americas",
+  "na1": "americas",
+  "oc1": "americas",
+  "ru": "europe",
+  "tr1": "europe",
+};
+
 // checks if tft summoner is found in database
 TFTController.checkTFTSummData = async (req, res, next) => {
-
-  const { summonerName } = req.params;
-  
+  const { summonerName, regionId } = req.params;
   try {
-    const summoner = await tftSummoner.findOne({summonerName: summonerName});
-
+    const summoner = await tftSummoner.findOne({summonerName: { $regex : new RegExp(summonerName, "i")}, region: regionId});
+    // const summoner = await tftSummoner.findOne({summonerName: summonerName, region: regionId});
     if (summoner !== null) {
       res.locals.TFTData = {
         summonerName: summoner.summonerName,
@@ -112,6 +125,7 @@ TFTController.checkTFTSummData = async (req, res, next) => {
         summonerRank: summoner.summonerRank,
         summonerIcon: summoner.summonerIcon,
         profileIcon: summoner.profileIcon,
+        region: summoner.region,
         TFTData: summoner.TFTMatchHistory,
         otherPlayersMatches: summoner.otherPlayersMatches,
       };
@@ -133,9 +147,10 @@ TFTController.updateTFTSummData = async (req, res, next) => {
   }
 
   try {
-    const { summonerName } = req.params;
+    const { summonerName, regionId } = req.params;
+    const regionRoute = regionObj[regionId];
 
-    const getSummData = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`,
+    const getSummData = await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -148,7 +163,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const { data } = getSummData;
     const { puuid, profileIconId, summonerLevel, id } = data;
 
-    const getRankData = await axios.get(`https://na1.api.riotgames.com/tft/league/v1/entries/by-summoner/${id}?api_key=${process.env.api_key}`,
+    const getRankData = await axios.get(`https://${regionId}.api.riotgames.com/tft/league/v1/entries/by-summoner/${id}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
@@ -158,7 +173,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       }
     });
 
-    const getRankData2 = await axios.get(`https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${process.env.api_key}`,
+    const getRankData2 = await axios.get(`https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
@@ -191,7 +206,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
 
 
     // returns a list of recent matches based on puuid 
-    const getMatchList = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${process.env.api_key}`,
+    const getMatchList = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -209,7 +224,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       const match = await tftMatches.findOne({matchId: matchIdList[i]});
       // if match returns null (doesn't exist in DB), ping API and then store it
       if (match === null) {
-        const getMatchData = await axios.get(`https://americas.api.riotgames.com/tft/match/v1/matches/${matchIdList[i]}?api_key=${process.env.api_key}`,
+        const getMatchData = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/${matchIdList[i]}?api_key=${process.env.api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -343,10 +358,10 @@ TFTController.updateTFTSummData = async (req, res, next) => {
 // gets TFT dropdown box data when dropdownbox is clicked
 TFTController.getTFTDDBoxSummData = async (req, res, next) => {
   try {
-    const { body } = req;
+    const { otherPlayers, regionId } = req.body;
 
-    for (let i = 0; i < body.length; i++) {
-      const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${body[i].puuid}?api_key=${process.env.api_key}`,
+    for (let i = 0; i < otherPlayers.length; i++) {
+      const playerNameRes = await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${otherPlayers[i].puuid}?api_key=${process.env.api_key}`,
       {
         headers: {
           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -355,24 +370,24 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
           "Origin": "https://developer.riotgames.com"
           }
       });
-      body[i].name = playerNameRes.data.name;
+      otherPlayers[i].name = playerNameRes.data.name;
     }
 
-    for (let i = 0; i < body.length; i++) {
+    for (let i = 0; i < otherPlayers.length; i++) {
       
-      const augmentsMap = await mapAugmentIcons(body[i].augments);
-      const littleLegendMap = await mapLittleLegendIcons(body[i].companion);
-      const unitsMap = await mapUnitIcons(body[i].units);
-      const traitsMap = await mapTraitIcons(body[i].traits);
+      const augmentsMap = await mapAugmentIcons(otherPlayers[i].augments);
+      const littleLegendMap = await mapLittleLegendIcons(otherPlayers[i].companion);
+      const unitsMap = await mapUnitIcons(otherPlayers[i].units);
+      const traitsMap = await mapTraitIcons(otherPlayers[i].traits);
       
-      body[i].traits = traitsMap;
-      body[i].units = unitsMap;
-      body[i].companion = littleLegendMap;
-      body[i].augments = augmentsMap;
+      otherPlayers[i].traits = traitsMap;
+      otherPlayers[i].units = unitsMap;
+      otherPlayers[i].companion = littleLegendMap;
+      otherPlayers[i].augments = augmentsMap;
 
     }
 
-    res.locals.DDBoxData = body;
+    res.locals.DDBoxData = otherPlayers;
     return next();
   }
   catch(err) {

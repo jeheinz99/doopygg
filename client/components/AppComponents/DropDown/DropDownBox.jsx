@@ -35,7 +35,7 @@ const DropDownBox = props => {
       });
       lolSetDDboxData(res.data.otherPlayers);
       setTimelineData(res.data.timelineData);
-    }
+    };
     getData();
   }, [summonerName]);
 
@@ -114,7 +114,7 @@ const DropDownBox = props => {
           <button className="dd-box-nav-btn" onClick={() => toggleBox(!currBox)}> etc. </button>
         </div>}
 
-      {currBox && otherPlayersRunes.length > 0 && 
+      {currBox && otherPlayersRunes.length > 0 && runeInfo.mainPlayer !== undefined &&
         <div className="RunesInfoDD">
           <div className="RunesInfoMainWrap">
 

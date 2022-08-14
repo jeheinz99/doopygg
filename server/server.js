@@ -71,19 +71,20 @@ summonerRouter.get('/test', summonerController.testSummData, (req, res) => {
 const TFTRouter = express.Router();
 app.use('/tft', TFTRouter);
 
+TFTRouter.get('/:regionId/:summonerName', TFTController.checkTFTSummData, TFTController.updateTFTSummData, (req, res) => {
+  // console.log(res.locals.TFTData);
+  return res.status(200).send(res.locals.TFTData);
+});
+
 TFTRouter.post('/ddboxdata', TFTController.getTFTDDBoxSummData, (req, res) => {
   return res.status(200).send(res.locals.DDBoxData);
 });
 
-TFTRouter.get('/update/:summonerName', TFTController.updateTFTSummData, (req, res) => {
+TFTRouter.get('/update/:regionId/:summonerName', TFTController.updateTFTSummData, (req, res) => {
   // console.log(res.locals.TFTData);
   return res.status(200).send(res.locals.TFTData);
 });
 
-TFTRouter.get('/:summonerName', TFTController.checkTFTSummData, TFTController.updateTFTSummData, (req, res) => {
-  // console.log(res.locals.TFTData);
-  return res.status(200).send(res.locals.TFTData);
-});
 
 // LEADERBOARD ENDPOINT
 // router handler to handle all request to /leaderboard endpoint

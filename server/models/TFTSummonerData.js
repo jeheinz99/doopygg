@@ -6,6 +6,7 @@ const tftSummonerSchema = new mongoose.Schema({
   summonerLevel: {type: String, required: false},
   summonerRank: {type: Object, required: false},
   summonerIcon: {type: Number, required: false},
+  region: {type: String, required: true},
   TFTMatchHistory: {type: Array, required: false},
   otherPlayersMatches: {type: Array, required: false},
   S12MatchesPlayed: {type: Array, required: false},

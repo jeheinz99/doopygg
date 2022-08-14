@@ -36,6 +36,18 @@ const TFTPageContainer = () => {
         <div id="inputSummonerName"> Input your Summoner Name Below </div>
         <br></br>
         <div className="SearchBoxInputandIcon">
+        <select id="tft-region-select" name="region">
+            <option value="na1">NA</option>
+            <option value="euw1">EUW</option>
+            <option value="eun1">EUN</option>
+            <option value="oc1">OCE</option>
+            <option value="kr">KR</option>
+            <option value="jp1">JP</option>
+            <option value="la1">LAS</option>
+            <option value="la2">LAN</option>
+            <option value="tr1">TR</option>
+            <option value="ru">RU</option>
+          </select>
           <input id="SearchBoxInputTFT" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
           <button id="SearchBoxButton" onClick={() => loadTFTData(getTFTData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
         </div>

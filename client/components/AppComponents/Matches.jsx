@@ -42,6 +42,8 @@ const Matches = props => {
   };
 
   const timeAgo = getTimeAgo(gameEnd);
+
+  const KDA = ((kills + assists) / deaths).toFixed(2);
   
   const [summonerOpen, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -67,7 +69,10 @@ const Matches = props => {
         </div>
         <div className="MatchGroup2div2">
           <p>{kills} / {deaths} / {assists}</p>
-          <p>K/D/A: {`${((kills + assists) / deaths).toFixed(2)}`}</p>
+          {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
+          {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {KDA} </p>}
+          {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: {KDA} </p>}
+          {KDA < 3 && <p id="lessthan3kda"> K/D/A: {KDA} </p>}
           <p>CS: {cs} <span id="cs-m-span">({`${(cs/(matchLength/60)).toFixed(1)}`}/m)</span></p>
           <p>vision: {visionScore}</p>
         </div>
@@ -135,8 +140,9 @@ const Matches = props => {
         </div>
         <div className="MatchGroupButton">
           {!summonerOpen && <button className="SummonerDataBoxButton" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretDown /></button>}
-          {summonerOpen && hidden && <button className="SummonerDataBoxButton" onClick={ () => setHidden(!hidden) }><AiFillCaretDown /></button>}
-          {summonerOpen && !hidden && <button className="SummonerDataBoxButton" onClick={ () => setHidden(!hidden) }><AiFillCaretUp /></button>}
+          {summonerOpen && <button className="SummonerDataBoxButton" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretUp /></button>}
+          {/* {summonerOpen && hidden && <button className="SummonerDataBoxButton" onClick={ () => setHidden(!hidden) }><AiFillCaretDown /></button>}
+          {summonerOpen && !hidden && <button className="SummonerDataBoxButton" onClick={ () => setHidden(!hidden) }><AiFillCaretUp /></button>} */}
         </div>
       </div>
       <div className="DropDownBoxes">

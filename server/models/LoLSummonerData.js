@@ -5,7 +5,7 @@ const lolSummonerSchema = new mongoose.Schema({
   summonerName: {type: String, required: true},
   summonerLevel: {type: String, required: false},
   summonerRank: {type: Object, required: false},
-  region: {type: String, required: false},
+  region: {type: String, required: true},
   puuid: {type: String, required: false},
   summonerId: {type: String, required: false},
   accountId: {type: String, required: false},

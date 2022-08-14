@@ -7,6 +7,7 @@ const initialState = {
   summonerLevel: 0,
   summonerRank: {},
   otherPlayersMatches: [],
+  region: '',
 };
 
 const tftReducer = (state = initialState, action) => {
@@ -24,6 +25,7 @@ const tftReducer = (state = initialState, action) => {
           summonerLevel: payload.summonerLevel,
           summonerRank: payload.summonerRank,
           otherPlayersMatches: payload.otherPlayersMatches,
+          region: payload.region,
         }
       );
 

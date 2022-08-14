@@ -542,14 +542,9 @@ summonerController.addSummMatchesData = async (req, res, next) => {
 };
 
 summonerController.testSummData = async (req, res, next) => {
-  const name = "never loved him";
+  const name = "doopliss2";
   try {
-    // const summoner = await lolSummoner.findOne({summonerName: name.toLowerCase()});
-    // const summoner = await lolSummoner.findOne({summonerName: {$regex: 'i'}});
-    // const summoner = await lolSummoner.findOne({summonerName: summonerName, region: regionId});
     const summoner = await lolSummoner.findOne({"summonerName": { '$regex' : new RegExp(name, "i")}});
-    // const summoner = await lolSummoner.findOne({summonerName: 'SkiTzee'});
-    
     // // const objs = await lolMatches.find({matchId:{$in: [...summoner.S12MatchesPlayed[0]]}});
     // // console.log(objs, 'objs in test');
 

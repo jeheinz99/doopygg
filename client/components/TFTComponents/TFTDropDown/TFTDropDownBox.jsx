@@ -8,18 +8,20 @@ const TFTDropDownBox = props => {
 
   const { otherPlayers } = props;
   const summonerName = useSelector(state => state.tft.summonerName);
+  const regionId = useSelector(state => state.tft.region);
 
   const [DDboxData, setDDboxData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       const res = await axios.post('/tft/ddboxdata', 
-      otherPlayers, 
+      {otherPlayers, regionId}, 
       {
         headers: {
           'Content-Type': 'application/json',
         }
       });
+      // console.log(res.data, 'res.data');
       const sortedData = res.data.sort((a, b) => a.placement - b.placement);
       setDDboxData(sortedData);
     }
