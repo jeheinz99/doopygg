@@ -108,6 +108,19 @@ html, body {
   position:relative;
   top:1px;
 }
+.loading-div {
+  height: 2.4em;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.3em;
+}
+#updating-p {
+  display: flex;
+  height: 82%;
+  margin: 0;
+  font-size: 1.5em;
+  color: rgba(255, 255, 255, 0.861);
+}
 .SummonerDataBoxGroup {
   display: flex;
   justify-content: center;
@@ -336,16 +349,15 @@ html, body {
   margin: 0;
 }
 
-/* .DropDownBoxMatch {
-  display: flex;
-  width: 100%;
-  gap: 0.5em;
-  justify-content: space-around;
-  border-top: none;
-} */
 .DropDownBoxMatch {
   display: grid;
+  justify-items: center;
   grid-template-columns: repeat(2, 1fr);
+}
+.DropDownBoxMatch {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 .team1BoxDD, .team2BoxDD {
   display: grid;

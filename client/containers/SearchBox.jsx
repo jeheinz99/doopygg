@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataBox.jsx';
 import ChampionsInfoBox from '../components/AppComponents/ChampionsInfoBox.jsx';
 import LiveGameBox from '../components/AppComponents/LiveGame/LiveGameBox.jsx';
+import { PulseLoader } from 'react-spinners';
 
 import { BiSearch } from 'react-icons/bi';
 
@@ -16,10 +17,16 @@ const SearchBox = () => {
   const region = useSelector(state => state.summoners.region);
 
   const [currBox, setCurrBox] = useState('matchHistory');
+  const [loading, setLoading] = useState(false);
 
   const loadSummonerData = useDispatch();
-
   const update = useDispatch();
+
+  const updateSummData = () => {
+    setLoading(true);
+    update(updateSummonerData(summName));
+    setLoading(false);
+  };
 
   const getTimeAgo = lastUpdated => {
     const todaysDateStamp = Date.now();
@@ -95,9 +102,18 @@ const SearchBox = () => {
         </div>
       </div>
 
-      {matchHistory[0] && <div className="headerinfo">
+      {matchHistory[0] && !loading && <div className="headerinfo">
         <h3> Summoner Information </h3>
-        <button id="summonerUpdateButton" onClick={() => update(updateSummonerData(summName))}> Update </button>
+        <button id="summonerUpdateButton" onClick={() => updateSummData(summName)}> Update </button>
+        <p>Last Updated {timeAgo}</p>
+      </div>}
+
+      {matchHistory[0] && loading && <div className="headerinfo">
+        <h3> Summoner Information </h3>
+        <div className="loading-div">
+          <p id="updating-p"> Updating </p>
+          <PulseLoader color="#ffffff" size={10} speedMultiplier={0.6}/>
+        </div>
         <p>Last Updated {timeAgo}</p>
       </div>}
     
