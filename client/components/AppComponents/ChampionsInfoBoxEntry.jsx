@@ -26,12 +26,12 @@ const ChampionsInfoBoxEntry = props => {
   return (
     <div className="championsInfoEntryBox">
 
-      <div className="championsInfoEntry1">
+      <div id="championsInfoEntry1">
         <img id="champions-entry-icon" src={championIcon}/>
         <p>{id}</p>
       </div>
 
-      <div className="championsInfoEntry2">
+      <div id="championsInfoEntry2">
         <div className="WinLossBar">
           <div className="winBar" id="ci-winbar" style={{width: `${winPercent}%`}}>
             {win !== 0 && <p>{win}W</p>}
@@ -43,7 +43,7 @@ const ChampionsInfoBoxEntry = props => {
         <p id="ci-wl-percent">{winPercent}% W/L</p>
       </div>
 
-      <div className="championsInfoEntry3">
+      <div id="championsInfoEntry3">
         {KDA === 'Infinity' && <p className="ci-kda-tag" id="over5kda"> Perfect </p>}
         {KDA >= 5 && KDA !== 'Infinity' && <p className="ci-kda-tag" id="over5kda"> {((kills + assists) / deaths).toFixed(2)} </p>}
         {KDA < 5 && KDA >= 3 && <p className="ci-kda-tag" id="between3and5kda"> {((kills + assists) / deaths).toFixed(2)} </p>}

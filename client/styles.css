@@ -336,32 +336,34 @@ html, body {
   margin: 0;
 }
 
-.DropDownBoxMatch {
+/* .DropDownBoxMatch {
   display: flex;
   width: 100%;
   gap: 0.5em;
   justify-content: space-around;
   border-top: none;
+} */
+.DropDownBoxMatch {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
-.team1BoxDD {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-.team2BoxDD {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+.team1BoxDD, .team2BoxDD {
+  display: grid;
+  grid-gap: 0.3em;
+  grid-template-rows: repeat(5, 1fr);
+  padding: 5px;
 }
 .TeamInfoTextDD {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   font-size: 0.8em;
-  width: 100%;
-  justify-content: space-around;
 }
-.TeamInfoTextDD1 {
-  display: flex;
-  width: 100%;
+.TeamInfoTextDD1, .TeamInfoTextDD2 {
+  display: grid;
+  width: 94%;
+  align-items: center;
+  grid-template-columns: 0.76fr 60px 40px 30px;
+  margin-left: 2%;
 }
 .goldBarDD {
   display: flex;
@@ -380,14 +382,8 @@ html, body {
   border-top-right-radius: 1em;
   border-bottom-right-radius: 1em;
 }
-#invis1 {
-  display: flex;
-  justify-content: flex-start;
-  width: 20em;
-
-}
 #invis1 p {
-  margin-left: 1em;
+  margin-left: 0.5em;
   font-style: italic;
   color:#47aad4;
   text-align: center;
@@ -396,18 +392,13 @@ html, body {
   border-left: 2px solid #47aad4;
 }
 #invis3 p {
-  margin-left: 1.3em;
+  margin-left: 0.5em;
   font-style: italic;
   color: #c5472b;
   text-align: center;
   font-size: 1.2em;
   width: 5em;
   border-left: 2px solid #c5472b;
-}
-#invis3 {
-  width: 21em;
-  display: flex;
-  justify-content: flex-start;
 }
 
 #damageDDIcon {
@@ -435,22 +426,10 @@ html, body {
   height: 24px;
   width: 24px;
 }
-#damageDD {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3.5em;
-}
-#csDD {
-  display: flex;
+#damageDD, #csDD, #visionDD {
+  display: grid;
   justify-content: center;
   align-items: center;
-  width: 3.5em;
-}
-#visionDD {
-  display: flex;
-  align-items: center;
-  width: 2em;
 }
 #damageDD2 {
   display: flex;
@@ -469,10 +448,6 @@ html, body {
   align-items: center;
   width: 2em;
 }
-.TeamInfoTextDD2 {
-  display: flex;
-  width: 100%;
-}
 #damageDD2 p {
 }
 #csDD2 {
@@ -480,38 +455,33 @@ html, body {
 #visionDD2 {
 }
 .Team1DropDownBox {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 0.5fr 0.4fr 0.4fr 2fr 1fr 1fr 0.5fr 0.5fr auto;
+  width: 95%;
+  align-items: center;
   padding: 5px;
-  width: 90%;
+  border-radius: 0.5em;
 }
 .Team1Players, .Team2Players {
   display: flex;
-  gap: 1px;
-}
-.Player0Team1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
   width: 100%;
-  border-radius: 0.5em;
-  padding: 5px;
+  gap: 1px;
 }
 .Player0Team1ChampIcon {
   display: flex;
 }
 .Player0Team1Info {
   display: flex;
+  flex: 1;
   flex-direction: row;
   align-items: center;
   font-size: 0.75em;
-  justify-content: flex-start;
+  justify-content: center;
+  /* justify-content: flex-start; */
   overflow: hidden;
 }
 .Player0Team1Info p {
   margin: 0;
-  width: 9em;
 }
 .Player0Team1Damage, .Player0Team1VisionScore {
   display: flex;
@@ -525,8 +495,8 @@ html, body {
   flex-direction: column;
   font-size: 0.8em;
   justify-content: center;
+  align-items: center;
   text-align: center;
-  overflow: hidden;
 }
 #dd-cs-m {
   color: rgb(155, 155, 155);
@@ -582,6 +552,7 @@ html, body {
 }
 .Player0Team1SummonerSpells {
   display: flex;
+  /* margin: 5px; */
   flex-direction: column;
 }
 .Player0Team1Items{
@@ -1520,11 +1491,16 @@ h4 {
   width: 128px;
 }
 .championsInfoEntryBox {
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
   border: 3px solid #303b51;
   border-radius: 0.2em;
   padding: 5px;
+}
+.championsInfoEntryBox div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .ChampionsInfoBox {
   width: 100%;
@@ -1534,27 +1510,23 @@ h4 {
   color: rgba(255, 255, 255, 0.80);
 }
 .ChampionsInfoBox ul {
-  padding: 0;
-  display: flex;
+  padding: 5px;
+  display: grid;
   align-items: center;
-  justify-content: space-evenly;
-  width: 99.7%;
+  width: 99%;
   border: 2px solid #303b51;
-  list-style: none;
   color: rgba(255, 255, 255, 0.80);
   text-align: center;
+  grid-template-columns: repeat(11, 1fr);
+  list-style: none;
   margin: 0;
 }
 #ci-champion {
-  text-align: left;
-  margin-left: 3em;
+  text-align: center;
 }
 #ci-winbar {
-  height: 20px;
+  height: 15px;
   font-size: 1.5em;
-}
-#ci-played p, #ci-kda p, #ci-gold p, #ci-damage p, #ci-cs p {
-  margin: 0;
 }
 .ci-kda-tag {
   font-size: 1.2em;
@@ -1563,42 +1535,41 @@ h4 {
   color: rgba(207, 205, 205, 0.8);
 }
 .ChampionsInfoBox ul li {
-  width: 10em;
-  text-decoration: none;
-}
-.championsInfoEntry1 {
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+}
+#championsInfoEntry1 {
+  display: flex;
+  width: 100%;
+  align-items: center;
   justify-content: flex-start;
-  margin-left: 16px;
-  width: 10em;
   gap: 0.5em;
 }
-.championsInfoEntry2 {
+#championsInfoEntry2 {
   display: flex;
+  width: 100%;
   flex-direction: column;
-  width: 7em;
   gap: 0.2em;
   align-items: center;
   justify-content: center;
-  margin-left: 3.2em;
 }
-.championsInfoEntry2 p {
+#championsInfoEntry2 p {
   justify-content: center;
   margin: 0;
 }
 #ci-wl-percent {
   color: rgba(207, 205, 205, 0.8);
 }
-.championsInfoEntry3 {
+#championsInfoEntry3 {
   display: flex;
   flex-direction: column;
-  width: 10em;
   align-items: center;
   justify-content: center;
-  margin-left: 1.3em;
 }
-.championsInfoEntry3 p {
+#championsInfoEntry3 p {
   margin: 0;
 }
 #champions-entry-icon {
@@ -1606,27 +1577,17 @@ h4 {
   width: 64px;
 }
 
-.championsInfoEntry4, .championsInfoEntry5, .championsInfoEntry6, .championsInfoEntry7 {
-  display: flex;
-  width: 10em;
+/* .championsInfoEntry4, .championsInfoEntry5, .championsInfoEntry6, .championsInfoEntry7 {
+  display: grid;
   align-items: center;
   justify-content: center;
 }
 .championsInfoEntry4 p {
   margin: 0;
-}
+} */
 .championsInfoEntry5 p span {
   font-size: 0.9em;
   color: rgba(207, 205, 205, 0.8);
-}
-#ci-double-kills, #ci-triple-kills, #ci-quadra-kills, #ci-penta-kills {
-  width: 6.4em;
-}
-.championsInfoEntry8, .championsInfoEntry9, .championsInfoEntry10, .championsInfoEntry11 {
-  display: flex;
-  width: 6.4em;
-  align-items: center;
-  justify-content: center;
 }
 .not-in-live-game {
   display: flex;
@@ -1960,6 +1921,16 @@ h4 {
   .SummonerDataBoxGroup {
     flex-direction: column;
     align-items: center;
+  }
+  #MatchBoxes {
+    width: 100%;
+  }
+  .test-one {
+    flex-direction: row;
+    align-items: center;
+  }
+  .recent-20-played-box {
+    height: 50%;
   }
   .OuterSearchBox {
     margin-top: 0;

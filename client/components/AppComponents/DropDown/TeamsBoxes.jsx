@@ -12,9 +12,9 @@ const TeamsBoxes = props => {
   const KDA = ((kills + assists) / deaths).toFixed(2);
 
   return (
-      <div className="Team1DropDownBox">
-        <div className="Team1Players">
-          <div className="Player0Team1" id={id}>
+      <div className="Team1DropDownBox" id={id}>
+        {/* <div className="Team1Players"> */}
+          {/* <div className="Player0Team1" id={id}> */}
             <div className="Player0Team1ChampIcon">
               <img id="Player0Champion" src={championIcon}/>
             </div>
@@ -58,8 +58,8 @@ const TeamsBoxes = props => {
                 <img id="item5DD" src={items[5]}/>
               </div>
             </div>            
-          </div>
-        </div>
+          {/* </div> */}
+        {/* </div> */}
       </div>
   )
 };
