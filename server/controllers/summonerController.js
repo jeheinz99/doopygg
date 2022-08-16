@@ -133,6 +133,7 @@ summonerController.checkSummData = async (req, res, next) => {
   const { summonerName, regionId } = req.params;
   try {
     const summoner = await lolSummoner.findOne({"summonerName": { "$regex" : new RegExp(summonerName, "i")}, "region": regionId});
+    // console.log(summoner, 'summoner');
     if (summoner !== null) {
       res.locals.summonerData = {
         summonerName: summoner.summonerName,
@@ -525,13 +526,13 @@ summonerController.addSummMatchesData = async (req, res, next) => {
     // iterate through all s12 ranked matches and see matches that are cached in db
     for (let i = 0; i < allMatchesPlayed.length; i++) {
       const objs = await lolMatches.find({matchId:{$in: [...summoner.S12MatchesPlayed[i]]}});
-      // console.log(objs, 'objs');
       const objData = getObjData(objs, summonerName);
       S12MatchesInfoArr.push(objData);
     }
 
     await lolSummoner.findOneAndUpdate({summonerName: summonerName, region: region}, {S12MatchesPlayedData: S12MatchesInfoArr});
     res.locals.summonerData.allMatchesPlayedData = S12MatchesInfoArr;
+    // console.log(res.locals.summonerData.allMatchesPlayedData, 'hi');
     return next();
   }
 
