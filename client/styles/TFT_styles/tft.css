@@ -27,17 +27,47 @@
   flex-direction: column;
   align-items: center;
 }
+.RankedMatchesInfo {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: auto auto;
+}
 .tft-ranked-wins-div {
   display: flex;
-  gap: 1em;
+  justify-content: space-between;
+  padding: 5px;
 }
 .tft-ranked-top4-div {
   display: flex;
-  gap: 1em;
+  justify-content: space-between;
+  padding: 5px;
 }
 .tft-ranked-played-div {
   display: flex;
-  gap: 1em;
+  justify-content: space-between;
+  padding: 5px;
+}
+.tft-ranked-summoner-box p {
+  display: flex;
+  gap: 5em;
+  justify-content: space-between;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+.tft-ranked-half {
+  padding-right: 10px;
+}
+#tftPlayedBar {
+  height: 7px;
+  border: 2px solid #272d3a;
+  background-color: #171A21;
+  border-left: none;
+}
+#tftPlayedFilledBar {
+  height: 7px;
+  border: 2px solid #272d3a;
+  border-right: none;
+  background-color:#8287c7;
 }
 .TFTDataBoxButton {  
   display: flex;
@@ -73,7 +103,8 @@
   border-top: none;
 }
 .TFTDDPlayerBox {
-  display: flex;
+  display: grid;
+  grid-template-columns: 10% 25% 55% 10%;
   width: 100%;
   border-bottom: 1px solid #6c6e73;
 }
@@ -81,18 +112,15 @@
   display: flex;
   flex-direction: column;
   color: rgba(255, 255, 255, 0.80);
-  width: 12%;
   justify-content: center;
 }
 .TFTDDB1 p {
   margin: 0;
-
 }
 .TFTDDB2 {
   display: flex;
   gap: 5px;
   align-items: center;
-  width: 23em;
   justify-content: flex-start;
 }
 .AugListB2 {
@@ -182,7 +210,6 @@
   width: 20px;
 }
 .TFTDDB3 {
-  width: 55%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -210,7 +237,6 @@
   border: 1px solid rgba(255, 255, 255, 0.403); 
 }
 .TFTDDB4 {
-  width: 6.5em;
   display: flex;
   flex-direction: column;
   color: rgba(255, 255, 255, 0.80);
@@ -234,11 +260,7 @@
   height: 32px;
   width: 32px;
 }
-
-
 .TFTWrapper {
-  display: flex;
-  flex-direction: column;
   width: 100%;
 }
 .TFTTopHalfBox {
@@ -264,10 +286,8 @@
 }
 .TFTMatches {
   width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-evenly;
-  padding: 1px;
+  display: grid;
+  grid-template-columns: 10% 15% 25% 48% 2%;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 5);
   align-items: center;
   color:rgba(255, 255, 255, 0.861);
@@ -280,7 +300,6 @@
   flex-direction: column;
   align-items: center;
   padding: 5px;
-  width: 7em;
 }
 .TFTMatchGroup1 p {
   width: 100%;
@@ -293,7 +312,6 @@
 .TFTMatchGroup2 {
   display: flex;
   align-items: center;
-  width: 15em;
 }
 .TFTMatchGroup2Div2 {
   display: flex;
@@ -303,7 +321,6 @@
 }
 .TFTMatchGroup2Div2 p {
   margin: 0;
-  width: 10em;
 }
 #LittleLegendIcon {
   width: 64px;
@@ -313,7 +330,6 @@
   border: 2px solid rgba(133, 133, 133, 0.403);
 }
 .TFTMatchGroup3 {
-  width: 25em;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -352,7 +368,6 @@
   gap: 5px;
   justify-content: center;
   align-items: flex-start;
-  width: 50em;
 }
 .TFTUnitGroup1 {
   display: flex;
@@ -425,131 +440,131 @@
   color: rgb(8, 213, 145);
 }
 .TFTRecentMatchesContainer {
-  display: flex;
-  border: 3px solid #272d3a;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 0.5fr;
   width: 99%;
-  height: 15em;
+  border: 3px solid #272d3a;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
   border-radius: 0.2em;
   background-color: #171A21;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .PlacementsBar {
-  display: flex;
-  flex-direction: column;
-  width: 27%;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1em;
-  border-right: 3px solid #272d3a;
-  padding: 5px;
+  display: grid;
+  grid-template-rows: 0.5fr 1fr 1fr 1fr;
 }
 #tftr10header {
   display: flex;
+  width: 95%;
+  justify-content: space-between;
   align-items: center;
-  border-left: 2px solid rgba(255, 255, 255, 0.80);
-  gap: 6em;
-  height: 10%;
-}
-.RecentTraits {
-  display: flex;
-  flex-direction: column;
-  color:rgba(255, 255, 255, 0.80);
-  margin: 0;
-  gap: 0.5em;
-  padding: 0.5em;
-  border-right: 3px solid #272d3a;
-}
-.RecentTraitsBox1 {
-  display: flex;
-}
-.RecentTraitsBoxes {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2em;
-}
-.RecentTraitsBox {
-  color: rgba(255, 255, 255, 0.80);
-}
-.RecentTraitsBox p {
-  margin: 0;
-}
-#tftr10traitheader {
-  border-left: 2px solid rgba(255, 255, 255, 0.80);
-  height: 10%;
-  margin-right: 10px;
-}
-#tftr10traitheader ul li {
-  text-decoration: underline;
-}
-#tftr10traitheader ul p {
-  text-decoration: none;
-  margin-left: 0.3em;
 }
 #tftr10header p {
+  border-left: 2px solid rgba(255, 255, 255, 0.80);
   margin: 0;
-  margin-left: 0.5em;
+  padding-left: 0.5em;
   color: rgba(255, 255, 255, 0.80);
 }
-#tftr10unitheader {
-  border-left: 2px solid rgba(255, 255, 255, 0.80);
-  height: 10%;
-  margin-right: 10px;
+#r10item {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.2em;
 }
-#tftr10unitheader ul li {
-  text-decoration: underline;
+.RecentItems {
+  display: grid;
+  width: 100%;
+  grid-template-rows: 10% 90%;
 }
-#tftr10unitheader ul p {
-  text-decoration: none;
-  margin-left: 0.3em;
+.RecentItems ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.861);
+  margin: 0;
+  padding: 0;
+}
+.RecentItems ul p {
+  margin: 0;
+}
+.RecentItemsBoxes {
+  display: grid;
+  width: 100%;
+}
+.RecentItemsBox {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-items: center;
+  color: rgba(255, 255, 255, 0.861);
+}
+.RecentItemsBox p {
+  margin: 0;
 }
 .RecentUnits {
-  display: flex;
-  flex-direction: column;
-  color: rgba(255, 255, 255, 0.80);
-  margin: 0;
-  gap: 0.5em;
-  padding: 0.5em;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-rows: 10% 90%;
+  width: 100%;
+  border-left: 3px solid #272d3a;
   border-right: 3px solid #272d3a;
 }
 .RecentUnits ul {
-  display: flex;
-  gap: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   list-style: none;
   align-items: center;
   margin: 0;
   padding: 0;
+  color: rgba(255, 255, 255, 0.861);
+}
+#tftr10unitheader {
+  width: 100%;
+  margin: 0;
+}
+#tftr10traitheader {
+  width: 100%;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.861);
+}
+.RecentTraits {
+  display: grid;
+  width: 100%;
+  grid-template-rows: 10% 90%;
+  border-right: 3px solid #272d3a;
 }
 .RecentTraits ul {
-  display: flex;
-  gap: 1em;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   list-style: none;
   align-items: center;
   margin: 0;
   padding: 0;
 }
-.RecentUnits ul li {
-  display: flex;
-  justify-content: center;
-  width: 6em;
-  margin: 0;
-}
-.RecentTraits ul li {
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  width: 6em;
-}
-.RecentTraitsBoxes {
+
+/* .RecentTraitsBoxes {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.4em;
+} */
+.RecentTraitsBoxes {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  width: 100%;
+}
+.RecentTraitsBoxes ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  color: rgba(255, 255, 255, 0.861);
 }
 .RecentUnitsBoxes {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.4em;
+  display: grid;
+  width: 100%;
+  grid-template-rows: repeat(5, 1fr);
 }
 .RecentTraits p {
   margin: 0;
@@ -557,21 +572,15 @@
 .RecentUnits p {
   margin: 0;
 }
-.RecentTraitsBox {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-}
-.RecentUnitsBox {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
+.RecentUnitsBox ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 .PlacementInfo {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 2em;
+  gap: 10%;
   border-left: 2px solid rgba(255, 255, 255, 0.80);
 }
 .PlacementInfoDiv1 {
@@ -586,18 +595,23 @@
 }
 #tftr10header #avgPlacementTag1 {
   color: rgb(193, 171, 44);
+  border: none;
 }
 #tftr10header #avgPlacementTag2 {
   color: #b4b4b4;
+  border: none;
 }
 #tftr10header #avgPlacementTag3 {
   color: #7B3F00;
+  border: none;
 }
 #tftr10header #avgPlacementTag4 {
   color: #1C6EA4;
+  border: none;
 }
 #tftr10header #avgPlacementTag5 {
   color: rgba(184, 184, 184, 0.8);
+  border: none;
 }
 #avgPlacementTag1, #avgPlacementTag2, #avgPlacementTag3, #avgPlacementTag4, #avgPlacementTag5 {
   font-size: 2em;
@@ -612,22 +626,22 @@
 
 .PlacementInfoDiv2 {
   display: flex;
-  width: 10em;
+  width: 35%;
 }
-.placementArr1 {
-  display: flex;
-  gap: 1em;
-}
-.placementArr2 {
-  display: flex;
-  gap: 1em;
+.placementArr1, .placementArr2 {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
 }
 .placementBox {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2.5em;
-  width: 3em;
+  /* height: 2.5em; */
+  /* width: 3em; */
+  height: 60%;
+  width: 53%;
   border: 2px solid #303b51;
   border-radius: 0.2em;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);

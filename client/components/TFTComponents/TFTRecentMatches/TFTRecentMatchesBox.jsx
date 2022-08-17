@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import TraitsBox from './TraitsBox.jsx';
 import UnitsBox from './UnitsBox.jsx';
+import ItemsBox from './ItemsBox.jsx';
 
 const RecentMatchesBox = () => {
 
@@ -9,6 +10,7 @@ const RecentMatchesBox = () => {
 
   const traitsObj = {};
   const unitsObj = {};
+  const itemsObj = {};
 
   const getPlacements = data => {
     const placementsArr = [];
@@ -69,6 +71,21 @@ const RecentMatchesBox = () => {
     };
   };
 
+  const sortItems = data => {
+    const tempArr = [];
+    
+    for (let i in data) {
+      tempArr.push(data[i]);
+    }
+
+    tempArr.sort((a, b) => {
+      return (b.played - a.played);
+    });
+    return {
+      top5Played: [tempArr[0], tempArr[1], tempArr[2], tempArr[3], tempArr[4]],
+    };
+  };
+
   // traits data from player tft matches
   for (let i = 0; i < TFTData.length; i++) {
     for (let j = 0; j < TFTData[i].traits.length; j++) {
@@ -79,7 +96,6 @@ const RecentMatchesBox = () => {
         traitsObj[TFTData[i].traits[j].name].tier_frequency += (TFTData[i].traits[j].tier_current / TFTData[i].traits[j].tier_total);
         
         (TFTData[i].traits[j].tier_current >= 1 ? traitsObj[TFTData[i].traits[j].name].count += 1 : null);
-
         if (TFTData[i].placement === 1) {
           traitsObj[TFTData[i].traits[j].name].placements.first += 1;
         }
@@ -140,12 +156,22 @@ const RecentMatchesBox = () => {
         if (TFTData[i].units[j].items.length > 0) {
           unitsObj[TFTData[i].units[j].character_id].playedWithItems += 1;
           for (let k = 0; k < TFTData[i].units[j].items.length; k++) {
-            if (unitsObj[TFTData[i].units[j].character_id].items[TFTData[i].units[j].items[k]]) {
-              unitsObj[TFTData[i].units[j].character_id].items[TFTData[i].units[j].items[k]] += 1;
+            if (itemsObj[TFTData[i].units[j].items[k]]) {
+              itemsObj[TFTData[i].units[j].items[k]].played += 1;
             }
             else {
-              unitsObj[TFTData[i].units[j].character_id].items[TFTData[i].units[j].items[k]] = 1;
+              const newObj = {};
+              newObj.id = TFTData[i].units[j].items[k];
+              newObj.played = 1;
+              newObj.icon = TFTData[i].units[j].itemIcons[k];
+              itemsObj[TFTData[i].units[j].items[k]] = newObj;
             }
+            // if (unitsObj[TFTData[i].units[j].character_id].items[TFTData[i].units[j].items[k]]) {
+            //   unitsObj[TFTData[i].units[j].character_id].items[TFTData[i].units[j].items[k]] += 1;
+            // }
+            // else {
+            //   unitsObj[TFTData[i].units[j].character_id].items[TFTData[i].units[j].items[k]] = 1;
+            // }
           }
         }
       }
@@ -157,6 +183,7 @@ const RecentMatchesBox = () => {
         newObj.played = 0;
         newObj.unitIcon = TFTData[i].units[j].unitIcon;
         newObj.items = {};
+        newObj.itemIcons = {};
         newObj.placements = {top4: 0, first: 0, bot4: 0};
 
         if (TFTData[i].placement === 1) { 
@@ -173,12 +200,22 @@ const RecentMatchesBox = () => {
           newObj.playedWithItems += 1;
           newObj.played += 1;
           for (let k = 0; k < TFTData[i].units[j].items.length; k++) {
-            if (newObj.items[TFTData[i].units[j].items[k]]) {
-              newObj.items[TFTData[i].units[j].items[k]] += 1;
+            if (itemsObj[TFTData[i].units[j].items[k]]) {
+              itemsObj[TFTData[i].units[j].items[k]].played += 1;
             }
             else {
-              newObj.items[TFTData[i].units[j].items[k]] = 1;
+              const newObj = {};
+              newObj.id = TFTData[i].units[j].items[k];
+              newObj.played = 1;
+              newObj.icon = TFTData[i].units[j].itemIcons[k];
+              itemsObj[TFTData[i].units[j].items[k]] = newObj;
             }
+            // if (newObj.items[TFTData[i].units[j].items[k]]) {
+            //   newObj.items[TFTData[i].units[j].items[k]] += 1;
+            // }
+            // else {
+            //   newObj.items[TFTData[i].units[j].items[k]] = 1;
+            // }
           }
         }
         else {
@@ -192,6 +229,9 @@ const RecentMatchesBox = () => {
   const sortedTraits = sortTraits(traitsObj);
 
   const sortedUnits = sortUnits(unitsObj);
+  const sortedItems = sortItems(itemsObj);
+
+  console.log(sortedItems, 'sorted items');
   
   const placements = getPlacements(TFTData);
 
@@ -243,6 +283,17 @@ const RecentMatchesBox = () => {
     items={sortedUnits.top5Played[i].items}
     />);
   }
+
+  const itemsArr = [];
+  for (let i = 0; i < sortedItems.top5Played.length; i++) {
+    itemsArr.push(<ItemsBox
+    key={`items-${i}`}
+    id={i}
+    itemId={sortedItems.top5Played[i].id}
+    played={sortedItems.top5Played[i].played}
+    icon={sortedItems.top5Played[i].icon}
+    />);
+  }
   
   return (
     <div className="TFTRecentMatchesContainer">
@@ -287,7 +338,7 @@ const RecentMatchesBox = () => {
 
         <div id="tftr10unitheader">
           <ul>
-            <p> Recent Units </p>
+            <p> Units </p>
             <li> Name </li>
             <li> Played </li>
             <li> Top4 % </li>
@@ -304,7 +355,7 @@ const RecentMatchesBox = () => {
 
         <div id="tftr10traitheader">
           <ul>
-            <p> Recent Traits </p>
+            <p> Traits </p>
             <li> Name </li>
             <li> Played </li>
             <li> Top4 % </li>
@@ -315,6 +366,19 @@ const RecentMatchesBox = () => {
           {traitsArr}
         </div>
 
+      </div>
+
+      <div className="RecentItems">
+        <div id="tftr10itemsheader">
+          <ul>
+            <p> Items </p>
+            <li> Played </li>
+          </ul>
+        </div>
+
+        <div className="RecentItemsBoxes">
+          {itemsArr}
+        </div>
       </div>
 
     </div>

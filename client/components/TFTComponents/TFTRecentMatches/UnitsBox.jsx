@@ -4,7 +4,7 @@ const UnitsBox = props => {
 
   const { name, played, playedWithItems, unitIcon, items, rarity, placements } = props;
 
-  const top4Percent = ((placements.top4 / played)*100).toFixed();
+  const top4Percent = (((placements.top4 + placements.first)/ played)*100).toFixed();
   const nameCopy = name.replace('TFT7_', '');
 
   return (

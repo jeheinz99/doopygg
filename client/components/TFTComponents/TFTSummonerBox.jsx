@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import TFTSummonerBoxes from './TFTSummonerBoxes';
 
 const TFTSummonerBox = () => {
 
@@ -48,6 +49,28 @@ const TFTSummonerBox = () => {
 
   const winPercent = ((matchesData.wins / matchesData.played)*100).toFixed(1);
   const top4Percent = ((matchesData.top4 / matchesData.played)*100).toFixed(1);
+
+  const boxNames = ['Played', 'Wins', 'Top4s', 'Avg.', 'Win%', 'Top4%'];
+  const boxValues = [matchesData.played, matchesData.wins, matchesData.top4, matchesData.avg, `${winPercent}%`, `${top4Percent}%`];
+  const boxPercents = [100, winPercent, top4Percent, 100, winPercent, top4Percent];
+  const left3 = [];
+  const right3 = [];
+  for (let i = 0; i < boxNames.length; i++) {
+    (left3.length < 3 ? left3.push(
+      <TFTSummonerBoxes 
+      key={`box-${boxNames[i]}-i`} 
+      name={boxNames[i]}
+      value={boxValues[i]}
+      percent={boxPercents[i]}/>)
+    : right3.push(
+      <TFTSummonerBoxes 
+      key={`box-${boxNames[i]}-i`} 
+      name={boxNames[i]}
+      value={boxValues[i]}
+      percent={boxPercents[i]}/>)
+    );
+
+  }
   
   return (
     <div>
@@ -75,17 +98,11 @@ const TFTSummonerBox = () => {
         </div>
 
         <div className="RankedMatchesInfo">
-          <div className="tft-ranked-played-div">
-            <p>Played: {matchesData.played} </p>
-            <p> Avg. {matchesData.avg}</p>
+          <div className="tft-ranked-half">
+            {left3}
           </div>
-          <div className="tft-ranked-wins-div">
-            <p>Wins: {matchesData.wins}</p>
-            <p>Win%: {winPercent}%</p>
-          </div>
-          <div className="tft-ranked-top4-div">
-            <p>Top4s: {matchesData.top4}</p>
-            <p>Top4%: {top4Percent}%</p>
+          <div className="tft-ranked-half">
+            {right3}
           </div>
         </div>
 

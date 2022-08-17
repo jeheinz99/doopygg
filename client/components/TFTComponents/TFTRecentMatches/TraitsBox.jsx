@@ -4,11 +4,11 @@ const TraitsBox = props => {
 
   const { id, name, count, styleCount, unitCount, tierFreq, traitIcon, placements } = props;
 
-  const top4Percent = ((placements.top4 / count)*100).toFixed();
+  const top4Percent = (((placements.top4 + placements.first)/ count)*100).toFixed();
   const nameCopy = name.replace('Set7_', '');
 
   return (
-    <div className="RecentTraitsBox">
+    // <div className="RecentTraitsBox">
       <ul>
         <li> <img id="r10trait" src={traitIcon}/> </li>
         <li> {nameCopy} </li>
@@ -17,7 +17,7 @@ const TraitsBox = props => {
       </ul>
 
       
-    </div>
+    // </div>
   );
 };
 

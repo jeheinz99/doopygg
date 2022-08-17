@@ -104,7 +104,7 @@ const SearchBox = () => {
       {matchHistory[0] && !loading && 
       <div className="headerinfo">
         <h3> Summoner Information </h3>
-        <button id="summonerUpdateButton" onClick={() => updateSummData(summName)}> Update </button>
+        <button id="summonerUpdateButton" onClick={() => updateSummData()}> Update </button>
         <p>Last Updated {timeAgo}</p>
       </div>}
 

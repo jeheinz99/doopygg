@@ -154,10 +154,7 @@ html, body {
 }
 
 .MatchesWrapper {
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  align-items: center;
 }
 .MatchBoxes {
   display: flex;
@@ -199,9 +196,9 @@ html, body {
 }
 .Matches {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 15% 27% 15% 40% 3%;
   align-items: center;
-  justify-content: space-evenly;
   border: 2px solid #272d3a;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
   border-radius: 0.2em;
@@ -212,7 +209,6 @@ html, body {
 }
 .MatchGroup1 p {
   margin: 0;
-  width: 7em;
   font-size: 1em;
   text-align: center;
 }
@@ -258,8 +254,9 @@ html, body {
   justify-content: center;
 }
 .MatchGroupButton {
+  height: 100%;
   display: flex;
-  margin-top: auto;
+  justify-content: center;
 }
 #DropDownButton {
   display: flex;
@@ -292,6 +289,7 @@ html, body {
 .MatchGroup4 {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   gap: 2px;
   align-items: center;
 }
@@ -318,19 +316,15 @@ html, body {
 .MatchGroup5 {
   display: flex;
   flex-direction: row;
-  gap: 1em;
+  justify-content: center
 }
-.leftSidePlayers {
+.leftSidePlayers, .rightSidePlayers {
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 2px;
+  font-size: 1.3em;
   padding: 5px;
-}
-.rightSidePlayers {
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-  gap: 2px;
 }
 .playerChampionIcon {
   width: 24px;
@@ -345,7 +339,7 @@ html, body {
 }
 
 .leftSideGroup p, .rightSideGroup p {
-  width: 80px;
+  width: 100%;
   margin: 0;
 }
 
@@ -354,14 +348,10 @@ html, body {
   justify-items: center;
   grid-template-columns: repeat(2, 1fr);
 }
-.DropDownBoxMatch {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
 .team1BoxDD, .team2BoxDD {
   display: grid;
   grid-gap: 0.3em;
+  width: 99%;
   grid-template-rows: repeat(5, 1fr);
   padding: 5px;
 }
@@ -374,8 +364,7 @@ html, body {
   display: grid;
   width: 94%;
   align-items: center;
-  grid-template-columns: 0.76fr 60px 40px 30px;
-  margin-left: 2%;
+  grid-template-columns: 60% 10% 10% 7%;
 }
 .goldBarDD {
   display: flex;
@@ -468,8 +457,8 @@ html, body {
 }
 .Team1DropDownBox {
   display: grid;
-  grid-template-columns: 0.5fr 0.4fr 0.4fr 2fr 1fr 1fr 0.5fr 0.5fr auto;
-  width: 95%;
+  grid-template-columns: 6% 4% 5% 27% 15% 10% 10% 6% 18%;
+  width: 97%;
   align-items: center;
   padding: 5px;
   border-radius: 0.5em;
@@ -481,13 +470,12 @@ html, body {
 }
 .Player0Team1ChampIcon {
   display: flex;
+  justify-content: center;
 }
 .Player0Team1Info {
   display: flex;
-  flex: 1;
-  flex-direction: row;
-  align-items: center;
-  font-size: 0.75em;
+  text-align: center;
+  font-size: 0.9em;
   justify-content: center;
   /* justify-content: flex-start; */
   overflow: hidden;
@@ -497,7 +485,7 @@ html, body {
 }
 .Player0Team1Damage, .Player0Team1VisionScore {
   display: flex;
-  font-size: 0.8em;
+  font-size: 0.9em;
   justify-content: center;
   overflow: hidden;
   text-align: center;
@@ -529,6 +517,7 @@ html, body {
 .Player0Team1KDA {
   display: flex;
   flex-direction: column;
+  align-items: center;
   font-size: 0.75em;
 }
 .Player0Team1KDA p {
@@ -564,12 +553,13 @@ html, body {
 }
 .Player0Team1SummonerSpells {
   display: flex;
-  /* margin: 5px; */
   flex-direction: column;
+  align-items: center;
 }
 .Player0Team1Items{
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1px;
 }
 .upperHalfItemsDD {
@@ -731,23 +721,27 @@ html, body {
   border-radius: 0.2em;
 }
 .champEntry {
-  display: flex;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
   align-items: center;
-  justify-content: center;
 }
 .champEntry p {
-  width: 7em;
   margin: 0;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.80);
 }
 .champEntryDiv1 {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 35% 50%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
   gap: 0.5em;
 }
 .champEntryDiv1 p {
   display: flex;
-  width: 5em;
 }
 .champEntryDiv2 {
   display: flex;
@@ -763,7 +757,6 @@ html, body {
 }
 .champEntryDiv4 {
   display: flex;
-  width: 7.5em;
 }
 .SummonerDataBoxButton {
   display: flex;
@@ -1807,17 +1800,16 @@ h4 {
   box-shadow: 2px 2px 15px rgb(0 0 0);
 }
 .recent-20-played-box ul {
+  display: grid;
+  grid-template-columns: 55% 15% 15% 15%;
   margin: 0;
   border-top: 2px solid #272d3a;
   border-bottom: 2px solid #272d3a;
   width: 100%;
-  gap: 1em;
-  display: flex;
   list-style: none;
   padding: 0;
 }
 .recent-20-played-box ul li p {
-  width: 3.8em;
   text-align: center;
   margin: 0;
   color: rgba(255, 255, 255, 0.861);
@@ -1837,10 +1829,9 @@ h4 {
   color: rgba(255, 255, 255, 0.861);
 }
 .recent-played-with-entry {
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: flex-start;
-  gap: 1em;
+  grid-template-columns: 55% 15% 15% 15%;
   border: 2px solid #303b51;
   border-radius: 0.2em;
   box-shadow: 1px 1px 4px rgb(0 0 0);
@@ -1849,14 +1840,12 @@ h4 {
 .recent-played-with-entry p {
   margin: 0;
   color: rgba(255, 255, 255, 0.861);
-  width: 4em;
   text-align: center;
 }
 .recent-played-with-1 {
   display: flex;
   align-items: center;
   gap: 1em;
-  width: 15em;
 }
 .recent-played-with-1 p {
   text-align: left;
