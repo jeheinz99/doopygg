@@ -43,8 +43,8 @@ app.use(function(req, res, next) {
 const summonerRouter = express.Router();
 app.use('/summoner', summonerRouter);
 
-summonerRouter.get('/:regionId/:summonerName', summonerController.checkSummData, summonerController.updateSummData,  (req, res) => {
-  console.log(res.locals.summonerData, 'test');
+summonerRouter.get('/:regionId/:summonerName', summonerController.checkSummData, summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
+  // console.log(res.locals.summonerData, 'test');
   return res.status(200).send(res.locals.summonerData);
 });
 
@@ -71,7 +71,7 @@ summonerRouter.get('/test', summonerController.testSummData, (req, res) => {
 const TFTRouter = express.Router();
 app.use('/tft', TFTRouter);
 
-TFTRouter.get('/:regionId/:summonerName', TFTController.checkTFTSummData, TFTController.updateTFTSummData, (req, res) => {
+TFTRouter.get('/:regionId/:summonerName', TFTController.checkTFTSummData, TFTController.updateTFTSummData, TFTController.addTFTSummMatchesData, (req, res) => {
   // console.log(res.locals.TFTData);
   return res.status(200).send(res.locals.TFTData);
 });
@@ -80,7 +80,7 @@ TFTRouter.post('/ddboxdata', TFTController.getTFTDDBoxSummData, (req, res) => {
   return res.status(200).send(res.locals.DDBoxData);
 });
 
-TFTRouter.get('/update/:regionId/:summonerName', TFTController.updateTFTSummData, (req, res) => {
+TFTRouter.get('/update/:regionId/:summonerName', TFTController.updateTFTSummData, TFTController.addTFTSummMatchesData, (req, res) => {
   // console.log(res.locals.TFTData);
   return res.status(200).send(res.locals.TFTData);
 });

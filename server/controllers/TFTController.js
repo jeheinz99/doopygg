@@ -3,8 +3,23 @@ const axios = require('axios');
 const db = require('../models/IconPaths');
 const tftSummoner = require('../models/TFTSummonerData');
 const tftMatches = require('../models/TFTMatchesModel');
+const queueData = require('../../queues.json');
 
 // HELPER FUNCTIONS ---> USED TO GET DATA FROM SQL DATABASE FROM RIOT API DATA
+
+// maps queue type based on queueId
+const mapQueueType = queueId => {
+  let str = '';
+  // reverse iterate through the array because most queues are high numbers, lower ids are deprecated
+  for (let i = queueData.length-1; i >= 0; i--) {
+    if (queueId === queueData[i].queueId) {
+      str = queueData[i].description;
+      str = str.replace(' games', '');
+      str = str.replace('5v5 ', '');
+      return str;
+    }
+  }
+};
 
 // maps augment icon based on augment name passed in
 const mapAugmentIcons = async augments => {
@@ -123,11 +138,16 @@ TFTController.checkTFTSummData = async (req, res, next) => {
         summonerName: summoner.summonerName,
         summonerLevel: summoner.summonerLevel,
         summonerRank: summoner.summonerRank,
-        summonerIcon: summoner.summonerIcon,
-        profileIcon: summoner.profileIcon,
+        puuid: summoner.puuid,
         region: summoner.region,
+        summonerId: summoner.summonerId,
+        accountId: summoner.accountId,
+        summonerIcon: summoner.summonerIcon,
         TFTData: summoner.TFTMatchHistory,
         otherPlayersMatches: summoner.otherPlayersMatches,
+        allMatchesPlayed: summoner.Set7MatchesPlayed,
+        allMatchesPlayedData: summoner.S12MatchesPlayedData,
+        lastUpdated: summoner.lastUpdated,
       };
       return next();
     }
@@ -161,7 +181,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     });
 
     const { data } = getSummData;
-    const { puuid, profileIconId, summonerLevel, id } = data;
+    const { puuid, profileIconId, summonerLevel, id, accountId, name } = data;
 
     const getRankData = await axios.get(`https://${regionId}.api.riotgames.com/tft/league/v1/entries/by-summoner/${id}?api_key=${process.env.api_key}`,
     {
@@ -310,38 +330,85 @@ TFTController.updateTFTSummData = async (req, res, next) => {
 
     };
 
-    const TFTData = {
-      TFTData: TFTMatchHistory,
-      summonerName: summonerName,
-      summonerIcon: profileIconId,
-      summonerLevel: summonerLevel,
-      summonerRank: rankData,
-      otherPlayersMatches: otherPlayersData,
+    const set7MatchesArr = [];
+    try {
+      for (let i = 0; i < 2000; i+=100) {
+        const getSet7AllMatches = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=${i}&startTime=1654646400&count=100&api_key=${process.env.api_key}`,
+        {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Origin": "https://developer.riotgames.com"
+          }
+        });
+
+        // cannot access length property with getRankedS12Matches.data.length, so initialize temp variable
+        const temp = getSet7AllMatches.data;
+        set7MatchesArr.push(temp);
+
+        if (temp.length !== 100) {
+          await tftSummoner.findOneAndUpdate({summonerName: summonerName, region: regionId}, {Set7MatchesPlayed: set7MatchesArr});
+          break;
+        }
+      }
+    }
+    catch(err) {
+      console.log('err in getting all set7 matches');
+      return next(err);
     }
 
-    const summoner = await tftSummoner.findOne({summonerName: summonerName});
+    const TFTData = {
+      summonerName: name,
+      summonerLevel: summonerLevel,
+      summonerRank: rankData,
+      puuid: puuid,
+      summonerId: id,
+      accountId: accountId,
+      TFTData: TFTMatchHistory,
+      region: regionId,
+      summonerIcon: profileIconId,
+      otherPlayersMatches: otherPlayersData,
+      allMatchesPlayed: set7MatchesArr,
+      allMatchesPlayedData: [],
+      lastUpdated: Date.now(),
+    };
+
+    const summoner = await tftSummoner.findOne({summonerName: name, region: regionId});
 
     if (summoner === null) {
       await tftSummoner.create({
-        summonerName: summonerName,
-        summonerLevel: summonerLevel,
+        summonerName: name,
         summonerRank: rankData,
+        summonerLevel: summonerLevel,
         summonerIcon: profileIconId,
         TFTMatchHistory: TFTMatchHistory,
         otherPlayersMatches: otherPlayersData,
+        Set7MatchesPlayed: set7MatchesArr,
+        puuid: puuid,
+        region: regionId,
+        summonerId: id,
+        accountId: accountId,
+        lastUpdated: Date.now(),
       });
     }
 
     else {
-      await tftSummoner.findOneAndUpdate({summonerName: summonerName}, 
+      await tftSummoner.findOneAndUpdate({summonerName: summonerName, region: regionId}, 
         {
           $set: {
-            summonerIcon: profileIconId,
-            summonerName: summonerName,
+            summonerName: name,
             summonerRank: rankData,
             summonerLevel: summonerLevel,
+            summonerIcon: profileIconId,
             TFTMatchHistory: TFTMatchHistory,
             otherPlayersMatches: otherPlayersData,
+            Set7MatchesPlayed: set7MatchesArr,
+            puuid: puuid,
+            region: regionId,
+            summonerId: id,
+            accountId: accountId,
+            lastUpdated: Date.now(),
           }
         }
       );
@@ -392,6 +459,50 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
   }
   catch(err) {
     console.log(err, 'err in getDDBoxSummData');
+    return next(err);
+  }
+};
+
+TFTController.addTFTSummMatchesData = async (req, res, next) => {
+
+  const { summonerName, allMatchesPlayed, region, puuid } = res.locals.TFTData;
+
+  try {
+    const summoner = await tftSummoner.findOne({"summonerName": { "$regex" : new RegExp(summonerName, "i")}, "region": region});
+    // function to extract data from match objects that we do have
+    const getObjData = (arrayOfObjs, puuid) => {
+      const tempArr = [];
+      // iterates through array of objects of matches we have in DB
+      for (let i = 0; i < arrayOfObjs.length; i++) {
+        // checks if the current match object is a ranked game
+        if (arrayOfObjs[i].matchData.queue_id === 1100) {
+          // iterates through all 8 players and checks if puuid matches
+          for (let j = 0; j < 8; j++) {
+            if (arrayOfObjs[i].matchData.participants[j].puuid === puuid) {
+              const player = arrayOfObjs[i].matchData.participants[j];
+              tempArr.push({
+                placement: player.placement,
+              });
+            }
+          }
+        }
+      }
+      return tempArr;
+    };
+
+    const set7MatchesInfoArr = [];
+    // iterate through all set 7 matches and see matches that are ranked and cached in db
+    for (let i = 0; i < allMatchesPlayed.length; i++) {
+      const objs = await tftMatches.find({ matchId: { $in: [...summoner.Set7MatchesPlayed[i]]}});
+      const objData = getObjData(objs, puuid);
+      set7MatchesInfoArr.push(objData);
+    }
+    await tftSummoner.findOneAndUpdate({summonerName: summonerName, region: region}, {Set7MatchesPlayedData: set7MatchesInfoArr});
+    res.locals.TFTData.allMatchesPlayedData = set7MatchesInfoArr;
+    return next();
+  }
+  catch(err) {
+    console.log(err, 'err in addTFTSummMatchData');
     return next(err);
   }
 };

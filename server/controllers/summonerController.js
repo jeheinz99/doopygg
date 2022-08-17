@@ -8,7 +8,7 @@ const queueData = require('../../queues.json');
 // HELPER FUNCTIONS ---> USED TO GET DATA FROM SQL DATABASE FROM RIOT API DATA
 
 // maps queue type based on queueId
-const mapQueueType = (queueId, queueData) => {
+const mapQueueType = queueId => {
   let str = '';
   // reverse iterate through the array because most queues are high numbers, lower ids are deprecated
   for (let i = queueData.length-1; i >= 0; i--) {
@@ -133,7 +133,6 @@ summonerController.checkSummData = async (req, res, next) => {
   const { summonerName, regionId } = req.params;
   try {
     const summoner = await lolSummoner.findOne({"summonerName": { "$regex" : new RegExp(summonerName, "i")}, "region": regionId});
-    // console.log(summoner, 'summoner');
     if (summoner !== null) {
       res.locals.summonerData = {
         summonerName: summoner.summonerName,
@@ -485,10 +484,10 @@ summonerController.updateSummData = async (req, res, next) => {
 
 summonerController.addSummMatchesData = async (req, res, next) => {
 
-  const { summonerName, allMatchesPlayed, region} = res.locals.summonerData;
+  const { summonerName, allMatchesPlayed, region } = res.locals.summonerData;
 
   try {
-    const summoner = await lolSummoner.findOne({summonerName: summonerName, region: region});
+    const summoner = await lolSummoner.findOne({"summonerName": { "$regex" : new RegExp(summonerName, "i")}, "region": region});
     // function to extract data from match objects that we do have
     const getObjData = (arrayOfObjs, summonerName) => {
       const tempArr = [];
@@ -522,14 +521,13 @@ summonerController.addSummMatchesData = async (req, res, next) => {
     };
 
     const S12MatchesInfoArr = [];
-    
     // iterate through all s12 ranked matches and see matches that are cached in db
     for (let i = 0; i < allMatchesPlayed.length; i++) {
-      const objs = await lolMatches.find({matchId:{$in: [...summoner.S12MatchesPlayed[i]]}});
+      const objs = await lolMatches.find({ matchId: { $in: [...summoner.S12MatchesPlayed[i]]}});
+      // console.log(objs, 'objs');
       const objData = getObjData(objs, summonerName);
       S12MatchesInfoArr.push(objData);
     }
-
     await lolSummoner.findOneAndUpdate({summonerName: summonerName, region: region}, {S12MatchesPlayedData: S12MatchesInfoArr});
     res.locals.summonerData.allMatchesPlayedData = S12MatchesInfoArr;
     // console.log(res.locals.summonerData.allMatchesPlayedData, 'hi');

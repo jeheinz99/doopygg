@@ -1,12 +1,18 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-  TFTData: [],
   summonerName: '',
-  summonerIcon: 0,
   summonerLevel: 0,
   summonerRank: {},
+  puuid: '',
+  summonerId: '',
+  accountId: '',
+  summonerIcon: 0,
+  TFTData: [],
   otherPlayersMatches: [],
+  allMatchesPlayed: [],
+  allMatchesPlayedData: [],
+  lastUpdated: 0,
   region: '',
 };
 
@@ -19,12 +25,18 @@ const tftReducer = (state = initialState, action) => {
       return Object.assign(
         {},
         state, {
-          TFTData: payload.TFTData,
           summonerName: payload.summonerName,
-          summonerIcon: payload.summonerIcon,
           summonerLevel: payload.summonerLevel,
           summonerRank: payload.summonerRank,
+          puuid: payload.puuid,
+          summonerId: payload.summonerId,
+          accountId: payload.accountId,
+          TFTData: payload.TFTData,
+          summonerIcon: payload.summonerIcon,
           otherPlayersMatches: payload.otherPlayersMatches,
+          allMatchesPlayed: payload.allMatchesPlayed,
+          allMatchesPlayedData: payload.allMatchesPlayedData,
+          lastUpdated: payload.lastUpdated,
           region: payload.region,
         }
       );

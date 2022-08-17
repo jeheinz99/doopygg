@@ -27,6 +27,18 @@
   flex-direction: column;
   align-items: center;
 }
+.tft-ranked-wins-div {
+  display: flex;
+  gap: 1em;
+}
+.tft-ranked-top4-div {
+  display: flex;
+  gap: 1em;
+}
+.tft-ranked-played-div {
+  display: flex;
+  gap: 1em;
+}
 .TFTDataBoxButton {  
   display: flex;
   align-self: flex-end;
