@@ -131,7 +131,7 @@ const SearchBox = () => {
     }
 
     {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'champions' && 
-    <div className="SummonerDataBoxGroup">
+    <div className="SummonerDataBoxGroup" id="SummonerDataBoxGroup-champions">
       {/* <SummonerChampDataBox /> */}
       <div className="searchbox-tabs">
         <button className="searchbox-tab" onClick={() => setCurrBox('matchHistory')}>Matches</button>
@@ -143,7 +143,7 @@ const SearchBox = () => {
     }
 
     {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'live-game' && 
-    <div className="SummonerDataBoxGroup">
+    <div className="SummonerDataBoxGroup" id="SummonerDataBoxGroup-live-game">
       {/* <SummonerChampDataBox /> */}
       <div className="searchbox-tabs">
         <button className="searchbox-tab" onClick={() => setCurrBox('matchHistory')}>Matches</button>

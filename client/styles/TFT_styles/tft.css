@@ -39,6 +39,14 @@
   justify-content: space-evenly;
   width: 100%;
 }
+#SummonerDataBoxGroup-champions {
+  display: flex;
+  width: 100%;
+}
+#SummonerDataBoxGroup-live-game {
+  display: flex;
+  width: 100%;
+}
 .RankedMatchesInfo {
   display: grid;
   grid-gap: 40px;
