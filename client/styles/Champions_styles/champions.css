@@ -1,0 +1,16 @@
+#queue-select, #division-select, #tier-select {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.861);
+  margin-right: 10px;
+}
+#queue-select:focus-visible, #division-select:focus-visible, #tier-select:focus-visible {
+  outline: none;
+}
+#testButton-champions-page {
+  width: 100px;
+  height: 20px;
+}
+#testButton-champions-page:hover {
+  background-color: red;
+}

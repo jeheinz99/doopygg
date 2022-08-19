@@ -230,8 +230,6 @@ const RecentMatchesBox = () => {
 
   const sortedUnits = sortUnits(unitsObj);
   const sortedItems = sortItems(itemsObj);
-
-  console.log(sortedItems, 'sorted items');
   
   const placements = getPlacements(TFTData);
 

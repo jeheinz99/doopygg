@@ -69,7 +69,7 @@ const TFTPageContainer = () => {
   }, []);
 
   return (
-    <div className="OuterSearchBox">
+    <div className="OuterSearchBox" id="TFTOSB">
       <div className="SearchBox" id="welcomeTFT">
         <div id="welcome"> doopy.gg TFT </div>
         <div id="inputSummonerName"> Input your Summoner Name Below </div>

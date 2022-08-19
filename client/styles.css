@@ -122,9 +122,10 @@ html, body {
   color: rgba(255, 255, 255, 0.861);
 }
 .SummonerDataBoxGroup {
-  display: flex;
+  display: grid;
+  grid-template-columns: 30% 70%;
   justify-content: center;
-  gap: 1em;
+  /* gap: 1em; */
   width: 100%;
   height: 100%;
 }
@@ -682,20 +683,13 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 30em;
+  /* width: 30em; */
   /* height: 100%; */
   border-radius: 0.5em;
   background-color: #171A21;
   padding: 10px;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
   border: 2px solid #303b51;
-}
-
-.outerSummonerDataBox h3 {
-  color:rgba(255, 255, 255, 0.80);
-  border-top: 2px solid rgba(255, 255, 255, 0.80);
-  margin: 10px;
-  font-weight: 500;
 }
 .SummonerDataBoxEntries {
   width: 100%;
@@ -704,15 +698,7 @@ html, body {
   gap: 0.5em;
   align-items: flex-start;
 }
-#SDBexpand:hover #topEntries {
-  height: 0;
-  overflow: hidden;
-}
-
-
-
 .champEntryWrapper {
-  display: flex;
   justify-content: center;
   width: 100%;
   background-color: #13161dde;
@@ -722,7 +708,6 @@ html, body {
 }
 .champEntry {
   display: grid;
-  width: 100%;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
 }
@@ -760,7 +745,9 @@ html, body {
 }
 .SummonerDataBoxButton {
   display: flex;
-  align-self: flex-end;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: flex-end;
   border: none;
   background: none;
   color:rgba(255, 255, 255, 0.80);
@@ -817,12 +804,13 @@ html, body {
   width: 37%;
 }
 .Recent20ChampCard {
-  display: flex;
+  display: grid;
+  grid-template-columns: 10% 80%;
+  align-items: center;
   justify-content: center;
   border-radius: 0.2em;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
   border: 2px solid #303b51;
-  align-items: center;
   padding: 5px;
   gap: 0.5em;
 }
@@ -835,20 +823,16 @@ html, body {
 .kdaAvgsR20 #lessthan3kda, .kdaAvgsR20 #between3and5kda, .kdaAvgsR20 #over5kda {
   font-size: 1.2em;
 }
-
-.Recent20ChampCardDiv2box1 {
-  display: flex;
+.Recent20ChampCardDiv2 {
+  display: grid;
+  grid-template-columns: 40% 15% 45%;
   align-items: center;
   width: 100%;
   gap: 0.5em;
 }
-.Recent20ChampCardDiv2box1 p {
-  width: 7em;
+.Recent20ChampCardDiv2 p {
   margin: 0;
   text-align: center;
-}
-.Recent20ChampCardDiv2box1 #below60wr, .Recent20ChampCardDiv2box1 #above60wr, .Recent20ChampCardDiv2box1 #exact100wr {
-  width: 3em;
 }
 .gamesPlayedLast20 {
   display: flex;
@@ -945,6 +929,24 @@ html, body {
   justify-content: space-between;
   align-items: center;
 }
+.DataBoxHeader p {
+  width: 27%;
+  font-size: 1.2em;
+  text-align: center;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.861);
+  border-right: 2px solid rgba(255, 255, 255, 0.80);
+}
+.DataBoxHeader p:hover {
+  filter: invert(20%);
+  cursor: pointer;
+}
+.DataBoxHeader h3 {
+  border-top: 2px solid rgba(255, 255, 255, 0.80);
+  font-weight: 500;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
 #rankedsoloheader {
   padding: 5px;
   border-right: 2px solid rgba(255, 255, 255, 0.80);
@@ -1032,30 +1034,24 @@ h4 {
   top:1px;
 }
 .SummonerInfoBox {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 35% 65%;
   align-items: center;
-  width: 100%;
+  width: 95%;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
   color: rgba(255, 255, 255, 0.861);
   border-top: 2px solid rgba(255, 255, 255, 0.80);
   border-bottom: 2px solid rgba(255, 255, 255, 0.80);
   justify-content: space-around;
   background-color: #171A21;
+  padding: 10px;
 }
 .SummonerInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
-  gap: 2em;
-}
-.rankBorderDiv {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 64px;
-  height: 64px;
+  padding-right: 10px;
+  gap: 1em;
 }
 .SummonerInfo p {
   margin: 0;
@@ -1063,22 +1059,60 @@ h4 {
   text-align: center;
 }
 .SummonerRankInfo {
-  display: flex;
-  gap: 3em;
-  margin-right: 1em;
+  display: grid;
+  width: 100%;
+  grid-template-rows: repeat(2, 1fr);
+}
+.RankedSoloDuo, .RankedFlex {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  align-items: center;
+  padding: 5px;
+  border-left: 2px solid #272d3a;
 }
 .RankedSoloDuo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  border-bottom: 2px solid #272d3a;
 }
-.RankedFlex {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.RankedSoloDuo h2, .RankedSoloDuo p, .RankedFlex h2, .RankedFlex p {
+.RankedSoloDuo h2, .RankedFlex h2 {
+  margin: 0;
   text-align: center;
+  font-size: 0.9em;
+}
+.RankedSoloDuo p, .RankedFlex p {
+  font-size: 0.8em;
+  text-align: center;
+}
+.queue-and-rankicon {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.queue-and-rankicon p {
+  margin: 0;
+}
+#ranked-winbar {
+  width: 90%;
+}
+#ranked-win-winbar {
+  background-color:#2c5e74;
+  border-top-left-radius: 2em;
+  border-bottom-left-radius: 2em;
+}
+#ranked-loss-winbar {
+  border-top-right-radius: 2em;
+  border-bottom-right-radius: 2em;
+  background-color: #773424;
+}
+.ranked-win-bar-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.ranked-win-bar-div p span {
+  color: rgba(255, 255, 255, 0.65);
 }
 #summonerIcon {
   height: 128px;
@@ -1087,8 +1121,8 @@ h4 {
   border: 2px solid #303b51;
 }
 #rankIcon {
-  height: 64px;
-  width: 64px;
+  height: 54px;
+  width: 54px;
 }
 #unrankedIcon {
   height: 48px;
@@ -1229,39 +1263,25 @@ h4 {
   gap: 1em;
 }
 .OtherPlayersRunes {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 2em;
   width: 95%;
   border-top: 1px solid #272d3a;
   padding: 10px;
 }
 .otherPlayerRunesBox {
-  display: flex;
+  display: grid;
+  grid-template-columns: 10% 30% 10% 20% 20% 10%;
   width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+  align-items: center;
+  justify-items: center;
   justify-content: flex-start;
   border: 2px solid #303b51;
   border-radius: 0.2em;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 5);
-}
-.otherPlayersRunesDiv1 {
-  display: flex;
-  align-items: center;
-  margin-left: 5px;
-}
-.otherPlayersRunesDiv1 p {
-  margin: 0;
-  width: 7em;
-  margin-left: 5px;
-  text-align: left;
-  font-size: 0.8em;
-  overflow: hidden;
-}
-.otherPlayersRunesDiv2 {
-  justify-content: space-evenly;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 0.5em;
 }
 .keystoneRunesDD {
   width: 54px;
@@ -1279,7 +1299,6 @@ h4 {
 .shardsDD {
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
 }
 .shardDD {
   width: 24px;
@@ -1301,18 +1320,10 @@ h4 {
   width: 48px;
   height: 48px;
 }
-#otherPlayers1 {
-  display: flex;
-  flex-direction: column;
+#otherPlayers1, #otherPlayers2 {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
   align-items: center;
-  gap: 1em;
-  width: 100%;
-}
-#otherPlayers2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 1em;
   width: 100%;
 }
@@ -1788,11 +1799,19 @@ h4 {
   gap: 2em;
   /* align-items: center; */
 }
+.test-two {
+  width: 93%;
+  border-radius: 0.5em;
+  background-color: #171A21;
+  padding: 10px;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
+  border: 2px solid #303b51;
+}
 .recent-20-played-box {
   display: flex;
+  width: 93%;
   flex-direction: column;
   gap: 0.5em;
-  width: 30em;
   padding: 10px;
   border: 2px solid #303b51;
   background-color: #171A21;
@@ -1819,7 +1838,7 @@ h4 {
   text-align: center;
 }
 .recent-20-played-header {
-  width: 50%;
+  width: 54%;
   border-top: 2px solid rgba(255, 255, 255, 0.861);
 }
 .recent-20-played-header p {
@@ -1831,7 +1850,7 @@ h4 {
 .recent-played-with-entry {
   display: grid;
   align-items: center;
-  grid-template-columns: 55% 15% 15% 15%;
+  grid-template-columns: 55% 15% 15% 18%;
   border: 2px solid #303b51;
   border-radius: 0.2em;
   box-shadow: 1px 1px 4px rgb(0 0 0);

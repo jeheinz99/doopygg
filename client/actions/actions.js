@@ -83,9 +83,14 @@ export const updateTFTData = summonerName => async dispatch => {
   dispatch(addTFTDataActionCreator(responseTFTUpdateData.data));
 };
 
-export const getChampionData = championName => async dispatch => {
-  return 'hi';
-  // this response returns the champion Data
+export const getChampionData = () => async dispatch => {
+  const region = document.getElementById('region-select').value;
+  const queue = document.getElementById('queue-select').value;
+  const tier = document.getElementById('tier-select').value;
+  const division = document.getElementById('division-select').value;
+  const responseChampData = await axios.get(`/champions/${region}/${queue}/${tier}/${division}`);
+  // console.log('CHAMP TEST response from back-end', responseChampData.data);
+  // dispatch(addChampionDataActionCreator(responseChampData.data));
 };
 
 export const testAsyncFunc = () => async dispatch => {

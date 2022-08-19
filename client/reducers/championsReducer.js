@@ -1,8 +1,8 @@
 import * as types from '../constants/actionTypes.js';
 
 const initialState = {
-  championName: '',
-}
+  data: {},
+};
 
 const championsReducer = (state = initialState, action) => {
 
@@ -10,6 +10,13 @@ const championsReducer = (state = initialState, action) => {
 
   switch(type) {
     case types.ADD_CHAMPION_DATA:
+
+      return Object.assign(
+        {}, 
+        state, {
+          data: payload.data,
+        }
+      );
 
   default: {
     return state;

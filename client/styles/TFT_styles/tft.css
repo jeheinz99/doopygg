@@ -18,18 +18,32 @@
 #SearchBoxInputTFT:hover {
   background-color: #22212174;
 }
-
 #TFTSummonerInfoBox {
-  gap: 2em;
+  display: grid;
+  width: 60%;
+  grid-template-columns: 20% 30% 45%;
+}
+#TFT-SI {
+  padding: 0;
 }
 .TFTRankedSolo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+.TFTRankedSolo h2, .TFTDoubleUp h2 {
+  font-size: 1em;
+}
+#TFTRankInfo {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
 .RankedMatchesInfo {
   display: grid;
   grid-gap: 40px;
+  height: 100%;
+  justify-items: center;
   grid-template-columns: auto auto;
 }
 .tft-ranked-wins-div {
@@ -49,13 +63,16 @@
 }
 .tft-ranked-summoner-box p {
   display: flex;
-  gap: 5em;
+  margin: 0;
   justify-content: space-between;
-  margin-top: 10%;
-  margin-bottom: 5%;
 }
 .tft-ranked-half {
-  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 100%;
+  justify-items: space-evenly;
+  justify-content: space-evenly;
 }
 #tftPlayedBar {
   height: 7px;
@@ -268,6 +285,7 @@
   flex-direction: column;
   width: 100%;
   justify-content: center;
+  align-content: center;
   align-items: center;
 }
 .TFTMatchBoxes {
@@ -311,6 +329,7 @@
 }
 .TFTMatchGroup2 {
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
 }
 .TFTMatchGroup2Div2 {
@@ -416,22 +435,26 @@
   color: purple;
 }
 #Unit-4 {
-  border-color: orangered;
+  border-color: purple;
 }
 #star-Unit-4 {
-  color: orangered;
+  color: purple;
+  /* color: orangered; */
 }
 #Unit-5 {
-  border-color: gold;
+  /* border-color: gold; */
+  border-color: orangered;
 }
 #star-Unit-5 {
-  color: gold;
+  color: orangered;
+  /* color: gold; */
 }
 #Unit-6 {
-  border-color: red;
+  border-color: gold;
+  /* border-color: red; */
 }
 #star-Unit-6 {
-  color: red;
+  color: gold;
 }
 #Unit-8 {
   border-color: rgb(8, 213, 145);
@@ -581,6 +604,7 @@
   align-items: center;
   width: 100%;
   gap: 10%;
+  margin-bottom: 5px;
   border-left: 2px solid rgba(255, 255, 255, 0.80);
 }
 .PlacementInfoDiv1 {

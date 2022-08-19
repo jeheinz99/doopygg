@@ -1,5 +1,5 @@
 import React from 'react';
-import { testAsyncFunc } from '../actions/actions';
+import { getChampionData } from '../actions/actions';
 import { useDispatch } from 'react-redux';
 import ChampionsHeader from '../components/ChampionsComponents/ChampionsHeader';
 
@@ -8,7 +8,7 @@ const ChampPageContainer = () => {
   const dispatch = useDispatch();
 
   const testFunc = async () => {
-    dispatch(testAsyncFunc());
+    dispatch(getChampionData());
   };
 
   return (
@@ -19,7 +19,7 @@ const ChampPageContainer = () => {
 
       <div className="champ-stats-mainpage">
          <ChampionsHeader />
-         {<button className="testButton" onClick={() => testFunc()}></button>}
+         {/* <button id="testButton-champions-page" onClick={() => testFunc()}></button> */}
       </div>
 
     </div>

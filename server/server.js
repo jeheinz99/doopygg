@@ -16,6 +16,7 @@ const summonerController = require('./controllers/summonerController');
 const valorantController = require('./controllers/valorantController');
 const TFTController = require('./controllers/TFTController');
 const leaderboardController = require('./controllers/leaderboardController');
+const championsController = require('./controllers/championsController');
 
 // parsing request body
 app.use(express.json());
@@ -104,6 +105,15 @@ app.use('/valorant', valorantRouter);
 valorantRouter.get('/:riotId/:tagLine', valorantController.valData, (req, res) => {
   // console.log(res.locals.valData);
   return res.status(200).send(res.locals.valData);
+});
+
+// CHAMPIONS ENDPOINT
+// router handler to ahndle all requests to /champions endpoint
+const championsRouter = express.Router();
+app.use('/champions', championsRouter);
+championsRouter.get('/:regionId/:queue/:tier/:division', championsController.getChampionData, (req, res) => {
+  // console.log(res.locals.championData, 'res.locals.championData in server.js');
+  return res.status(200).send(res.locals.championData);
 });
 // catch-all route handler for any requests to an unknown route
 // app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
