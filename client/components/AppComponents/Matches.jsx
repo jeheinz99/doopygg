@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import DropDownBox from './DropDown/DropDownBox.jsx';
 
 import { AiFillCaretDown } from 'react-icons/ai';
 import { AiFillCaretUp } from 'react-icons/ai';
+import { useEffect } from 'react';
 
 
 const Matches = props => {
@@ -10,7 +12,7 @@ const Matches = props => {
   const { matchId, gameEnd, matchNum, otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
   
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
-
+  const summonerName = useSelector(state => state.summoners.summonerName);
   // function that compares todays unix timestamp to the match timestamp
   const getTimeAgo = gameEndTime => {
     const gameDateStamp = new Date(gameEndTime);
@@ -46,6 +48,9 @@ const Matches = props => {
   const KDA = ((kills + assists) / deaths).toFixed(2);
   
   const [summonerOpen, setOpen] = useState(false);
+  useEffect(() => {
+    setOpen(false);
+  }, [summonerName])
   const [hidden, setHidden] = useState(false);
 
   return (
@@ -141,8 +146,6 @@ const Matches = props => {
         <div className="MatchGroupButton">
           {!summonerOpen && <button className="SummonerDataBoxButton" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretDown /></button>}
           {summonerOpen && <button className="SummonerDataBoxButton" onClick={ () => setOpen(!summonerOpen) }><AiFillCaretUp /></button>}
-          {/* {summonerOpen && hidden && <button className="SummonerDataBoxButton" onClick={ () => setHidden(!hidden) }><AiFillCaretDown /></button>}
-          {summonerOpen && !hidden && <button className="SummonerDataBoxButton" onClick={ () => setHidden(!hidden) }><AiFillCaretUp /></button>} */}
         </div>
       </div>
       <div className="DropDownBoxes">

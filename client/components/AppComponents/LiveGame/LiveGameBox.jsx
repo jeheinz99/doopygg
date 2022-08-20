@@ -23,20 +23,28 @@ const LiveGameBox = () => {
         setLiveGameData(null);
       }
     };
+    if (liveGameData) setLiveGameData('loading');
     getLiveGameData();
-  }, []);
+  }, [summonerName]);
 
   const team1Bans = [];
   const team2Bans = [];
   const team1 = [];
   const team2 = [];
+  
   if (liveGameData !== null && liveGameData !== 'loading') {
     // loop through players in match
     for (let i = 0; i < liveGameData.playerInfo.length; i++) {
       if (liveGameData.playerInfo[i].team === 100) { 
         team1.push(<LiveGamePlayerBox
         key={`live-player-${liveGameData.playerInfo[i].summonerName}`}
+        id={`matchBox-${i}`}
         championId={liveGameData.playerInfo[i].championId}
+        division={liveGameData.playerInfo[i].division}
+        losses={liveGameData.playerInfo[i].losses}
+        wins={liveGameData.playerInfo[i].wins}
+        lp={liveGameData.playerInfo[i].lp}
+        tier={liveGameData.playerInfo[i].tier}
         runes={liveGameData.playerInfo[i].runes}
         summonerName={liveGameData.playerInfo[i].summonerName}
         summonerSpells={liveGameData.playerInfo[i].summonerSpells}
@@ -45,7 +53,13 @@ const LiveGameBox = () => {
       else {
         team2.push(<LiveGamePlayerBox
         key={`live-player-${liveGameData.playerInfo[i].summonerName}`}
+        id={`matchBox-${i}`}
         championId={liveGameData.playerInfo[i].championId}
+        division={liveGameData.playerInfo[i].division}
+        losses={liveGameData.playerInfo[i].losses}
+        wins={liveGameData.playerInfo[i].wins}
+        lp={liveGameData.playerInfo[i].lp}
+        tier={liveGameData.playerInfo[i].tier}
         runes={liveGameData.playerInfo[i].runes}
         summonerName={liveGameData.playerInfo[i].summonerName}
         summonerSpells={liveGameData.playerInfo[i].summonerSpells}
@@ -55,10 +69,10 @@ const LiveGameBox = () => {
     // loop through (usually 10) bans
     for (let i = 0; i < liveGameData.bans.length; i++) {
       if (liveGameData.bans[i].teamId === 100) {
-        team1Bans.push(<LiveGameBansBox championId={liveGameData.bans[i].championId}/>);
+        team1Bans.push(<LiveGameBansBox key={`ban-${i}`} championId={liveGameData.bans[i].championId}/>);
       }
       else {
-        team2Bans.push(<LiveGameBansBox championId={liveGameData.bans[i].championId}/>);
+        team2Bans.push(<LiveGameBansBox key={`ban-${i}`} championId={liveGameData.bans[i].championId}/>);
       }
     }
   }
@@ -83,7 +97,6 @@ const LiveGameBox = () => {
       {liveGameData !== null && liveGameData !== 'loading' &&
       <div className="in-live-game-box">
         <p className="one-temp"> {`${summonerName}`} is currently in-game!</p>
-        <p className="one-temp"> But this tab is still currently under development.</p>  
         <div className="lg-queue-bg-div">
           <p id="lg-queue-header">{liveGameData.queueType}</p>
         </div>

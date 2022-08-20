@@ -674,22 +674,60 @@ summonerController.getLiveGameData = async (req, res, next) => {
     const { data } = getLiveGameData;
     // console.log(data, 'data for live game');
     
-    // gets queue type (ranked, normals, aram, etc)
     const queueMap = await mapQueueType(data.gameQueueConfigId, queueData);
-    // iterates through participants to get their summoners, champions, profileIcons, names, and runes
+
+    // extract all 10 players encrypted summoner ids from response and send request to league-v4 to get rank data
     const playerInfoArr = [];
     for (let i = 0; i < data.participants.length; i++) {
       const player = data.participants[i];
-      playerInfoArr.push({
-        summonerSpells: [player.spell1Id, player.spell2Id],
-        championId: player.championId,
-        // profileIconId: player.profileIconId,
-        summonerName: player.summonerName,
-        runes: player.perks,
-        queue: queueMap,
-        team: player.teamId,
+      const newObj = {};
+      const getRankData = await axios.get(`https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-summoner/${data.participants[i].summonerId}?api_key=${process.env.api_key}`,
+      {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+          "Accept-Language": "en-US,en;q=0.9",
+          "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+          "Origin": "https://developer.riotgames.com"
+        }
       });
+
+      for (let i = 0; i < getRankData.data.length; i++) {
+        if (getRankData.data[i].queueType === "RANKED_SOLO_5x5") {
+          newObj.summonerName = getRankData.data[i].summonerName;
+          newObj.tier = getRankData.data[i].tier;
+          newObj.division = getRankData.data[i].rank;
+          newObj.lp = getRankData.data[i].leaguePoints;
+          newObj.wins = getRankData.data[i].wins;
+          newObj.losses = getRankData.data[i].losses;
+        }
+      }
+
+      const summSpellMap = await mapSummonerIcons([player.spell1Id, player.spell2Id]); // 2 items total
+      // inserting runes in format of -> keystone, primary runes 1-2-3, 
+      // primary tree style, secondary tree style, secondary runes 1-2, shards 1-2-3
+      const runesMap = await mapRuneIcons(
+        [
+          player.perks.perkIds[0],
+          player.perks.perkIds[1],
+          player.perks.perkIds[2],
+          player.perks.perkIds[3],
+          player.perks.perkStyle,
+          player.perks.perkSubStyle,
+          player.perks.perkIds[4],
+          player.perks.perkIds[5],
+          player.perks.perkIds[8],
+          player.perks.perkIds[7],
+          player.perks.perkIds[6],
+        ]
+      );
+
+      newObj.summonerSpells = summSpellMap;
+      newObj.championId = player.championId;
+      newObj.runes = runesMap;
+      newObj.team = player.teamId;
+      playerInfoArr.push(newObj);
     }
+
     const liveGameData = {
       queueType: queueMap,
       bans: data.bannedChampions,

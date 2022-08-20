@@ -36,6 +36,10 @@ const DropDownBox = props => {
       lolSetDDboxData(res.data.otherPlayers);
       setTimelineData(res.data.timelineData);
     };
+    if (lolDDboxData) {
+      lolSetDDboxData([]);
+      setTimelineData({});
+    }
     getData();
   }, [summonerName]);
 

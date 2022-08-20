@@ -16,7 +16,7 @@ const White2 = props => {
     <div className="TreeBox">
 
     <div className="Keystone">
-      {/* <img className="TreeStyle" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/7203_whimsy.png"/> */}
+      <img className="TreeStyle" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/7203_whimsy.png"/>
     </div>
 
     <div className="minorRuneRow" id="White">

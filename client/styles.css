@@ -841,11 +841,9 @@ html, body {
 }
 #gamesPlayedLast20ptag1 {
   font-size: 0.9em;
-  width: 5em;
 }
 #gamesPlayedLast20ptag2 {
   font-size: 0.75em;
-  width: 5em;
 }
 
 #championIconRecent20 {
@@ -863,7 +861,8 @@ html, body {
 #above60wr {
   color: #C42402;
 }
-#below60wr {
+#above70wr {
+  color: #e18a1f;
 }
 
 #over5kda {
@@ -1163,6 +1162,9 @@ h4 {
   width: 48px;
   height: 48px;
 }
+.Keystone {
+  height: 48px;
+}
 .RunesInfoDD {
   width: 100%;
   display: flex;
@@ -1186,14 +1188,14 @@ h4 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1em;
+  gap: 1.7em;
 }
 .TreeDiv {
   width: 90%;
   border: 3px solid #272d3a;
   border-radius: 0.2em;
   padding: 0.5em;
-  height: 100%;
+  /* height: 100%; */
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
 }
 #div-8000 {
@@ -1437,6 +1439,7 @@ h4 {
 }
 #runes3 {
   height: 50%;
+  background-color: #16161dce;
 }
 
 .DDbox {
@@ -1592,15 +1595,6 @@ h4 {
   height: 64px;
   width: 64px;
 }
-
-/* .championsInfoEntry4, .championsInfoEntry5, .championsInfoEntry6, .championsInfoEntry7 {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-}
-.championsInfoEntry4 p {
-  margin: 0;
-} */
 .championsInfoEntry5 p span {
   font-size: 0.9em;
   color: rgba(207, 205, 205, 0.8);
@@ -1625,9 +1619,8 @@ h4 {
 }
 .lg-teams {
   display: flex;
-  flex-direction: row;
   width: 90%;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 1em;
   padding: 5px;
@@ -1639,23 +1632,78 @@ h4 {
   justify-content: center;
   gap: 0.5em;
 }
-#lg-champicon {
+#lg-champicon-100 {
   border-radius: 0.2em;
-  /* border: 1px solid #303b51; */
+  border: 1px solid #375eab;
+  width: 48px;
+  height: 48px;
+}
+#lg-champicon-200 {
+  border-radius: 0.2em;
+  border: 1px solid #ab374a;
   width: 48px;
   height: 48px;
 }
 #lg-summoner-name {
-  width: 10em;
+  margin: 0;
+  font-size: 0.8em;
+  text-align: center;
+}
+#lg-runes-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.861);
+  background: none;
+  border: none;
+  font-family: Kanit;
+}
+#lg-runes-button:hover {
+  filter: invert(20%);
+  cursor: pointer;
+}
+.live-game-wrapper {
+  width: 100%;
 }
 .live-game-player {
-  display: flex;
+  display: grid;
+  grid-template-columns: 15% 20% 25% 20% 18.5%;
   width: 100%;
   gap: 0.2em;
   padding: 5px;
   border: 2px solid #303b51;
-  width: 35em;
   align-items: center;
+}
+.lg-rank-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.lg-rank-div p {
+  font-size: 0.7em;
+  margin: 0;
+}
+.lg-winrate-div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+}
+.lg-winrate-div p {
+  text-align: center;
+  font-size: 0.8em;
+  margin: 0;
+}
+.lg-winrate-div p span {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.6);
+}
+#lg-rank-icon {
+  width: 48px; 
+  height: 48px;
 }
 #lg-team-100 {
   background: rgb(19, 28, 43);
@@ -1665,12 +1713,18 @@ h4 {
 
 }
 .lg-team-bans {
-  width: 96%;
+  width: 100%;
   display: flex;
   align-items: center;
   border: 2px solid #303b51;
+  background-color: #16161bce;
   padding: 5px;
   gap: 1.5em;
+}
+.lg-team-bans p {
+  border-left: 2px solid rgba(255, 255, 255, 0.861);
+  padding-left: 10px;
+  /* text-decoration: underline; */
 }
 .lg-ban {
   width: 48px;
@@ -1689,6 +1743,89 @@ h4 {
   font-size: 1.2em;
   margin-left: 7px;
 }
+#lg-win-loss-bar {
+  height: 7px;
+  gap: 0;
+}
+#lg-winbar {
+  height: 100%;
+  border: 1px solid #272d3a;
+  border-right: none;
+}
+#lg-winbar-above60wr {
+  height: 100%;
+  border: 1px solid #272d3a;
+  border-right: none;
+  background-color: #C42402;
+}
+#lg-winbar-above70wr {
+  height: 100%;
+  border: 1px solid #272d3a;
+  border-right: none;
+  background-color: #e18a1f;
+}
+#lg-winbar-exact100wr {
+  height: 100%;
+  border: 1px solid #272d3a;
+  border-right: none;
+  background-color: #FFC300;
+}
+#lg-lossbar {
+  border: 1px solid #272d3a;
+  border-left: none;
+  background-color: #16161b;
+  height: 100%;
+}
+.lg-icons-div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 5px;
+}
+.lg-summspells {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+.lg-runes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.lg-summ-spell {
+  width: 24px;
+  height: 24px;
+  border-radius: 0.2em;
+  border: 1px solid #303b51;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0);
+}
+#lg-rune-style-icon {
+  width: 20px;
+  height: 20px;
+  filter: drop-shadow(0 0 0.3rem rgb(11, 10, 11));
+}
+#lg-keystone-icon {
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 0 0.3rem rgb(11, 10, 11));
+}
+.lg-runes-dropdown-box {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 2px solid #303b51;
+  background-color: #16161bce;
+  border-top: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  width: 100%;
+}
+
 .Match-timeline-main {
   display: flex;
   flex-direction: column;
