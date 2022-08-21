@@ -124,7 +124,6 @@ html, body {
   display: grid;
   grid-template-columns: 30% 70%;
   justify-content: center;
-  /* gap: 1em; */
   width: 100%;
   height: 100%;
 }
@@ -1396,16 +1395,10 @@ h4 {
   border-radius: 0.2em;
   padding: 5px;
 }
-#upperDDbox img {
+#upperDDbox img, #lowerDDbox img {
   width: 40px;
   height: 40px;
   margin: 1px;
-}
-#lowerDDbox img {
-  width: 40px;
-  height: 40px;
-  margin: 1px;
-
 }
 #temp {
   width: 64px;
@@ -1442,6 +1435,10 @@ h4 {
   margin: 0 20px;
 }
 #runes3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 50%;
   background-color: #16161dce;
 }
@@ -1538,6 +1535,7 @@ h4 {
   color: rgba(255, 255, 255, 0.80);
   text-align: center;
   grid-template-columns: 13% 10% repeat(9, 1fr);
+  /* grid-template-columns: 18% 18% 12% 1fr 10% repeat(6, 1fr); */
   list-style: none;
   margin: 0;
 }
@@ -1545,8 +1543,7 @@ h4 {
   text-align: center;
 }
 #ci-winbar {
-  height: 15px;
-  font-size: 1.5em;
+  height: 8px;
 }
 .ci-kda-tag {
   font-size: 1.2em;
@@ -1938,9 +1935,13 @@ h4 {
   flex-direction: column;
   justify-content: flex-start;
   gap: 2em;
+  align-items: flex-end;
   /* align-items: center; */
 }
 .test-two {
+  /* display: flex; */
+  /* flex-direction: column; */
+  height: 100%;
   width: 93%;
   border-radius: 0.5em;
   background-color: #171A21;
@@ -1978,8 +1979,8 @@ h4 {
   text-align: center;
 }
 .recent-20-played-header {
-  width: 54%;
-  border-top: 2px solid rgba(255, 255, 255, 0.861);
+  width: 100%;
+  /* border-top: 2px solid rgba(255, 255, 255, 0.861); */
 }
 .recent-20-played-header p {
   margin: 0;
@@ -2079,4 +2080,262 @@ h4 {
 }
 
 @media only screen and (max-width: 1400px) {
+  .SummonerDataBoxGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-template-columns: none;
+    justify-content: center;
+    width: 100%;
+    gap: 1em;
+  }
+  .test-one {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  html {
+    font-size: 0.9em;
+  }
+  #championsInfoEntry2 p {
+    font-size: 0.8em;
+  }
+  #championsInfoEntry1 {
+    font-size: 0.7em;
+  }
+  #championsInfoEntry3 p {
+    font-size: 0.85em;
+  }
+  #ci-wl-percent {
+    font-size: 0.8em;
+  }
+  #summonerIcon {
+    height: 96px;
+    width: 96px;
+  }
+  #championIcon {
+    width: 56px;
+    height: 56px;
+  }
+  .keystoneRunesDD {
+    width: 48px;
+    height: 48px;
+  }
+  .otherPlayerRunesBox {
+    display: grid;
+    grid-template-columns: 10% 25% 12% 27% 18% 9%;
+  } 
+}
+@media only screen and (max-width: 1100px) {
+  .match-timeline-skills-div {
+    gap: 0.5em;
+  }
+  .skill-box {
+    width: 24px;
+    height: 24px
+  }
+  .timeline-item-box {
+    width: 24px;
+    height: 24px;
+  }
+  #NavbarBox {
+    background: #171A21;
+    transition: 1s !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.861);
+  }
+  #NavbarHeader {
+    opacity: 1;
+  }
+  #welcome {
+    opacity: 0;
+    margin-top: 4%;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .TeamInfoTextDD1, .TeamInfoTextDD2 {
+    grid-template-columns: 58.5% 10% 10% 7%;
+  }
+  #ci-profile-icon {
+    width: 96px;
+    height: 96px;
+  }
+  .otherPlayerRunesBox p {
+    font-size: 0.8em;
+  }
+  #champIconRunesDD {
+    width: 40px;
+    height: 40px;
+  }
+  .champEntry {
+
+  }
+  #item0, #item1, #item2, #item3, #item4, #item5, #item6 {
+    width: 24px;
+    height: 24px;
+  }
+  #championIcon {
+    width: 48px;
+    height: 48px;
+  }
+  #summonerSpellIcon1, #summonerSpellIcon2 {
+    width: 20px;
+    height: 20px;
+  }
+  #keystoneIcon {
+    width: 24px;
+    height: 24px;
+  }
+  #secondaryRuneIcon {
+    width: 20px;
+    height: 20px;
+  }
+  .leftSideGroup p, .rightSideGroup p {
+    font-size: 0.9em;
+  }
+  .Matches {
+    grid-template-columns: 15% 24% 19% 39% 3%;
+  }
+  .MatchGroup1 {
+    font-size: 0.9em;
+  }
+  .MatchGroup2 {
+    font-size: 0.9em;
+  }
+  #temp {
+    width: 48px;
+    height: 48px;
+  }
+  #upperDDbox img, #lowerDDbox img {
+    width: 32px;
+    height: 32px;
+  }
+  .inactiveKeystone {
+    width: 40px;
+    height: 40px;
+  }
+  .activeKeystone {
+    width: 40px;
+    height: 40px;
+  }
+  .inactiveRune {
+    width: 24px;
+    height: 24px;
+  }
+  .activeRune {
+    width: 24px;
+    height: 24px;
+  }
+  .Team1DropDownBox {
+    grid-template-columns: 8% 5% 5% 22% 15% 10% 10% 6% 20%;
+  }
+  .Team1DropDownBox p {
+    font-size: 0.8em;
+  }
+  .keystoneRunesDD {
+    width: 40px;
+    height: 40px;
+  }
+  .minorRuneDD {
+    width: 28px;
+    height: 28px;
+  }
+  .shardDD {
+    width: 20px;
+    height: 20px;
+  }
+  #Player0Team1Keystone {
+    height: 20px;
+    width: 20px;
+  }
+  #Player0Team1SecondaryTree {
+    height: 14px;
+    width: 14px;
+  }
+  #Player0Champion {
+    width: 28px;
+    height: 28px;
+  }
+  #summonerSpellIcon1DropDown, #summonerSpellIcon2DropDown {
+    width: 16px;
+    height: 16px;
+  }
+  #item0DD, #item1DD, #item2DD, #item3DD, #item4DD, #item5DD {
+    width: 20px;
+    height: 20px;
+  }
+  .ChampionsInfoBox ul {
+    width: 98.4%;
+    grid-template-columns: 15% 13% 10% 1fr 10% repeat(6, 1fr);
+    font-size: 0.9em;
+  }
+  .championsInfoEntryBox {
+    grid-template-columns: 15% 13% 10% 1fr 10% repeat(6, 1fr);
+  }
+  #champions-entry-icon {
+    width: 48px;
+    height: 48px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .champEntry {
+    font-size: 0.8em;
+    grid-template-columns: 35% repeat(3, 1fr);
+  }
+  #ci-profile-icon {
+    width: 64px;
+    height: 64px;
+  }
+  .champEntryDiv1 p {
+    font-size: 0.9em;
+  }
+  .recent-20-played-box {
+    font-size: 0.9em;    
+  }
+  .DataBoxHeader {
+    font-size: 0.85em;
+  }
+  .queue-and-rankicon {
+    font-size: 0.9em;
+  }
+  .RunesInfoMainWrap {
+    flex-direction: column;
+    align-items: center;
+  }
+  .keystoneRunesDD {
+    width: 32px;
+    height: 32px;
+  }
+  .minorRuneDD {
+    width: 24px;
+    height: 24px;
+  }
+  .shardDD {
+    width: 18px;
+    height: 18px;
+  }
+  .otherPlayerRunesBox {
+    font-size: 0.9em;
+  }
+  .ChampionsInfoBox ul {
+    width: 98.2%;
+    grid-template-columns: 15% 15% 10% 1fr 10% repeat(6, 1fr);
+    font-size: 0.75em;
+  }
+  .championsInfoEntryBox {
+    grid-template-columns: 15% 15% 10% 1fr 10% repeat(6, 1fr);
+    font-size: 0.9em;
+  }
+  #champions-entry-icon {
+    width: 40px;
+    height: 40px;
+  }
+  #championIcon {
+    width: 40px;
+    height: 40px;
+  }
+}
+@media only screen and (max-width: 420px) {
+
 }
