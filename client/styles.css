@@ -126,6 +126,7 @@ html, body {
   justify-content: center;
   width: 100%;
   height: 100%;
+  gap: 1em;
 }
 .headerinfo {
   display: flex;
@@ -1941,7 +1942,6 @@ h4 {
 .test-two {
   /* display: flex; */
   /* flex-direction: column; */
-  height: 100%;
   width: 93%;
   border-radius: 0.5em;
   background-color: #171A21;
