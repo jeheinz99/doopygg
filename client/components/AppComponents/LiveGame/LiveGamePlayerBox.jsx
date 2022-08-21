@@ -32,11 +32,18 @@ const LiveGamePlayerBox = props => {
 
         <p id="lg-summoner-name">{summonerName}</p>
 
+        {tier === undefined ? 
+        <div className="lg-rank-div">
+          <img id="lg-rank-icon" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/unranked.png"/>
+          <p> Unranked </p>
+        </div> :
         <div className="lg-rank-div">
           <img id="lg-rank-icon" src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/${tier.toLowerCase()}.png`}/>
           <p> {tier} {division} {lp}LP </p>
-        </div>
-
+        </div>}
+        
+        {tier === undefined ?
+        <p> - </p> :
         <div className="lg-winrate-div">
           {winPercent < 60 && !isNaN(winPercent) && <p>{winPercent}% <span> {`(${played} Played)`}</span></p>}
           {winPercent >= 60 && winPercent < 70 && !isNaN(winPercent) && <p id="above60wr">{winPercent}% <span> {`(${played} Played)`} </span></p>}
@@ -49,7 +56,7 @@ const LiveGamePlayerBox = props => {
             {isNaN(winPercent) && <div className="winBar" id="lg-winbar-exact100wr" style={{width: `${winPercent}%`}}></div>}
             <div className="lossBar" id="lg-lossbar" style={{width: `${100 - winPercent}%`}}></div>
           </div>
-        </div>
+        </div>}
 
         <button id="lg-runes-button" onClick={() => setOpen(!open)}> Runes </button>
       </div>

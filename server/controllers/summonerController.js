@@ -693,7 +693,6 @@ summonerController.getLiveGameData = async (req, res, next) => {
 
       for (let i = 0; i < getRankData.data.length; i++) {
         if (getRankData.data[i].queueType === "RANKED_SOLO_5x5") {
-          newObj.summonerName = getRankData.data[i].summonerName;
           newObj.tier = getRankData.data[i].tier;
           newObj.division = getRankData.data[i].rank;
           newObj.lp = getRankData.data[i].leaguePoints;
@@ -701,7 +700,8 @@ summonerController.getLiveGameData = async (req, res, next) => {
           newObj.losses = getRankData.data[i].losses;
         }
       }
-
+      newObj.summonerName = player.summonerName;
+      
       const summSpellMap = await mapSummonerIcons([player.spell1Id, player.spell2Id]); // 2 items total
       // inserting runes in format of -> keystone, primary runes 1-2-3, 
       // primary tree style, secondary tree style, secondary runes 1-2, shards 1-2-3
