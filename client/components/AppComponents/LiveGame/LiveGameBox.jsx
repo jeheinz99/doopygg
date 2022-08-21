@@ -23,7 +23,7 @@ const LiveGameBox = () => {
         setLiveGameData(null);
       }
     };
-    if (liveGameData) setLiveGameData('loading');
+    setLiveGameData('loading');
     getLiveGameData();
   }, [summonerName]);
 

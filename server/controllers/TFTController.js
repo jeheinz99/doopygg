@@ -9,16 +9,18 @@ const queueData = require('../../queues.json');
 
 // maps queue type based on queueId
 const mapQueueType = queueId => {
-  let str = '';
+  if (queueId === 1100) return 'Ranked TFT';
+  else if (queueId === 1090) return 'Standard TFT';
+  else if (queueId === 1160) return 'Double Up';
+  
+  // let str = '';
   // reverse iterate through the array because most queues are high numbers, lower ids are deprecated
   for (let i = queueData.length-1; i >= 0; i--) {
     if (queueId === queueData[i].queueId) {
-      str = queueData[i].description;
-      str = str.replace(' games', '');
-      str = str.replace('5v5 ', '');
-      return str;
+      return queueData[i].description;
     }
   }
+  return 'TFT';
 };
 
 // maps augment icon based on augment name passed in
@@ -275,6 +277,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
           const player = matchData[i].participants[j];
           TFTMatchHistory.push({
             gameEnd: (matchData[i].game_datetime - Math.round(matchData[i].game_length)*1000),
+            gameMode: matchData[i].queue_id,
             matchLength: matchData[i].game_length,
             setNumber: matchData[i].tft_set_number,
             augments: player.augments,
@@ -322,11 +325,13 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       const littleLegendMap = await mapLittleLegendIcons(TFTMatchHistory[i].companion);
       const unitsMap = await mapUnitIcons(TFTMatchHistory[i].units);
       const traitsMap = await mapTraitIcons(TFTMatchHistory[i].traits);
+      const queueMap = await mapQueueType(TFTMatchHistory[i].gameMode);
 
       TFTMatchHistory[i].traits = traitsMap;
       TFTMatchHistory[i].units = unitsMap;
       TFTMatchHistory[i].augments = augmentsMap;
       TFTMatchHistory[i].companion = littleLegendMap;
+      TFTMatchHistory[i].gameMode = queueMap;
 
     };
 

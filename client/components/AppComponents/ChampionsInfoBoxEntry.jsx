@@ -32,15 +32,12 @@ const ChampionsInfoBoxEntry = props => {
       </div>
 
       <div id="championsInfoEntry2">
+        <p id="ci-wl-percent"> {winPercent}% <span>{`(${played} Played)`}</span></p>
         <div className="WinLossBar">
-          <div className="winBar" id="ci-winbar" style={{width: `${winPercent}%`}}>
-            {win !== 0 && <p>{win}W</p>}
-          </div>
-          <div className="lossBar" id="ci-winbar" style={{width: `${100 - winPercent}%`}}>
-            {loss !== 0 && <p>{loss}L</p>}
-          </div>
+          <div className="winBar" id="ci-winbar" style={{width: `${winPercent}%`}}/>
+          <div className="lossBar" id="ci-winbar" style={{width: `${100 - winPercent}%`}}/>
         </div>
-        <p id="ci-wl-percent">{winPercent}% W/L</p>
+        <p>{win}W - {loss}L</p>
       </div>
 
       <div id="championsInfoEntry3">

@@ -34,7 +34,8 @@
 }
 
 .leaderboardBox {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
   align-items: center;
   width: 98.4%;
   height: 80px;

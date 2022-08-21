@@ -79,7 +79,7 @@ const Recent20PlayedWith = () => {
         <li><p id="id1"> Summoner </p></li>
         <li><p> Played </p></li>
         <li><p> W - L </p></li>
-        <li><p> % W-L </p></li>
+        <li><p> % W - L </p></li>
       </ul>
 
       {recentPlayedArr}

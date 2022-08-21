@@ -380,7 +380,7 @@ summonerController.updateSummData = async (req, res, next) => {
       const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
       const runesMap = await mapRuneIcons(matchesData[i].runes); // 11 runes total
       const summSpellMap = await mapSummonerIcons(matchesData[i].summonerSpells); // 2 items total
-      const queueMap = await mapQueueType(matchesData[i].gameMode, queueData);
+      const queueMap = await mapQueueType(matchesData[i].gameMode);
 
       matchesData[i].gameMode = queueMap;
       matchesData[i].items = itemsMap;

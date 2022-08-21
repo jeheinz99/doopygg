@@ -121,10 +121,12 @@ const SearchBox = () => {
     {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'matchHistory' && 
     <div className="SummonerDataBoxGroup">
       <SummonerChampDataBox />
-      <div className="searchbox-tabs">
-        <button id="active-btn-tab" className="searchbox-tab">Matches</button>
-        <button className="searchbox-tab" onClick={() => setCurrBox('champions')}>Champions</button>
-        <button className="searchbox-tab" onClick={() => setCurrBox('live-game')}>Live Game</button>
+      <div className="outer-box">
+        <div className="searchbox-tabs">
+          <button id="active-btn-tab" className="searchbox-tab">Matches</button>
+          <button className="searchbox-tab" onClick={() => setCurrBox('champions')}>Champions</button>
+          <button className="searchbox-tab" onClick={() => setCurrBox('live-game')}>Live Game</button>
+        </div>
         <MatchBoxes />
       </div>
     </div>
@@ -132,11 +134,12 @@ const SearchBox = () => {
 
     {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'champions' && 
     <div className="SummonerDataBoxGroup" id="SummonerDataBoxGroup-champions">
-      {/* <SummonerChampDataBox /> */}
-      <div className="searchbox-tabs">
-        <button className="searchbox-tab" onClick={() => setCurrBox('matchHistory')}>Matches</button>
-        <button id="active-btn-tab" className="searchbox-tab">Champions</button>
-        <button className="searchbox-tab" onClick={() => setCurrBox('live-game')}>Live Game</button>
+      <div className="outer-box">
+        <div className="searchbox-tabs">
+          <button className="searchbox-tab" onClick={() => setCurrBox('matchHistory')}>Matches</button>
+          <button id="active-btn-tab" className="searchbox-tab">Champions</button>
+          <button className="searchbox-tab" onClick={() => setCurrBox('live-game')}>Live Game</button>
+        </div>
         <ChampionsInfoBox />
       </div>
     </div>
@@ -144,11 +147,12 @@ const SearchBox = () => {
 
     {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'live-game' && 
     <div className="SummonerDataBoxGroup" id="SummonerDataBoxGroup-live-game">
-      {/* <SummonerChampDataBox /> */}
-      <div className="searchbox-tabs">
-        <button className="searchbox-tab" onClick={() => setCurrBox('matchHistory')}>Matches</button>
-        <button className="searchbox-tab" onClick={() => setCurrBox('champions')}>Champions</button>
-        <button id="active-btn-tab" className="searchbox-tab">Live Game</button>
+      <div className="outer-box">
+        <div className="searchbox-tabs">
+          <button className="searchbox-tab" onClick={() => setCurrBox('matchHistory')}>Matches</button>
+          <button className="searchbox-tab" onClick={() => setCurrBox('champions')}>Champions</button>
+          <button id="active-btn-tab" className="searchbox-tab">Live Game</button>
+        </div>
         <LiveGameBox />
       </div>
     </div>

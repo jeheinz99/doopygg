@@ -50,14 +50,13 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 98.8%;
+  width: 98.5%;
   box-shadow: 2px 5px 5px rgba(0, 0, 0, 5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.861);
   background: #171A21;
   /* min-height: 43vw; */
   gap: 1.5em;
   padding: 10px;
-  margin-top: 0.4em;
 }
 
 #SearchBoxInput {
@@ -742,6 +741,12 @@ html, body {
 }
 .champEntryDiv4 {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.champEntryDiv4 p {
+  font-size: 0.8em;
 }
 .SummonerDataBoxButton {
   display: flex;
@@ -882,7 +887,6 @@ html, body {
 .WinLossBar {
   display: flex;
   width: 100%;
-  gap: 2px;
 }
 .winBar {
   color:rgba(255, 255, 255, 0.80);
@@ -891,9 +895,9 @@ html, body {
   justify-content: center;
   font-size: 0.55em;
   height: 10px;
-  border-top-left-radius: 0.2em;
-  border-bottom-left-radius: 0.2em;
-  background-color:#47aad4;
+  border-top-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+  background-color:#2c5e74;
   border-right: none;
 }
 .winBar p {
@@ -906,11 +910,11 @@ html, body {
   align-items: center;
   justify-content: center;
   font-size: 0.55em;
-  border-top-right-radius: 0.2em;
-  border-bottom-right-radius: 0.2em;
+  border-top-right-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
   height: 10px;
   border-left: none;
-  background-color: #c5472b;
+  background-color: #773424;
 }
 .lossBar p {
   text-align: center;
@@ -1464,6 +1468,11 @@ h4 {
   color: white;
 }
 .searchbox-tabs {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+.outer-box {
   width: 100%;
 }
 .searchbox-tab {
@@ -1484,24 +1493,16 @@ h4 {
   border-bottom: 3px solid #303b51;
 }
 .ci-summoner-info {
+  display: grid;
+  grid-template-columns: auto 15% 50%;
   border: 2px solid #303b51;
   padding: 5px;
-  display: flex;
-  gap: 2em;
   align-items: center;
   justify-content: flex-start;
+  text-align: center;
 }
 .ci-name-level {
   font-size: 1.2em;
-}
-.ci-summoner-info h3 {
-  margin-left: 10em;
-  text-align: center;
-}
-.ci-summoner-info p {
-  width: 10em;
-  text-align: center;
-  margin: 0;
 }
 #ci-profile-icon {
   border: 1px solid #303b51;
@@ -1511,7 +1512,7 @@ h4 {
 }
 .championsInfoEntryBox {
   display: grid;
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: 13% 10% repeat(9, 1fr);
   border: 3px solid #303b51;
   border-radius: 0.2em;
   padding: 5px;
@@ -1536,7 +1537,7 @@ h4 {
   border: 2px solid #303b51;
   color: rgba(255, 255, 255, 0.80);
   text-align: center;
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: 13% 10% repeat(9, 1fr);
   list-style: none;
   margin: 0;
 }
@@ -1580,6 +1581,9 @@ h4 {
   margin: 0;
 }
 #ci-wl-percent {
+  font-size: 0.9em;
+}
+#ci-wl-percent span {
   color: rgba(207, 205, 205, 0.8);
 }
 #championsInfoEntry3 {
@@ -1957,7 +1961,7 @@ h4 {
 }
 .recent-20-played-box ul {
   display: grid;
-  grid-template-columns: 55% 15% 15% 15%;
+  grid-template-columns: 55% 14% 14% 17%;
   margin: 0;
   border-top: 2px solid #272d3a;
   border-bottom: 2px solid #272d3a;
@@ -1971,7 +1975,6 @@ h4 {
   color: rgba(255, 255, 255, 0.861);
 }
 #id1 {
-  width: 15em;
   text-align: center;
 }
 .recent-20-played-header {
@@ -1981,6 +1984,7 @@ h4 {
 .recent-20-played-header p {
   margin: 0;
   margin-left: 5px;
+  width: 100%;
   font-size: 1.5em;
   color: rgba(255, 255, 255, 0.861);
 }
@@ -2075,35 +2079,4 @@ h4 {
 }
 
 @media only screen and (max-width: 1400px) {
-  .SummonerDataBoxGroup {
-    flex-direction: column;
-    align-items: center;
-  }
-  #MatchBoxes {
-    width: 100%;
-  }
-  .test-one {
-    flex-direction: row;
-    align-items: center;
-  }
-  .recent-20-played-box {
-    height: 50%;
-  }
-  .OuterSearchBox {
-    margin-top: 0;
-    width: 99.8%;
-    padding: 0;
-    margin-bottom: 1em;
-    box-shadow: 2px 5px 5px rgba(0, 0, 0, 5);
-  }
-  .MatchesWrapper {
-    width: 98%;
-  }
-  #NavbarBox {
-    border-left: none;
-    border-right: none;
-  }
-  .SearchBox {
-    margin-top: 5em;
-  }
 }

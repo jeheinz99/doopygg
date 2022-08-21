@@ -20,7 +20,8 @@ const TFTMatchBoxes = () => {
     matchList.push(
     <TFTBoxes 
       key={i} 
-      id={`tftplacement-${TFTData[i].placement}`} 
+      id={`tftplacement-${TFTData[i].placement}`}
+      gameMode={TFTData[i].gameMode}
       otherPlayers={chunkArr[i]} 
       augments={TFTData[i].augments} 
       traitIcons={TFTData[i].traitIcons} 

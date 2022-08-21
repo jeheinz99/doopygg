@@ -7,7 +7,7 @@ import { AiFillCaretDown } from 'react-icons/ai';
 
 const TFTBoxes = props => {
 
-  const { augments, companion, damageDealt, level, matchLength, placement, setNumber, traits, units, id, otherPlayers, gameEnd } = props;
+  const { gameMode, augments, companion, damageDealt, level, matchLength, placement, setNumber, traits, units, id, otherPlayers, gameEnd } = props;
 
   // function that omits all of the players' non-active traits
   const getActiveTraits = data => {
@@ -85,7 +85,7 @@ const TFTBoxes = props => {
     <div className="TFTWrapper">
       <div className="TFTMatches" id={id}>
         <div className="TFTMatchGroup1">
-          <p id="tft-mg1-p1">Ranked TFT</p>
+          <p id="tft-mg1-p1">{gameMode}</p>
           <p id="tft-mg1-p2">{timeAgo}</p>
           { placement === 1 && <p id={`placementnumber-${placement}`}>{placement}st</p> }
           { placement === 2 && <p id={`placementnumber-${placement}`}>{placement}nd</p> }
