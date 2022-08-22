@@ -14,7 +14,7 @@ import ItemTimelineBox from './ItemTimelineBox.jsx';
 
 const DropDownBox = props => {
   
-  const { champion, matchId, matchNum, matchLength, otherPlayers, id, championIcon, items } = props;
+  const { championId, matchId, matchNum, matchLength, otherPlayers, id, championIcon, items } = props;
 
   const summonerName = useSelector(state => state.summoners.summonerName);
   const puuid = useSelector(state => state.summoners.puuid);
@@ -23,11 +23,12 @@ const DropDownBox = props => {
   const [currBox, toggleBox] = useState(false);
   const [lolDDboxData, lolSetDDboxData] = useState([]);
   const [timelineData, setTimelineData] = useState({});
+  const [championAbilityIcons, setChampionIcons] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       const res = await axios.post('/summoner/ddboxdata', 
-      {otherPlayers, matchId, puuid, regionId}, 
+      {otherPlayers, matchId, puuid, regionId, championId}, 
       {
         headers: {
           'Content-Type': 'application/json',
@@ -35,10 +36,12 @@ const DropDownBox = props => {
       });
       lolSetDDboxData(res.data.otherPlayers);
       setTimelineData(res.data.timelineData);
+      setChampionIcons(res.data.championAbilityIcons)
     };
     if (lolDDboxData) {
       lolSetDDboxData([]);
       setTimelineData({});
+      setChampionIcons([]);
     }
     getData();
   }, [summonerName]);
@@ -101,7 +104,6 @@ const DropDownBox = props => {
   const skillRArr = [];
   const itemsArr = [];
   if (Object.keys(timelineData).length !== 0) {
-    console.log(timelineData, 'timelineData');
     for (let i = 0; i < timelineData.skillLevels.length; i++) {
       if (timelineData.skillLevels[i].skillSlot == 1) {
         skillQArr.push(<SkillBox key={`skill-${i}-Q`} level={i+1} id={`activeBox`}/>);
@@ -196,32 +198,32 @@ const DropDownBox = props => {
               <div className="match-timeline-skills-header">
                 <p> Skill Order </p>
               </div>
-
+              
               <div className="match-timeline-skills-div">
                 <div className="match-timeline-skills">
                   <div className="ability-icon">
-                    <img className="champion-ability-icon" id="Q-icon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/${champion.toLowerCase()}/hud/icons2d/${champion.toLowerCase()}_q.png`}/>
+                    <img className="champion-ability-icon" id="Q-icon" src={championAbilityIcons[0]}/>
                     <div className="level-div" id="level-matchbox">Q</div>
                   </div>
                   {skillQArr}
                 </div>
                 <div className="match-timeline-skills">
                   <div className="ability-icon">
-                    <img className="champion-ability-icon" id="W-icon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/${champion.toLowerCase()}/hud/icons2d/${champion.toLowerCase()}_w.png`}/>
+                    <img className="champion-ability-icon" id="W-icon" src={championAbilityIcons[1]}/>
                     <div className="level-div" id="level-matchbox">W</div>
                   </div>  
                   {skillWArr}
                 </div>
                 <div className="match-timeline-skills">
                   <div className="ability-icon">
-                    <img className="champion-ability-icon" id="E-icon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/${champion.toLowerCase()}/hud/icons2d/${champion.toLowerCase()}_e.png`}/>
+                    <img className="champion-ability-icon" id="E-icon" src={championAbilityIcons[2]}/>
                     <div className="level-div" id="level-matchbox">E</div>
                   </div>
                   {skillEArr}
                 </div>
                 <div className="match-timeline-skills">
                   <div className="ability-icon">
-                    <img className="champion-ability-icon" id="R-icon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/${champion.toLowerCase()}/hud/icons2d/${champion.toLowerCase()}_r.png`}/>
+                    <img className="champion-ability-icon" id="R-icon" src={championAbilityIcons[3]}/>
                     <div className="level-div" id="level-matchbox">R</div>
                   </div>
                   {skillRArr}

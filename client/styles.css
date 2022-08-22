@@ -1145,23 +1145,6 @@ h4 {
   height: 48px;
   width: 48px;
 }
-
-.donthavedatabox {
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  background-color: #222020;
-  border-radius: 1em;
-  align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.80);
-  width: 50em;
-}
-#kittisaurDuck {
-  width: 50%;
-  border-radius: 5em;
-  border: 3px solid rgba(255, 255, 255, 0.80);
-}
-
 .inactiveRune {
   width: 32px;
   height: 32px;

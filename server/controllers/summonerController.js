@@ -561,7 +561,7 @@ summonerController.testSummData = async (req, res, next) => {
 // gets dropdown box data when dropdownbox is clicked
 summonerController.getDDBoxSummData = async (req, res, next) => {
   try {
-    const { otherPlayers, matchId, puuid, regionId } = req.body;
+    const { otherPlayers, matchId, puuid, regionId, championId } = req.body;
     const regionRoute = regionObj[regionId];
 
     // helper function to parse through timeline and get relevant timeline info
@@ -607,6 +607,12 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
       };
     };
 
+    const getChampAbilityIcons = async () => {
+      const query = `SELECT champion_spell_paths FROM champion_info WHERE champion_id = ${championId};`
+      const path = await db.query(query);
+      return path.rows[0].champion_spell_paths;
+    };
+
     const getMatchTimeline = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline?api_key=${process.env.api_key}`,
     {
       headers: {
@@ -625,7 +631,6 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
       const itemsMap = await mapItemIcons(otherPlayers[i].items); // 7 items total
       const runesMap = await mapRuneIcons(otherPlayers[i].runes); // 11 runes total
       const summSpellMap = await mapSummonerIcons(otherPlayers[i].summonerSpells); // 2 items total
-      
       const itemTimelineMap = await mapItemTimelineIcons(timelineData.itemTimeline);
       
       timelineData.itemTimeline = itemTimelineMap;
@@ -633,9 +638,13 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
       otherPlayers[i].runes = runesMap;
       otherPlayers[i].summonerSpells = summSpellMap;
     }
+
+    const championAbilityIcons = await getChampAbilityIcons();
+
     res.locals.DDBoxData = {
       otherPlayers: otherPlayers,
       timelineData: timelineData,
+      championAbilityIcons: championAbilityIcons,
     };
     return next();
   }

@@ -3,4 +3,5 @@ dist/
 .env
 package-lock.json
 script.js
+temp.js
 champions.json

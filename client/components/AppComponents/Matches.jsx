@@ -152,7 +152,7 @@ const Matches = props => {
         </div>
       </div>
       <div className="DropDownBoxes">
-        {summonerOpen && <div className={`hidden-${hidden}`}><DropDownBox champion={champion} matchId={matchId} matchLength={matchLength} championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/></div>}
+        {summonerOpen && <div className={`hidden-${hidden}`}><DropDownBox championId={championId} matchId={matchId} matchLength={matchLength} championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/></div>}
       </div>
     </div>
   );
