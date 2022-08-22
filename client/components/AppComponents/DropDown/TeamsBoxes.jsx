@@ -13,53 +13,50 @@ const TeamsBoxes = props => {
 
   return (
       <div className="Team1DropDownBox" id={id}>
-        {/* <div className="Team1Players"> */}
-          {/* <div className="Player0Team1" id={id}> */}
-            <div className="Player0Team1ChampIcon">
-              <img id="Player0Champion" src={championIcon}/>
-            </div>
-            <div className="Player0Team1SummonerSpells">
-              <img id="summonerSpellIcon1DropDown" src={summonerSpells[0]}/>
-              <img id="summonerSpellIcon2DropDown" src={summonerSpells[1]}/>
-            </div>
-            <div className="Player0Team1Runes">
-              <img id="Player0Team1Keystone" src={runes[0].icon}/>
-              <img id="Player0Team1SecondaryTree" src={runes[5].icon}/>
-            </div>
-            <div className="Player0Team1Info">
-              <p>{summonerName}</p>
-            </div>
-            <div className="Player0Team1KDA">
-              <p>{kills} / {deaths} / {assists}</p>
-              {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
-              {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
-              {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
-              {KDA < 3 && <p id="lessthan3kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
-            </div>
-            <div className="Player0Team1Damage">
-              <p>{numFormat.format(champDamage)}</p>
-            </div>
-            <div className="Player0Team1CS">
-              <p>{cs}</p>
-              <p id="dd-cs-m">{`(${(cs / (matchLength/60)).toFixed(1)})`}</p>
-            </div>
-            <div className="Player0Team1VisionScore">
-              <p>{visionScore}</p>
-            </div>
-            <div className="Player0Team1Items">
-              <div className="upperHalfItemsDD">
-                <img id="item0DD" src={items[0]}/>
-                <img id="item1DD" src={items[1]}/>
-                <img id="item2DD" src={items[2]}/>
-              </div>
-              <div className="lowerHalfItemsDD">
-                <img id="item3DD" src={items[3]}/>
-                <img id="item4DD" src={items[4]}/>
-                <img id="item5DD" src={items[5]}/>
-              </div>
-            </div>            
-          {/* </div> */}
-        {/* </div> */}
+        <div className="Player0Team1ChampIcon">
+          <img id="Player0Champion" src={championIcon}/>
+          <div className="level-div" id="level-matchbox">{champLevel}</div>
+        </div>
+        <div className="Player0Team1SummonerSpells">
+          <img id="summonerSpellIcon1DropDown" src={summonerSpells[0]}/>
+          <img id="summonerSpellIcon2DropDown" src={summonerSpells[1]}/>
+        </div>
+        <div className="Player0Team1Runes">
+          <img id="Player0Team1Keystone" src={runes[0].icon}/>
+          <img id="Player0Team1SecondaryTree" src={runes[5].icon}/>
+        </div>
+        <div className="Player0Team1Info">
+          <p>{summonerName}</p>
+        </div>
+        <div className="Player0Team1KDA">
+          <p>{kills} / {deaths} / {assists}</p>
+          {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
+          {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
+          {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
+          {KDA < 3 && <p id="lessthan3kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
+        </div>
+        <div className="Player0Team1Damage">
+          <p>{numFormat.format(champDamage)}</p>
+        </div>
+        <div className="Player0Team1CS">
+          <p>{cs}</p>
+          <p id="dd-cs-m">{`(${(cs / (matchLength/60)).toFixed(1)})`}</p>
+        </div>
+        <div className="Player0Team1VisionScore">
+          <p>{visionScore}</p>
+        </div>
+        <div className="Player0Team1Items">
+          <div className="upperHalfItemsDD">
+            <img id="item0DD" src={items[0]}/>
+            <img id="item1DD" src={items[1]}/>
+            <img id="item2DD" src={items[2]}/>
+          </div>
+          <div className="lowerHalfItemsDD">
+            <img id="item3DD" src={items[3]}/>
+            <img id="item4DD" src={items[4]}/>
+            <img id="item5DD" src={items[5]}/>
+          </div>
+        </div>            
       </div>
   )
 };

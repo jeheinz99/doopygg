@@ -1,9 +1,9 @@
 import React from 'react';
 
 const SkillBox = props => {
-  const { id } = props;
+  const { id, level } = props;
   return (
-    <div className="skill-box" id={`skill-box-${id}`}>{id}</div>
+    <div className="skill-box" id={id}>{level}</div>
   );
 };
 

@@ -307,6 +307,7 @@ summonerController.updateSummData = async (req, res, next) => {
           });
           otherPlayersData.push({
             championId: player.championId,
+            champion: player.championName,
             summonerName: player.summonerName,
             kills: player.kills,
             deaths: player.deaths,
@@ -341,6 +342,7 @@ summonerController.updateSummData = async (req, res, next) => {
           const player = matchHistoryData[i].participants[j];
           otherPlayersData.push({
             championId: player.championId,
+            champion: player.championName,
             summonerName: player.summonerName,
             kills: player.kills,
             deaths: player.deaths,

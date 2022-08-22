@@ -228,9 +228,32 @@ html, body {
   justify-content: center;
   gap: 0.2em;
 }
-.MatchGroup2div2 p {
-  width: 7em;
+.championIcon-and-Level {
+  position: relative;
+}
+.level-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #171A21;
+  position: absolute;
+  bottom: -5%;
+  border: 3px solid #272d3a;
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 100%;
+  width: 25%;
+  right: 0;
+  font-size: 0.85em;
+}
+#level-matchbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 35%;
   text-align: center;
+  bottom: -15%;
+  font-size: 0.65em;
 }
 .MatchGroup2div {
   display: flex;
@@ -246,11 +269,13 @@ html, body {
 .MatchGroup2div2 p {
   margin: 0;
   font-size: 0.8em;
+  text-align: center;
 }
 .MatchGroup2div3 {
   display: flex;
   flex-direction: column;
   align-content: center;
+  gap: 4px;
   justify-content: center;
 }
 .MatchGroupButton {
@@ -267,6 +292,9 @@ html, body {
   filter: invert(20%);
 }
 #championIcon {
+  position: relative;
+  top: 0;
+  left: 0;
   width: 64px;
   height: 64px;
   border-radius: 0.3em;
@@ -449,28 +477,16 @@ html, body {
   align-items: center;
   width: 2em;
 }
-#damageDD2 p {
-}
-#csDD2 {
-}
-#visionDD2 {
-}
 .Team1DropDownBox {
   display: grid;
-  grid-template-columns: 6% 4% 5% 27% 15% 10% 10% 6% 18%;
+  grid-template-columns: 7% 4% 5% 27% 15% 10% 10% 6% 17%;
   width: 97%;
   align-items: center;
   padding: 5px;
   border-radius: 0.5em;
 }
-.Team1Players, .Team2Players {
-  display: flex;
-  width: 100%;
-  gap: 1px;
-}
 .Player0Team1ChampIcon {
-  display: flex;
-  justify-content: center;
+  position: relative;
 }
 .Player0Team1Info {
   display: flex;
@@ -876,8 +892,6 @@ html, body {
 #between3and5kda {
   color: rgb(68, 92, 198);
 }
-#lessthan3kda {
-}
 #winTag {
   color: rgb(68, 92, 198);
 }
@@ -1179,6 +1193,8 @@ h4 {
 }
 .RunesInfoMainWrap {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 93%;
   justify-content: center;
 }
@@ -1352,9 +1368,6 @@ h4 {
 .dd-box-nav-btn:hover {
   cursor: pointer;
   filter: invert(30%);
-}
-#dd-box-etc-btn {
-
 }
 #otherPlayers-8000 {
   background-color: rgba(212, 205, 71, 0.2);
@@ -1827,16 +1840,17 @@ h4 {
   padding-right: 10px;
   width: 100%;
 }
-
 .Match-timeline-main {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-top: 1em;
   gap: 1em;
+  width: 90%;
   border: 3px solid #272d3a;
   border-radius: 0.2em;
   padding: 6px;
+  background-color: #16161dce;
   height: 50%;
 }
 .match-timeline-skills-header {
@@ -1845,17 +1859,25 @@ h4 {
   text-align: center;
   height: 1.75em;
   border-left: 2px solid rgba(255, 255, 255, 0.8);
-  /* border-bottom: 1px solid #272d3a; */
 }
 .match-timeline-skills-header p {
   font-size: 1.2em;
   margin: 0;
   margin-left: 0.5em;
 }
+.ability-icon {
+  position: relative;
+}
 .match-timeline-skills-div {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 1em;
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: auto;
+}
+.match-timeline-skills {
+  display: grid;
+  grid-template-columns: repeat(19, 1fr);
+  align-items: center;
+  justify-items: center;
 }
 .skill-box {
   display: flex;
@@ -1863,20 +1885,20 @@ h4 {
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: 3px solid #303b51;
+  border: 2px solid #303b51;
   border-radius: 0.2em;
 }
-#skill-box-Q {
-  color:#1C6EA4;
+.champion-ability-icon {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #303b51;
+  border-radius: 0.2em;
 }
-#skill-box-W {
-  color: rgb(243, 157, 51);
+#inactiveBox {
+  background: rgb(45, 17, 20);
 }
-#skill-box-E {
-  color: rgb(101, 200, 43);
-}
-#skill-box-R {
-  color: rgb(243, 54, 51);
+#activeBox {
+  background: rgb(19, 28, 43);
 }
 .match-timeline-items-header {
   display: flex;
@@ -2132,6 +2154,10 @@ h4 {
   .match-timeline-skills-div {
     gap: 0.5em;
   }
+  .champion-ability-icon {
+    width: 32px;
+    height: 32px;
+  }
   .skill-box {
     width: 24px;
     height: 24px
@@ -2167,9 +2193,6 @@ h4 {
   #champIconRunesDD {
     width: 40px;
     height: 40px;
-  }
-  .champEntry {
-
   }
   #item0, #item1, #item2, #item3, #item4, #item5, #item6 {
     width: 24px;

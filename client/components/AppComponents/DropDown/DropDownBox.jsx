@@ -14,7 +14,7 @@ import ItemTimelineBox from './ItemTimelineBox.jsx';
 
 const DropDownBox = props => {
   
-  const { matchId, matchNum, matchLength, otherPlayers, id, championIcon, items } = props;
+  const { champion, matchId, matchNum, matchLength, otherPlayers, id, championIcon, items } = props;
 
   const summonerName = useSelector(state => state.summoners.summonerName);
   const puuid = useSelector(state => state.summoners.puuid);
@@ -95,12 +95,50 @@ const DropDownBox = props => {
       />));
   }
 
-  const skillLevels = [];
+  const skillQArr = [];
+  const skillWArr = [];
+  const skillEArr = [];
+  const skillRArr = [];
   const itemsArr = [];
   if (Object.keys(timelineData).length !== 0) {
+    console.log(timelineData, 'timelineData');
     for (let i = 0; i < timelineData.skillLevels.length; i++) {
-      const skills = {1: 'Q', 2: 'W', 3: 'E', 4: 'R'};
-      skillLevels.push(<SkillBox key={`skill-${i}`} id={skills[timelineData.skillLevels[i].skillSlot]}/>);
+      if (timelineData.skillLevels[i].skillSlot == 1) {
+        skillQArr.push(<SkillBox key={`skill-${i}-Q`} level={i+1} id={`activeBox`}/>);
+
+        skillWArr.push(<SkillBox key={`skill-${i}-W`} level="" id={`inactiveBox`}/>);
+        skillEArr.push(<SkillBox key={`skill-${i}-E`} level="" id={`inactiveBox`}/>);
+        skillRArr.push(<SkillBox key={`skill-${i}-R`} level="" id={`inactiveBox`}/>);
+      }
+      else if (timelineData.skillLevels[i].skillSlot == 2) {
+        skillWArr.push(<SkillBox key={`skill-${i}-W`} level={i+1} id={`activeBox`}/>);
+
+        skillQArr.push(<SkillBox key={`skill-${i}-Q`} level="" id={`inactiveBox`}/>);
+        skillEArr.push(<SkillBox key={`skill-${i}-E`} level="" id={`inactiveBox`}/>);
+        skillRArr.push(<SkillBox key={`skill-${i}-R`} level="" id={`inactiveBox`}/>);
+
+      }
+      else if (timelineData.skillLevels[i].skillSlot == 3) {
+        skillEArr.push(<SkillBox key={`skill-${i}-E`} level={i+1} id={`activeBox`}/>);
+
+        skillQArr.push(<SkillBox key={`skill-${i}-Q`} level="" id={`inactiveBox`}/>);
+        skillWArr.push(<SkillBox key={`skill-${i}-W`} level="" id={`inactiveBox`}/>);
+        skillRArr.push(<SkillBox key={`skill-${i}-R`} level="" id={`inactiveBox`}/>);
+      }
+      else {
+        skillRArr.push(<SkillBox key={`skill-${i}-R`} level={i+1} id={`activeBox`}/>);
+
+        skillQArr.push(<SkillBox key={`skill-${i}-Q`} level="" id={`inactiveBox`}/>);
+        skillWArr.push(<SkillBox key={`skill-${i}-W`} level="" id={`inactiveBox`}/>);
+        skillEArr.push(<SkillBox key={`skill-${i}-E`} level="" id={`inactiveBox`}/>);
+      }
+    }
+    while (skillQArr.length < 18) {
+      const len = skillQArr.length;
+      skillQArr.push(<SkillBox key={`skill-${len}-Q`} level="" id={`inactiveBox`}/>);
+      skillWArr.push(<SkillBox key={`skill-${len}-W`} level="" id={`inactiveBox`}/>);
+      skillEArr.push(<SkillBox key={`skill-${len}-E`} level="" id={`inactiveBox`}/>);
+      skillRArr.push(<SkillBox key={`skill-${len}-R`} level="" id={`inactiveBox`}/>);
     }
     for (let i = 0; i < timelineData.itemTimeline.length; i++) {
       if (timelineData.itemTimeline[i].length > 0) {
@@ -158,8 +196,37 @@ const DropDownBox = props => {
               <div className="match-timeline-skills-header">
                 <p> Skill Order </p>
               </div>
+
               <div className="match-timeline-skills-div">
-                { skillLevels }
+                <div className="match-timeline-skills">
+                  <div className="ability-icon">
+                    <img className="champion-ability-icon" id="Q-icon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/${champion.toLowerCase()}/hud/icons2d/${champion.toLowerCase()}_q.png`}/>
+                    <div className="level-div" id="level-matchbox">Q</div>
+                  </div>
+                  {skillQArr}
+                </div>
+                <div className="match-timeline-skills">
+                  <div className="ability-icon">
+                    <img className="champion-ability-icon" id="W-icon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/${champion.toLowerCase()}/hud/icons2d/${champion.toLowerCase()}_w.png`}/>
+                    <div className="level-div" id="level-matchbox">W</div>
+                  </div>  
+                  {skillWArr}
+                </div>
+                <div className="match-timeline-skills">
+                  <div className="ability-icon">
+                    <img className="champion-ability-icon" id="E-icon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/${champion.toLowerCase()}/hud/icons2d/${champion.toLowerCase()}_e.png`}/>
+                    <div className="level-div" id="level-matchbox">E</div>
+                  </div>
+                  {skillEArr}
+                </div>
+                <div className="match-timeline-skills">
+                  <div className="ability-icon">
+                    <img className="champion-ability-icon" id="R-icon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/${champion.toLowerCase()}/hud/icons2d/${champion.toLowerCase()}_r.png`}/>
+                    <div className="level-div" id="level-matchbox">R</div>
+                  </div>
+                  {skillRArr}
+                </div>
+
               </div>
 
               <div className="match-timeline-items-header">

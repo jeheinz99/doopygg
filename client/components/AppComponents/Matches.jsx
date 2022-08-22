@@ -63,24 +63,27 @@ const Matches = props => {
           {id === "winMatch" ? <p style={{color: 'blue'}}>{outcome}</p> : <p style={{color: 'red'}}>{outcome}</p>}
         </div>
         <div className="MatchGroup2">
-          <img id="championIcon" src={championIcon}/>
-        <div className="MatchGroup2div3">
+          <div className="championIcon-and-Level">
+            <img id="championIcon" src={championIcon}/>
+            <div className="level-div">{champLevel}</div>
+          </div>
+          <div className="MatchGroup2div3">
             <img id="summonerSpellIcon1" src={summonerSpells[0]}/>
             <img id="summonerSpellIcon2" src={summonerSpells[1]}/>
-        </div>
-        <div className="MatchGroup2div">
-          <img id="keystoneIcon" src={runes[0].icon}/>
-          <img id="secondaryRuneIcon" src={runes[5].icon}/>
-        </div>
-        <div className="MatchGroup2div2">
-          <p>{kills} / {deaths} / {assists}</p>
-          {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
-          {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {KDA} </p>}
-          {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: {KDA} </p>}
-          {KDA < 3 && <p id="lessthan3kda"> K/D/A: {KDA} </p>}
-          <p>CS: {cs} <span id="cs-m-span">({`${(cs/(matchLength/60)).toFixed(1)}`}/m)</span></p>
-          <p>vision: {visionScore}</p>
-        </div>
+          </div>
+          <div className="MatchGroup2div">
+            <img id="keystoneIcon" src={runes[0].icon}/>
+            <img id="secondaryRuneIcon" src={runes[5].icon}/>
+          </div>
+          <div className="MatchGroup2div2">
+            <p>{kills} / {deaths} / {assists}</p>
+            {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
+            {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {KDA} </p>}
+            {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: {KDA} </p>}
+            {KDA < 3 && <p id="lessthan3kda"> K/D/A: {KDA} </p>}
+            <p>CS: {cs} <span id="cs-m-span">({`${(cs/(matchLength/60)).toFixed(1)}`}/m)</span></p>
+            <p>vision: {visionScore}</p>
+          </div>
         </div>
         <div className="MatchGroup4">
           <div className="MatchGroup4div">
@@ -149,7 +152,7 @@ const Matches = props => {
         </div>
       </div>
       <div className="DropDownBoxes">
-        {summonerOpen && <div className={`hidden-${hidden}`}><DropDownBox matchId={ matchId } matchLength={ matchLength } championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/></div>}
+        {summonerOpen && <div className={`hidden-${hidden}`}><DropDownBox champion={champion} matchId={matchId} matchLength={matchLength} championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/></div>}
       </div>
     </div>
   );
