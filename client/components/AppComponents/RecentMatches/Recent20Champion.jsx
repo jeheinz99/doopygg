@@ -20,9 +20,9 @@ const Recent20Champion = props => {
       
       <div className="Recent20ChampCardDiv2">
         <div className="kdaAvgsR20">
-          {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
-          {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
-          {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
+          {KDA === 'Infinity' && <p id="over5kda"> K/D/A: <span>Perfect</span></p>}
+          {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: <span>{((kills + assists) / deaths).toFixed(2)}</span></p>}
+          {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: <span>{((kills + assists) / deaths).toFixed(2)}</span></p>}
           {KDA < 3 && <p id="lessthan3kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
           <p>{avgKills} / <span id="avgDeathsSpanTag">{avgDeaths}</span> / {avgAssists}</p>            
         </div>

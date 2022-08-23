@@ -28,11 +28,11 @@ html, body {
   background: rgb(19, 28, 43);
 }
 #dd-winMatch {
-  border: 2px solid #272d3a;
+  border: 2px solid rgba(39, 45, 58, 0.7);
   background: rgb(19, 28, 43);
 }
 #dd-loseMatch {
-  border: 2px solid #272d3a;
+  border: 2px solid rgba(39, 45, 58, 0.7);
   background: rgb(45, 17, 20);
 }
 #loseMatch {
@@ -186,6 +186,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   width: 99.6%;
   border: 3px solid #272d3a;
   border-top: none;
@@ -495,7 +496,6 @@ html, body {
   font-size: 0.9em;
   justify-content: center;
   /* justify-content: flex-start; */
-  overflow: hidden;
 }
 .Player0Team1Info p {
   margin: 0;
@@ -504,8 +504,35 @@ html, body {
   display: flex;
   font-size: 0.9em;
   justify-content: center;
-  overflow: hidden;
   text-align: center;
+}
+#dd-damage-bar {
+  height: 7px;
+  gap: 0;
+}
+#dd-winMatch-damagebar, #dd-winMatch-damagebar-100, #dd-loseMatch-damagebar, #dd-loseMatch-damagebar-100 {
+  height: 100%;
+  border-radius: 0;
+  background-color:#37a6d5;
+  border: 1px solid #272d3a;
+  border-right: none;
+}
+#dd-loseMatch-damagebar {
+  background-color:#d55137;
+}
+#dd-winMatch-damagebar-100, #dd-loseMatch-damagebar-100 {
+  border-right: 1px solid #272d3a;
+  border-radius: 0;
+}
+#dd-damagebar-grey {
+  border-radius: 0;
+  height: 100%;
+  border: 1px solid #272d3a;
+  background-color: #595b5e;
+  border-left: none; 
+}
+.Player0Team1Damage {
+  flex-direction: column;
 }
 .Player0Team1CS {
   display: flex;
@@ -521,15 +548,12 @@ html, body {
 }
 .Player0Team1Damage p {
   margin: 0;
-  width: 4em;
 }
 .Player0Team1VisionScore p {
   margin: 0;
-  width: 2em;
 }
 .Player0Team1CS p {
   margin: 0;
-  width: 3.5em;
 }
 .Player0Team1KDA {
   display: flex;
@@ -717,8 +741,8 @@ html, body {
 .champEntryWrapper {
   justify-content: center;
   width: 100%;
-  background-color: #13161dde;
-  border: 2px solid #303b51;
+  background-color: #16161dce;
+  border: 2px solid rgba(39, 45, 58, 0.7);
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
   border-radius: 0.2em;
 }
@@ -801,7 +825,7 @@ html, body {
   justify-content: center;
   width: 99%;
   height: 100%;
-  border: 2px solid #272d3a;
+  border: 2px solid rgba(39, 45, 58, 0.5);
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
   border-radius: 0.2em;
   gap: 2em;
@@ -821,7 +845,7 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.1em;
+  gap: 0.2em;
   margin: 5px;
   width: 37%;
 }
@@ -831,8 +855,9 @@ html, body {
   align-items: center;
   justify-content: center;
   border-radius: 0.2em;
+  background-color: #16161dce;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
-  border: 2px solid #303b51;
+  border: 2px solid rgba(39, 45, 58, 0.7);
   padding: 5px;
   gap: 0.5em;
 }
@@ -887,11 +912,14 @@ html, body {
   color: #e18a1f;
 }
 
-#over5kda {
+#over5kda, #over5kda span {
   color: #FFC300;
 }
-#between3and5kda {
+#between3and5kda, #between3and5kda span {
   color: rgb(68, 92, 198);
+}
+#lessthan3kda {
+  color: rgba(255, 255, 255, 0.6);
 }
 #winTag {
   color: rgb(68, 92, 198);
@@ -937,6 +965,9 @@ html, body {
 }
 #RPWinBar {
   font-size: 0.7em;
+}
+#RPWinBar-100 {
+  border-radius: 1em;
 }
 #R20WinBar {
   font-size: 0.70em;
@@ -1132,11 +1163,23 @@ h4 {
 .ranked-win-bar-div p span {
   color: rgba(255, 255, 255, 0.65);
 }
+.SummonerIcon-Level {
+  position: relative;
+}
+#summoner-level-div {
+  border-radius: 0.2em;
+  right: 30%;
+  bottom: -7%;
+  width: 40%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background-color: #16161d;
+  font-size: 1.1em;
+}
 #summonerIcon {
   height: 128px;
   width: 128px;
   border-radius: 1em;
-  border: 2px solid #303b51;
+  border: 1px solid rgba(255, 255, 255, 0.861);
 }
 #rankIcon {
   height: 54px;
@@ -1189,7 +1232,7 @@ h4 {
 }
 .TreeDiv {
   width: 90%;
-  border: 3px solid #272d3a;
+  border: 3px solid rgba(39, 45, 58, 0.5);
   border-radius: 0.2em;
   padding: 0.5em;
   /* height: 100%; */
@@ -1279,11 +1322,7 @@ h4 {
   justify-items: center;
   justify-content: flex-start;
   background-color: #16161dce;
-  /* background-color: #16161dce; */
-  /* border-top: 1px solid #303b51;
-  border-bottom: 1px solid #303b51; */
-  border: 1px solid #272d3a;
-  /* border-right: 5px solid #303b51; */
+  border: 1px solid rgba(39, 45, 58, 0.5);
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 5);
 }
 .keystoneRunesDD {
@@ -1339,16 +1378,25 @@ h4 {
 }
 .dd-box-nav-btn {
   background: none;
-  border: 3px solid #4d525f;
-  border-radius: 0.5em;
-  height: 3em;
-  width: 6em;
+  border: none;
+  font-size: 1em;
+  border-bottom: 4px solid #4d525f;
+  /* border-radius: 0.5em; */
+  height: 2.5em;
+  width: 5em;
   font-family: Kanit;
-  color:rgba(255, 255, 255, 0.861);
+  color:#4d525f;
+  transition: 0.5s;
 }
 .dd-box-nav-btn:hover {
   cursor: pointer;
-  filter: invert(30%);
+  color:rgba(255, 255, 255, 0.861);
+  border-color: #e4e4e4;
+  /* transform: translateY(-2px); */
+}
+#dd-box-nav-active {
+  color:rgba(255, 255, 255, 0.861);
+  border-color: #e4e4e4;
 }
 #otherPlayers-8000 {
   /* border-color: rgba(212, 205, 71, 0.561); */
@@ -1395,11 +1443,12 @@ h4 {
   gap: 1.4em;
   background-color: #16161dce;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 5);
-  border: 3px solid #272d3a;
+  border: 3px solid rgba(39, 45, 58, 0.5);
   border-radius: 0.2em;
   padding: 6px;
 }
 .runes-items-champicon p {
+  color: rgba(207, 205, 205, 0.8);
   margin: 0;
   height: 100%;
 }
@@ -1496,7 +1545,7 @@ h4 {
 .searchbox-tab {
   border: none;
   background: none;
-  color: rgba(255, 255, 255, 0.80);
+  color: #4d525f;
   font-size: 1.2em;
   margin: 5px;
   border-bottom: 2px solid #171A21;
@@ -1504,11 +1553,12 @@ h4 {
 }
 .searchbox-tab:hover {
   cursor: pointer;
-  /* background-color: #24252a; */
-  border-bottom: 3px solid #303b51;
+  color: rgba(255, 255, 255, 0.80);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.80);
 }
 #active-btn-tab {
-  border-bottom: 3px solid #303b51;
+  color: rgba(255, 255, 255, 0.80);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.80);
 }
 .ci-summoner-info {
   display: grid;
@@ -1531,7 +1581,8 @@ h4 {
 .championsInfoEntryBox {
   display: grid;
   grid-template-columns: 13% 10% repeat(9, 1fr);
-  border: 3px solid #303b51;
+  background-color: #16161dce;
+  border: 2px solid rgba(39, 45, 58, 0.7);
   border-radius: 0.2em;
   padding: 5px;
 }
@@ -1625,7 +1676,8 @@ h4 {
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 3px solid #272d3a;
+  border: 2px solid rgba(39, 45, 58, 0.5);
+  /* border: 3px solid #272d3a; */
   align-items: center;
   color: rgba(255, 255, 255, 0.80);
   font-size: 1.5em;
@@ -1656,13 +1708,13 @@ h4 {
 }
 #lg-champicon-100 {
   border-radius: 0.2em;
-  border: 1px solid #375eab;
+  border: 1px solid #375eabb0;
   width: 48px;
   height: 48px;
 }
 #lg-champicon-200 {
   border-radius: 0.2em;
-  border: 1px solid #ab374a;
+  border: 1px solid #ab374aa0;
   width: 48px;
   height: 48px;
 }
@@ -1693,7 +1745,7 @@ h4 {
   width: 100%;
   gap: 0.2em;
   padding: 5px;
-  border: 2px solid #303b51;
+  border: 2px solid rgba(39, 45, 58, 0.7);
   align-items: center;
 }
 .lg-rank-div {
@@ -1738,8 +1790,8 @@ h4 {
   width: 100%;
   display: flex;
   align-items: center;
-  border: 2px solid #303b51;
-  background-color: #16161bce;
+  border: 2px solid rgba(39, 45, 58, 0.5);
+  background-color: #16161dce;
   padding: 5px;
   gap: 1.5em;
 }
@@ -1756,7 +1808,7 @@ h4 {
   display: flex;
   width: 90%;
   align-items: center;
-  margin-left: 5px;
+  margin-left: 0.4%;
   margin-bottom: 10px;
   border-left: 3px solid white;
   height: 25px;
@@ -1839,7 +1891,7 @@ h4 {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border: 2px solid #303b51;
+  border: 2px solid rgba(39, 45, 58, 0.7);
   background-color: #16161bce;
   border-top: none;
   padding-top: 10px;
@@ -1884,7 +1936,7 @@ h4 {
   gap: 0.5em;
   padding: 5px;
   border-radius: 0.2em;
-  border: 3px solid #272d3a;
+  border: 2px solid rgba(39, 45, 58, 0.5);
   grid-template-columns: auto;
 }
 .match-timeline-items-div {
@@ -1892,7 +1944,7 @@ h4 {
   flex-flow: wrap;
   padding: 5px;
   border-radius: 0.2em;
-  border: 3px solid #272d3a;
+  border: 2px solid rgba(39, 45, 58, 0.5);
   width: 95%;
   gap: 0.5em;
 }
@@ -1945,7 +1997,7 @@ h4 {
   align-items: center;
   justify-content: center;
   gap: 0.5em;
-  border: 2px solid #303b51;
+  border: 2px solid rgba(39, 45, 58, 0.8);
   padding: 5px;
   background: #16161b;
   border-radius: 0.5em;
@@ -2019,8 +2071,9 @@ h4 {
 .recent-played-with-entry {
   display: grid;
   align-items: center;
+  background-color: #16161dce;
   grid-template-columns: 55% 15% 15% 18%;
-  border: 2px solid #303b51;
+  border: 2px solid rgba(39, 45, 58, 0.7);
   border-radius: 0.2em;
   box-shadow: 1px 1px 4px rgb(0 0 0);
   padding: 5px;

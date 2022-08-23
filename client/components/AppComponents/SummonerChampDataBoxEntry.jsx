@@ -23,10 +23,10 @@ const SummonerChampDataBoxEntry = props => {
         </div>
         
         <div className="champEntryDiv2">
-          {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
-          {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
-          {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
-          {KDA < 3 && <p id="lessthan3kda"> K/D/A: {((kills + assists) / deaths).toFixed(2)} </p>}
+          {KDA === 'Infinity' && <p id="over5kda"> KDA: Perfect</p>}
+          {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> KDA: {((kills + assists) / deaths).toFixed(2)}</p>}
+          {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> KDA: {((kills + assists) / deaths).toFixed(2)}</p>}
+          {KDA < 3 && <p id="lessthan3kda"> KDA: {((kills + assists) / deaths).toFixed(2)} </p>}
           <p>{avgKills} / <span id="avgDeathsSpanTag">{avgDeaths}</span> / {avgAssists}</p> 
         </div>
 
@@ -41,8 +41,8 @@ const SummonerChampDataBoxEntry = props => {
 
           <p>{win}W - {loss}L</p>
           <div className="WinLossBar">
-            <div className="winBar" id="RPWinBar" style={{width: `${winPercent}%`}}/>
-            <div className="lossBar" id="RPWinBar" style={{width: `${100 - winPercent}%`}}/>
+            {loss === 0 ? <div className="winBar" id="RPWinBar-100" style={{width: `${winPercent}%`}}/> : <div className="winBar" id="RPWinBar" style={{width: `${winPercent}%`}}/>}
+            {win === 0 ? <div className="lossBar" id="RPWinBar-100" style={{width: `${100 - winPercent}%`}}/> : <div className="lossBar" id="RPWinBar" style={{width: `${100 - winPercent}%`}}/>}
           </div>
         </div>
         

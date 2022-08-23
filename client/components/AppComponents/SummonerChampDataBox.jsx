@@ -127,10 +127,12 @@ const SummonerChampDataBox = () => {
       <div className="test-two">
         <div className="SummonerInfoBox">
           <div className="SummonerInfo">
-            <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${matchHistory[0].summonerIcon}.jpg`}/>
+            <div className="SummonerIcon-Level">
+              <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${matchHistory[0].summonerIcon}.jpg`}/>
+              <div className="level-div" id="summoner-level-div">{summonerLevel}</div>
+            </div>
             <div className="summonerInfoPtags">
               <p>{summonerName}</p>
-              <p>Level {summonerLevel}</p>
             </div>
           </div>
 

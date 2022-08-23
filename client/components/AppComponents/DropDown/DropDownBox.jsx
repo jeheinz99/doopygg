@@ -164,6 +164,7 @@ const DropDownBox = props => {
       <div className="DDbox">
 
         <div className="dd-box-routes">
+          <button className="dd-box-nav-btn" id="dd-box-nav-active"> Overview </button>
           <button className="dd-box-nav-btn" onClick={() => toggleBox("match-runes")}> Runes </button>
           <button className="dd-box-nav-btn" onClick={() => toggleBox("match-timeline")}> Build </button>
         </div>
@@ -176,69 +177,72 @@ const DropDownBox = props => {
         <DDBoxPlayers matchLength={matchLength} lolDDboxData={lolDDboxData}/>
       </div>}
 
-      {currBox === "match-runes" && otherPlayersRunes.length > 0 && runeInfo.mainPlayer !== undefined &&
-        <div className="RunesInfoDD">
-          <div className="dd-box-routes">
-            <button className="dd-box-nav-btn" onClick={() => toggleBox("match-overview")}> Overview </button>
-            <button className="dd-box-nav-btn" onClick={() => toggleBox("match-timeline")}> Build </button>
-          </div>
-          <div className="RunesInfoMainWrap">
+      {/* {currBox === "match-runes" && otherPlayersRunes.length > 0 && runeInfo.mainPlayer !== undefined && */}
+      {currBox === "match-runes" && lolDDboxData.length > 0 &&
+      <div className="RunesInfoDD">
+        <div className="dd-box-routes">
+          <button className="dd-box-nav-btn" onClick={() => toggleBox("match-overview")}> Overview </button>
+          <button className="dd-box-nav-btn" id="dd-box-nav-active"> Runes </button>
+          <button className="dd-box-nav-btn" onClick={() => toggleBox("match-timeline")}> Build </button>
+        </div>
+        <div className="RunesInfoMainWrap">
 
-            <div className="RunesInfoMain">
-              <div className="IconAndBuild">
-                <div className="runes-items-champicon">
-                  <div className="runes-items-champicon-div">
-                    <div className="championIcon-and-Level">
-                      <img id="temp" src={championIcon}/>
-                      <div className="level-div">{champLevel}</div>
-                    </div>
-                    <div className="runes-items-summspells">
-                      <img id="summonerSpellIcon1" src={summonerSpells[0]}/>
-                      <img id="summonerSpellIcon1" src={summonerSpells[1]}/>
-                    </div>
-                    <div className="runes-items-rune-trees">
-                      <img id="keystoneIcon" src={runes[0].icon}/>
-                      <img id="secondaryRuneIcon" src={runes[5].icon}/>
-                    </div>
+          <div className="RunesInfoMain">
+            <div className="IconAndBuild">
+              <div className="runes-items-champicon">
+                <div className="runes-items-champicon-div">
+                  <div className="championIcon-and-Level">
+                    <img id="temp" src={championIcon}/>
+                    <div className="level-div">{champLevel}</div>
                   </div>
-                  <div className="runes-itemsDiv">
-
-                    <div className="upperHalfItems" id="upperDDbox">
-                      <img id="item0" src={items[0]}/>
-                      <img id="item1" src={items[1]}/>
-                      <img id="item2" src={items[2]}/>
-                    </div>
-
-                    <div className="lowerHalfItems" id="lowerDDbox">
-                      <img id="item3" src={items[3]}/>
-                      <img id="item4" src={items[4]}/>
-                      <img id="item5" src={items[5]}/>
-                    </div>
-
+                  <div className="runes-items-summspells">
+                    <img id="summonerSpellIcon1" src={summonerSpells[0]}/>
+                    <img id="summonerSpellIcon1" src={summonerSpells[1]}/>
                   </div>
-                  <p> {kills} / {deaths} / {assists} <span>{`(${KDA})`}</span></p>
+                  <div className="runes-items-rune-trees">
+                    <img id="keystoneIcon" src={runes[0].icon}/>
+                    <img id="secondaryRuneIcon" src={runes[5].icon}/>
+                  </div>
                 </div>
-                <Runes1 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
-                <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
-                <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+                <div className="runes-itemsDiv">
+
+                  <div className="upperHalfItems" id="upperDDbox">
+                    <img id="item0" src={items[0]}/>
+                    <img id="item1" src={items[1]}/>
+                    <img id="item2" src={items[2]}/>
+                  </div>
+
+                  <div className="lowerHalfItems" id="lowerDDbox">
+                    <img id="item3" src={items[3]}/>
+                    <img id="item4" src={items[4]}/>
+                    <img id="item5" src={items[5]}/>
+                  </div>
+
+                </div>
+                <p> {kills} / {deaths} / {assists} <span>{`(${KDA})`}</span></p>
               </div>
+              <Runes1 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+              <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+              <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
             </div>
           </div>
-          <div className="OtherPlayersRunes">
-            <div id="otherPlayers1">
-              { otherPlayersRunes }
-            </div>
-            <div id="otherPlayers2">
-              { otherPlayersRunes2 }
-            </div> 
+        </div>
+        <div className="OtherPlayersRunes">
+          <div id="otherPlayers1">
+            { otherPlayersRunes }
           </div>
-        </div>}
+          <div id="otherPlayers2">
+            { otherPlayersRunes2 }
+          </div> 
+        </div>
+      </div>}
 
       {currBox === "match-timeline" && lolDDboxData.length > 0 && 
       <div className="Match-timeline-main">
         <div className="dd-box-routes">
           <button className="dd-box-nav-btn" onClick={() => toggleBox("match-overview")}> Overview </button>
           <button className="dd-box-nav-btn" onClick={() => toggleBox("match-runes")}> Runes </button>
+          <button className="dd-box-nav-btn" id="dd-box-nav-active"> Build </button>
         </div>
         <div className="match-timeline-skills-header">
           <p> Skill Order </p>

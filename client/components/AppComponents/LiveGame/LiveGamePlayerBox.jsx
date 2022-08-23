@@ -50,10 +50,10 @@ const LiveGamePlayerBox = props => {
           {winPercent >= 70 && !isNaN(winPercent) && <p id="above70wr">{winPercent}% <span> {`(${played} Played)`} </span></p>}
           {isNaN(winPercent) && <p id="exact100wr">{winPercent}% <span> {`(${played} Played)`} </span></p>}
           <div className="WinLossBar" id="lg-win-loss-bar">
-            {winPercent < 60 && !isNaN(winPercent) && <div className="winBar" id="lg-winbar" style={{width: `${winPercent}%`}}></div>}
-            {winPercent >= 60 && winPercent < 70 && <div className="winBar" id="lg-winbar-above60wr" style={{width: `${winPercent}%`}}></div>}
-            {winPercent >= 70 && !isNaN(winPercent) && <div className="winBar" id="lg-winbar-above70wr" style={{width: `${winPercent}%`}}></div>}
-            {isNaN(winPercent) && <div className="winBar" id="lg-winbar-exact100wr" style={{width: `${winPercent}%`}}></div>}
+            {winPercent < 60 && !isNaN(winPercent) && <div className="winBar" id="lg-winbar" style={{width: `${winPercent}%`}}/>}
+            {winPercent >= 60 && winPercent < 70 && <div className="winBar" id="lg-winbar-above60wr" style={{width: `${winPercent}%`}}/>}
+            {winPercent >= 70 && !isNaN(winPercent) && <div className="winBar" id="lg-winbar-above70wr" style={{width: `${winPercent}%`}}/>}
+            {isNaN(winPercent) && <div className="winBar" id="lg-winbar-exact100wr" style={{width: `${winPercent}%`}}/>}
             <div className="lossBar" id="lg-lossbar" style={{width: `${100 - winPercent}%`}}></div>
           </div>
         </div>}

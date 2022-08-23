@@ -1,10 +1,8 @@
 import React from "react";
-import { useSelector } from 'react-redux';
 
 const TeamsBoxes = props => {
 
-  const {id, matchLength, otherPlayers, kills, deaths, assists, items, cs, summonerSpells, visionScore, champDamage, champLevel, runes, championId, summonerName } = props;
-
+  const { id, damagePercent, matchLength, kills, deaths, assists, items, cs, summonerSpells, visionScore, champDamage, champLevel, runes, championId, summonerName } = props;
   // allows to get commas in large numbers
   const numFormat = new Intl.NumberFormat('en-US');
   
@@ -37,6 +35,10 @@ const TeamsBoxes = props => {
         </div>
         <div className="Player0Team1Damage">
           <p>{numFormat.format(champDamage)}</p>
+          <div className="WinLossBar" id="dd-damage-bar">
+            {damagePercent === 100 ? <div className="winBar" id={`${id}-damagebar-100`} style={{width: `${damagePercent}%`}}/> : <div className="winBar" id={`${id}-damagebar`} style={{width: `${damagePercent}%`}}/>}
+            {damagePercent !== 100 && <div className="lossBar" id="dd-damagebar-grey" style={{width: `${100 - damagePercent}%`}}></div>}
+          </div>
         </div>
         <div className="Player0Team1CS">
           <p>{cs}</p>

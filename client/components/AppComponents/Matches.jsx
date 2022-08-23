@@ -77,9 +77,9 @@ const Matches = props => {
           </div>
           <div className="MatchGroup2div2">
             <p>{kills} / {deaths} / {assists}</p>
-            {KDA === 'Infinity' && <p id="over5kda"> K/D/A: Perfect </p>}
-            {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: {KDA} </p>}
-            {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: {KDA} </p>}
+            {KDA === 'Infinity' && <p id="over5kda"> K/D/A: <span>Perfect</span> </p>}
+            {KDA >= 5 && KDA !== 'Infinity' && <p id="over5kda"> K/D/A: <span>{KDA}</span></p>}
+            {KDA < 5 && KDA >= 3 && <p id="between3and5kda"> K/D/A: <span>{KDA}</span> </p>}
             {KDA < 3 && <p id="lessthan3kda"> K/D/A: {KDA} </p>}
             <p>CS: {cs} <span id="cs-m-span">({`${(cs/(matchLength/60)).toFixed(1)}`}/m)</span></p>
             <p>vision: {visionScore}</p>
@@ -152,7 +152,7 @@ const Matches = props => {
         </div>
       </div>
       <div className="DropDownBoxes">
-        {summonerOpen && <div className={`hidden-${hidden}`}><DropDownBox runes={runes} summonerSpells={summonerSpells} champLevel={champLevel} kills={kills} deaths={deaths} assists={assists} championId={championId} matchId={matchId} matchLength={matchLength} championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/></div>}
+        {summonerOpen && <DropDownBox runes={runes} summonerSpells={summonerSpells} champLevel={champLevel} kills={kills} deaths={deaths} assists={assists} championId={championId} matchId={matchId} matchLength={matchLength} championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/>}
       </div>
     </div>
   );
