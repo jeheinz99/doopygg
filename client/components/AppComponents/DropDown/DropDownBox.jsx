@@ -14,13 +14,13 @@ import ItemTimelineBox from './ItemTimelineBox.jsx';
 
 const DropDownBox = props => {
   
-  const { championId, matchId, matchNum, matchLength, otherPlayers, id, championIcon, items } = props;
+  const { summonerSpells, runes, kills, deaths, assists, champLevel, championId, matchId, matchNum, matchLength, otherPlayers, id, championIcon, items } = props;
 
   const summonerName = useSelector(state => state.summoners.summonerName);
   const puuid = useSelector(state => state.summoners.puuid);
   const regionId = useSelector(state => state.summoners.region);
 
-  const [currBox, toggleBox] = useState(false);
+  const [currBox, toggleBox] = useState('match-overview');
   const [lolDDboxData, lolSetDDboxData] = useState([]);
   const [timelineData, setTimelineData] = useState({});
   const [championAbilityIcons, setChampionIcons] = useState([]);
@@ -149,97 +149,80 @@ const DropDownBox = props => {
     }
   }
 
+  const KDA = ((kills + assists) / deaths).toFixed(2);
+
   return (
     <div className="DDBoxWrap">
 
-      {currBox && otherPlayersRunes.length > 0 && 
-        <div className="dd-box-routes">
-          <button className="dd-box-nav-btn" onClick={() => toggleBox(!currBox)}> Overview </button>
-          <button className="dd-box-nav-btn" onClick={() => toggleBox(!currBox)}> etc. </button>
-        </div>}
+      {lolDDboxData.length === 0 &&
+      <div className="LoadingDiv">
+        <PulseLoader color="#ffffff" size={15} speedMultiplier={0.6}/>
+        <p> Loading... </p>
+      </div>}
 
-      {currBox && otherPlayersRunes.length > 0 && runeInfo.mainPlayer !== undefined &&
+      {currBox === "match-overview" && lolDDboxData.length > 0 &&
+      <div className="DDbox">
+
+        <div className="dd-box-routes">
+          <button className="dd-box-nav-btn" onClick={() => toggleBox("match-runes")}> Runes </button>
+          <button className="dd-box-nav-btn" onClick={() => toggleBox("match-timeline")}> Build </button>
+        </div>
+
+        <div className="objectives-1">
+          <ObjectivesDD otherPlayers={otherPlayers}/>
+        </div>
+
+        <InfoBar/>
+        <DDBoxPlayers matchLength={matchLength} lolDDboxData={lolDDboxData}/>
+      </div>}
+
+      {currBox === "match-runes" && otherPlayersRunes.length > 0 && runeInfo.mainPlayer !== undefined &&
         <div className="RunesInfoDD">
+          <div className="dd-box-routes">
+            <button className="dd-box-nav-btn" onClick={() => toggleBox("match-overview")}> Overview </button>
+            <button className="dd-box-nav-btn" onClick={() => toggleBox("match-timeline")}> Build </button>
+          </div>
           <div className="RunesInfoMainWrap">
 
             <div className="RunesInfoMain">
               <div className="IconAndBuild">
-                <div className="wrap-1">
-                  <div className="runes-items-champicon">
-                    <img id="temp" src={championIcon}/>
+                <div className="runes-items-champicon">
+                  <div className="runes-items-champicon-div">
+                    <div className="championIcon-and-Level">
+                      <img id="temp" src={championIcon}/>
+                      <div className="level-div">{champLevel}</div>
+                    </div>
+                    <div className="runes-items-summspells">
+                      <img id="summonerSpellIcon1" src={summonerSpells[0]}/>
+                      <img id="summonerSpellIcon1" src={summonerSpells[1]}/>
+                    </div>
+                    <div className="runes-items-rune-trees">
+                      <img id="keystoneIcon" src={runes[0].icon}/>
+                      <img id="secondaryRuneIcon" src={runes[5].icon}/>
+                    </div>
+                  </div>
+                  <div className="runes-itemsDiv">
 
-                    <div className="runes-itemsDiv">
+                    <div className="upperHalfItems" id="upperDDbox">
+                      <img id="item0" src={items[0]}/>
+                      <img id="item1" src={items[1]}/>
+                      <img id="item2" src={items[2]}/>
+                    </div>
 
-                      <div className="upperHalfItems" id="upperDDbox">
-                        <img id="item0" src={items[0]}/>
-                        <img id="item1" src={items[1]}/>
-                        <img id="item2" src={items[2]}/>
-                      </div>
-
-                      <div className="lowerHalfItems" id="lowerDDbox">
-                        <img id="item3" src={items[3]}/>
-                        <img id="item4" src={items[4]}/>
-                        <img id="item5" src={items[5]}/>
-                      </div>
-
+                    <div className="lowerHalfItems" id="lowerDDbox">
+                      <img id="item3" src={items[3]}/>
+                      <img id="item4" src={items[4]}/>
+                      <img id="item5" src={items[5]}/>
                     </div>
 
                   </div>
-                  <Runes1 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+                  <p> {kills} / {deaths} / {assists} <span>{`(${KDA})`}</span></p>
                 </div>
-                <div className="R2andR3">
-                  <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
-                  <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
-                </div>
+                <Runes1 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+                <Runes2 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
+                <Runes3 matchNum={matchNum} runeInfo={runeInfo.mainPlayer}/>
               </div>
             </div>
-
-            <div className="Match-timeline-main">
-              <div className="match-timeline-skills-header">
-                <p> Skill Order </p>
-              </div>
-              
-              <div className="match-timeline-skills-div">
-                <div className="match-timeline-skills">
-                  <div className="ability-icon">
-                    <img className="champion-ability-icon" id="Q-icon" src={championAbilityIcons[0]}/>
-                    <div className="level-div" id="level-matchbox">Q</div>
-                  </div>
-                  {skillQArr}
-                </div>
-                <div className="match-timeline-skills">
-                  <div className="ability-icon">
-                    <img className="champion-ability-icon" id="W-icon" src={championAbilityIcons[1]}/>
-                    <div className="level-div" id="level-matchbox">W</div>
-                  </div>  
-                  {skillWArr}
-                </div>
-                <div className="match-timeline-skills">
-                  <div className="ability-icon">
-                    <img className="champion-ability-icon" id="E-icon" src={championAbilityIcons[2]}/>
-                    <div className="level-div" id="level-matchbox">E</div>
-                  </div>
-                  {skillEArr}
-                </div>
-                <div className="match-timeline-skills">
-                  <div className="ability-icon">
-                    <img className="champion-ability-icon" id="R-icon" src={championAbilityIcons[3]}/>
-                    <div className="level-div" id="level-matchbox">R</div>
-                  </div>
-                  {skillRArr}
-                </div>
-
-              </div>
-
-              <div className="match-timeline-items-header">
-                <p> Item Build </p>
-              </div>
-
-              <div className="match-timeline-items-div">
-                { itemsArr }
-              </div>
-            </div>
-
           </div>
           <div className="OtherPlayersRunes">
             <div id="otherPlayers1">
@@ -249,30 +232,56 @@ const DropDownBox = props => {
               { otherPlayersRunes2 }
             </div> 
           </div>
+        </div>}
 
-        </div>
-        }
-
-      {!currBox && lolDDboxData.length === 0 &&
-      <div className="LoadingDiv">
-        <PulseLoader color="#ffffff" size={15} speedMultiplier={0.6}/>
-        <p> Loading... </p>
-      </div>}
-
-      {!currBox && lolDDboxData.length > 0 &&
-      <div className="DDbox">
-
+      {currBox === "match-timeline" && lolDDboxData.length > 0 && 
+      <div className="Match-timeline-main">
         <div className="dd-box-routes">
-          <button className="dd-box-nav-btn" onClick={() => toggleBox(!currBox)}> Runes </button>
-          <button className="dd-box-nav-btn" onClick={() => toggleBox(!currBox)}> etc. </button>
+          <button className="dd-box-nav-btn" onClick={() => toggleBox("match-overview")}> Overview </button>
+          <button className="dd-box-nav-btn" onClick={() => toggleBox("match-runes")}> Runes </button>
+        </div>
+        <div className="match-timeline-skills-header">
+          <p> Skill Order </p>
+        </div>
+        
+        <div className="match-timeline-skills-div">
+          <div className="match-timeline-skills">
+            <div className="ability-icon">
+              <img className="champion-ability-icon" id="Q-icon" src={championAbilityIcons[0]}/>
+              <div className="level-div" id="level-matchbox">Q</div>
+            </div>
+            {skillQArr}
+          </div>
+          <div className="match-timeline-skills">
+            <div className="ability-icon">
+              <img className="champion-ability-icon" id="W-icon" src={championAbilityIcons[1]}/>
+              <div className="level-div" id="level-matchbox">W</div>
+            </div>  
+            {skillWArr}
+          </div>
+          <div className="match-timeline-skills">
+            <div className="ability-icon">
+              <img className="champion-ability-icon" id="E-icon" src={championAbilityIcons[2]}/>
+              <div className="level-div" id="level-matchbox">E</div>
+            </div>
+            {skillEArr}
+          </div>
+          <div className="match-timeline-skills">
+            <div className="ability-icon">
+              <img className="champion-ability-icon" id="R-icon" src={championAbilityIcons[3]}/>
+              <div className="level-div" id="level-matchbox">R</div>
+            </div>
+            {skillRArr}
+          </div>
+        </div>
+        
+        <div className="match-timeline-items-header">
+          <p> Item Build </p>
         </div>
 
-        <div className="objectives-1">
-          <ObjectivesDD otherPlayers={otherPlayers}/>
+        <div className="match-timeline-items-div">
+          { itemsArr }
         </div>
-
-        <InfoBar/>
-        <DDBoxPlayers matchLength={matchLength} lolDDboxData={lolDDboxData}/>
       </div>}
       
     </div>

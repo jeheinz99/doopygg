@@ -241,7 +241,7 @@ html, body {
   border: 3px solid #272d3a;
   color: rgba(255, 255, 255, 0.8);
   border-radius: 100%;
-  width: 25%;
+  width: 30%;
   right: 0;
   font-size: 0.85em;
 }
@@ -260,6 +260,7 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 4px;
 }
 .MatchGroup2div2 {
   display: flex;
@@ -335,7 +336,7 @@ html, body {
   height: 32px;
   border-radius: 0.5em;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
-  border: 2px solid #2f3138;
+  border: 2px solid rgba(47, 49, 56, 0.5);
 }
 #item6 {
   width: 24px;
@@ -1178,20 +1179,13 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 93%;
+  width: 95%;
   justify-content: center;
 }
 .RunesInfoMain {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-}
-.wrap-1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.7em;
 }
 .TreeDiv {
   width: 90%;
@@ -1284,6 +1278,7 @@ h4 {
   align-items: center;
   justify-items: center;
   justify-content: flex-start;
+  background-color: #16161dce;
   /* background-color: #16161dce; */
   /* border-top: 1px solid #303b51;
   border-bottom: 1px solid #303b51; */
@@ -1378,8 +1373,9 @@ h4 {
 }
 .IconAndBuild {
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
   /* border: 2px solid #272d3a; */
   /* border-radius: 0.2em; */
   padding: 8px;
@@ -1393,13 +1389,40 @@ h4 {
 }
 .runes-items-champicon {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.1em;
+  gap: 1.4em;
+  background-color: #16161dce;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 5);
   border: 3px solid #272d3a;
   border-radius: 0.2em;
-  padding: 5px;
+  padding: 6px;
+}
+.runes-items-champicon p {
+  margin: 0;
+  height: 100%;
+}
+.runes-items-champicon p span {
+  font-size: 0.9em;
+  color: rgba(207, 205, 205, 0.8);
+}
+.runes-items-champicon-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+}
+.runes-items-summspells, .runes-items-rune-trees {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.runes-items-rune-trees {
+  padding-bottom: 4px;
 }
 #upperDDbox img, #lowerDDbox img {
   width: 40px;
@@ -1451,14 +1474,6 @@ h4 {
 
 .DDbox {
   width: 100%;
-}
-.R2andR3 {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
 }
 .LoadingDiv {
   display: flex;
@@ -1835,35 +1850,51 @@ h4 {
 .Match-timeline-main {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  margin-top: 1em;
+  align-items: center;
   gap: 1em;
-  width: 90%;
-  border: 3px solid #272d3a;
+  width: 100%;
   border-radius: 0.2em;
-  padding: 6px;
   background-color: #16161dce;
   height: 50%;
+  padding-bottom: 1%;
 }
-.match-timeline-skills-header {
+.match-timeline-skills-header, .match-timeline-items-header {
   display: flex;
   align-items: center;
   text-align: center;
   height: 1.75em;
-  border-left: 2px solid rgba(255, 255, 255, 0.8);
+  width: 100%;
+  padding-bottom: 1em;
+  /* border-left: 2px solid rgba(255, 255, 255, 0.8); */
+  border-bottom: 1px solid #272d3a;
 }
-.match-timeline-skills-header p {
+.match-timeline-skills-header p, .match-timeline-items-header p {
   font-size: 1.2em;
   margin: 0;
-  margin-left: 0.5em;
+  padding-left: 1%;
+  margin-left: 2%;
+  border-left: 2px solid rgba(255, 255, 255, 0.8);
 }
 .ability-icon {
   position: relative;
 }
 .match-timeline-skills-div {
   display: grid;
+  width: 95%;
   gap: 0.5em;
+  padding: 5px;
+  border-radius: 0.2em;
+  border: 3px solid #272d3a;
   grid-template-columns: auto;
+}
+.match-timeline-items-div {
+  display: flex;
+  flex-flow: wrap;
+  padding: 5px;
+  border-radius: 0.2em;
+  border: 3px solid #272d3a;
+  width: 95%;
+  gap: 0.5em;
 }
 .match-timeline-skills {
   display: grid;
@@ -1891,24 +1922,6 @@ h4 {
 }
 #activeBox {
   background: rgb(19, 28, 43);
-}
-.match-timeline-items-header {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  height: 1.75em;
-  border-left: 2px solid rgba(255, 255, 255, 0.8);
-  /* border-bottom: 1px solid #272d3a; */
-}
-.match-timeline-items-header p {
-  font-size: 1.2em;
-  margin: 0;
-  margin-left: 0.5em;
-}
-.match-timeline-items-div {
-  display: flex;
-  flex-flow: wrap;
-  gap: 0.5em;
 }
 .timeline-item-box {
   border-radius: 0.3em;
@@ -2352,5 +2365,4 @@ h4 {
   }
 }
 @media only screen and (max-width: 420px) {
-
 }
