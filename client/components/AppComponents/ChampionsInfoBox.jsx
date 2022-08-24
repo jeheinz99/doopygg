@@ -124,13 +124,11 @@ const ChampionsInfoBox = () => {
     <div className="ChampionsInfoBox">
       <div className="ci-header">
         <div className="ci-summoner-info">
-
-          <img id="ci-profile-icon" src={profileIcon}/>
-
-          <div className="ci-name-level">
-            <p> {summonerName} </p>
-            <p> Level: {summonerLevel} </p>
+          <div className="SummonerIcon-Level">
+            <img id="ci-profile-icon" src={profileIcon}/>
+            <div className="level-div" id="ci-summoner-level-div">{summonerLevel}</div>
           </div>
+          <p> {summonerName} </p>
 
           <h3> Ranked Solo S12 </h3>
 

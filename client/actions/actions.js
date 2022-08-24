@@ -54,6 +54,7 @@ export const getSummonerData = summonerName => async dispatch => {
 };
 
 export const updateSummonerData = summonerName => async dispatch => {
+  
   const region = document.getElementById('region-select').value;
   const responseSummUpdateData = await axios.get(`/summoner/update/${region}/${summonerName}`);
   // console.log('SUMM UPDATE response from back-end', responseSummUpdateData.data);

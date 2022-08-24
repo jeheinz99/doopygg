@@ -87,38 +87,81 @@ html, body {
   outline: none;
 }
 
-#summonerUpdateButton {
+.summonerUpdateButton {
   border: none;
-  border-left: 3px solid rgba(255, 255, 255, 0.80);
-  width: 5%;
-  display: flex;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0.2em;
+  width: 7%;
+  height: 40px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
   justify-self: flex-start;
-  background: none;
+  display: flex;
+  background-color: #264653a7;
   margin: 0;
+  padding: 0;
   color:#ffffff;
   font-size: 1.5em;
   font-weight: 500;
+  transition: 0.5s;
 }
-#summonerUpdateButton:hover {
+.summonerUpdateButton:hover {
+  transform: translateY(-1px);
   cursor: pointer;
-  color: rgb(220, 49, 49);
+  filter: invert(10%);
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
+  border: 2px solid rgba(255, 255, 255, 0.75);
 }
-#summonerUpdateButton:active {
+.summonerUpdateButton:active {
+  transform: translateY(0px);
   position:relative;
-  top:1px;
+}
+#update-wait {
+  background-color: #16161dce;
+}
+#update-wait:hover {
+  transform: none;
+  filter: none;
+  box-shadow: none;
+  cursor: default;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+#update-wait:active {
+  transform: none;
 }
 .loading-div {
-  height: 2.4em;
   display: flex;
+  justify-content: center;
+  height: 36px;
+  border: 2px solid rgba(71, 70, 70, 0.6);
+  border-radius: 0.2em;
+  min-width: 150px;
+  width: 9.5%;
   align-items: flex-end;
-  gap: 0.3em;
+  background-color: #5722159c;
+  gap: 0.2em;
+  transition: 1s;
+}
+.loading-div:hover {
+  filter: invert(5%);
+  cursor: pointer;
 }
 #updating-p {
   display: flex;
-  height: 82%;
+  flex-wrap: wrap;
+  color:#c9c9c9;
   margin: 0;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
   font-size: 1.5em;
-  color: rgba(255, 255, 255, 0.861);
+  transition: 1s;
+}
+#pulse-test {
+  display: flex;
+  align-self: center;
+  padding-top: 15px;
 }
 .SummonerDataBoxGroup {
   display: grid;
@@ -1175,6 +1218,15 @@ h4 {
   background-color: #16161d;
   font-size: 1.1em;
 }
+#ci-summoner-level-div {
+  border-radius: 0.2em;
+  right: 30%;
+  bottom: -7%;
+  width: 40%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background-color: #16161d;
+  font-size: 1.1em;
+}
 #summonerIcon {
   height: 128px;
   width: 128px;
@@ -1231,7 +1283,6 @@ h4 {
   justify-content: flex-start;
 }
 .TreeDiv {
-  width: 90%;
   border: 3px solid rgba(39, 45, 58, 0.5);
   border-radius: 0.2em;
   padding: 0.5em;
@@ -1545,7 +1596,7 @@ h4 {
 .searchbox-tab {
   border: none;
   background: none;
-  color: #4d525f;
+  color: rgba(255, 255, 255, 0.80);
   font-size: 1.2em;
   margin: 5px;
   border-bottom: 2px solid #171A21;
@@ -1557,7 +1608,6 @@ h4 {
   border-bottom: 3px solid rgba(255, 255, 255, 0.80);
 }
 #active-btn-tab {
-  color: rgba(255, 255, 255, 0.80);
   border-bottom: 3px solid rgba(255, 255, 255, 0.80);
 }
 .ci-summoner-info {
@@ -1568,9 +1618,6 @@ h4 {
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-}
-.ci-name-level {
-  font-size: 1.2em;
 }
 #ci-profile-icon {
   border: 1px solid #303b51;

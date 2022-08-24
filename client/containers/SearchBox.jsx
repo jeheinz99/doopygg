@@ -29,8 +29,9 @@ const SearchBox = () => {
 
   const getTimeAgo = lastUpdated => {
     const todaysDateStamp = Date.now();
-
+    
     const diff = todaysDateStamp - lastUpdated;
+    if (diff < 180000) return (3 - (Math.round(diff/60000)));
     if (diff >= 3600000 && diff < 86400000) {
       if (Math.round(diff/3600000) === 1) return ('1 hour ago');
       return (`${Math.round(diff/3600000)} hours ago`);
@@ -42,9 +43,6 @@ const SearchBox = () => {
     if (diff >= 86400000 && diff < 2592000000) {
       if (Math.round(diff/86400000) === 1) return ('1 day ago');
       return (`${Math.round(diff/86400000)} days ago`);
-    }
-    if (diff < 60000) {
-      return (`${Math.round(diff/1000)} seconds ago`);
     }
     if (diff >= 2592000000 && diff < 31540000000) {
       if (Math.round(diff/2592000000) === 1) return ('1 month ago');
@@ -101,19 +99,30 @@ const SearchBox = () => {
         </div>
       </div>
 
-      {matchHistory[0] && !loading && 
+      {matchHistory[0] && !loading && typeof timeAgo === "string" &&
       <div className="headerinfo">
         <h3> Summoner Information </h3>
-        <button id="summonerUpdateButton" onClick={() => updateSummData()}> Update </button>
+        <button className="summonerUpdateButton" onClick={() => updateSummData()}> Update </button>
         <p>Last Updated {timeAgo}</p>
       </div>}
+
+      {matchHistory[0] && !loading && typeof timeAgo === "number" &&
+      <div className="headerinfo">
+        <h3> Summoner Information </h3>
+        <button className="summonerUpdateButton" id="update-wait"> Update </button>
+        {timeAgo === 3 && <p>Please wait {timeAgo} minutes before updating again.</p>}
+        {timeAgo === 2 && <p>Please wait {timeAgo} minutes before updating again.</p>}
+        {timeAgo <= 1 && <p>Please wait {timeAgo} minute before updating again.</p>}
+      </div>}
+
+
 
       {matchHistory[0] && loading && 
       <div className="headerinfo">
         <h3> Summoner Information </h3>
         <div className="loading-div">
           <p id="updating-p"> Updating </p>
-          <PulseLoader color="#ffffff" size={10} speedMultiplier={0.6}/>
+          <PulseLoader id="pulse-test" color="#c9c9c9" size={8} speedMultiplier={0.6}/>
         </div>
         <p>Last Updated {timeAgo}</p>
       </div>}

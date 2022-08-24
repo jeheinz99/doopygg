@@ -177,8 +177,7 @@ const DropDownBox = props => {
         <DDBoxPlayers matchLength={matchLength} lolDDboxData={lolDDboxData}/>
       </div>}
 
-      {/* {currBox === "match-runes" && otherPlayersRunes.length > 0 && runeInfo.mainPlayer !== undefined && */}
-      {currBox === "match-runes" && lolDDboxData.length > 0 &&
+      {currBox === "match-runes" && otherPlayersRunes.length > 0 && runeInfo.mainPlayer !== undefined &&
       <div className="RunesInfoDD">
         <div className="dd-box-routes">
           <button className="dd-box-nav-btn" onClick={() => toggleBox("match-overview")}> Overview </button>

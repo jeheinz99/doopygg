@@ -99,7 +99,7 @@ const TFTPageContainer = () => {
       {TFTData[0] && !loading && 
       <div className="headerinfo">
         <h3> Summoner Information </h3>
-        <button id="summonerUpdateButton" onClick={() => updateTFTSummData()}> Update </button>
+        <button className="summonerUpdateButton" onClick={() => updateTFTSummData()}> Update </button>
         <p>Last Updated {timeAgo}</p>
       </div>}
 
