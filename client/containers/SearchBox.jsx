@@ -5,15 +5,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataBox.jsx';
 import ChampionsInfoBox from '../components/AppComponents/ChampionsInfoBox.jsx';
 import LiveGameBox from '../components/AppComponents/LiveGame/LiveGameBox.jsx';
+import RegionSelect from '../components/AppComponents/RegionSelect.jsx'
 import { PulseLoader } from 'react-spinners';
 import { BiSearch } from 'react-icons/bi';
+import doop from '../assets/Doopliss_Kindred.png';
 
 const SearchBox = () => {
   const summName = useSelector(state => state.summoners.summonerName);
   const matchHistory = useSelector(state => state.summoners.matchHistory);
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
   const lastUpdated = useSelector(state => state.summoners.lastUpdated);
-  const region = useSelector(state => state.summoners.region);
 
   const [currBox, setCurrBox] = useState('matchHistory');
   const [loading, setLoading] = useState(false);
@@ -74,52 +75,42 @@ const SearchBox = () => {
   return (
     <div className="OuterSearchBox">
       <div className="SearchBox">
-        <div id="welcome"> doopy.gg Summoners </div>
-        <div id="inputSummonerName"> Input your Summoner Name Below </div>
-        <br></br>
-        <div className="SearchBoxInputandIcon">
-          <select id="region-select" name="region">
-            <option value="na1">NA</option>
-            <option value="euw1">EUW</option>
-            <option value="eun1">EUN</option>
-            <option value="oc1">OCE</option>
-            <option value="kr">KR</option>
-            <option value="jp1">JP</option>
-            <option value="la1">LAS</option>
-            <option value="la2">LAN</option>
-            <option value="tr1">TR</option>
-            <option value="ru">RU</option>
-          </select>
-          <input id="SearchBoxInput" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
-          <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
+        <div className="welcome-div">
+          <div id="welcome"> doopy.gg </div>
+          <img id="doop" src={doop}/>
         </div>
-        <div className="test-button">
-          <p>Don't have a summoner name?</p>
-          <button id="SearchBoxDemoButton" onClick={() => loadSummonerData(getSummonerData('Doopliss2'))}> Demo </button>
+        <div id="inputSummonerName"> 
+          <p>Input your Summoner Name</p>
+          <div className="SearchBoxInputandIcon">
+            <RegionSelect/>
+            <input id="SearchBoxInput" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
+            <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
+          </div>
+          <div className="test-button">
+            <p>Don't have a summoner name?</p>
+            <button id="SearchBoxDemoButton" onClick={() => loadSummonerData(getSummonerData('Doopliss2'))}> Demo </button>
+          </div>
         </div>
       </div>
 
       {matchHistory[0] && !loading && typeof timeAgo === "string" &&
       <div className="headerinfo">
-        <h3> Summoner Information </h3>
         <button className="summonerUpdateButton" onClick={() => updateSummData()}> Update </button>
         <p>Last Updated {timeAgo}</p>
       </div>}
 
       {matchHistory[0] && !loading && typeof timeAgo === "number" &&
       <div className="headerinfo">
-        <h3> Summoner Information </h3>
-        <button className="summonerUpdateButton" id="update-wait"> Update </button>
+        <button className="summonerUpdateButton" id="update-wait"> Updated </button>
         {timeAgo === 3 && <p>Please wait {timeAgo} minutes before updating again.</p>}
         {timeAgo === 2 && <p>Please wait {timeAgo} minutes before updating again.</p>}
-        {timeAgo <= 1 && <p>Please wait {timeAgo} minute before updating again.</p>}
+        {timeAgo <= 1 && <p>Please wait 1 minute before updating again.</p>}
       </div>}
 
 
 
       {matchHistory[0] && loading && 
       <div className="headerinfo">
-        <h3> Summoner Information </h3>
         <div className="loading-div">
           <p id="updating-p"> Updating </p>
           <PulseLoader id="pulse-test" color="#c9c9c9" size={8} speedMultiplier={0.6}/>

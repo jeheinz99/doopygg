@@ -22,6 +22,7 @@ a {
 #NavbarHeader {
   opacity: 0;
   transition: 0.6s;
+  font-size: 2em;
 }
 
 #ul1 {
@@ -74,8 +75,8 @@ a {
 }
 
 #HomeLogo {
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
 }
 
 .LogoLinks {
@@ -90,23 +91,23 @@ a {
   filter: drop-shadow(0 0 0.1rem rgb(11, 10, 11));
 }
 #tftLogo {
-  height: 46px;
-  width: 76px;
+  height: 52px;
+  width: 82px;
   transition: 0.4s;
 }
 #valorantLogo {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
 }
 
 #LeaderboardLogo {
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
 }
 
 #RiotLogo {
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
 }
 
 #valorant:link, #valorant:visited, #champions:link, #champions:visited, #leaderboards:link, #leaderboards:visited, #home:link, #home:visited, #tft:link, #tft:visited {
@@ -115,41 +116,84 @@ a {
 }
 
 #githubLogo {
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
 }
 #GithubLogoLink {
   display: inline-block;
 }
 
 #discordLogo {
-  height: 32px;
-  width: 32px;
+  height: 48px;
+  width: 48px;
 }
 #DiscordLogoLink {
   display: inline-block;
 }
 
 #youtubeLogo {
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
 }
 #YoutubeLogoLink {
   display: inline-block;
 }
 
 #twitterLogo {
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
 }
 #TwitterLogoLink { 
   display: inline-block;
 }
 
 #LinkedInLogo {
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
 }
 #LinkedInLogoLink {
   display: inline-block;
+}
+
+@media only screen and (max-width: 1100px) {
+  #LinkedInLogo {
+    width: 32px;
+    height: 32px;
+  }
+  #discordLogo {
+    width: 32px;
+    height: 32px;
+  }
+  #youtubeLogo {
+    width: 32px;
+    height: 32px;
+  }
+  #twitterLogo {
+    width: 32px;
+    height: 32px;
+  }
+  #githubLogo {
+    width: 32px;
+    height: 32px;
+  }
+  #HomeLogo {
+    width: 32px;
+    height: 32px;
+  }
+  #valorantLogo {
+    width: 64px;
+    height: 64px;
+  }
+  #LeaderboardLogo {
+    width: 32px;
+    height: 32px;
+  }
+  #tftLogo {
+    height: 46px;
+    width: 76px;
+  }
+  #RiotLogo {
+    width: 32px;
+    height: 32px;
+  }
 }

@@ -7,16 +7,26 @@
   text-align: center;
   font-size: 1em;
   border: none;
-  border-bottom: 1px solid #C9F0FF;
+  border-bottom: 2px solid rgba(55, 166, 213, 0.6);
+  border-right: 2px solid #171A21;
+  border-left: 2px solid #171A21;
+  border-top: 2px solid #171A21;
   background-color: #15161a;
   color:rgba(255, 255, 255, 0.861);
-  /* box-shadow: 2px 2px 15px rgb(0, 0, 0, 5); */
+  transition: 1s;
+  height: 36px;
 }
 #SearchBoxInputTFT:focus {
   outline: 0;
+  background-color: #15161ab7;
+  /* border-bottom: 4px solid rgba(213, 55, 65, 0.6); */
+  border-radius: 0.5em;
+  border-right: 2px solid rgba(55, 166, 213, 0.6);
+  border-left: 2px solid rgba(55, 166, 213, 0.6);
+  border-top: 2px solid rgba(55, 166, 213, 0.6);
 }
 #SearchBoxInputTFT:hover {
-  background-color: #22212174;
+  background-color: #15161ab7;
 }
 #TFTSummonerInfoBox {
   display: grid;

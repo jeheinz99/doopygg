@@ -45,7 +45,7 @@ export const getLeaderboardData = regionName => async dispatch => {
 
 export const getSummonerData = summonerName => async dispatch => {
   const input = document.getElementById('SearchBoxInput');
-  const region = document.getElementById('region-select').value;
+  const region = document.getElementById('region-select-btn').value;
   input.value = '';
   input.placeholder = 'Summoner Name';
   const responseSummData = await axios.get(`/summoner/${region}/${summonerName}`);
@@ -54,8 +54,7 @@ export const getSummonerData = summonerName => async dispatch => {
 };
 
 export const updateSummonerData = summonerName => async dispatch => {
-  
-  const region = document.getElementById('region-select').value;
+  const region = document.getElementById('region-select-btn').value;
   const responseSummUpdateData = await axios.get(`/summoner/update/${region}/${summonerName}`);
   // console.log('SUMM UPDATE response from back-end', responseSummUpdateData.data);
   dispatch(addSummonerDataActionCreator(responseSummUpdateData.data));
@@ -68,7 +67,7 @@ export const getValorantData = (riotID, tagLine) => async dispatch => {
 };
 
 export const getTFTData = summonerName => async dispatch => {
-  const region = document.getElementById('tft-region-select').value;
+  const region = document.getElementById('region-select-btn').value;
   const input = document.getElementById('SearchBoxInputTFT');
   input.value = '';
   input.placeholder = 'Summoner Name';
@@ -78,7 +77,7 @@ export const getTFTData = summonerName => async dispatch => {
 };
 
 export const updateTFTData = summonerName => async dispatch => {
-  const region = document.getElementById('tft-region-select').value;
+  const region = document.getElementById('region-select-btn').value;
   const responseTFTUpdateData = await axios.get(`/tft/update/${region}/${summonerName}`);
   // console.log('TFT UPDATE response from back-end', responseTFTUpdateData.data);
   dispatch(addTFTDataActionCreator(responseTFTUpdateData.data));

@@ -44,6 +44,7 @@ html, body {
   align-items: center;
   width: 100%;
   color: white;
+  text-align: center;
 }
 .OuterSearchBox {
   display: flex;
@@ -54,7 +55,6 @@ html, body {
   box-shadow: 2px 5px 5px rgba(0, 0, 0, 5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.861);
   background: #171A21;
-  /* min-height: 43vw; */
   gap: 1.5em;
   padding: 10px;
 }
@@ -63,28 +63,75 @@ html, body {
   text-align: center;
   font-size: 1em;
   border: none;
-  border-bottom: 1px solid #484848;
+  border-bottom: 2px solid rgba(55, 166, 213, 0.6);
+  border-right: 2px solid #171A21;
+  border-left: 2px solid #171A21;
+  border-top: 2px solid #171A21;
   background-color: #15161a;
   color:rgba(255, 255, 255, 0.861);
   transition: 1s;
+  height: 36px;
 }
 
 #SearchBoxInput:focus {
   outline: 0;
-  background-color: #22212174;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.861);
+  background-color: #15161ab7;
+  /* border-bottom: 4px solid rgba(213, 55, 65, 0.6); */
+  border-radius: 0.5em;
+  border-right: 2px solid rgba(55, 166, 213, 0.6);
+  border-left: 2px solid rgba(55, 166, 213, 0.6);
+  border-top: 2px solid rgba(55, 166, 213, 0.6);
 }
 #SearchBoxInput:hover {
-  background-color: #22212174;
+  background-color: #15161ab7;
 }
-#tft-region-select, #region-select {
+.region-select {
+  position: relative;
+}
+#region-select-btn {
+  width: 70px;
+  display: grid;
+  grid-template-columns: 40% 30%;
+  align-items: center;
+  position: relative;
+  background: none;
+  border: none;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.861);
+  font-family: Kanit;
+  font-size: 1em;
+  padding: 0;
+}
+#region-select-btn:focus-visible {
+  outline: none;
+}
+.region-btn {
+  width: 100%;
   background: none;
   border: none;
   color: rgba(255, 255, 255, 0.861);
-  margin-right: 10px;
+  font-size: 0.9em;
+  font-family: Kanit;
+  transition: 0.3s;
+  border-radius: 0.5em;
 }
-#region-select:focus-visible {
-  outline: none;
+.region-btn:hover {
+  border-radius: 0.5em;
+  background-color:#376cd57d;
+}
+.region-select-content {
+  position: absolute;
+  top: -20%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 50px;
+  border-radius: 0.5em;
+  padding: 5px;
+  border: 1px solid rgba(39, 45, 58, 0.5);
+  background-color: #16161d;
+  /* opacity: 1; */
+  transition: opacity 0.5s ease-out;
 }
 
 .summonerUpdateButton {
@@ -186,14 +233,36 @@ html, body {
 }
 
 #welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   gap: 0;
   font-size: 3em;
   color:rgba(255, 255, 255, 0.861);
+  margin-bottom: 1%;
+}
+.welcome-div {
+  display: grid;
+  width: 100%;
+  justify-content: center;
+  gap: 1em;
+  grid-template-rows: 25% 70%;
 }
 #inputSummonerName {
+  width: 100%;
+  display: flex;
+  color: rgba(255, 255, 255, 0.8);
+  flex-direction: column;
+  align-items: center;
   font-size: 1.25em;
   font-weight: -200;
+}
+
+#doop {
+  margin-right: 15px;
+  width: 256px;
+  height: 256px;
 }
 
 .MatchesWrapper {
@@ -560,7 +629,7 @@ html, body {
   border: 1px solid #272d3a;
   border-right: none;
 }
-#dd-loseMatch-damagebar {
+#dd-loseMatch-damagebar, #dd-loseMatch-damagebar-100 {
   background-color:#d55137;
 }
 #dd-winMatch-damagebar-100, #dd-loseMatch-damagebar-100 {
@@ -1105,15 +1174,20 @@ h4 {
   color: rgba(255, 255, 255, 0.861);
 }
 .SearchBoxInputandIcon {
-  display: flex;
+  display: grid;
+  grid-template-columns: 20% 65% 15%;
+  align-items: center;
+  gap: 0.3em;
 }
 #SearchIcon {
   width: 32px;
   height: 32px;
 }
 #SearchBoxButton {
+  position: relative;
   border: none;
   background: none;
+  /* margin-left: 10px; */
   color:rgba(255, 255, 255, 0.80);
 }
 
@@ -1132,8 +1206,8 @@ h4 {
   width: 95%;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
   color: rgba(255, 255, 255, 0.861);
-  border-top: 2px solid rgba(255, 255, 255, 0.80);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.80);
+  border-top: 2px solid #383e4c;
+  border-bottom: 2px solid #383e4c;
   justify-content: space-around;
   background-color: #171A21;
   padding: 10px;
@@ -1210,15 +1284,6 @@ h4 {
   position: relative;
 }
 #summoner-level-div {
-  border-radius: 0.2em;
-  right: 30%;
-  bottom: -7%;
-  width: 40%;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  background-color: #16161d;
-  font-size: 1.1em;
-}
-#ci-summoner-level-div {
   border-radius: 0.2em;
   right: 30%;
   bottom: -7%;
@@ -1610,21 +1675,6 @@ h4 {
 #active-btn-tab {
   border-bottom: 3px solid rgba(255, 255, 255, 0.80);
 }
-.ci-summoner-info {
-  display: grid;
-  grid-template-columns: auto 15% 50%;
-  border: 2px solid #303b51;
-  padding: 5px;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: center;
-}
-#ci-profile-icon {
-  border: 1px solid #303b51;
-  border-radius: 0.2em;
-  height: 128px;
-  width: 128px;
-}
 .championsInfoEntryBox {
   display: grid;
   grid-template-columns: 13% 10% repeat(9, 1fr);
@@ -1650,7 +1700,7 @@ h4 {
   display: grid;
   align-items: center;
   width: 99%;
-  border: 2px solid #303b51;
+  border: 2px solid rgba(39, 45, 58, 1);
   color: rgba(255, 255, 255, 0.80);
   text-align: center;
   grid-template-columns: 13% 10% repeat(9, 1fr);
@@ -2175,20 +2225,28 @@ h4 {
   text-decoration: underline;
 }
 .test-button {
-  display: flex;
+  color: rgba(255, 255, 255, 0.6);
+  width: 50%;
+  display: grid;
+  font-size: 0.9em;
+  justify-content: center;
   align-items: center;
-  gap: 0.5em;
+  gap: 5px;
+  grid-template-columns: 35% 8%;
+  margin-right: 10px;
 }
 #SearchBoxDemoButton {
   background: #16181a;
-  border: 2px solid #303b51;
-  height: 3em;
+  border: 1px solid rgba(71, 70, 70, 0.4);
+  border-radius: 0.2em;
+  height: 2.5em;
   transition: 0.5s;
-  color: rgba(255, 255, 255, 0.861);
+  color: rgba(255, 255, 255, 0.6);
 }
 #SearchBoxDemoButton:hover {
   cursor: pointer;
-  filter: invert(10%);
+  transform: translateY(-1px);
+  border: 1px solid rgba(55, 166, 213, 0.6);
 }
 #SearchBoxDemoButton:active {
   transform: translateY(3px);
@@ -2287,10 +2345,6 @@ h4 {
 @media only screen and (max-width: 900px) {
   .TeamInfoTextDD1, .TeamInfoTextDD2 {
     grid-template-columns: 58.5% 10% 10% 7%;
-  }
-  #ci-profile-icon {
-    width: 96px;
-    height: 96px;
   }
   .otherPlayerRunesBox p {
     font-size: 0.8em;
@@ -2410,10 +2464,6 @@ h4 {
   .champEntry {
     font-size: 0.8em;
     grid-template-columns: 35% repeat(3, 1fr);
-  }
-  #ci-profile-icon {
-    width: 64px;
-    height: 64px;
   }
   .champEntryDiv1 p {
     font-size: 0.9em;
