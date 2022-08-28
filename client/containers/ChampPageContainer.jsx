@@ -1,5 +1,5 @@
 import React from 'react';
-import { getChampionData } from '../actions/actions';
+import { getChampionData, testAsyncFunc } from '../actions/actions';
 import { useDispatch } from 'react-redux';
 import ChampionsHeader from '../components/ChampionsComponents/ChampionsHeader';
 
@@ -11,6 +11,10 @@ const ChampPageContainer = () => {
     dispatch(getChampionData());
   };
 
+  const testFuncTwo = async () => {
+    dispatch(testAsyncFunc());
+  };
+
   return (
     <div className ="OuterSearchBox">
 
@@ -19,6 +23,7 @@ const ChampPageContainer = () => {
 
       <div className="champ-stats-mainpage">
          <ChampionsHeader />
+         {/* {<button className="testButton" onClick={() => testFuncTwo()}></button>} */}
          {/* <button id="testButton-champions-page" onClick={() => testFunc()}></button> */}
       </div>
 
@@ -27,11 +32,3 @@ const ChampPageContainer = () => {
 };
 
 export default ChampPageContainer;
-
-  // {<button className="testButton" onClick={() => testFunc()}></button>}
-
-  // const dispatch = useDispatch();
-
-  // const testFunc = async () => {
-  //   dispatch(testAsyncFunc());
-  // };

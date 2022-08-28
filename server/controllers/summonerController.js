@@ -498,7 +498,7 @@ summonerController.addSummMatchesData = async (req, res, next) => {
       const tempArr = [];
 
       for (let i = 0; i < arrayOfObjs.length; i++) {
-        for (let j = 0; j < 10; j++) {
+        for (let j = 0; j < arrayOfObjs[i].matchData.participants.length; j++) {
           if ((arrayOfObjs[i].matchData.participants[j].summonerName).toLowerCase() === summonerName.toLowerCase()) {
             const player = arrayOfObjs[i].matchData.participants[j];
             tempArr.push({
@@ -525,17 +525,26 @@ summonerController.addSummMatchesData = async (req, res, next) => {
       return tempArr;
     };
 
+    // for (let i = 0; i < allMatchesPlayed.length; i++) {
+      //   const objs = await lolMatches.find({ matchId: { $in: [...summoner.S12MatchesPlayed[i]]}});
+      //   const objData = getObjData(objs, summonerName);
+      //   S12MatchesInfoArr.push(objData);
+      // }
+      // iterate through array of arrays and push to 1 array to only connect to DB once
     const S12MatchesInfoArr = [];
-    // iterate through all s12 ranked matches and see matches that are cached in db
+    const tempArr = [];
     for (let i = 0; i < allMatchesPlayed.length; i++) {
-      const objs = await lolMatches.find({ matchId: { $in: [...summoner.S12MatchesPlayed[i]]}});
-      // console.log(objs, 'objs');
-      const objData = getObjData(objs, summonerName);
-      S12MatchesInfoArr.push(objData);
+      for (let j = 0; j < allMatchesPlayed[i].length; j++) {
+        tempArr.push(allMatchesPlayed[i][j]);
+      }
     }
-    await lolSummoner.findOneAndUpdate({summonerName: summonerName, region: region}, {S12MatchesPlayedData: S12MatchesInfoArr});
+    // find all matches that exist in DB from array of all matches
+    const objs = await lolMatches.find({ matchId: { $in: [...tempArr]}});
+    const objData = getObjData(objs, summonerName);
+    S12MatchesInfoArr.push(objData);
+
+    // await lolSummoner.findOneAndUpdate({summonerName: summonerName, region: region}, {S12MatchesPlayedData: S12MatchesInfoArr});
     res.locals.summonerData.allMatchesPlayedData = S12MatchesInfoArr;
-    // console.log(res.locals.summonerData.allMatchesPlayedData, 'hi');
     return next();
   }
 
@@ -546,9 +555,44 @@ summonerController.addSummMatchesData = async (req, res, next) => {
 };
 
 summonerController.testSummData = async (req, res, next) => {
-  const name = "doopliss2";
+  const regionId = "na1";
+  const regionRoute = regionObj[regionId];
+  const name = "raiden mei";
   try {
-    const summoner = await lolSummoner.findOne({"summonerName": { '$regex' : new RegExp(name, "i")}});
+    const summoner = await lolSummoner.findOne({"summonerName": { "$regex" : new RegExp(name, "i")}, "region": regionId});
+
+    if (summoner !== null) {
+      const rankedMatchesArr = [];
+      for (let i = 0; i < summoner.S12MatchesPlayed.length; i++) {
+        for (let j = 0; j < summoner.S12MatchesPlayed[i].length; j++) {
+          const matchObj = await lolMatches.findOne({matchId: summoner.S12MatchesPlayed[i][j]});
+        
+            if (matchObj === null) {
+
+            const getMatchObj = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${summoner.S12MatchesPlayed[i][j]}?api_key=${process.env.api_key}`,
+            {
+              headers: {
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+                "Origin": "https://developer.riotgames.com"
+                }
+            });
+
+            await lolMatches.create({
+              matchId: summoner.S12MatchesPlayed[i][j],
+              matchData: getMatchObj.data.info
+            });
+          }
+          else {
+            rankedMatchesArr.push(matchObj.matchData);
+          }
+        }
+      }
+      res.locals.summonerTestData = rankedMatchesArr;
+      return next();
+    }
+    return next();
 
   }
 
