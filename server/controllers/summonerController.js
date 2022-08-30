@@ -408,7 +408,6 @@ summonerController.updateSummData = async (req, res, next) => {
         // cannot access length property with getRankedS12Matches.data.length, so initialize temp variable
         const temp = getRankedS12Matches.data;
         allS12MatchesArr.push(temp);
-
         if (temp.length !== 100) {
           await lolSummoner.findOneAndUpdate({summonerName: summonerName, region: regionId}, {S12MatchesPlayed: allS12MatchesArr});
           break;
@@ -566,7 +565,6 @@ summonerController.testSummData = async (req, res, next) => {
       for (let i = 0; i < summoner.S12MatchesPlayed.length; i++) {
         for (let j = 0; j < summoner.S12MatchesPlayed[i].length; j++) {
           const matchObj = await lolMatches.findOne({matchId: summoner.S12MatchesPlayed[i][j]});
-        
             if (matchObj === null) {
 
             const getMatchObj = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${summoner.S12MatchesPlayed[i][j]}?api_key=${process.env.api_key}`,

@@ -6,7 +6,7 @@ import TFTMatchBoxes from '../components/TFTComponents/TFTMatchBoxes.jsx';
 import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx';
 
 import { BiSearch } from 'react-icons/bi';
-import RegionSelect from '../components/AppComponents/RegionSelect.jsx';
+import CustomSelect from '../components/AppComponents/CustomSelect.jsx';
 
 const TFTPageContainer = () => {
 
@@ -76,7 +76,7 @@ const TFTPageContainer = () => {
         <div id="inputSummonerName"> Input your Summoner Name Below </div>
         <br></br>
         <div className="SearchBoxInputandIcon">
-          <RegionSelect />
+          <CustomSelect id={'region-select-btn'} selectType={'regions'} init={'NA'}/>
           <input id="SearchBoxInputTFT" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
           <button id="SearchBoxButton" onClick={() => dispatch(getTFTData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
         </div>

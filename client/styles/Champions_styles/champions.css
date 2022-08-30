@@ -1,12 +1,3 @@
-#region-select, #queue-select, #division-select, #tier-select {
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.861);
-  margin-right: 10px;
-}
-#queue-select:focus-visible, #division-select:focus-visible, #tier-select:focus-visible {
-  outline: none;
-}
 #testButton-champions-page {
   width: 100px;
   height: 20px;
@@ -20,4 +11,31 @@
 }
 .testButton:hover {
   background-color: blue;
+}
+.champ-stats-mainpage {
+  width: 100%;
+}
+.champ-stats-header {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 5% 9% 8% 4%;
+  justify-content: center;
+}
+#queue-select-btn, #tier-select-btn, #division-select-btn {
+  width: 100%;
+  display: flex;
+}
+.queue-btn, .tier-btn, .division-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.861);
+  font-size: 0.9em;
+  font-family: Kanit;
+  transition: 0.3s;
+  border-radius: 0.5em;
+}
+.queue-btn:hover, .tier-btn:hover, .division-btn:hover {
+  border-radius: 0.5em;
+  background-color:#376cd57d;
 }

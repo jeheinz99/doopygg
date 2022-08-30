@@ -85,10 +85,10 @@ html, body {
 #SearchBoxInput:hover {
   background-color: #15161ab7;
 }
-.region-select {
+.custom-select {
   position: relative;
 }
-#region-select-btn {
+.select-btn {
   width: 70px;
   display: grid;
   grid-template-columns: 40% 30%;
@@ -102,7 +102,7 @@ html, body {
   font-size: 1em;
   padding: 0;
 }
-#region-select-btn:focus-visible {
+#custom-select-btn:focus-visible {
   outline: none;
 }
 .region-btn {
@@ -119,19 +119,21 @@ html, body {
   border-radius: 0.5em;
   background-color:#376cd57d;
 }
-.region-select-content {
+.custom-select-content {
   position: absolute;
   top: -20%;
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 50px;
   border-radius: 0.5em;
   padding: 5px;
   border: 1px solid rgba(39, 45, 58, 0.5);
   background-color: #16161d;
   /* opacity: 1; */
   transition: opacity 0.5s ease-out;
+}
+#content-regions {
+  width: 50px;
 }
 
 .summonerUpdateButton {

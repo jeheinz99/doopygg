@@ -271,7 +271,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const TFTMatchHistory = [];
     const otherPlayersData = [];
     for (let i = 0; i < matchData.length; i++) {
-      for (let j = 0; j < 8; j++) {
+      for (let j = 0;  8; j++) {
 
         if (matchData[i].participants[j].puuid === puuid) {
           const player = matchData[i].participants[j];
@@ -482,7 +482,7 @@ TFTController.addTFTSummMatchesData = async (req, res, next) => {
         // checks if the current match object is a ranked game
         if (arrayOfObjs[i].matchData.queue_id === 1100) {
           // iterates through all 8 players and checks if puuid matches
-          for (let j = 0; j < 8; j++) {
+          for (let j = 0; j < arrayOfObjs[i].matchData.participants.length; j++) {
             if (arrayOfObjs[i].matchData.participants[j].puuid === puuid) {
               const player = arrayOfObjs[i].matchData.participants[j];
               tempArr.push({

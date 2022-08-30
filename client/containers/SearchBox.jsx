@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataBox.jsx';
 import ChampionsInfoBox from '../components/AppComponents/ChampionsInfoBox.jsx';
 import LiveGameBox from '../components/AppComponents/LiveGame/LiveGameBox.jsx';
-import RegionSelect from '../components/AppComponents/RegionSelect.jsx'
+import CustomSelect from '../components/AppComponents/CustomSelect.jsx'
 import { PulseLoader } from 'react-spinners';
 import { BiSearch } from 'react-icons/bi';
 import doop from '../assets/Doopliss_Kindred.png';
@@ -82,7 +82,7 @@ const SearchBox = () => {
         <div id="inputSummonerName"> 
           <p>Input your Summoner Name</p>
           <div className="SearchBoxInputandIcon">
-            <RegionSelect/>
+            <CustomSelect id={'region-select-btn'} selectType={'regions'} init={'NA'}/>
             <input id="SearchBoxInput" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
             <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
           </div>
