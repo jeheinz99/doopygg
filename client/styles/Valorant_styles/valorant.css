@@ -47,6 +47,7 @@
   align-items: center;
   font-size: 3em;
   gap: 0.2em;
+  height: 100px;
 }
 .ValorantSearchBox p {
   color: rgba(255, 255, 255, 0.861);
@@ -60,4 +61,20 @@
 .ValorantPageBox h3 {
   margin: 10px;
   font-size: 3em;
+}
+#Riot-Sign-On {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 125px;
+  height: 50px;
+  font-size: 1.5em;
+  background-color: #ed4253c6;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.7);
+}
+#Riot-Sign-On:hover {
+  cursor: pointer;
+  filter: invert(5%);
 }

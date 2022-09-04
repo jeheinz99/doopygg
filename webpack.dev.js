@@ -19,12 +19,6 @@ module.exports = merge(common, {
         // secure: false,
         // changeOrigin: true,
       },
-      '/tft': {
-        target: 'http://localhost:3000/tft',
-      },
-      '/leaderboards': {
-        target: 'http://localhost:3000/leaderboards'
-      },
     },
   },
 });

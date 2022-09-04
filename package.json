@@ -2,7 +2,7 @@
   "name": "doopygg",
   "version": "1.0.0",
   "description": "\"doopygg\"",
-  "main": "server.js",
+  "main": "client/index.js",
   "scripts": {
     "dev": "concurrently \" webpack serve --open --config webpack.dev.js\" \"nodemon ./server/server.js\"",
     "build": "webpack --config webpack.prod.js",

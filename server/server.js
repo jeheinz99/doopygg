@@ -39,6 +39,15 @@ app.use(function(req, res, next) {
   next();
 });
 
+// AUTH ENDPOINT
+// router handler to handle all requests to authentication
+const authRouter = express.Router();
+app.use('/riot/auth', authRouter);
+
+authRouter.get('/callback', (req, res) => {
+  res.send('temp');
+});
+
 // SUMMONER ENDPOINT
 // router handler to handle all requests to main app endpoint with summoners
 const summonerRouter = express.Router();
@@ -115,7 +124,14 @@ championsRouter.get('/:regionId/:queue/:tier/:division', championsController.get
   // console.log(res.locals.championData, 'res.locals.championData in server.js');
   return res.status(200).send(res.locals.championData);
 });
-// catch-all route handler for any requests to an unknown route
+// catch-all route handler for any requests to an unknown route 
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 // app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
 
 // global error handler - only invoked when next passes in an arg

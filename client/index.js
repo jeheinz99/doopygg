@@ -24,11 +24,11 @@ root.render (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
-            <Route path="champions" element={<ChampionsPage />} />
-            <Route path="leaderboards" element={<LeaderboardPage />} />
-            <Route path="valorant" element={<ValorantPage />} />
-            <Route path="tft" element={<TFTPage />} />
-            <Route path="*" element={<NothingHerePage />} />
+          <Route path="champions" element={<ChampionsPage />} />
+          <Route path="leaderboards" element={<LeaderboardPage />} />
+          <Route path="valorant" element={<ValorantPage />} />
+          <Route path="tft" element={<TFTPage />} />
+          <Route path="*" element={<NothingHerePage />} />
         </Routes>
       </BrowserRouter>
     </Provider>

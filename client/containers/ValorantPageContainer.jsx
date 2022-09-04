@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { SiRiotgames } from 'react-icons/si';
 import { getValorantData } from '../actions/actions.js';
 
 const ValorantPageContainer = () => {
@@ -25,9 +26,10 @@ const ValorantPageContainer = () => {
         <h3>doopy.gg VALORANT</h3>
         <div className="ValorantSearchBox">
           <input id="ValBoxInput" placeholder="Riot ID" onChange={ riotIdData } required></input>
-          <p> # </p>
+          <p onClick={() => setHidden(!hidden)}> # </p>
           <input id="ValBoxInput" placeholder="Tag-line" onChange={ taglineData } required></input>
         </div>
+        <a href="https://doopy.dev/riot/auth" id="Riot-Sign-On" onClick={() => authFunc()}>Sign In <SiRiotgames /></a>
         <p id="in-development"> in development </p>
         {/* <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> Search! </button> */}
       </div>
