@@ -19,6 +19,9 @@ module.exports = merge(common, {
         // secure: false,
         // changeOrigin: true,
       },
+      '/valorant': {
+        target: 'http://localhost:3000/valorant'
+      }
     },
   },
 });

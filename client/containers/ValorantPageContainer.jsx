@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SiRiotgames } from 'react-icons/si';
 import { getValorantData } from '../actions/actions.js';
+import axios from 'axios';
 
 const ValorantPageContainer = () => {
 
@@ -20,6 +21,11 @@ const ValorantPageContainer = () => {
     return taglineInput;
   }
 
+  const authFunc = async () => {
+    const res = await axios.get('/auth/');
+    console.log(res.data, 'data');
+  };
+
   return (
     <div className="ValorantPageBox">
       <div className="OuterSearchBox" id="welcomeValorant"> 
@@ -29,7 +35,8 @@ const ValorantPageContainer = () => {
           <p onClick={() => setHidden(!hidden)}> # </p>
           <input id="ValBoxInput" placeholder="Tag-line" onChange={ taglineData } required></input>
         </div>
-        <a href="https://doopy.dev/riot/auth" id="Riot-Sign-On" onClick={() => authFunc()}>Sign In <SiRiotgames /></a>
+        <button id="Riot-Sign-On" onClick={() => authFunc()}>Sign In <SiRiotgames /></button>
+        {/* <a href="https://doopy.dev/riot/auth" id="Riot-Sign-On" onClick={() => authFunc()}>Sign In <SiRiotgames /></a> */}
         <p id="in-development"> in development </p>
         {/* <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> Search! </button> */}
       </div>
