@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/auth/callback', (req, res) => {
-  res.send('hello');
   const accessCode = req.query.code;
+  res.send(accessCode);
   console.log('hi inside callback');
 
   // make server-to-server request to token endpoint
