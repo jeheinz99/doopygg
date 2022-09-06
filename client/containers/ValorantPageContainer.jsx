@@ -22,7 +22,7 @@ const ValorantPageContainer = () => {
   }
 
   const authFunc = async () => {
-    const res = await axios.get('/auth/');
+    const res = await axios.get('/riot/auth');
     console.log(res.data, 'data');
   };
 

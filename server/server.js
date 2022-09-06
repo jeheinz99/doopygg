@@ -4,7 +4,6 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const authRouter = require('./routers/auth');
 const riotAuthRouter = require('./routers/riotAuth');
 const summonerRouter = require('./routers/summoner');
 const TFTRouter = require('./routers/tft');
@@ -41,7 +40,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/auth', authRouter);
 app.use('/riot', riotAuthRouter);
 app.use('/summoner', summonerRouter);
 app.use('/tft', TFTRouter);
