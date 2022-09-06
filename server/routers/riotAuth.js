@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/auth/callback', (req, res) => {
+  res.send('hello');
   const accessCode = req.query.code;
   console.log('hi inside callback');
 
