@@ -18,7 +18,6 @@ const redirect_uri = 'http://www.doopy.dev/riot/auth';
 
 router.get('/auth/callback', (req, res) => {
   const accessCode = req.query.code;
-
   // make server-to-server request to token endpoint
   // exchange auth code for tokens
   request.post({
@@ -44,8 +43,11 @@ router.get('/auth/callback', (req, res) => {
         access_token: payload.access_token
       };
 
-      // Legibly print out our tokens
-      res.send("<pre>" + JSON.stringify(tokens, false, 4) + "</pre");
+      res.cookie('accessToken', payload.access_token);
+      res.cookie('refreshToken', payload.refresh_token);
+
+      // res.send("<pre>" + JSON.stringify(tokens, false, 4) + "</pre");
+      return res.status(300).redirect('/valorant');
     } else {
       res.send("/token request failed");
     }
