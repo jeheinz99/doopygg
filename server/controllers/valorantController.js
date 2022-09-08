@@ -19,7 +19,6 @@ const regionObj = {
 
 valorantController.checkValorantUser = async (req, res, next) => {
   const { regionId, riotId, tagLine } = req.params;
-  console.log(riotId, tagLine, 'riot id, tagline')
   try {
     const user = await authUsers.findOne({"gameName": { "$regex" : new RegExp(riotId, "i")}, "tagLine": tagLine, "region": regionId});
     if (user !== null) {

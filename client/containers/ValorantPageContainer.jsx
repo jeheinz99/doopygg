@@ -9,7 +9,6 @@ import jett from '../assets/jett.png';
 
 const ValorantPageContainer = () => {
 
-  // const playerId = useSelector(state => state.valorant.playerId);
   const loadValorantData = useDispatch();
   console.log(document.cookie, 'document cookie');
 
@@ -30,22 +29,22 @@ const ValorantPageContainer = () => {
     console.log(res.data, 'data');
   };
 
-  // useEffect(() => {
-  //   const input1 = document.getElementById('val-input-1');
-  //   const input2 = document.getElementById('val-input-2');
-  //   input1.addEventListener('keypress', (e) => {
-  //     if (e.key === 'Enter') {
-  //       e.preventDefault;
-  //       document.getElementById('ValorantBoxButton').click();
-  //     }
-  //   });
-  //   input2.addEventListener('keypress', (e) => {
-  //     if (e.key === 'Enter') {
-  //       e.preventDefault;
-  //       document.getElementById('ValorantBoxButton').click();
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    const input1 = document.getElementById('val-input-1');
+    const input2 = document.getElementById('val-input-2');
+    input1.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault;
+        document.getElementById('ValorantBoxButton').click();
+      }
+    });
+    input2.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault;
+        document.getElementById('ValorantBoxButton').click();
+      }
+    });
+  }, []);
 
   return (
     <div className="ValorantPageBox">
@@ -63,7 +62,7 @@ const ValorantPageContainer = () => {
               <input className="ValBoxInput" id="val-input-1" placeholder="Riot ID" onChange={ riotIdData } required></input>
               <p id="hash"> # </p>
               <input className="ValBoxInput" id="val-input-2" placeholder="Tag-line" onChange={ taglineData } required></input>
-              {/* <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> <BiSearch id="SearchIcon"/> </button> */}
+              <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> <BiSearch id="SearchIcon"/> </button>
             </div>
             <button id="Riot-Sign-On" onClick={() => authFunc()}><SiRiotgames />Sign In</button>
             <p id="RSO-warning"> Signing in with Riot allows doopy.gg access to your stats and makes your profile public. </p>
