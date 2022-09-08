@@ -11,6 +11,7 @@ const ValorantPageContainer = () => {
 
   const playerId = useSelector(state => state.valorant.playerId);
   const loadValorantData = useDispatch();
+  console.log(document.cookie, 'document cookie');
 
   let riotIdInput;
   function riotIdData (e) {
