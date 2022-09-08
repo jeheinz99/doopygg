@@ -29,7 +29,8 @@ module.exports = {
     ]
   },
   plugins: [new HtmlWebpackPlugin({ 
-    template: './client/index.html'
+    template: './client/index.html',
+    favicon: './client/assets/favicon.png'
   }),
 ],
   resolve: {
