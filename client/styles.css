@@ -257,7 +257,7 @@ html, body {
   gap: 1em;
   grid-template-rows: 20% 50%;
 }
-#inputSummonerName {
+.inputSummonerName {
   width: 100%;
   display: flex;
   color: rgba(255, 255, 255, 0.8);

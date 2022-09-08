@@ -19,8 +19,8 @@
 }
 #welcome-valorant {
   position: fixed;
-  width: 100%;
   top: 0;
+  width: 100%;
   height: 105px;
   justify-content: center;
   display: flex;
@@ -35,24 +35,26 @@
   width: 100%;
   font-size: 2.5em;
 }
-#cypher {
-  width: 200px;
-  height: 350px;
+#welcome-valorant h3 span {
+  color:rgb(209, 61, 76);
 }
-#jett {
+#cypher, #jett {
   width: 200px;
   height: 350px;
+  z-index: 500;
+}
+#cypher-spray {
+  width: 128px;
+  height: 128px;
 }
 .ValBoxInput {
   text-align: center;
   font-size: 0.5em;
   border: none;
   height: 36px;
-  width: 100%;
+  width: 95%;
+  border: 2px solid #171A21;
   border-bottom: 2px solid rgba(213, 55, 65, 0.6);
-  border-left: 2px solid #171A21;
-  border-top: 2px solid #171A21;
-  border-right: 2px solid #171A21;
   background-color: #15161a;
   color: rgba(255, 255, 255, 0.861);
   transition: 0.5s;
@@ -66,8 +68,6 @@
   background-color: #15161ab7;
 }
 #hash {
-  position: relative;
-  margin-left: 15%;
   font-size: 0.8em;
   color: rgba(255, 255, 255, 0.7);
   text-align: center;
@@ -94,7 +94,7 @@
 }
 .val-searchbox-div2 {
   display: grid;
-  grid-template-columns: 40% 10% 40% 5%;
+  grid-template-columns: 42% 8% 42% 7%;
   align-items: center;
   text-align: center;
   justify-content: center;
@@ -105,6 +105,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
+  background-color: #16161b;
 }
 #RSO-warning {
   font-size: 0.25em;
@@ -131,4 +132,9 @@
 #Riot-Sign-On:hover {
   transform: translateY(-2px);
   cursor: pointer;
+}
+#in-dev {
+  margin: 0;
+  font-size: 0.5em;
+  font-style: italic;
 }

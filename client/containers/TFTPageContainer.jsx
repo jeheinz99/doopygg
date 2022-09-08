@@ -4,6 +4,7 @@ import { getTFTData, updateTFTData } from '../actions/actions.js';
 import { PulseLoader } from 'react-spinners';
 import TFTMatchBoxes from '../components/TFTComponents/TFTMatchBoxes.jsx';
 import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx';
+import chibiYasuo from '../assets/chibi_yasuo.png';
 
 import { BiSearch } from 'react-icons/bi';
 import CustomSelect from '../components/AppComponents/CustomSelect.jsx';
@@ -72,17 +73,23 @@ const TFTPageContainer = () => {
   return (
     <div className="OuterSearchBox" id="TFTOSB">
       <div className="SearchBox" id="welcomeTFT">
-        <div id="welcome"> doopy.gg TFT </div>
-        <div id="inputSummonerName"> Input your Summoner Name Below </div>
-        <br></br>
-        <div className="SearchBoxInputandIcon">
-          <CustomSelect id={'region-select-btn'} selectType={'regions'} init={'NA'}/>
-          <input id="SearchBoxInputTFT" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
-          <button id="SearchBoxButton" onClick={() => dispatch(getTFTData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
+        <div className="welcome-div" id="tft-welcome-div">
+          <div id="welcome">
+            <h3> doopy.gg TFT </h3>
+          </div>
+          <img id="chibi-yasuo" src={chibiYasuo}/>
         </div>
-        <div className="test-button">
-          <p>Don't have a summoner name?</p>
-          <button id="SearchBoxDemoButton" onClick={() => dispatch(getTFTData('Doopliss2'))}> Demo </button>
+        <div className="inputSummonerName" id="inputSummonerNameTFT"> 
+          <p>Input your Summoner Name</p>
+          <div className="SearchBoxInputandIcon">
+            <CustomSelect id={'region-select-btn'} selectType={'regions'} init={'NA'}/>
+            <input id="SearchBoxInputTFT" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
+            <button id="SearchBoxButton" onClick={() => dispatch(getTFTData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
+          </div>
+          <div className="test-button">
+            <p id="tft-test-p">Don't have a summoner name?</p>
+            <button id="SearchBoxDemoButton" onClick={() => dispatch(getTFTData('Doopliss2'))}> Demo </button>
+          </div>
         </div>
       </div>
 

@@ -36,6 +36,24 @@
 #TFT-SI {
   padding: 0;
 }
+#tft-welcome-div {
+  grid-template-rows: none;
+  height: 20%;
+}
+#inputSummonerNameTFT p {
+  margin-top: 0;
+}
+#chibi-yasuo {
+  position: relative;
+  margin-top: 100px;
+  margin-right: 15px;
+  width: 252px;
+  height: 252px;
+  filter: drop-shadow(0 0 0.5rem rgb(11, 10, 11));
+}
+#tft-test-p {
+  margin-top: 1em !important;
+}
 .TFTRankedSolo {
   display: flex;
   flex-direction: column;

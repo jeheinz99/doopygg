@@ -81,7 +81,7 @@ const SearchBox = () => {
           </div>
           <img id="doop" src={doop}/>
         </div>
-        <div id="inputSummonerName"> 
+        <div className="inputSummonerName"> 
           <p>Input your Summoner Name</p>
           <div className="SearchBoxInputandIcon">
             <CustomSelect id={'region-select-btn'} selectType={'regions'} init={'NA'}/>

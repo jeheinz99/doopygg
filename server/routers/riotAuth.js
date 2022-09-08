@@ -92,7 +92,7 @@ router.get('/auth/callback', (req, res) => {
 
 router.get('/auth', (req, res)=> { 
   const link = `${authorizeUrl}?redirect_uri=${appCallbackUrl}&client_id=${clientID}&response_type=code&scope=openid`;
-  return res.status(300).redirect(`${link}`);
+  res.send('<a href="' + link + '"> Sign In</a>');
 });
 
 module.exports = router;
