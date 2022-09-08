@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const request = require('request');
 const axios = require('axios');
+const authUsers = require('../models/AuthUsers');
 
 // AUTH ENDPOINT
 // router handler to handle all requests to authentication
