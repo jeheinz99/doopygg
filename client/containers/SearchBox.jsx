@@ -76,7 +76,9 @@ const SearchBox = () => {
     <div className="OuterSearchBox">
       <div className="SearchBox">
         <div className="welcome-div">
-          <div id="welcome"> doopy.gg </div>
+          <div id="welcome"> 
+            <h3>doopy.gg</h3>
+          </div>
           <img id="doop" src={doop}/>
         </div>
         <div id="inputSummonerName"> 

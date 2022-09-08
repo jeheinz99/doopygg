@@ -1,7 +1,8 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-  playerId: '',
+  gameName: '',
+  tagLine: '',
 };
 
 const valorantReducer = (state = initialState, action) => {
@@ -12,7 +13,8 @@ const valorantReducer = (state = initialState, action) => {
       return Object.assign(
         {},
         state, {
-          playerId: payload.playerId,
+          gameName: payload.gameName,
+          tagLine: payload.tagLine,
         }
       );
     default: {

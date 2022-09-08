@@ -61,8 +61,12 @@ export const updateSummonerData = summonerName => async dispatch => {
 };
 
 export const getValorantData = (riotID, tagLine) => async dispatch => {
-  const responseValData = await axios.get(`/valorant/${riotID}/${tagLine}`);
-  // console.log('VAL response from back-end', responseValData.data);
+  const input1 = document.getElementById('val-input-1');
+  const input2 = document.getElementById('val-input-2');
+  input1.value = '';
+  input2.value = '';
+  const responseValData = await axios.get(`/valorant/na1/${riotID}/${tagLine}`);
+  console.log('VAL response from back-end', responseValData.data);
   dispatch(addValorantDataActionCreator(responseValData.data));  
 };
 

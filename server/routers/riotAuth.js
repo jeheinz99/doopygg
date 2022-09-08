@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
+const axios = require('axios');
 
 // AUTH ENDPOINT
 // router handler to handle all requests to authentication
@@ -32,7 +33,7 @@ router.get('/auth/callback', (req, res) => {
       redirect_uri: appCallbackUrl
     }
   }, 
-  (err, response, body) => {
+  async (err, response, body) => {
     if (!err && response.statusCode === 200) {
       // parse the response to JSON
       const payload = JSON.parse(body);
@@ -43,8 +44,43 @@ router.get('/auth/callback', (req, res) => {
         access_token: payload.access_token
       };
 
+      const getUserData = await axios.get('https://americas.api.riotgames.com/riot/account/v1/accounts/me', 
+      {
+        headers: {
+          Authorization: `Bearer ${payload.access_token}`
+        }
+      });
+      const puuid = getUserData.data.puuid;
+      const gameName = getUserData.data.gameName;
+      const tagLine = getUserData.data.tagLine;
+
+      const user = await authUsers.findOne({"gameName": { "$regex" : new RegExp(gameName, "i")}, "tagLine": tagLine, "puuid": puuid});
+      if (user === null) {
+        await authUsers.create({
+          puuid: puuid,
+          gameName: gameName,
+          tagLine: tagLine,
+          access_token: payload.access_token,
+          refresh_token: payload.refresh_token,
+          id_token: payload.id_token,
+        });
+      }
+      else {
+        await authUsers.findOneAndUpdate({"gameName": { "$regex" : new RegExp(gameName, "i")}, "tagLine": tagLine, "puuid": puuid}, 
+        {
+          puuid: puuid,
+          gameName: gameName,
+          tagLine: tagLine,
+          access_token: payload.access_token,
+          refresh_token: payload.refresh_token,
+          id_token: payload.id_token,
+        });
+      }
+
       res.cookie('accessToken', payload.access_token);
       res.cookie('refreshToken', payload.refresh_token);
+      res.cookie('currGameName', gameName);
+      res.cookie('currTagLine', tagLine);
 
       // res.send("<pre>" + JSON.stringify(tokens, false, 4) + "</pre");
       return res.status(300).redirect('/valorant');
@@ -56,7 +92,7 @@ router.get('/auth/callback', (req, res) => {
 
 router.get('/auth', (req, res)=> { 
   const link = `${authorizeUrl}?redirect_uri=${appCallbackUrl}&client_id=${clientID}&response_type=code&scope=openid`;
-  res.send('<a href="' + link + '"> Sign In</a>');
+  return res.status(300).redirect(`${link}`);
 });
 
 module.exports = router;

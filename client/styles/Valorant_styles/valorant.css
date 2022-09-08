@@ -1,80 +1,134 @@
 #ValorantBoxButton {
-  background-color:#292828;
-  border:0.10em double #1C6EA4;
-  border-radius: 0.5em;
-  cursor:pointer;
-  color:#ffffff;
-  letter-spacing: 0.05em;
-  font-size:15px;
-  font-weight:bold;
-  padding:9px 23px;
-  text-decoration:none;
-  text-shadow:0px -1px 0px #7a2a1d;
-  width: 6em;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.861);
 }
 #ValorantBoxButton:hover {
-  background-color:#222020;
-  border: 0.10em double #a41c49;
+  filter: invert(20%);
+  cursor: pointer;
 }
 #ValorantBoxButton:active {
   position:relative;
   top:1px;
 }
-
-#ValBoxInput {
-  width: 7em;
+#welcomeValorant {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+#welcome-valorant {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 105px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  font-size: 0.7em;
+  gap: 0;
+  color:rgba(255, 255, 255, 0.861);
+  background-color: #171A21;
+}
+#welcome-valorant h3 {
+  width: 100%;
+  font-size: 2.5em;
+}
+#cypher {
+  width: 200px;
+  height: 350px;
+}
+#jett {
+  width: 200px;
+  height: 350px;
+}
+.ValBoxInput {
+  text-align: center;
+  font-size: 0.5em;
   border: none;
-  border-bottom: 1px solid #484848;
+  height: 36px;
+  width: 100%;
+  border-bottom: 2px solid rgba(213, 55, 65, 0.6);
+  border-left: 2px solid #171A21;
+  border-top: 2px solid #171A21;
+  border-right: 2px solid #171A21;
   background-color: #15161a;
   color: rgba(255, 255, 255, 0.861);
-  transition: 1s;
+  transition: 0.5s;
 }
-#ValBoxInput:focus {
+.ValBoxInput:focus {
   outline: 0;
-  background-color: #22212174;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.861);
+  border-color: rgba(213, 55, 65, 0.6);
+  border-radius: 0.1em;
 }
-#ValBoxInput:hover {
-  background-color: #22212174;
+.ValBoxInput:hover {
+  background-color: #15161ab7;
+}
+#hash {
+  position: relative;
+  margin-left: 15%;
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
 }
 
 .ValorantSearchBox {
-  display: flex; 
-  flex-direction: row;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 15% 50% 15%;
   justify-content: center;
   align-items: center;
   font-size: 3em;
-  gap: 0.2em;
-  height: 100px;
+  
 }
 .ValorantSearchBox p {
   color: rgba(255, 255, 255, 0.861);
   font-size: 0.8em;
 }
+.val-searchbox-div1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.val-searchbox-div2 {
+  display: grid;
+  grid-template-columns: 40% 10% 40% 5%;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
 .ValorantPageBox {
+  position: relative;
+  margin-top: 100px;
   display: flex;
   width: 100%;
   justify-content: center;
 }
-.ValorantPageBox h3 {
-  margin: 10px;
-  font-size: 3em;
+#RSO-warning {
+  font-size: 0.25em;
+  width: 75%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
 }
 #Riot-Sign-On {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 3%;
   gap: 10px;
   width: 125px;
   height: 50px;
-  font-size: 1.5em;
-  background-color: #ed4253c6;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  font-size: 0.5em;
+  background-color: rgb(209, 61, 76);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.2em;
+  font-family: Kanit;
   color: rgba(255, 255, 255, 0.7);
+  transition: 0.5s;
 }
 #Riot-Sign-On:hover {
+  transform: translateY(-2px);
   cursor: pointer;
-  filter: invert(5%);
 }
