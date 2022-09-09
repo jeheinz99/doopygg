@@ -7,26 +7,29 @@ import { BiSearch } from 'react-icons/bi';
 import cypher from '../assets/cypher.png';
 import jett from '../assets/jett.png';
 
+const link = 'https://auth.riotgames.com/authorize?redirect_uri=http://www.doopy.dev/riot/auth/callback&client_id=doopygg&response_type=code&scope=openid';
+
 const ValorantPageContainer = () => {
 
   const loadValorantData = useDispatch();
   console.log(document.cookie, 'document cookie');
 
   let riotIdInput;
-  function riotIdData (e) {
+  const riotIdData = e => {
     riotIdInput = e.target.value;
     return riotIdInput;
-  }
+  };
 
   let taglineInput;
-  function taglineData (e) {
+  const taglineData = e => {
     taglineInput = e.target.value;
     return taglineInput;
-  }
+  };
 
-  const authFunc = async () => {
-    const res = await axios.get('/riot/auth');
-    console.log(res.data, 'data');
+  const getCookie = name => {
+    const escape = s => { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }
+    const match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
+    return match ? match[1] : null;
   };
 
   useEffect(() => {
@@ -46,6 +49,13 @@ const ValorantPageContainer = () => {
     });
   }, []);
 
+  if (document.cookie) {
+    const accessToken = getCookie('accessToken');
+    const refreshToken = getCookie('refreshToken');
+  }
+  console.log(accessToken, 'access token');
+  console.log(refreshToken, 'refresh token');
+
   return (
     <div className="ValorantPageBox">
       <div className="OuterSearchBox" id="welcomeValorant"> 
@@ -64,7 +74,8 @@ const ValorantPageContainer = () => {
               <input className="ValBoxInput" id="val-input-2" placeholder="Tag-line" onChange={ taglineData } required></input>
               <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> <BiSearch id="SearchIcon"/> </button>
             </div>
-            <button id="Riot-Sign-On" onClick={() => authFunc()}><SiRiotgames />Sign In</button>
+            <a id="Riot-Sign-On" href={link}><SiRiotgames />Sign In</a>
+            {/* <button id="Riot-Sign-On" onClick={() => authFunc()}><SiRiotgames />Sign In</button> */}
             <p id="RSO-warning"> Signing in with Riot allows doopy.gg access to your stats and makes your profile public. </p>
 
           </div>
