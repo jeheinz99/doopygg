@@ -52,9 +52,9 @@ const ValorantPageContainer = () => {
   if (document.cookie) {
     const accessToken = getCookie('accessToken');
     const refreshToken = getCookie('refreshToken');
+    console.log(accessToken, 'access token');
+    console.log(refreshToken, 'refresh token');
   }
-  console.log(accessToken, 'access token');
-  console.log(refreshToken, 'refresh token');
 
   return (
     <div className="ValorantPageBox">
