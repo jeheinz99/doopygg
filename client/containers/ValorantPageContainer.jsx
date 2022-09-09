@@ -47,14 +47,13 @@ const ValorantPageContainer = () => {
         document.getElementById('ValorantBoxButton').click();
       }
     });
+    if (document.cookie) {
+      const accessToken = getCookie('accessToken');
+      const refreshToken = getCookie('refreshToken');
+      const currGameName = getCookie('currGameName');
+      const currTagLine = getCookie('currTagLine');
+    }
   }, []);
-
-  if (document.cookie) {
-    const accessToken = getCookie('accessToken');
-    const refreshToken = getCookie('refreshToken');
-    const currGameName = getCookie('currGameName');
-    const currTagLine = getCookie('currTagLine');
-  }
 
   return (
     <div className="ValorantPageBox">
