@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SiRiotgames } from 'react-icons/si';
 import { getValorantData } from '../actions/actions.js';
@@ -12,7 +12,6 @@ const link = 'https://auth.riotgames.com/authorize?redirect_uri=http://www.doopy
 const ValorantPageContainer = () => {
 
   const loadValorantData = useDispatch();
-  const [isLoggedIn, setLoggedIn] = useState(false);
   // console.log(document.cookie, 'document cookie');
 
   let riotIdInput;
@@ -33,10 +32,8 @@ const ValorantPageContainer = () => {
     return match ? match[1] : null;
   };
 
-  const signOutFunc = () => {
-    console.log('hi');
+  const signOutFunc = async () => {
     document.cookie.split(';').forEach(cookie => document.cookie = cookie.replace(/^ +/, '').replace(/=,*/, `=;expires=${new Date(0).toUTCString()};path=/`));
-    setLoggedIn(false);
   };
 
   useEffect(() => {
@@ -57,7 +54,6 @@ const ValorantPageContainer = () => {
   }, []);
 
   if (document.cookie) {
-    setLoggedIn(true);
     const accessToken = getCookie('accessToken');
     const refreshToken = getCookie('refreshToken');
     // console.log(accessToken, 'access token');
@@ -82,7 +78,7 @@ const ValorantPageContainer = () => {
               <input className="ValBoxInput" id="val-input-2" placeholder="Tag-line" onChange={ taglineData } required></input>
               <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> <BiSearch id="SearchIcon"/> </button>
             </div>
-            {isLoggedIn ? 
+            {!document.cookie ? 
             <a id="Riot-Sign-On" href={link}><SiRiotgames />Sign In</a>
             :
             <button id="Riot-Sign-Out" onClick={() => signOutFunc()}>Sign Out</button>
