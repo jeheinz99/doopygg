@@ -12,7 +12,7 @@ const link = 'https://auth.riotgames.com/authorize?redirect_uri=http://www.doopy
 const ValorantPageContainer = () => {
 
   const loadValorantData = useDispatch();
-  console.log(document.cookie, 'document cookie');
+  // console.log(document.cookie, 'document cookie');
 
   let riotIdInput;
   const riotIdData = e => {
@@ -47,13 +47,14 @@ const ValorantPageContainer = () => {
         document.getElementById('ValorantBoxButton').click();
       }
     });
-    if (document.cookie) {
-      const accessToken = getCookie('accessToken');
-      const refreshToken = getCookie('refreshToken');
-      const currGameName = getCookie('currGameName');
-      const currTagLine = getCookie('currTagLine');
-    }
   }, []);
+
+  if (document.cookie) {
+    const accessToken = getCookie('accessToken');
+    const refreshToken = getCookie('refreshToken');
+    // console.log(accessToken, 'access token');
+    // console.log(refreshToken, 'refresh token');
+  }
 
   return (
     <div className="ValorantPageBox">
@@ -73,12 +74,7 @@ const ValorantPageContainer = () => {
               <input className="ValBoxInput" id="val-input-2" placeholder="Tag-line" onChange={ taglineData } required></input>
               <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> <BiSearch id="SearchIcon"/> </button>
             </div>
-            {currGameName !== undefined && currTagLine !== undefined ?
-            <div className="signed-in-riot">
-              <p>{currGameName}#{currTagLine}</p>
-              <button id="riot-sign-out" onClick={() => signOutFunc()}>Sign Out</button>
-            </div>
-            : 
+            {!document.cookie && 
             <a id="Riot-Sign-On" href={link}><SiRiotgames />Sign In</a>
             }
             {/* <button id="Riot-Sign-On" onClick={() => authFunc()}><SiRiotgames />Sign In</button> */}
