@@ -133,6 +133,25 @@
   transform: translateY(-2px);
   cursor: pointer;
 }
+#Riot-Sign-Out {
+  border-radius: 0.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6%;
+  gap: 10px;
+  height: 35px;
+  width: 80px;
+  background-color: rgb(24, 21, 21);
+  font-family: Kanit;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  transition: 0.5s;
+}
+#Riot-Sign-Out:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
+}
 #in-dev {
   margin: 0;
   font-size: 0.5em;
