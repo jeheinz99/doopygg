@@ -61,6 +61,7 @@ router.get('/auth/callback', (req, res) => {
           puuid: puuid,
           gameName: gameName,
           tagLine: tagLine,
+          region: 'na1',
           access_token: payload.access_token,
           refresh_token: payload.refresh_token,
           id_token: payload.id_token,
