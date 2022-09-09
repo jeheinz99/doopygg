@@ -73,7 +73,7 @@ const ValorantPageContainer = () => {
               <input className="ValBoxInput" id="val-input-2" placeholder="Tag-line" onChange={ taglineData } required></input>
               <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> <BiSearch id="SearchIcon"/> </button>
             </div>
-            {document.cookie ?
+            {currGameName !== undefined && currTagLine !== undefined ?
             <div className="signed-in-riot">
               <p>{currGameName}#{currTagLine}</p>
               <button id="riot-sign-out" onClick={() => signOutFunc()}>Sign Out</button>
