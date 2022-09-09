@@ -32,6 +32,10 @@ const ValorantPageContainer = () => {
     return match ? match[1] : null;
   };
 
+  const signOutFunc = async () => {
+    await axios.get('/valorant/signout');
+  };
+
   useEffect(() => {
     const input1 = document.getElementById('val-input-1');
     const input2 = document.getElementById('val-input-2');
@@ -74,8 +78,10 @@ const ValorantPageContainer = () => {
               <input className="ValBoxInput" id="val-input-2" placeholder="Tag-line" onChange={ taglineData } required></input>
               <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> <BiSearch id="SearchIcon"/> </button>
             </div>
-            {!document.cookie && 
+            {!document.cookie ? 
             <a id="Riot-Sign-On" href={link}><SiRiotgames />Sign In</a>
+            :
+            <button id="Riot-Sign-Out" onClick={() => signOutFunc()}>Sign Out</button>
             }
             {/* <button id="Riot-Sign-On" onClick={() => authFunc()}><SiRiotgames />Sign In</button> */}
             <p id="RSO-warning"> Signing in with Riot allows doopy.gg access to your stats and makes your profile public. </p>
