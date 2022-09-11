@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import SummonerChampDataBoxEntry from "./SummonerChampDataBoxEntry.jsx";
+import SummonerChampDataBoxEntry from "./SummonerChampDataBoxEntry";
 import Recent20PlayedWith from "./RecentMatches/Recent20PlayedWith.jsx";
 
 import { AiFillCaretDown } from 'react-icons/ai';
@@ -37,48 +37,46 @@ const SummonerChampDataBox = () => {
   const champData = {};
 
   for (let i = 0; i < allMatchesPlayedData.length; i++) {
-    for (let j = 0; j < allMatchesPlayedData[i].length; j++) {
-      if (allMatchesPlayedData[i] !== undefined) {
-        if (champData[allMatchesPlayedData[i][j].championName] && champData) {
-          champData[allMatchesPlayedData[i][j].championName].kills += allMatchesPlayedData[i][j].kills;
-          champData[allMatchesPlayedData[i][j].championName].deaths += allMatchesPlayedData[i][j].deaths;
-          champData[allMatchesPlayedData[i][j].championName].assists += allMatchesPlayedData[i][j].assists;
-          champData[allMatchesPlayedData[i][j].championName].champDamage += allMatchesPlayedData[i][j].champDamage;
-          champData[allMatchesPlayedData[i][j].championName].cs += allMatchesPlayedData[i][j].cs;
-          champData[allMatchesPlayedData[i][j].championName].positions[allMatchesPlayedData[i][j].position] += 1;
-          champData[allMatchesPlayedData[i][j].championName].played += 1;
-  
-          (allMatchesPlayedData[i][j].win === true ? champData[allMatchesPlayedData[i][j].championName].win += 1 : champData[allMatchesPlayedData[i][j].championName].loss += 1);
-  
+    if (allMatchesPlayedData[i] !== undefined) {
+      if (champData[allMatchesPlayedData[i].championName] && champData) {
+        champData[allMatchesPlayedData[i].championName].kills += allMatchesPlayedData[i].kills;
+        champData[allMatchesPlayedData[i].championName].deaths += allMatchesPlayedData[i].deaths;
+        champData[allMatchesPlayedData[i].championName].assists += allMatchesPlayedData[i].assists;
+        champData[allMatchesPlayedData[i].championName].champDamage += allMatchesPlayedData[i].champDamage;
+        champData[allMatchesPlayedData[i].championName].cs += allMatchesPlayedData[i].cs;
+        champData[allMatchesPlayedData[i].championName].positions[allMatchesPlayedData[i].position] += 1;
+        champData[allMatchesPlayedData[i].championName].played += 1;
+
+        (allMatchesPlayedData[i].win === true ? champData[allMatchesPlayedData[i].championName].win += 1 : champData[allMatchesPlayedData[i].championName].loss += 1);
+
+      }
+
+      else {
+        const newObj = {};
+
+        newObj.championName = allMatchesPlayedData[i].championName;
+        newObj.championId = allMatchesPlayedData[i].championId;
+        newObj.kills = allMatchesPlayedData[i].kills;
+        newObj.deaths = allMatchesPlayedData[i].deaths;
+        newObj.assists = allMatchesPlayedData[i].assists;
+        newObj.champDamage = allMatchesPlayedData[i].champDamage;
+        newObj.cs = allMatchesPlayedData[i].cs;
+        newObj.played = 1;
+
+        newObj.positions = {'TOP': 0, 'JUNGLE': 0, 'MIDDLE': 0, 'BOTTOM': 0, 'UTILITY': 0, '': 0, 'Invalid': 0};
+        newObj.positions[allMatchesPlayedData[i].position] = 1;
+
+        if (allMatchesPlayedData[i].win === true) {
+          newObj.win = 1;
+          newObj.loss = 0;
         }
-  
+
         else {
-          const newObj = {};
-  
-          newObj.championName = allMatchesPlayedData[i][j].championName;
-          newObj.championId = allMatchesPlayedData[i][j].championId;
-          newObj.kills = allMatchesPlayedData[i][j].kills;
-          newObj.deaths = allMatchesPlayedData[i][j].deaths;
-          newObj.assists = allMatchesPlayedData[i][j].assists;
-          newObj.champDamage = allMatchesPlayedData[i][j].champDamage;
-          newObj.cs = allMatchesPlayedData[i][j].cs;
-          newObj.played = 1;
-  
-          newObj.positions = {'TOP': 0, 'JUNGLE': 0, 'MIDDLE': 0, 'BOTTOM': 0, 'UTILITY': 0, '': 0, 'Invalid': 0};
-          newObj.positions[allMatchesPlayedData[i][j].position] = 1;
-  
-          if (allMatchesPlayedData[i][j].win === true) {
-            newObj.win = 1;
-            newObj.loss = 0;
-          }
-  
-          else {
-            newObj.win = 0;
-            newObj.loss = 1;
-          }
-          
-          champData[allMatchesPlayedData[i][j].championName] = newObj;
+          newObj.win = 0;
+          newObj.loss = 1;
         }
+        
+        champData[allMatchesPlayedData[i].championName] = newObj;
       }
     }
   }

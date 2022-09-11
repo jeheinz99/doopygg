@@ -271,7 +271,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const TFTMatchHistory = [];
     const otherPlayersData = [];
     for (let i = 0; i < matchData.length; i++) {
-      for (let j = 0;  8; j++) {
+      for (let j = 0;  j < matchData[i].participants.length; j++) {
 
         if (matchData[i].participants[j].puuid === puuid) {
           const player = matchData[i].participants[j];

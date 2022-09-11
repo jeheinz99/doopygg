@@ -32,7 +32,7 @@ const Navbar = () => {
         <ul id="ul1">
           <li><a id="DiscordLogoLink" target="_blank" href="https://discord.com/"><FaDiscord color="#7289d9" className="LogoLinks" id="discordLogo"/></a></li>
           <li><a id="YoutubeLogoLink" target="_blank" href="https://www.youtube.com/channel/UCfXdp5JwO4QghC01p-_h5OA"><AiFillYoutube color="#FF0000" className="LogoLinks" id="youtubeLogo"/></a></li>
-          <li><a id="TwitterLogoLink" target="_blank" href="https://twitter.com/kindo_v9"><BsTwitter color="#00acee" className="LogoLinks" id="twitterLogo"/></a></li>
+          <li><a id="TwitterLogoLink" target="_blank" href="https://twitter.com/doop_kindred"><BsTwitter color="#00acee" className="LogoLinks" id="twitterLogo"/></a></li>
           <li><a id="LinkedInLogoLink" target="_blank" href="https://www.linkedin.com/in/joseph-heinz-874676240"><AiFillLinkedin color="#0072b1" className="LogoLinks" id="LinkedInLogo"/></a></li>
           <li><a id="GithubLogoLink" target="_blank" href="https://github.com/jeheinz99"><AiFillGithub color="white" className="LogoLinks" id="githubLogo"/></a></li>
         </ul>
