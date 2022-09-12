@@ -426,8 +426,8 @@ summonerController.updateSummData = async (req, res, next) => {
         const data = getRankedS12Matches.data;
         allS12MatchesArr.push(data);
         if (data.length !== 100) {
-          const summoner = await lolSummoner.findOne({summonerName: summonerName, region: regionId});
-          const flattenedArr = summoner.S12MatchesPlayed.flat();
+          // const summoner = await lolSummoner.findOne({summonerName: name, region: regionId});
+          const flattenedArr = allS12MatchesArr.flat();
           const matchesDataSet = new Set(flattenedArr);
 
           const flattenedArr2 = allS12MatchesArr.flat();
@@ -571,6 +571,7 @@ summonerController.addSummMatchesData = async (req, res, next) => {
     for (let i = 0; i < tempArr.length; i++) {
       if (!set.has(tempArr[i])) neededObjs.push(tempArr[i]);
     }
+    console.log(neededObjs.length, 'objs needed');
 
     if (neededObjs.length > 0) {
       const objects = await Promise.allSettled(neededObjs.map(async id => {
@@ -585,6 +586,9 @@ summonerController.addSummMatchesData = async (req, res, next) => {
           });
         })
       );
+
+      console.log('after');
+
       // console.log(objects.length, 'objs needed');
       // cons ole.log(objects[0].value.data.info, 'objects info after');
       // console.log(objects[0].value.data.metadata.matchId, 'objects after');
