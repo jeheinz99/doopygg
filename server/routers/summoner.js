@@ -6,7 +6,7 @@ const router = express.Router();
 // router handler to handle all requests to main app endpoint with summoners
 
 router.get('/:regionId/:summonerName', summonerController.checkSummData, summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
-  // console.log(res.locals.summonerData, 'test');
+  // console.log(res.locals.summonerData, 'summoner data in backend');
   return res.status(200).send(res.locals.summonerData);
 });
 

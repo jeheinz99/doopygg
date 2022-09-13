@@ -238,6 +238,7 @@ summonerController.updateSummData = async (req, res, next) => {
     const matchHistoryData = [];
     const neededObjs = [];
 
+    // check DB for each ID in player's recent matches
     const matchObjs = await lolMatches.find({ matchId: { $in: [...matchIdList]}});
 
     const set = new Set();
@@ -264,19 +265,16 @@ summonerController.updateSummData = async (req, res, next) => {
           );
       }));
 
-      for (let i = 0; i < matchObjs.length; i++) {
-        // can't fucking figure out WHY IT'S UNDEFINED
-        // if (typeof matchObjs[i].value.data === 'undefined') {
-          // console.log(matchObjs[i], 'value');
-        // }
-        console.log(`creating match ${i}`);
-        await lolMatches.create({
-          matchId: matchObjs[i].value.data.metadata.matchId,
-          matchData: matchObjs[i].value.data.info,
-        });
-        matchHistoryData.push(matchObjs[i].value.data.info);
-      }
+      await Promise.allSettled(matchObjs.map(async obj => {
+        if (obj.status !== 'rejected') {
+          await lolMatches.create({
+            matchId: obj.value.data.metadata.matchId,
+            matchData: obj.value.data.info
+          });
+        }
+      }));
     }
+
     matchHistoryData.sort((a, b) => {
       return ((b.gameEndTimestamp - a.gameEndTimestamp));
     });
@@ -286,7 +284,7 @@ summonerController.updateSummData = async (req, res, next) => {
     // with statistics from the last 20 matches 
     const matchesData = [];
     const otherPlayersData = [];
-    // console.log(matchHistoryData, 'match history data');
+    console.log(matchHistoryData.length, 'match history data length');
     for (let i = 0; i < matchHistoryData.length; i++) {      
       for (let j = 0; j < matchHistoryData[i].participants.length; j++) {
         // console.log(matchHistoryData[i].participants, 'participants');
@@ -524,88 +522,88 @@ summonerController.addSummMatchesData = async (req, res, next) => {
     // function to extract data from match objects for the specific player
     const getObjData = (arrayOfObjs, summonerName) => {
       const tempArr = [];
-
       for (let i = 0; i < arrayOfObjs.length; i++) {
-        // for (let j = 0; j < arrayOfObjs[i].participants.length; j++) {
-          for (let j = 0; j < arrayOfObjs[i].matchData.participants.length; j++) {
-            if ((arrayOfObjs[i].matchData.participants[j].summonerName).toLowerCase() === summonerName.toLowerCase()) {
-          // if ((arrayOfObjs[i].participants[j].summonerName).toLowerCase() === summonerName.toLowerCase()) {
-            // const player = arrayOfObjs[i].participants[j];
-            const player = arrayOfObjs[i].matchData.participants[j];
-            tempArr.push({
-              championName: player.championName,
-              championId: player.championId,
-              champDamage: player.totalDamageDealtToChampions,
-              kills: player.kills,
-              deaths: player.deaths,
-              assists: player.assists,
-              cs: (player.totalMinionsKilled + player.neutralMinionsKilled),
-              csPerMin: (player.totalMinionsKilled + player.neutralMinionsKilled)/(arrayOfObjs[i].matchData.gameDuration/60),
-              win: player.win,
-              position: player.teamPosition,
-              gold: player.goldEarned,
-              damageTaken: player.totalDamageTaken,
-              doubleKills: player.doubleKills,
-              tripleKills: player.tripleKills,
-              quadraKills: player.quadraKills,
-              pentaKills: player.pentaKills, 
-            });
+        // if (arrayOfObjs[i] !== undefined) {
+          for (let j = 0; j < arrayOfObjs[i].participants.length; j++) {
+            if ((arrayOfObjs[i].participants[j].summonerName).toLowerCase() === summonerName.toLowerCase()) {
+              const player = arrayOfObjs[i].participants[j];
+              tempArr.push({
+                championName: player.championName,
+                championId: player.championId,
+                champDamage: player.totalDamageDealtToChampions,
+                kills: player.kills,
+                deaths: player.deaths,
+                assists: player.assists,
+                cs: (player.totalMinionsKilled + player.neutralMinionsKilled),
+                csPerMin: (player.totalMinionsKilled + player.neutralMinionsKilled)/(arrayOfObjs[i].gameDuration/60),
+                win: player.win,
+                position: player.teamPosition,
+                gold: player.goldEarned,
+                damageTaken: player.totalDamageTaken,
+                doubleKills: player.doubleKills,
+                tripleKills: player.tripleKills,
+                quadraKills: player.quadraKills,
+                pentaKills: player.pentaKills, 
+              });
+            }
           }
-        }
+        // }
       }
       return tempArr;
     };
 
-    // // final arr that will be sent as response
-    // const S12MatchesInfoArr = [];
-
     // arr to combine array of arrays together
     const tempArr = allMatchesPlayed.flat();
     const objs = await lolMatches.find({ matchId: { $in: [...tempArr]}});
+    console.log(tempArr.length, 'temp arr length');
 
     const set = new Set();
     for (let i = 0; i < objs.length; i++) {
       set.add(objs[i].matchId);
-    } 
+    }
+
     const neededObjs = [];
     for (let i = 0; i < tempArr.length; i++) {
       if (!set.has(tempArr[i])) neededObjs.push(tempArr[i]);
     }
-    console.log(neededObjs.length, 'objs needed');
 
+    let newObjs = objs.map(matchObj => {
+      return matchObj.matchData;
+    });
+    console.log(newObjs.length, 'new objs length');
+    console.log(neededObjs.length, 'needed objs length')
     if (neededObjs.length > 0) {
       const objects = await Promise.allSettled(neededObjs.map(async id => {
-          return await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${id}?api_key=${process.env.api_key}`,
-          {
-            headers: {
-              "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-              "Accept-Language": "en-US,en;q=0.9",
-              "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-              "Origin": "https://developer.riotgames.com"
-              }
-          });
-        })
-      );
+        return await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${id}?api_key=${process.env.api_key}`,
+        {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Origin": "https://developer.riotgames.com"
+          }
+        });
+      }));
 
-      console.log('after');
-
-      // console.log(objects.length, 'objs needed');
-      // cons ole.log(objects[0].value.data.info, 'objects info after');
-      // console.log(objects[0].value.data.metadata.matchId, 'objects after');
-
-      for (let i = 0; i < objects.length; i++) {
-        // can't fucking figure out WHY IT'S UNDEFINED
-        if (objects[i].status !== 'rejected') {
-          console.log(`creating match ${i}`);
+      const objData = await Promise.allSettled(objects.map(async obj => {
+        if (obj.status !== 'rejected') {
           await lolMatches.create({
-            matchId: objects[i].value.data.metadata.matchId,
-            matchData: objects[i].value.data.info,
+            matchId: obj.value.data.metadata.matchId,
+            matchData: obj.value.data.info
           });
+          return obj.value.data.info;
         }
-      }
+      }));
+
+      const newObjData = objData.map(matchObj => {
+        return matchObj.value;
+      });
+      console.log(newObjData.length, 'new obj data length');
+      newObjs = newObjs.concat(newObjData);
     }
 
-    const S12MatchesInfoArr = getObjData(objs, summonerName);
+    const S12MatchesInfoArr = getObjData(newObjs, summonerName);
+    console.log(S12MatchesInfoArr.length, 's12 matches info arr length')
     await lolSummoner.findOneAndUpdate({summonerName: summonerName, region: region}, {S12MatchesPlayedData: S12MatchesInfoArr});
     res.locals.summonerData.allMatchesPlayedData = S12MatchesInfoArr;
     return next();
