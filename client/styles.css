@@ -1854,6 +1854,7 @@ h4 {
   padding: 5px;
   border: 2px solid rgba(39, 45, 58, 0.7);
   align-items: center;
+  text-align: center;
 }
 .lg-rank-div {
   display: flex;

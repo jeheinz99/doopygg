@@ -132,6 +132,7 @@ const regionObj = {
 summonerController.checkSummData = async (req, res, next) => {
   const { summonerName, regionId } = req.params;
   try {
+    // const summoner = null;
     const summoner = await lolSummoner.findOne({"summonerName": { "$regex" : new RegExp(summonerName, "i")}, "region": regionId});
     if (summoner !== null) {
       res.locals.summonerData = {
@@ -252,20 +253,24 @@ summonerController.updateSummData = async (req, res, next) => {
     }
 
     if (neededObjs.length > 0) {
-      const matchObjs = await Promise.allSettled(neededObjs.map(async id => {
-          return await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${id}?api_key=${process.env.api_key}`,
-            {
-              headers: {
-                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-                "Accept-Language": "en-US,en;q=0.9",
-                "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-                "Origin": "https://developer.riotgames.com"
-              }
+      const gettingMatchObjs = await Promise.allSettled(neededObjs.map(async id => {
+        return await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${id}?api_key=${process.env.api_key}`,
+          {
+            headers: {
+              "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+              "Accept-Language": "en-US,en;q=0.9",
+              "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+              "Origin": "https://developer.riotgames.com"
             }
-          );
+          }
+        );
       }));
 
-      await Promise.allSettled(matchObjs.map(async obj => {
+      for (let i = 0; i < gettingMatchObjs.length; i++) {
+        matchHistoryData.push(gettingMatchObjs[i].value.data.info);
+      }
+
+      await Promise.allSettled(gettingMatchObjs.map(async obj => {
         if (obj.status !== 'rejected') {
           await lolMatches.create({
             matchId: obj.value.data.metadata.matchId,
@@ -278,13 +283,14 @@ summonerController.updateSummData = async (req, res, next) => {
     matchHistoryData.sort((a, b) => {
       return ((b.gameEndTimestamp - a.gameEndTimestamp));
     });
+    console.log(matchHistoryData, 'match History Data')
 
     // iterates through the matchHistoryData list to find the summoner being-
     // looked up so you only find their statistics for each match and push an object 
     // with statistics from the last 20 matches 
     const matchesData = [];
     const otherPlayersData = [];
-    console.log(matchHistoryData.length, 'match history data length');
+    // console.log(matchHistoryData.length, 'match history data length');
     for (let i = 0; i < matchHistoryData.length; i++) {      
       for (let j = 0; j < matchHistoryData[i].participants.length; j++) {
         // console.log(matchHistoryData[i].participants, 'participants');
@@ -555,7 +561,7 @@ summonerController.addSummMatchesData = async (req, res, next) => {
     // arr to combine array of arrays together
     const tempArr = allMatchesPlayed.flat();
     const objs = await lolMatches.find({ matchId: { $in: [...tempArr]}});
-    console.log(tempArr.length, 'temp arr length');
+    // console.log(tempArr.length, 'temp arr length');
 
     const set = new Set();
     for (let i = 0; i < objs.length; i++) {
@@ -570,8 +576,8 @@ summonerController.addSummMatchesData = async (req, res, next) => {
     let newObjs = objs.map(matchObj => {
       return matchObj.matchData;
     });
-    console.log(newObjs.length, 'new objs length');
-    console.log(neededObjs.length, 'needed objs length')
+    // console.log(newObjs.length, 'new objs length');
+    // console.log(neededObjs.length, 'needed objs length')
     if (neededObjs.length > 0) {
       const objects = await Promise.allSettled(neededObjs.map(async id => {
         return await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${id}?api_key=${process.env.api_key}`,
@@ -598,12 +604,12 @@ summonerController.addSummMatchesData = async (req, res, next) => {
       const newObjData = objData.map(matchObj => {
         return matchObj.value;
       });
-      console.log(newObjData.length, 'new obj data length');
+      // console.log(newObjData.length, 'new obj data length');
       newObjs = newObjs.concat(newObjData);
     }
 
     const S12MatchesInfoArr = getObjData(newObjs, summonerName);
-    console.log(S12MatchesInfoArr.length, 's12 matches info arr length')
+    // console.log(S12MatchesInfoArr.length, 's12 matches info arr length')
     await lolSummoner.findOneAndUpdate({summonerName: summonerName, region: region}, {S12MatchesPlayedData: S12MatchesInfoArr});
     res.locals.summonerData.allMatchesPlayedData = S12MatchesInfoArr;
     return next();
