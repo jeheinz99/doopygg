@@ -135,6 +135,7 @@ summonerController.checkSummData = async (req, res, next) => {
     // const summoner = null;
     const summoner = await lolSummoner.findOne({"summonerName": { "$regex" : new RegExp(summonerName, "i")}, "region": regionId});
     if (summoner !== null) {
+      // console.log(summoner.S12MatchesPlayedData.length, "summoner's matched played data length in check summ data");
       res.locals.summonerData = {
         summonerName: summoner.summonerName,
         summonerLevel: summoner.summonerLevel,
@@ -283,7 +284,7 @@ summonerController.updateSummData = async (req, res, next) => {
     matchHistoryData.sort((a, b) => {
       return ((b.gameEndTimestamp - a.gameEndTimestamp));
     });
-    console.log(matchHistoryData, 'match History Data')
+    // console.log(matchHistoryData, 'match History Data')
 
     // iterates through the matchHistoryData list to find the summoner being-
     // looked up so you only find their statistics for each match and push an object 
@@ -397,8 +398,7 @@ summonerController.updateSummData = async (req, res, next) => {
         }
       };
     };
-    // console.log(matchHistoryData, 'match history data');
-    // console.log(matchesData, 'matches data');
+
     // maps icons for main player being searched for
     for (let i = 0; i < matchesData.length; i++) {
       const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
@@ -417,6 +417,7 @@ summonerController.updateSummData = async (req, res, next) => {
 
     try {
       for (let i = 0; i < 2000; i+=100) {
+        // gets players last 1000 ranked soloq match ids from riot api
         const getRankedS12Matches = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1641531600&queue=420&type=ranked&start=${i}&count=100&api_key=${process.env.api_key}`,
         {
           headers: {
@@ -427,19 +428,45 @@ summonerController.updateSummData = async (req, res, next) => {
           }
         });
 
-        const data = getRankedS12Matches.data;
+        const { data } = getRankedS12Matches;
+        // pushing each array of 100 ids to the alls12matches array
         allS12MatchesArr.push(data);
+        // once we hit point where data is less than 100
         if (data.length !== 100) {
-          // const summoner = await lolSummoner.findOne({summonerName: name, region: regionId});
-          const flattenedArr = allS12MatchesArr.flat();
-          const matchesDataSet = new Set(flattenedArr);
 
-          const flattenedArr2 = allS12MatchesArr.flat();
+          const summoner = await lolSummoner.findOne({summonerName: name, region: regionId});
+          // if we have the summoner in DB
+          if (summoner !== null) {
+            // get the summoner's s12 matches played ids and flatten it into 1 array
+            // this is basically a player's existing 500 matches in the database
+            const flattenedArr = summoner.S12MatchesPlayed.flat();
+            console.log(flattenedArr.length, "summoner's flat arr length");
 
-          for (let i = 0; i < flattenedArr2.length; i++) {
-            if (!matchesDataSet.has(flattenedArr2[i])) flattenedArr.push(flattenedArr2[i]);
+            // create a new set of summoner's existing match ids 
+            const matchesDataSet = new Set(flattenedArr);
+
+            // create 2nd array of all data we just pushed into the allS12Matches array
+            const flattenedArr2 = allS12MatchesArr.flat();
+
+            // iterate through the last 1000 ids of the player in the 1st flattened array
+            for (let i = 0; i < flattenedArr.length; i++) {
+              if (!matchesDataSet.has(flattenedArr[i])) allS12MatchesArr.push(flattenedArr[i]);
+            }
+            break;
           }
-          break;
+          else {
+            break;
+          }
+
+
+          // //
+          // const flattenedArr2 = allS12MatchesArr.flat();
+          // console.log(flattenedArr2.length, 'flat arr 2 length');
+
+          // for (let i = 0; i < flattenedArr2.length; i++) {
+          //   if (!matchesDataSet.has(flattenedArr2[i])) flattenedArr.push(flattenedArr2[i]);
+          // }
+          // break;
         }
       }
     }
@@ -450,6 +477,7 @@ summonerController.updateSummData = async (req, res, next) => {
 
     // flatten array so array of arrays becomes 1 array with all values
     const flattenedArr = allS12MatchesArr.flat();
+    console.log(flattenedArr.length, 'flattened arr after');
 
     // summoner data to send back to front end as response
     const summonerData = {
@@ -560,6 +588,7 @@ summonerController.addSummMatchesData = async (req, res, next) => {
 
     // arr to combine array of arrays together
     const tempArr = allMatchesPlayed.flat();
+    console.log(tempArr.length, 'temp arr length');
     const objs = await lolMatches.find({ matchId: { $in: [...tempArr]}});
     // console.log(tempArr.length, 'temp arr length');
 
