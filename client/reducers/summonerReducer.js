@@ -40,7 +40,14 @@ const summonerReducer = (state = initialState, action) => {
         region: payload.region,
         }
       );
-
+    
+    case types.EXPAND_SUMM_MATCH_HISTORY:
+      return Object.assign(
+        {},
+        state, {
+          matchHistory: payload.matchHistory,
+        }
+      );
   // returning default state if no case is met
   default: {
     return state;

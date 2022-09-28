@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Matches from './Matches.jsx';
 import Recent20StatsBox from './RecentMatches/Recent20StatsBox.jsx';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { BiChevronDown } from 'react-icons/bi';
+import { expandSummMatchHistory } from '../../actions/actions.js';
 
 const MatchBoxes = () => {
 
   const matchHistory = useSelector(state => state.summoners.matchHistory);
   const otherPlayersMatches = useSelector(state => state.summoners.otherPlayersMatches);
+  const summonerName = useSelector(state => state.summoners.summonerName);
+  const region = useSelector(state => state.summoners.region);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
+  const expandHistory = async () => {
+    // setLoading(true);
+    // await dispatch(expandSummMatchHistory(summonerName, matchHistory.length, region));
+    // setLoading(false);
+    // console.log('hi');
+  };
 
   /* there are only 10 players per match, the 'otherPlayersMatches' players are in order by match played in,
   this function will split 10 players for each match based on the amount of matches that were queried
@@ -121,6 +134,7 @@ const MatchBoxes = () => {
       <h4>Match History</h4>
       <Recent20StatsBox recent20Data={recent20Data}/>
       { matchList }
+      <button id="match-history-expand-btn" onClick={() => expandHistory()}><BiChevronDown size={25}/></button>
     </div>
   );
 };

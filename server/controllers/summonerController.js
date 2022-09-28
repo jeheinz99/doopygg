@@ -440,7 +440,7 @@ summonerController.updateSummData = async (req, res, next) => {
             // get the summoner's s12 matches played ids and flatten it into 1 array
             // this is basically a player's existing 500 matches in the database
             const flattenedArr = summoner.S12MatchesPlayed.flat();
-            console.log(flattenedArr.length, "summoner's flat arr length");
+            // console.log(flattenedArr.length, "summoner's flat arr length");
 
             // create a new set of summoner's existing match ids 
             const matchesDataSet = new Set(flattenedArr);
@@ -477,7 +477,7 @@ summonerController.updateSummData = async (req, res, next) => {
 
     // flatten array so array of arrays becomes 1 array with all values
     const flattenedArr = allS12MatchesArr.flat();
-    console.log(flattenedArr.length, 'flattened arr after');
+    // console.log(flattenedArr.length, 'flattened arr after');
 
     // summoner data to send back to front end as response
     const summonerData = {
@@ -557,38 +557,36 @@ summonerController.addSummMatchesData = async (req, res, next) => {
     const getObjData = (arrayOfObjs, summonerName) => {
       const tempArr = [];
       for (let i = 0; i < arrayOfObjs.length; i++) {
-        // if (arrayOfObjs[i] !== undefined) {
-          for (let j = 0; j < arrayOfObjs[i].participants.length; j++) {
-            if ((arrayOfObjs[i].participants[j].summonerName).toLowerCase() === summonerName.toLowerCase()) {
-              const player = arrayOfObjs[i].participants[j];
-              tempArr.push({
-                championName: player.championName,
-                championId: player.championId,
-                champDamage: player.totalDamageDealtToChampions,
-                kills: player.kills,
-                deaths: player.deaths,
-                assists: player.assists,
-                cs: (player.totalMinionsKilled + player.neutralMinionsKilled),
-                csPerMin: (player.totalMinionsKilled + player.neutralMinionsKilled)/(arrayOfObjs[i].gameDuration/60),
-                win: player.win,
-                position: player.teamPosition,
-                gold: player.goldEarned,
-                damageTaken: player.totalDamageTaken,
-                doubleKills: player.doubleKills,
-                tripleKills: player.tripleKills,
-                quadraKills: player.quadraKills,
-                pentaKills: player.pentaKills, 
-              });
-            }
+        for (let j = 0; j < arrayOfObjs[i].participants.length; j++) {
+          if ((arrayOfObjs[i].participants[j].summonerName).toLowerCase() === summonerName.toLowerCase()) {
+            const player = arrayOfObjs[i].participants[j];
+            tempArr.push({
+              championName: player.championName,
+              championId: player.championId,
+              champDamage: player.totalDamageDealtToChampions,
+              kills: player.kills,
+              deaths: player.deaths,
+              assists: player.assists,
+              cs: (player.totalMinionsKilled + player.neutralMinionsKilled),
+              csPerMin: (player.totalMinionsKilled + player.neutralMinionsKilled)/(arrayOfObjs[i].gameDuration/60),
+              win: player.win,
+              position: player.teamPosition,
+              gold: player.goldEarned,
+              damageTaken: player.totalDamageTaken,
+              doubleKills: player.doubleKills,
+              tripleKills: player.tripleKills,
+              quadraKills: player.quadraKills,
+              pentaKills: player.pentaKills, 
+            });
           }
-        // }
+        }
       }
       return tempArr;
     };
 
     // arr to combine array of arrays together
     const tempArr = allMatchesPlayed.flat();
-    console.log(tempArr.length, 'temp arr length');
+    // console.log(tempArr.length, 'temp arr length');
     const objs = await lolMatches.find({ matchId: { $in: [...tempArr]}});
     // console.log(tempArr.length, 'temp arr length');
 
@@ -888,6 +886,85 @@ summonerController.getLiveGameData = async (req, res, next) => {
   }
   catch(err) {
     console.log(err, 'err in getLiveGameData');
+    return next(err);
+  }
+};
+
+// gets summoner's next matches in their history 
+summonerController.expandSummMatchHistory = async (req, res, next) => {
+  const { summonerName, historyLength, regionId } = req.params;
+  const regionRoute = regionObj[regionId];
+
+  try {
+    const summoner = await lolSummoner.findOne({"summonerName": { "$regex" : new RegExp(summonerName, "i")}, "region": regionId});
+    const { puuid } = summoner;
+
+    const matchHistoryData = [];
+    // uses summoner's puuid to get summoner's match history id list of past 20 games to an array
+    const responseMatchData = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=${historyLength}&count=20&api_key=${process.env.api_key}`,
+    {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Origin": "https://developer.riotgames.com"
+      }
+    });
+
+    const matchIdList = responseMatchData.data;
+    // check DB for each ID in player's recent matches
+    const matchObjs = await lolMatches.find({ matchId: { $in: [...matchIdList]}});
+
+    const set = new Set();
+    for (let i = 0; i < matchObjs.length; i++) {
+      set.add(matchObjs[i].matchId);
+      matchHistoryData.push(matchObjs[i].matchData);
+    }
+
+    for (let i = 0; i < matchIdList.length; i++) {
+      if (!set.has(matchIdList[i])) neededObjs.push(matchIdList[i]);
+    }
+
+    if (neededObjs.length > 0) {
+      const gettingMatchObjs = await Promise.allSettled(neededObjs.map(async id => {
+        return await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${id}?api_key=${process.env.api_key}`,
+          {
+            headers: {
+              "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+              "Accept-Language": "en-US,en;q=0.9",
+              "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+              "Origin": "https://developer.riotgames.com"
+            }
+          }
+        );
+      }));
+
+      for (let i = 0; i < gettingMatchObjs.length; i++) {
+        matchHistoryData.push(gettingMatchObjs[i].value.data.info);
+      }
+
+      await Promise.allSettled(gettingMatchObjs.map(async obj => {
+        if (obj.status !== 'rejected') {
+          await lolMatches.create({
+            matchId: obj.value.data.metadata.matchId,
+            matchData: obj.value.data.info
+          });
+        }
+      }));
+    }
+
+    matchHistoryData.sort((a, b) => {
+      return ((b.gameEndTimestamp - a.gameEndTimestamp));
+    });
+    // console.log(responseMatchesData.data, 'response match data');
+    
+    // res.locals.newSummMatchHistory = {
+    //   matchHistory: matchHistoryData,
+    // };
+    return next();
+  }
+  catch(err) {
+    console.log(err, 'err in expand summ match history');
     return next(err);
   }
 };

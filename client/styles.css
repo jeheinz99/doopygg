@@ -309,9 +309,10 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 99.6%;
-  border: 3px solid #272d3a;
+  width: 100%;
+  border: 1px solid #272d3a;
   border-top: none;
+  background-color: #16161D;
 }
 .DropDownBoxes {
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
@@ -322,9 +323,9 @@ html, body {
   display: grid;
   grid-template-columns: 15% 27% 15% 40% 3%;
   align-items: center;
-  border: 2px solid #272d3a;
+  border: 1px solid #272d3a;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
-  border-radius: 0.2em;
+  /* border-radius: 0.2em; */
 }
 .MatchGroup1 {
   display: flex;
@@ -361,7 +362,7 @@ html, body {
   background: #171A21;
   position: absolute;
   bottom: -5%;
-  border: 3px solid #272d3a;
+  border: 2px solid #272d3a;
   color: rgba(255, 255, 255, 0.8);
   border-radius: 100%;
   width: 30%;
@@ -835,6 +836,28 @@ html, body {
   width: 24px;
   height: 24px;
 }
+#match-history-expand-btn {
+  width: 100%;
+  border: 1px solid #272d3a;
+  background-color: #16161dce;
+  color: rgba(255, 255, 255, 0.80);
+  border-bottom-left-radius: 1.5em;
+  border-bottom-right-radius: 1.5em;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
+  transition: 0.5s;
+}
+#match-history-expand-btn:hover {
+  cursor: pointer;
+  filter: invert(1%);
+  transform: translateY(-1px);
+}
+#match-history-expand-btn:active {
+  outline: none;
+  transform: translateY(0px);
+}
+#match-history-expand-btn:focus {
+  outline: none;
+}
 
 .outerSummonerBox {
   display: flex;
@@ -889,6 +912,7 @@ html, body {
 }
 .champEntryDiv1 p {
   display: flex;
+  font-size: 0.9em;
 }
 .champEntryDiv2 {
   display: flex;
@@ -947,7 +971,7 @@ html, body {
   justify-content: center;
   width: 99%;
   height: 100%;
-  border: 2px solid rgba(39, 45, 58, 0.5);
+  border: 1px solid rgba(39, 45, 58, 0.5);
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
   border-radius: 0.2em;
   gap: 2em;
@@ -1496,7 +1520,7 @@ h4 {
   width: 97%;
 }
 .dd-box-routes {
-  width: 98.9%;
+  width: 99.2%;
   padding: 5px;
   display: flex;
   gap: 1em;
@@ -2044,7 +2068,7 @@ h4 {
   gap: 0.5em;
   padding: 5px;
   border-radius: 0.2em;
-  border: 2px solid rgba(39, 45, 58, 0.5);
+  border: 1px solid rgba(39, 45, 58, 0.5);
   grid-template-columns: auto;
 }
 .match-timeline-items-div {
@@ -2052,7 +2076,7 @@ h4 {
   flex-flow: wrap;
   padding: 5px;
   border-radius: 0.2em;
-  border: 2px solid rgba(39, 45, 58, 0.5);
+  border: 1px solid rgba(39, 45, 58, 0.5);
   width: 95%;
   gap: 0.5em;
 }
@@ -2068,13 +2092,13 @@ h4 {
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: 2px solid #303b51;
+  border: 1px solid #303b51;
   border-radius: 0.2em;
 }
 .champion-ability-icon {
   width: 40px;
   height: 40px;
-  border: 2px solid #303b51;
+  border: 1px solid #303b51;
   border-radius: 0.2em;
 }
 #inactiveBox {
@@ -2207,7 +2231,7 @@ h4 {
   width: 32px;
 }
 #timeline-event-ITEM_SOLD {
-  border: 2px solid red;
+  border: 1px solid red;
 }
 #disclaimerdiv {
   display: flex;

@@ -19,6 +19,11 @@ export const addChampionDataActionCreator = championData => ({
   payload: championData
 });
 
+export const expandSummMatchHistoryActionCreator = matchHistoryData => ({
+  type: types.EXPAND_SUMM_MATCH_HISTORY,
+  payload: matchHistoryData
+});
+
 export const addLeaderboardDataActionCreator = leaderboardData => ({
   type: types.ADD_LEADERBOARD_DATA,
   payload: leaderboardData
@@ -60,13 +65,20 @@ export const updateSummonerData = summonerName => async dispatch => {
   dispatch(addSummonerDataActionCreator(responseSummUpdateData.data));
 };
 
+export const expandSummMatchHistory = (summonerName, historyLength, regionId) => async dispatch => {
+  console.log('hi inside expand');
+  const responseSummExpandMatchHistory = await axios.get(`/summoner/history/${regionId}/${summonerName}/${historyLength}`);
+  console.log('SUMMONER EXPAND HISTORY response from back-end');
+  dispatch(expandSummMatchHistoryActionCreator(responseSummExpandMatchHistory.data));
+};
+
 export const getValorantData = (riotID, tagLine) => async dispatch => {
   const input1 = document.getElementById('val-input-1');
   const input2 = document.getElementById('val-input-2');
   input1.value = '';
   input2.value = '';
   const responseValData = await axios.get(`/valorant/playerdata/na1/${riotID}/${tagLine}`);
-  console.log('VAL response from back-end', responseValData.data);
+  // console.log('VAL response from back-end', responseValData.data);
   dispatch(addValorantDataActionCreator(responseValData.data));  
 };
 

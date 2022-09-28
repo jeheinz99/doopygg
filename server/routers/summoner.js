@@ -14,6 +14,10 @@ router.post('/ddboxdata', summonerController.getDDBoxSummData, (req, res) => {
   return res.status(200).send(res.locals.DDBoxData);
 });
 
+router.get('/history/:regionId/:summonerName/:historyLength', summonerController.expandSummMatchHistory, (req, res) => {
+  return res.status(200).send(res.locals.newSummMatchHistory);
+});
+
 router.get('/update/:regionId/:summonerName', summonerController.updateSummData, summonerController.addSummMatchesData, (req, res) => {
   // console.log(res.locals.recentSummoner, ' recent summoner in server js');
   return res.status(200).send(res.locals.summonerData);
