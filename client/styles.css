@@ -460,7 +460,7 @@ html, body {
   height: 32px;
   border-radius: 0.5em;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
-  border: 2px solid rgba(47, 49, 56, 0.5);
+  border: 1px solid rgba(47, 49, 56, 0.5);
 }
 #item6 {
   width: 24px;
@@ -528,13 +528,13 @@ html, body {
   border-top-left-radius: 1em;
   border-bottom-left-radius: 1em;
   background: rgb(58, 131, 92);
-  border: 1px solid #000;
+  border: 1px solid rgba(47, 49, 56, 0.5);
 }
 #goldBarDDLose {
-  border: 1px solid #000;
-  background: rgb(64, 37, 39);
   border-top-right-radius: 1em;
   border-bottom-right-radius: 1em;
+  background: rgb(64, 37, 39);
+  border: 1px solid rgba(47, 49, 56, 0.5);
 }
 #invis1 p {
   margin-left: 0.5em;
@@ -738,7 +738,7 @@ html, body {
   width: 24px;
   height: 24px;
   border-radius: 0.5em;
-  border: 1px solid #000;
+  border: 1px solid rgba(47, 49, 56, 0.5);
 } 
 .ObjectivesDD {
   display: flex;
