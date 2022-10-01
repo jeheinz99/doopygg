@@ -20,16 +20,16 @@ const root = createRoot(document.getElementById('contents'));
 
 root.render (
   // wrapping app in provider and BrowserRouter for page navigation
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="champions" element={<ChampionsPage />} />
-          <Route path="leaderboards" element={<LeaderboardPage />} />
-          <Route path="valorant" element={<ValorantPage />} />
-          <Route path="tft" element={<TFTPage />} />
-          <Route path="*" element={<NothingHerePage />} />
-        </Routes>
-      </BrowserRouter>
-    </Provider>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="champions" element={<ChampionsPage />} />
+        <Route path="leaderboards" element={<LeaderboardPage />} />
+        <Route path="valorant" element={<ValorantPage />} />
+        <Route path="tft" element={<TFTPage />} />
+        <Route path="*" element={<NothingHerePage />} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>
 );

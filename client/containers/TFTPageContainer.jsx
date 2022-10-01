@@ -48,8 +48,9 @@ const TFTPageContainer = () => {
 
   const updateTFTSummData = async () => {
     setLoading(true);
-    await dispatch(updateTFTData(summonerName));
+    const data = await updateTFTData(summonerName);
     setLoading(false);
+    dispatch(data);
   };
 
   const timeAgo = getTimeAgo(lastUpdated);

@@ -1221,7 +1221,7 @@ h4 {
   position: relative;
   border: none;
   background: none;
-  /* margin-left: 10px; */
+  padding: 0;
   color:rgba(255, 255, 255, 0.80);
 }
 
@@ -1683,6 +1683,11 @@ h4 {
   align-items: center;
   padding: 10px;
   color: white;
+}
+#searching-load-div {
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
 }
 .searchbox-tabs {
   display: flex;

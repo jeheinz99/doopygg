@@ -6,11 +6,15 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import { AiFillCaretUp } from 'react-icons/ai';
 import { useEffect } from 'react';
 
+import MatchBoxTeamPlayers from './MatchBoxTeamPlayers.jsx';
+
 
 const Matches = props => {
 
   const { matchId, gameEnd, matchNum, otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
   
+  const [summonerOpen, setOpen] = useState(false);
+
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
   const summonerName = useSelector(state => state.summoners.summonerName);
   // function that compares todays unix timestamp to the match timestamp
@@ -47,11 +51,27 @@ const Matches = props => {
 
   const KDA = ((kills + assists) / deaths).toFixed(2);
   
-  const [summonerOpen, setOpen] = useState(false);
+  // whenever component is re-rendered, close the dropdown box
   useEffect(() => {
-    setOpen(false);
-  }, [summonerName])
-  const [hidden, setHidden] = useState(false);
+    if (summonerOpen) {
+      setOpen(false);
+    }
+  }, [summonerName]);
+
+  const matchBoxTeamsArr1 = [];
+  const matchBoxTeamsArr2 = [];
+  for (let i = 0; i < otherPlayers.length; i++) {
+    matchBoxTeamsArr1.length < 5 ? 
+    matchBoxTeamsArr1.push(<MatchBoxTeamPlayers
+      key={`${matchId}-player-${i}`}
+      summonerName={otherPlayers[i].summonerName}
+      championId={otherPlayers[i].championId}/>) 
+    :
+    matchBoxTeamsArr2.push(<MatchBoxTeamPlayers
+      key={`${matchId}-player-${i}`}
+      summonerName={otherPlayers[i].summonerName}
+      championId={otherPlayers[i].championId}/>);
+  }
 
   return (
     <div className="MatchesWrapper">
@@ -102,48 +122,10 @@ const Matches = props => {
         </div>
         <div className="MatchGroup5">
           <div className="leftSidePlayers">
-            <div className="leftSideGroup">
-              <img className="playerChampionIcon" id="player0Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[0].championId}.png`}/>
-              <p>{otherPlayers[0].summonerName}</p>
-            </div>
-            <div className="leftSideGroup">
-              <img className="playerChampionIcon" id="player1Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[1].championId}.png`}/>
-              <p>{otherPlayers[1].summonerName}</p>
-            </div>
-            <div className="leftSideGroup">
-              <img className="playerChampionIcon" id="player2Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[2].championId}.png`}/>
-              <p>{otherPlayers[2].summonerName}</p>
-            </div>
-            <div className="leftSideGroup">
-              <img className="playerChampionIcon" id="player3Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[3].championId}.png`}/>
-              <p>{otherPlayers[3].summonerName}</p>
-            </div>
-            <div className="leftSideGroup">
-              <img className="playerChampionIcon" id="player4Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[4].championId}.png`}/>
-              <p>{otherPlayers[4].summonerName}</p>
-            </div>
+            {matchBoxTeamsArr1}
           </div>
-            <div className="rightSidePlayers">
-              <div className="rightSideGroup">
-                <img className="playerChampionIcon" id="player5Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[5].championId}.png`}/>
-                <p>{otherPlayers[5].summonerName}</p>
-              </div>
-              <div className="rightSideGroup">
-                <img className="playerChampionIcon" id="player6Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[6].championId}.png`}/>
-                <p>{otherPlayers[6].summonerName}</p>
-              </div>
-              <div className="rightSideGroup">
-                <img className="playerChampionIcon" id="player7Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[7].championId}.png`}/>
-                <p>{otherPlayers[7].summonerName}</p>
-              </div>
-              <div className="rightSideGroup">
-                <img className="playerChampionIcon" id="player8Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[8].championId}.png`}/>
-                <p>{otherPlayers[8].summonerName}</p>
-              </div>
-              <div className="rightSideGroup">
-                <img className="playerChampionIcon" id="player9Champion" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${otherPlayers[9].championId}.png`}/>
-                <p>{otherPlayers[9].summonerName}</p>
-              </div>
+          <div className="rightSidePlayers">
+            {matchBoxTeamsArr2}
           </div>
         </div>
         <div className="MatchGroupButton">

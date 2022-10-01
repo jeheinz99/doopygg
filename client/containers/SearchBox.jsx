@@ -17,15 +17,21 @@ const SearchBox = () => {
   const lastUpdated = useSelector(state => state.summoners.lastUpdated);
 
   const [currBox, setCurrBox] = useState('matchHistory');
-  const [loading, setLoading] = useState(false);
+  const [updating, setUpdating] = useState(false);
+  const [searching, setSearching] = useState(false);
 
-  const loadSummonerData = useDispatch();
-  const update = useDispatch();
+  const dispatch = useDispatch();
 
   const updateSummData = async () => {
-    setLoading(true);
-    await update(updateSummonerData(summName));
-    setLoading(false);
+    setUpdating(true);
+    await dispatch(updateSummonerData(summName));
+    setUpdating(false);
+  };
+
+  const searchSummData = async summonerName => {
+    setSearching(true);
+    await dispatch(getSummonerData(summonerName));
+    setSearching(false);
   };
 
   const getTimeAgo = lastUpdated => {
@@ -86,22 +92,26 @@ const SearchBox = () => {
           <div className="SearchBoxInputandIcon">
             <CustomSelect id={'region-select-btn'} selectType={'regions'} init={'NA'}/>
             <input id="SearchBoxInput" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
-            <button id="SearchBoxButton" onClick={() => loadSummonerData(getSummonerData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
+            {searching ? 
+              <div className="LoadingDiv" id="searching-load-div">
+                <PulseLoader color="#ffffff" size={10} speedMultiplier={0.5}/>
+              </div> :
+              <button id="SearchBoxButton" onClick={() => searchSummData(summonerNameInput)}> <BiSearch id="SearchIcon"/> </button>}
           </div>
           <div className="test-button">
             <p>Don't have a summoner name?</p>
-            <button id="SearchBoxDemoButton" onClick={() => loadSummonerData(getSummonerData('Doopliss2'))}> Demo </button>
+            {searching ? <button id="SearchBoxDemoButton"> Demo </button> : <button id="SearchBoxDemoButton" onClick={() => searchSummData('Doopliss2')}> Demo </button>}
           </div>
         </div>
       </div>
 
-      {matchHistory[0] && !loading && typeof timeAgo === "string" &&
+      {matchHistory[0] && !updating && typeof timeAgo === "string" &&
       <div className="headerinfo">
         <button className="summonerUpdateButton" onClick={() => updateSummData()}> Update </button>
         <p>Last Updated {timeAgo}</p>
       </div>}
 
-      {matchHistory[0] && !loading && typeof timeAgo === "number" &&
+      {matchHistory[0] && !updating && typeof timeAgo === "number" &&
       <div className="headerinfo">
         <button className="summonerUpdateButton" id="update-wait"> Updated </button>
         {timeAgo === 3 && <p>Please wait {timeAgo} minutes before updating again.</p>}
@@ -109,7 +119,7 @@ const SearchBox = () => {
         {timeAgo <= 1 && <p>Please wait 1 minute before updating again.</p>}
       </div>}
 
-      {matchHistory[0] && loading && 
+      {matchHistory[0] && updating && 
       <div className="headerinfo">
         <div className="loading-div">
           <p id="updating-p"> Updating </p>
@@ -118,7 +128,7 @@ const SearchBox = () => {
         <p>Last Updated {timeAgo}</p>
       </div>}
     
-    {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'matchHistory' && 
+    {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'matchHistory' && !searching &&
     <div className="SummonerDataBoxGroup">
       <SummonerChampDataBox />
       <div className="outer-box">
@@ -127,11 +137,11 @@ const SearchBox = () => {
           <button className="searchbox-tab" onClick={() => setCurrBox('champions')}>Champions</button>
           <button className="searchbox-tab" onClick={() => setCurrBox('live-game')}>Live Game</button>
         </div>
-        <MatchBoxes />
+        {!updating && <MatchBoxes />}
       </div>
     </div>}
 
-    {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'champions' && 
+    {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'champions' && !searching &&
     <div className="SummonerDataBoxGroup" id="SummonerDataBoxGroup-champions">
       <div className="outer-box">
         <div className="searchbox-tabs">
@@ -143,7 +153,7 @@ const SearchBox = () => {
       </div>
     </div>}
 
-    {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'live-game' && 
+    {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'live-game' && !searching &&
     <div className="SummonerDataBoxGroup" id="SummonerDataBoxGroup-live-game">
       <div className="outer-box">
         <div className="searchbox-tabs">
@@ -155,7 +165,7 @@ const SearchBox = () => {
       </div>
     </div>}
 
-    {matchHistory[0] && allMatchesPlayedData[0] === undefined && currBox === 'matchHistory' &&
+    {matchHistory[0] && allMatchesPlayedData[0] === undefined && currBox === 'matchHistory' && !searching &&
     <div className="SummonerDataBoxGroup">
       <SummonerChampDataBox />
       <div className="outer-box">
@@ -164,11 +174,11 @@ const SearchBox = () => {
           <button className="searchbox-tab" onClick={() => setCurrBox('champions')}>Champions</button>
           <button className="searchbox-tab" onClick={() => setCurrBox('live-game')}>Live Game</button>
         </div>
-        <MatchBoxes />
+        {!updating && <MatchBoxes />}
       </div>
     </div>}
 
-    {matchHistory[0] && allMatchesPlayedData[0] === undefined && currBox === 'champions' && 
+    {matchHistory[0] && allMatchesPlayedData[0] === undefined && currBox === 'champions' && !searching &&
     <div className="SummonerDataBoxGroup" id="SummonerDataBoxGroup-champions">
       <div className="outer-box">
         <div className="searchbox-tabs">
