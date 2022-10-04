@@ -105,13 +105,13 @@ const SearchBox = () => {
         </div>
       </div>
 
-      {matchHistory[0] && !updating && typeof timeAgo === "string" &&
+      {matchHistory[0] && !updating && typeof timeAgo === "string" && !searching &&
       <div className="headerinfo">
         <button className="summonerUpdateButton" onClick={() => updateSummData()}> Update </button>
         <p>Last Updated {timeAgo}</p>
       </div>}
 
-      {matchHistory[0] && !updating && typeof timeAgo === "number" &&
+      {matchHistory[0] && !updating && typeof timeAgo === "number" && !searching &&
       <div className="headerinfo">
         <button className="summonerUpdateButton" id="update-wait"> Updated </button>
         {timeAgo === 3 && <p>Please wait {timeAgo} minutes before updating again.</p>}
@@ -119,7 +119,7 @@ const SearchBox = () => {
         {timeAgo <= 1 && <p>Please wait 1 minute before updating again.</p>}
       </div>}
 
-      {matchHistory[0] && updating && 
+      {matchHistory[0] && updating && !searching &&
       <div className="headerinfo">
         <div className="loading-div">
           <p id="updating-p"> Updating </p>
@@ -137,7 +137,7 @@ const SearchBox = () => {
           <button className="searchbox-tab" onClick={() => setCurrBox('champions')}>Champions</button>
           <button className="searchbox-tab" onClick={() => setCurrBox('live-game')}>Live Game</button>
         </div>
-        {!updating && <MatchBoxes />}
+        {!searching && <MatchBoxes />}
       </div>
     </div>}
 
@@ -174,7 +174,7 @@ const SearchBox = () => {
           <button className="searchbox-tab" onClick={() => setCurrBox('champions')}>Champions</button>
           <button className="searchbox-tab" onClick={() => setCurrBox('live-game')}>Live Game</button>
         </div>
-        {!updating && <MatchBoxes />}
+        {!searching && <MatchBoxes />}
       </div>
     </div>}
 

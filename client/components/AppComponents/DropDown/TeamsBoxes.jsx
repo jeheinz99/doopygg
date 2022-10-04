@@ -1,4 +1,5 @@
 import React from "react";
+import { searchUser } from "../../../../searchUser";
 
 const TeamsBoxes = props => {
 
@@ -24,7 +25,7 @@ const TeamsBoxes = props => {
           <img id="Player0Team1SecondaryTree" src={runes[5].icon}/>
         </div>
         <div className="Player0Team1Info">
-          <p>{summonerName}</p>
+          <p className="playernames" onClick={() => searchUser(summonerName)}>{summonerName}</p>
         </div>
         <div className="Player0Team1KDA">
           <p>{kills} / {deaths} / {assists}</p>

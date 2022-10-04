@@ -1,4 +1,5 @@
 import React from 'react';
+import { searchUser } from '../../../../searchUser';
 
 const OtherPlayerRunes = props => {
 
@@ -15,7 +16,7 @@ const OtherPlayerRunes = props => {
     <div className="otherPlayerRunesBox" id={`otherPlayers-${runes[4].id}`}>
 
       <img id="champIconRunesDD" src={championIcon}/>
-      <p> {name} </p>
+      <p className="playernames" onClick={() => searchUser(name)}> {name} </p>
 
       <img className="keystoneRunesDD" src={runes[0].icon}/>
 

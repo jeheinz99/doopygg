@@ -540,27 +540,29 @@ summonerController.addSummMatchesData = async (req, res, next) => {
     const getObjData = (arrayOfObjs, summonerName) => {
       const tempArr = [];
       for (let i = 0; i < arrayOfObjs.length; i++) {
-        for (let j = 0; j < arrayOfObjs[i].participants.length; j++) {
-          if ((arrayOfObjs[i].participants[j].summonerName).toLowerCase() === summonerName.toLowerCase()) {
-            const player = arrayOfObjs[i].participants[j];
-            tempArr.push({
-              championName: player.championName,
-              championId: player.championId,
-              champDamage: player.totalDamageDealtToChampions,
-              kills: player.kills,
-              deaths: player.deaths,
-              assists: player.assists,
-              cs: (player.totalMinionsKilled + player.neutralMinionsKilled),
-              csPerMin: (player.totalMinionsKilled + player.neutralMinionsKilled)/(arrayOfObjs[i].gameDuration/60),
-              win: player.win,
-              position: player.teamPosition,
-              gold: player.goldEarned,
-              damageTaken: player.totalDamageTaken,
-              doubleKills: player.doubleKills,
-              tripleKills: player.tripleKills,
-              quadraKills: player.quadraKills,
-              pentaKills: player.pentaKills, 
-            });
+        if (arrayOfObjs[i] !== undefined) {
+          for (let j = 0; j < arrayOfObjs[i].participants.length; j++) {
+            if ((arrayOfObjs[i].participants[j].summonerName).toLowerCase() === summonerName.toLowerCase()) {
+              const player = arrayOfObjs[i].participants[j];
+              tempArr.push({
+                championName: player.championName,
+                championId: player.championId,
+                champDamage: player.totalDamageDealtToChampions,
+                kills: player.kills,
+                deaths: player.deaths,
+                assists: player.assists,
+                cs: (player.totalMinionsKilled + player.neutralMinionsKilled),
+                csPerMin: (player.totalMinionsKilled + player.neutralMinionsKilled)/(arrayOfObjs[i].gameDuration/60),
+                win: player.win,
+                position: player.teamPosition,
+                gold: player.goldEarned,
+                damageTaken: player.totalDamageTaken,
+                doubleKills: player.doubleKills,
+                tripleKills: player.tripleKills,
+                quadraKills: player.quadraKills,
+                pentaKills: player.pentaKills, 
+              });
+            }
           }
         }
       }
@@ -822,13 +824,18 @@ summonerController.getLiveGameData = async (req, res, next) => {
 // gets summoner's next matches in their history 
 summonerController.expandSummMatchHistory = async (req, res, next) => {
   const { summonerName, historyLength, regionId } = req.params;
+  // console.log(summonerName, 'summonerName');
+  // console.log(historyLength, 'history length');
+  // console.log(regionId, 'region id');
   const regionRoute = regionObj[regionId];
 
   try {
+    // connect to DB to find summoner's puuid
     const summoner = await lolSummoner.findOne({"summonerName": { "$regex" : new RegExp(summonerName, "i")}, "region": regionId});
     const { puuid } = summoner;
 
     const matchHistoryData = [];
+    const neededObjs = [];
     // uses summoner's puuid to get summoner's match history id list of past 20 games to an array
     const responseMatchData = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=${historyLength}&count=20&api_key=${process.env.api_key}`,
     {
@@ -845,11 +852,13 @@ summonerController.expandSummMatchHistory = async (req, res, next) => {
     const matchObjs = await lolMatches.find({ matchId: { $in: [...matchIdList]}});
 
     const set = new Set();
+    // iterate through the match objs that we found and add them to new set and push their data to matchhistorydata array
     for (let i = 0; i < matchObjs.length; i++) {
       set.add(matchObjs[i].matchId);
       matchHistoryData.push(matchObjs[i].matchData);
     }
 
+    // iterate through the match id list and see if they exist in the set
     for (let i = 0; i < matchIdList.length; i++) {
       if (!set.has(matchIdList[i])) neededObjs.push(matchIdList[i]);
     }
@@ -885,6 +894,8 @@ summonerController.expandSummMatchHistory = async (req, res, next) => {
     matchHistoryData.sort((a, b) => {
       return ((b.gameEndTimestamp - a.gameEndTimestamp));
     });
+    
+    // console.log(matchHistoryData, 'match history data');
     
     // res.locals.newSummMatchHistory = {
     //   matchHistory: matchHistoryData,

@@ -483,17 +483,20 @@ html, body {
   width: 24px;
   height: 24px;
 }
-.leftSideGroup, .rightSideGroup {
+.playerGroup {
   display: flex;
   flex-direction: row;
   align-items: center;
   font-size: 0.7em;
   gap: 0.5em;
 }
-
-.leftSideGroup p, .rightSideGroup p {
-  width: 100%;
+.playerGroup p {
   margin: 0;
+}
+.playerGroup p:hover {
+  filter: invert(20%);
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .DropDownBoxMatch {
@@ -618,10 +621,14 @@ html, body {
   text-align: center;
   font-size: 0.9em;
   justify-content: center;
-  /* justify-content: flex-start; */
 }
 .Player0Team1Info p {
   margin: 0;
+}
+.playernames:hover {
+  filter: invert(20%);
+  cursor: pointer;
+  text-decoration: underline;
 }
 .Player0Team1Damage, .Player0Team1VisionScore {
   display: flex;
@@ -1123,18 +1130,6 @@ html, body {
   width: 100%;
   justify-content: space-between;
   align-items: center;
-}
-.DataBoxHeader p {
-  width: 27%;
-  font-size: 1.2em;
-  text-align: center;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.861);
-  border-right: 2px solid rgba(255, 255, 255, 0.80);
-}
-.DataBoxHeader p:hover {
-  filter: invert(20%);
-  cursor: pointer;
 }
 .DataBoxHeader h3 {
   border-top: 2px solid rgba(255, 255, 255, 0.80);
@@ -2225,9 +2220,17 @@ h4 {
   align-items: center;
   gap: 1em;
 }
+/* .recent-played-with-1 div { */
+  /* text-align: left; */
+  /* width: 100%; */
+/* } */
 .recent-played-with-1 p {
   text-align: left;
-  width: 100%;
+}
+.recent-played-with-1 p:hover {
+  filter: invert(20%);
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 #recent-played-profile-icon {

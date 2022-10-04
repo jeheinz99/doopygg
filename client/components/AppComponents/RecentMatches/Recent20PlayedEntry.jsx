@@ -1,4 +1,5 @@
 import React from 'react';
+import { searchUser } from '../../../../searchUser';
 
 const R20PlayedEntry = props => {
 
@@ -11,7 +12,7 @@ const R20PlayedEntry = props => {
 
       <div className="recent-played-with-1">
         <img id="recent-played-profile-icon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${profileIconId}.jpg`}/>
-        <p>{summonerName}</p>
+        <p className="playernames" onClick={() => searchUser(summonerName)}>{summonerName}</p>
       </div>
 
       <p>{played}</p>

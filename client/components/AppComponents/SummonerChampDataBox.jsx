@@ -181,7 +181,7 @@ const SummonerChampDataBox = () => {
     
         <div className="DataBoxHeader">
           <h3> Most Played </h3>
-          <p id="rankedFlexheader"> Ranked Solo </p>
+          <p id="rankedsoloheader"> Ranked Solo </p>
         </div>
       
         {!open && <div className="SummonerDataBoxEntries" id="topEntries">

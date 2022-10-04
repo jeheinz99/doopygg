@@ -16,9 +16,8 @@ const MatchBoxes = () => {
 
   const expandHistory = async () => {
     // setLoading(true);
-    // const data = await expandSummMatchHistory(summonerName, matchHistory.length, region);
+    // await dispatch(expandSummMatchHistory(summonerName, matchHistory.length, region));
     // setLoading(false);
-    // return dispatch(data);
     // console.log('hi');
   };
 

@@ -49,6 +49,7 @@ export const getLeaderboardData = regionName => async dispatch => {
 };
 
 export const getSummonerData = summonerName => async dispatch => {
+  if (summonerName === undefined) summonerName = document.getElementById('SearchBoxInput').value;
   const input = document.getElementById('SearchBoxInput');
   const region = document.getElementById('region-select-btn').value;
   input.value = '';
