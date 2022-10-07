@@ -85,7 +85,7 @@ const DropDownBox = props => {
       key={`playerRunes-${i}`}
       id={`otherPlayerRunes-${i}`}
       championId={runeInfo.otherPlayers[i].championId}
-      name={runeInfo.otherPlayers[i].name}
+      summonerName={runeInfo.otherPlayers[i].name}
       runes={runeInfo.otherPlayers[i].runes} 
     />) : 
     otherPlayersRunes2.push(
@@ -93,7 +93,7 @@ const DropDownBox = props => {
       key={`playerRunes-${i}`}
       id={`otherPlayerRunes-${i}`}
       championId={runeInfo.otherPlayers[i].championId}
-      name={runeInfo.otherPlayers[i].name}
+      summonerName={runeInfo.otherPlayers[i].name}
       runes={runeInfo.otherPlayers[i].runes} 
       />));
   }

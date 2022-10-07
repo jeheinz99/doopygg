@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getSummonerData, updateSummonerData } from '../actions/actions.js';
+import { useSearchParams } from 'react-router-dom';
 import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataBox.jsx';
@@ -20,6 +21,8 @@ const SearchBox = () => {
   const [updating, setUpdating] = useState(false);
   const [searching, setSearching] = useState(false);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const dispatch = useDispatch();
 
   const updateSummData = async () => {
@@ -28,10 +31,9 @@ const SearchBox = () => {
     setUpdating(false);
   };
 
-  const searchSummData = async summonerName => {
-    setSearching(true);
-    await dispatch(getSummonerData(summonerName));
-    setSearching(false);
+  const searchSummData = summonerName => {
+    const regionId = document.getElementById('region-select-btn').value;
+    setSearchParams({ region: regionId, summonerName: summonerNameInput });
   };
 
   const getTimeAgo = lastUpdated => {
@@ -70,14 +72,33 @@ const SearchBox = () => {
 
   useEffect(() => {
     const input = document.getElementById('SearchBoxInput');
-    input.addEventListener('keypress', (e) => {
+    const eventHandler = e => {
       if (e.key === 'Enter') {
         e.preventDefault;
         document.getElementById('SearchBoxButton').click();
       }
-    });
+    };
+    input.addEventListener('keypress', eventHandler);
+
+    return () => {
+      input.removeEventListener('keypress', eventHandler);
+    };
   }, []);
-  
+
+  useEffect(() => {
+    const summonerNameParam = searchParams.get('summonerName');
+    const regionIdParam = searchParams.get('region');
+
+    const tempFunc = () => {
+      setSearching(true);
+      dispatch(getSummonerData(summonerNameParam, regionIdParam))
+      .then(() =>  setSearching(false));
+    }
+    if (summonerNameParam && regionIdParam) {
+      tempFunc();
+    }
+  }, [searchParams]);
+
   return (
     <div className="OuterSearchBox">
       <div className="SearchBox">

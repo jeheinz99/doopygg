@@ -1,9 +1,14 @@
 import React from 'react';
-import { searchUser } from '../../../../searchUser';
+import { useSelector } from 'react-redux';
+import { useSearchParams } from "react-router-dom";
 
 const OtherPlayerRunes = props => {
 
-  const { name, id, runes, championId } = props;
+  const { summonerName, id, runes, championId } = props;
+
+  const regionId = useSelector(state => state.summoners.region);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
 
@@ -16,7 +21,7 @@ const OtherPlayerRunes = props => {
     <div className="otherPlayerRunesBox" id={`otherPlayers-${runes[4].id}`}>
 
       <img id="champIconRunesDD" src={championIcon}/>
-      <p className="playernames" onClick={() => searchUser(name)}> {name} </p>
+          <p className="playernames" onClick={() => setSearchParams({ region: regionId, summonerName: summonerName })}>{summonerName}</p>
 
       <img className="keystoneRunesDD" src={runes[0].icon}/>
 

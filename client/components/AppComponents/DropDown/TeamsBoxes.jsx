@@ -1,9 +1,14 @@
 import React from "react";
-import { searchUser } from "../../../../searchUser";
+import { useSelector } from 'react-redux';
+import { useSearchParams } from "react-router-dom";
 
 const TeamsBoxes = props => {
 
   const { id, damagePercent, matchLength, kills, deaths, assists, items, cs, summonerSpells, visionScore, champDamage, champLevel, runes, championId, summonerName } = props;
+
+  const regionId = useSelector(state => state.summoners.region);
+
+  const [searchParams, setSearchParams] = useSearchParams();
   // allows to get commas in large numbers
   const numFormat = new Intl.NumberFormat('en-US');
   
@@ -25,7 +30,7 @@ const TeamsBoxes = props => {
           <img id="Player0Team1SecondaryTree" src={runes[5].icon}/>
         </div>
         <div className="Player0Team1Info">
-          <p className="playernames" onClick={() => searchUser(summonerName)}>{summonerName}</p>
+          <p className="playernames" onClick={() => setSearchParams({ region: regionId, summonerName: summonerName })}>{summonerName}</p>
         </div>
         <div className="Player0Team1KDA">
           <p>{kills} / {deaths} / {assists}</p>

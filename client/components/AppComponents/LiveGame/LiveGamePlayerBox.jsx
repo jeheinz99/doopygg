@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import Runes1 from '../DropDown/Runes1.jsx';
 import Runes2 from '../DropDown/Runes2.jsx';
 import Runes3 from '../DropDown/Runes3.jsx';
+import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 
 const LiveGamePlayerBox = props => {
 
   const { id, championId, division, losses, wins, lp, tier, profileIconId, runes, summonerName, summonerSpells, team } = props;
+
+  const regionId = useSelector(state => state.summoners.region);
+  
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [open, setOpen] = useState(false);
 
@@ -30,7 +36,7 @@ const LiveGamePlayerBox = props => {
           </div>
         </div>
 
-        <p id="lg-summoner-name">{summonerName}</p>
+        <p id="lg-summoner-name" className="playernames" onClick={() => setSearchParams({ region: regionId, summonerName: summonerName })}>{summonerName}</p>
 
         {tier === undefined ? 
         <div className="lg-rank-div">

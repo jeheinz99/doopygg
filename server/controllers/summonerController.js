@@ -529,6 +529,7 @@ summonerController.updateSummData = async (req, res, next) => {
   }
 };
 
+// get match objects and data from each to send back to front end
 summonerController.addSummMatchesData = async (req, res, next) => {
 
   const { summonerName, allMatchesPlayed, region } = res.locals.summonerData;
@@ -537,12 +538,13 @@ summonerController.addSummMatchesData = async (req, res, next) => {
   try {
     const summoner = await lolSummoner.findOne({"summonerName": { "$regex" : new RegExp(summonerName, "i")}, "region": region});
     // function to extract data from match objects for the specific player
-    const getObjData = (arrayOfObjs, summonerName) => {
+    const getObjData = (arrayOfObjs, summonerName, puuid) => {
       const tempArr = [];
       for (let i = 0; i < arrayOfObjs.length; i++) {
         if (arrayOfObjs[i] !== undefined) {
           for (let j = 0; j < arrayOfObjs[i].participants.length; j++) {
-            if ((arrayOfObjs[i].participants[j].summonerName).toLowerCase() === summonerName.toLowerCase()) {
+            // check if summoner's summoner name matches or their puuid
+            if ((arrayOfObjs[i].participants[j].summonerName).toLowerCase() === summonerName.toLowerCase() || arrayOfObjs[i].participants[j].puuid === puuid) {
               const player = arrayOfObjs[i].participants[j];
               tempArr.push({
                 championName: player.championName,
@@ -614,8 +616,8 @@ summonerController.addSummMatchesData = async (req, res, next) => {
       });
       newObjs = newObjs.concat(newObjData);
     }
-
-    const S12MatchesInfoArr = getObjData(newObjs, summonerName);
+    // console.log(summoner.puuid, 'puuid');
+    const S12MatchesInfoArr = getObjData(newObjs, summonerName, summoner.puuid);
     await lolSummoner.findOneAndUpdate({summonerName: summonerName, region: region}, {S12MatchesPlayedData: S12MatchesInfoArr});
     res.locals.summonerData.allMatchesPlayedData = S12MatchesInfoArr;
     return next();
