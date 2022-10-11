@@ -172,7 +172,7 @@ summonerController.updateSummData = async (req, res, next) => {
   }
 
   try {
-    const responseSummData = await axios.get(`https://${regionId}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`, 
+    const responseSummData = await axios.get(`https://${regionId}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(summonerName)}?api_key=${process.env.api_key}`, 
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
