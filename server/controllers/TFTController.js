@@ -25,7 +25,7 @@ const mapQueueType = queueId => {
 
 // maps augment icon based on augment name passed in
 const mapAugmentIcons = async augments => {
-  const query = `SELECT path FROM tftaugments WHERE name IN ('${augments[0]}', '${augments[1]}', '${augments[2]}')
+  const query = `SELECT path FROM tftaugments WHERE apiname IN ('${augments[0]}', '${augments[1]}', '${augments[2]}')
   ORDER BY CASE name
   WHEN '${augments[0]}' then 1
   WHEN '${augments[1]}' then 2
@@ -74,14 +74,14 @@ const mapUnitIcons = async units => {
     }
   }
 
-  const query = `SELECT * FROM tftchamps WHERE name = any(array[${unitsArr}])`;
+  const query = `SELECT * FROM tftchamps WHERE apiname = any(array[${unitsArr}])`;
   const query2 = `SELECT * FROM tftitems WHERE id = any(array[${itemsArr}])`;
   const path = await db.query(query);
   const path2 = await db.query(query2);
 
   for (let i = 0; i < units.length; i++) {
     for (let j = 0; j < path.rows.length; j++) {
-      if (units[i].character_id === path.rows[j].name) {
+      if (units[i].character_id === path.rows[j].apiname) {
         units[i].unitIcon = path.rows[j].path;
       }
       if (units[i].items.length > 0) {
@@ -101,12 +101,12 @@ const mapTraitIcons = async traits => {
     // }
   }
   if (!tempArr.length) return [];
-  const query = `SELECT * FROM traits WHERE name = any(array[${tempArr}])`;
+  const query = `SELECT * FROM traits WHERE apiname = any(array[${tempArr}])`;
   const path = await db.query(query);
 
   for (let i = 0; i < traits.length; i++) {
     for (let j = 0; j < path.rows.length; j++) {
-      if (traits[i].name === path.rows[j].name) {
+      if (traits[i].name === path.rows[j].apiname) {
         traits[i].traitIcon = path.rows[j].path;
       }
     }
@@ -172,7 +172,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const { summonerName, regionId } = req.params;
     const regionRoute = regionObj[regionId];
 
-    const getSummData = await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-name/${summonerName}?api_key=${process.env.api_key}`,
+    const getSummData = await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-name/${encodeURI(summonerName)}?api_key=${process.env.dev_api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -185,7 +185,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const { data } = getSummData;
     const { puuid, profileIconId, summonerLevel, id, accountId, name } = data;
 
-    const getRankData = await axios.get(`https://${regionId}.api.riotgames.com/tft/league/v1/entries/by-summoner/${id}?api_key=${process.env.api_key}`,
+    const getRankData = await axios.get(`https://${regionId}.api.riotgames.com/tft/league/v1/entries/by-summoner/${id}?api_key=${process.env.dev_api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
@@ -195,7 +195,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       }
     });
 
-    const getRankData2 = await axios.get(`https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${process.env.api_key}`,
+    const getRankData2 = await axios.get(`https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${process.env.dev_api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
@@ -228,7 +228,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
 
 
     // returns a list of recent matches based on puuid 
-    const getMatchList = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${process.env.api_key}`,
+    const getMatchList = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${process.env.dev_api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -246,7 +246,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       const match = await tftMatches.findOne({matchId: matchIdList[i]});
       // if match returns null (doesn't exist in DB), ping API and then store it
       if (match === null) {
-        const getMatchData = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/${matchIdList[i]}?api_key=${process.env.api_key}`,
+        const getMatchData = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/${matchIdList[i]}?api_key=${process.env.dev_api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -338,7 +338,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const set7MatchesArr = [];
     try {
       for (let i = 0; i < 2000; i+=100) {
-        const getSet7AllMatches = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=${i}&startTime=1654646400&count=100&api_key=${process.env.api_key}`,
+        const getSet7AllMatches = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=${i}&startTime=1654646400&count=100&api_key=${process.env.dev_api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -433,7 +433,7 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
     const { otherPlayers, regionId } = req.body;
 
     for (let i = 0; i < otherPlayers.length; i++) {
-      const playerNameRes = await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${otherPlayers[i].puuid}?api_key=${process.env.api_key}`,
+      const playerNameRes = await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${otherPlayers[i].puuid}?api_key=${process.env.dev_api_key}`,
       {
         headers: {
           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",

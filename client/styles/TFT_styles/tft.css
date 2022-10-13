@@ -465,10 +465,12 @@
   color:rgb(68, 92, 198);
 }
 #Unit-3 {
-  border-color: purple;
+  border-color:rgb(68, 92, 198);
+  /* border-color: purple; */
 }
 #star-Unit-3 {
-  color: purple;
+  color:rgb(68, 92, 198);
+  /* color: purple; */
 }
 #Unit-4 {
   border-color: purple;
@@ -479,10 +481,10 @@
 }
 #Unit-5 {
   /* border-color: gold; */
-  border-color: orangered;
+  border-color: purple;
 }
 #star-Unit-5 {
-  color: orangered;
+  color: purple;
   /* color: gold; */
 }
 #Unit-6 {
@@ -491,6 +493,12 @@
 }
 #star-Unit-6 {
   color: gold;
+}
+#Unit-7 {
+  border-color: orangered;
+}
+#star-Unit-7 {
+  color: orangered;
 }
 #Unit-8 {
   border-color: rgb(8, 213, 145);

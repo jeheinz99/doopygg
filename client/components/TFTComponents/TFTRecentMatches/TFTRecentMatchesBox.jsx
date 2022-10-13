@@ -276,9 +276,7 @@ const RecentMatchesBox = () => {
     rarity={sortedUnits.top5Played[i].rarity}
     name={sortedUnits.top5Played[i].character_id}
     played={sortedUnits.top5Played[i].played}
-    playedWithItems={sortedUnits.top5Played[i].playedWithItems}
     unitIcon={sortedUnits.top5Played[i].unitIcon}
-    items={sortedUnits.top5Played[i].items}
     />);
   }
 

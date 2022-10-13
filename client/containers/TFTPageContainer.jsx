@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { getTFTData, updateTFTData } from '../actions/actions.js';
+import { useSearchParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { PulseLoader } from 'react-spinners';
+
 import TFTMatchBoxes from '../components/TFTComponents/TFTMatchBoxes.jsx';
 import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx';
 import chibiYasuo from '../assets/chibi_yasuo.png';
@@ -11,17 +13,28 @@ import CustomSelect from '../components/AppComponents/CustomSelect.jsx';
 
 const TFTPageContainer = () => {
 
-  const dispatch = useDispatch();
   const summonerName = useSelector(state => state.tft.summonerName);
   const TFTData = useSelector(state => state.tft.TFTData);
   const lastUpdated = useSelector(state => state.tft.lastUpdated);
 
-  const [loading, setLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  const dispatch = useDispatch();
 
+  const [searching, setSearching] = useState(false);
+  const [updating, setUpdating] = useState(false);
+
+  const updateTFTSummData = async () => {
+    setUpdating(true);
+    await dispatch(updateTFTData(summonerName));
+    setUpdating(false);
+  };
+  
   const getTimeAgo = lastUpdated => {
     const todaysDateStamp = Date.now();
-
+    
     const diff = todaysDateStamp - lastUpdated;
+    if (diff < 180000) return (3 - (Math.round(diff/60000)));
     if (diff >= 3600000 && diff < 86400000) {
       if (Math.round(diff/3600000) === 1) return ('1 hour ago');
       return (`${Math.round(diff/3600000)} hours ago`);
@@ -34,9 +47,6 @@ const TFTPageContainer = () => {
       if (Math.round(diff/86400000) === 1) return ('1 day ago');
       return (`${Math.round(diff/86400000)} days ago`);
     }
-    if (diff < 60000) {
-      return (`${Math.round(diff/1000)} seconds ago`);
-    }
     if (diff >= 2592000000 && diff < 31540000000) {
       if (Math.round(diff/2592000000) === 1) return ('1 month ago');
       return (`${Math.round(diff/2592000000)} months ago`);
@@ -46,11 +56,9 @@ const TFTPageContainer = () => {
     }
   };
 
-  const updateTFTSummData = async () => {
-    setLoading(true);
-    const data = await updateTFTData(summonerName);
-    setLoading(false);
-    dispatch(data);
+  const searchSummTFTData = () => {
+    const regionId = document.getElementById('region-select-btn').value;
+    setSearchParams({ region: regionId, summonerName: summonerNameInput });
   };
 
   const timeAgo = getTimeAgo(lastUpdated);
@@ -63,13 +71,32 @@ const TFTPageContainer = () => {
 
   useEffect(() => {
     const input = document.getElementById('SearchBoxInputTFT');
-    input.addEventListener('keypress', (e) => {
+    const eventHandler = e => {
       if (e.key === 'Enter') {
         e.preventDefault;
         document.getElementById('SearchBoxButton').click();
       }
-    });
+    };
+    input.addEventListener('keypress', eventHandler);
+
+    return () => {
+      input.removeEventListener('keypress', eventHandler);
+    };
   }, []);
+
+  useEffect(() => {
+    const summonerNameParam = searchParams.get('summonerName');
+    const regionIdParam = searchParams.get('region');
+
+    const tempFunc = () => {
+      setSearching(true);
+      dispatch(getTFTData(summonerNameParam, regionIdParam))
+      .then(() =>  setSearching(false));
+    }
+    if (summonerNameParam && regionIdParam) {
+      tempFunc();
+    }
+  }, [searchParams]);
 
   return (
     <div className="OuterSearchBox" id="TFTOSB">
@@ -85,25 +112,38 @@ const TFTPageContainer = () => {
           <div className="SearchBoxInputandIcon">
             <CustomSelect id={'region-select-btn'} selectType={'regions'} init={'NA'}/>
             <input id="SearchBoxInputTFT" placeholder="Summoner Name" onChange={ summonerNameData } required></input>
-            <button id="SearchBoxButton" onClick={() => dispatch(getTFTData(summonerNameInput))}> <BiSearch id="SearchIcon"/> </button>
+            {searching ? 
+              <div className="LoadingDiv" id="searching-load-div">
+                <PulseLoader color="#ffffff" size={10} speedMultiplier={0.5}/>
+              </div> :
+              <button id="SearchBoxButton" onClick={() => searchSummTFTData(summonerNameInput)}> <BiSearch id="SearchIcon"/> </button>}
           </div>
           <div className="test-button">
             <p id="tft-test-p">Don't have a summoner name?</p>
-            <button id="SearchBoxDemoButton" onClick={() => dispatch(getTFTData('Doopliss2'))}> Demo </button>
+            {searching ? <button id="SearchBoxDemoButton"> Demo </button> : <button id="SearchBoxDemoButton" onClick={() => searchSummTFTData('Doopliss2')}> Demo </button>}
           </div>
         </div>
       </div>
 
-      {TFTData[0] && !loading && 
+      {TFTData[0] && !updating && typeof timeAgo === "string" && !searching && 
       <div className="headerinfo">
-        <h3> Summoner Information </h3>
         <button className="summonerUpdateButton" onClick={() => updateTFTSummData()}> Update </button>
         <p>Last Updated {timeAgo}</p>
       </div>}
 
-      {TFTData[0] && loading && 
+      {TFTData[0] && !updating && typeof timeAgo === "number" && !searching && 
       <div className="headerinfo">
-        <h3> Summoner Information </h3>
+        <button className="summonerUpdateButton" id="update-wait"> Updated </button>
+        {timeAgo === 3 && <p>Please wait {timeAgo} minutes before updating again.</p>}
+        {timeAgo === 2 && <p>Please wait {timeAgo} minutes before updating again.</p>}
+        {timeAgo <= 1 && <p>Please wait 1 minute before updating again.</p>}
+      </div>}
+
+      {/* {matchHistory[0] && !updating && typeof timeAgo === "string" && !searching && */}
+      {/* {matchHistory[0] && !updating && typeof timeAgo === "number" && !searching && */}
+
+      {TFTData[0] && updating && !searching && 
+      <div className="headerinfo">
         <div className="loading-div">
           <p id="updating-p"> Updating </p>
           <PulseLoader color="#ffffff" size={10} speedMultiplier={0.6}/>
