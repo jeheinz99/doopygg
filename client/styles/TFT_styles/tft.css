@@ -510,16 +510,15 @@
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 0.5fr;
   width: 99%;
-  border: 3px solid #272d3a;
+  border: 1px solid #272d3a;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
   border-radius: 0.2em;
   background-color: #171A21;
-  padding-left: 10px;
-  padding-right: 10px;
 }
 .PlacementsBar {
   display: grid;
   grid-template-rows: 0.5fr 1fr 1fr 1fr;
+  padding-left: 10px;
 }
 #tftr10header {
   display: flex;
@@ -541,8 +540,10 @@
 }
 .RecentItems {
   display: grid;
-  width: 100%;
+  width: 99%;
   grid-template-rows: 10% 90%;
+  background-color: #16161dce;
+  border-left: 1px solid #272d3a;
 }
 .RecentItems ul {
   display: grid;
@@ -576,8 +577,9 @@
   grid-gap: 5px;
   grid-template-rows: 10% 90%;
   width: 100%;
-  border-left: 3px solid #272d3a;
-  border-right: 3px solid #272d3a;
+  border-left: 1px solid #272d3a;
+  border-right: 1px solid #272d3a;
+  background-color: #16161dce;
 }
 .RecentUnits ul {
   display: grid;
@@ -601,7 +603,6 @@
   display: grid;
   width: 100%;
   grid-template-rows: 10% 90%;
-  border-right: 3px solid #272d3a;
 }
 .RecentTraits ul {
   display: grid;
@@ -611,13 +612,6 @@
   margin: 0;
   padding: 0;
 }
-
-/* .RecentTraitsBoxes {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.4em;
-} */
 .RecentTraitsBoxes {
   display: grid;
   grid-template-rows: repeat(5, 1fr);
@@ -633,6 +627,9 @@
   width: 100%;
   grid-template-rows: repeat(5, 1fr);
 }
+/* .RecentUnitsBoxes ul:nth-child(odd) {
+  background-color: red;
+} */
 .RecentTraits p {
   margin: 0;
 }
@@ -706,11 +703,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* height: 2.5em; */
-  /* width: 3em; */
   height: 60%;
   width: 53%;
-  border: 2px solid #303b51;
+  border: 1px solid #303b51;
   border-radius: 0.2em;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
   background-color: #16181c;
