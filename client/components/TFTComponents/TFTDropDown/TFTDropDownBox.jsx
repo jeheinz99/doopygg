@@ -21,9 +21,11 @@ const TFTDropDownBox = props => {
           'Content-Type': 'application/json',
         }
       });
-      // console.log(res.data, 'res.data');
       const sortedData = res.data.sort((a, b) => a.placement - b.placement);
       setDDboxData(sortedData);
+    }
+    if (DDboxData) {
+      setDDboxData([]);
     }
     getData();
   }, [summonerName]);

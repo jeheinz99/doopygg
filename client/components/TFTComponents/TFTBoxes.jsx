@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import TFTDropDownBox from './TFTDropDown/TFTDropDownBox.jsx';
 import TFTUnitsBox from './TFTUnitsBox.jsx';
 
@@ -8,6 +9,16 @@ import { AiFillCaretDown } from 'react-icons/ai';
 const TFTBoxes = props => {
 
   const { gameMode, augments, companion, damageDealt, level, matchLength, placement, setNumber, traits, units, id, otherPlayers, gameEnd } = props;
+
+  const summonerName = useSelector(state => state.tft.summonerName);
+
+  const [tftOpen, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (tftOpen) {
+      setOpen(false);
+    }
+  }, [summonerName]);
 
   // function that omits all of the players' non-active traits
   const getActiveTraits = data => {
@@ -50,9 +61,6 @@ const TFTBoxes = props => {
   }
 
   const timeAgo = getTimeAgo(gameEnd);
-
-  const [tftOpen, setOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
 
   const unitsArr = [];
   
@@ -125,12 +133,11 @@ const TFTBoxes = props => {
         </div>
         <div className="TFTMatchGroupButton">
           {!tftOpen && <button className="TFTDataBoxButton" onClick={() => setOpen(!tftOpen) }><AiFillCaretDown /></button>}
-          {tftOpen && hidden && <button className="TFTDataBoxButton" onClick={() => setHidden(!hidden)}><AiFillCaretDown/></button>}
-          {tftOpen && !hidden && <button className="TFTDataBoxButton" onClick={() => setHidden(!hidden)}><AiFillCaretUp/></button>}
+          {tftOpen && <button className="TFTDataBoxButton" onClick={() => setOpen(!tftOpen)}><AiFillCaretUp /></button>}
         </div>
       </div>
       <div className="TFTDropDownBoxes">
-        { tftOpen && <div className={`hidden-${hidden}`}><TFTDropDownBox otherPlayers={otherPlayers}/></div> }
+        { tftOpen && <TFTDropDownBox otherPlayers={otherPlayers}/> }
       </div>
     </div>
   );
