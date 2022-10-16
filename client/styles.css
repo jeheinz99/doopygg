@@ -494,7 +494,7 @@ html, body {
   margin: 0;
 }
 .playerGroup p:hover {
-  filter: invert(20%);
+  filter: invert(30%);
   cursor: pointer;
   text-decoration: underline;
 }

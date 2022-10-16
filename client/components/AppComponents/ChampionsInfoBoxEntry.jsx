@@ -4,6 +4,9 @@ const ChampionsInfoBoxEntry = props => {
 
   const { championId, id, kills, deaths, assists, played, win, loss, cs, champDamage, gold, csPerMin, doubleKills, tripleKills, quadraKills, pentaKills, damageTaken } = props;
 
+  let idCopy = id;
+  if (idCopy === "MonkeyKing") idCopy = "Wukong";
+
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
   
   // number format to get commas in large numbers
@@ -28,7 +31,7 @@ const ChampionsInfoBoxEntry = props => {
 
       <div id="championsInfoEntry1">
         <img id="champions-entry-icon" src={championIcon}/>
-        <p>{id}</p>
+        <p>{idCopy}</p>
       </div>
 
       <div id="championsInfoEntry2">

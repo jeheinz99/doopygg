@@ -4,6 +4,9 @@ const SummonerChampDataBoxEntry = props => {
 
   const { kills, deaths, assists, win, loss, championId, id, played } = props;
 
+  let idCopy = id;
+  if (idCopy === "MonkeyKing") idCopy = "Wukong";
+
   const KDA = ((kills + assists) / deaths).toFixed(2);
   const winPercent = ((win / (win + loss))*100).toFixed(0);
 
@@ -19,7 +22,7 @@ const SummonerChampDataBoxEntry = props => {
       
         <div className="champEntryDiv1">
           <img id="champEntryChampIcon" src={championIcon}/>
-          <p>{id}</p>
+          <p>{idCopy}</p>
         </div>
         
         <div className="champEntryDiv2">

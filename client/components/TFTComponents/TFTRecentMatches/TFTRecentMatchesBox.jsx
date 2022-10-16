@@ -166,12 +166,6 @@ const RecentMatchesBox = () => {
               newObj.icon = TFTData[i].units[j].itemIcons[k];
               itemsObj[TFTData[i].units[j].items[k]] = newObj;
             }
-            // if (unitsObj[TFTData[i].units[j].character_id].items[TFTData[i].units[j].items[k]]) {
-            //   unitsObj[TFTData[i].units[j].character_id].items[TFTData[i].units[j].items[k]] += 1;
-            // }
-            // else {
-            //   unitsObj[TFTData[i].units[j].character_id].items[TFTData[i].units[j].items[k]] = 1;
-            // }
           }
         }
       }
@@ -210,12 +204,6 @@ const RecentMatchesBox = () => {
               newObj.icon = TFTData[i].units[j].itemIcons[k];
               itemsObj[TFTData[i].units[j].items[k]] = newObj;
             }
-            // if (newObj.items[TFTData[i].units[j].items[k]]) {
-            //   newObj.items[TFTData[i].units[j].items[k]] += 1;
-            // }
-            // else {
-            //   newObj.items[TFTData[i].units[j].items[k]] = 1;
-            // }
           }
         }
         else {

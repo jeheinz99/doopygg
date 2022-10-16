@@ -33,7 +33,7 @@ const SearchBox = () => {
 
   const searchSummData = summonerName => {
     const regionId = document.getElementById('region-select-btn').value;
-    setSearchParams({ region: regionId, summonerName: summonerNameInput });
+    setSearchParams({ region: regionId, summonerName: summonerName });
   };
 
   const getTimeAgo = lastUpdated => {

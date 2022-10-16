@@ -49,11 +49,12 @@ app.use('/champions', championsRouter);
 
 // catch-all route handler for any requests to an unknown route 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'), (err) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
+  res.sendFile(path.join(__dirname, '../riot.txt'));
+  // res.sendFile(path.join(__dirname, '../dist/index.html'), (err) => {
+  //   if (err) {
+  //     res.status(500).send(err);
+  //   }
+  // });
 });
 // app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
 

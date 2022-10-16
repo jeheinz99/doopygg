@@ -20,6 +20,7 @@ const mapQueueType = queueId => {
       return queueData[i].description;
     }
   }
+  // if don't find the queue ID anywhere, just return TFT
   return 'TFT';
 };
 
@@ -432,17 +433,25 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
   try {
     const { otherPlayers, regionId } = req.body;
 
-    for (let i = 0; i < otherPlayers.length; i++) {
-      const playerNameRes = await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${otherPlayers[i].puuid}?api_key=${process.env.dev_api_key}`,
-      {
-        headers: {
-          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-          "Accept-Language": "en-US,en;q=0.9",
-          "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-          "Origin": "https://developer.riotgames.com"
+    const otherPlayersRes = await Promise.allSettled(otherPlayers.map(async player => {
+      return await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${player.puuid}?api_key=${process.env.dev_api_key}`,
+        {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Origin": "https://developer.riotgames.com"
           }
-      });
-      otherPlayers[i].name = playerNameRes.data.name;
+        }
+      );
+    }));
+
+    for (let i = 0; i < otherPlayers.length; i++) {
+      for (let j = 0; j < otherPlayersRes.length; j++) {
+        if (otherPlayers[i].puuid === otherPlayersRes[j].value.data.puuid) {
+          otherPlayers[i].name = otherPlayersRes[j].value.data.name;
+        }
+      }
     }
 
     for (let i = 0; i < otherPlayers.length; i++) {

@@ -11,6 +11,7 @@ const SummonerChampDataBox = () => {
   const summonerRank = useSelector(state => state.summoners.summonerRank);
   const summonerLevel = useSelector(state => state.summoners.summonerLevel);
   const summonerName = useSelector(state => state.summoners.summonerName);
+  const summonerIcon = useSelector(state => state.summoners.profileIconId);
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
   const matchHistory = useSelector(state => state.summoners.matchHistory);
 
@@ -126,7 +127,7 @@ const SummonerChampDataBox = () => {
         <div className="SummonerInfoBox">
           <div className="SummonerInfo">
             <div className="SummonerIcon-Level">
-              <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${matchHistory[0].summonerIcon}.jpg`}/>
+              <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${summonerIcon}.jpg`}/>
               <div className="level-div" id="summoner-level-div">{summonerLevel}</div>
             </div>
             <div className="summonerInfoPtags">

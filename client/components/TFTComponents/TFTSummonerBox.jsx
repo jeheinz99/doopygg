@@ -7,6 +7,7 @@ const TFTSummonerBox = () => {
   const summonerName = useSelector(state => state.tft.summonerName);
   const summonerIcon = useSelector(state => state.tft.summonerIcon);
   const summonerRank = useSelector(state => state.tft.summonerRank);
+  const summonerLevel = useSelector(state => state.tft.summonerLevel);
   const allMatchesPlayedData = useSelector(state => state.tft.allMatchesPlayedData);
 
   const getMatchesData = () => {
@@ -76,8 +77,13 @@ const TFTSummonerBox = () => {
     <div className="SummonerInfoBox" id="TFTSummonerInfoBox">
 
       <div className="SummonerInfo" id="TFT-SI">
-        {summonerName ? <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${summonerIcon}.jpg`}/> : ''}
-        <p>{summonerName}</p>
+        <div className="SummonerIcon-Level">
+          {summonerName ? <img id="summonerIcon" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${summonerIcon}.jpg`}/> : ''}
+          <div className="level-div" id="summoner-level-div">{summonerLevel}</div>
+        </div>
+        <div className="summonerInfoPtags">
+          <p>{summonerName}</p>
+        </div>
       </div>
 
       <div className="SummonerRankInfo" id="TFTRankInfo">
