@@ -15,7 +15,6 @@ html, body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* background: #171A21; */
   width: 100%;
   height: 100%;
 }
@@ -76,7 +75,6 @@ html, body {
 #SearchBoxInput:focus {
   outline: 0;
   background-color: #15161ab7;
-  /* border-bottom: 4px solid rgba(213, 55, 65, 0.6); */
   border-radius: 0.5em;
   border-right: 2px solid rgba(55, 166, 213, 0.6);
   border-left: 2px solid rgba(55, 166, 213, 0.6);
@@ -129,7 +127,6 @@ html, body {
   padding: 5px;
   border: 1px solid rgba(39, 45, 58, 0.5);
   background-color: #16161d;
-  /* opacity: 1; */
   transition: opacity 0.5s ease-out;
 }
 #content-regions {
@@ -140,7 +137,7 @@ html, body {
   border: none;
   border: 2px solid rgba(255, 255, 255, 0.4);
   border-radius: 0.2em;
-  width: 7%;
+  width: 90px;
   height: 40px;
   align-items: center;
   align-content: center;
@@ -249,6 +246,8 @@ html, body {
   font-size: 3em;
   margin-right: 15px;
   width: 100%;
+  margin-bottom: 0;
+  padding-bottom: 40px;
 }
 .welcome-div {
   display: grid;
@@ -300,8 +299,6 @@ html, body {
 .Box20 {
   display: flex;
   width: 100%;
-  /* align-items: center; */
-  /* justify-content: space-around; */
 }
 .DDBoxWrap {
   display: flex;
@@ -325,7 +322,6 @@ html, body {
   align-items: center;
   border: 1px solid #272d3a;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
-  /* border-radius: 0.2em; */
 }
 .MatchGroup1 {
   display: flex;
@@ -503,13 +499,13 @@ html, body {
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(2, 1fr);
+  padding-bottom: 5px;
 }
 .team1BoxDD, .team2BoxDD {
   display: grid;
   grid-gap: 0.3em;
-  width: 99%;
+  width: 95%;
   grid-template-rows: repeat(5, 1fr);
-  padding: 5px;
 }
 .TeamInfoTextDD {
   display: grid;
@@ -558,28 +554,7 @@ html, body {
   border-left: 2px solid #c5472b;
 }
 
-#damageDDIcon {
-  height: 24px;
-  width: 24px;
-}
-#csDDIcon {
-  height: 24px;
-  width: 24px;
-}
-#visionDDIcon {
-  height: 24px;
-  width: 24px;
-}
-
-#csDDIcon2 {
-  height: 24px;
-  width: 24px;
-}
-#visionDDIcon2 {
-  height: 24px;
-  width: 24px;
-}
-#damageDDIcon2 {
+#damageDDIcon, #csDDIcon, #visionDDIcon, #damageDDIcon2, #visionDDIcon2, #csDDIcon2 {
   height: 24px;
   width: 24px;
 }
@@ -607,19 +582,22 @@ html, body {
 }
 .Team1DropDownBox {
   display: grid;
-  grid-template-columns: 7% 4% 5% 27% 15% 10% 10% 6% 17%;
+  grid-template-columns: 10% 5% 5% 22% 15% 10% 10% 6% 17%;
   width: 97%;
   align-items: center;
   padding: 5px;
   border-radius: 0.5em;
 }
 .Player0Team1ChampIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
 }
 .Player0Team1Info {
   display: flex;
   text-align: center;
-  font-size: 0.9em;
+  font-size: 0.8em;
   justify-content: center;
 }
 .Player0Team1Info p {
@@ -632,7 +610,7 @@ html, body {
 }
 .Player0Team1Damage, .Player0Team1VisionScore {
   display: flex;
-  font-size: 0.9em;
+  font-size: 0.7em;
   justify-content: center;
   text-align: center;
 }
@@ -757,49 +735,11 @@ html, body {
 .ObjectivesDD p {
   margin: 0;
 }
-.T1Obj1 {
+.T1Obj1, .T1Obj2, .T1Obj3, .T1Obj4, .T2Obj1, .T2Obj2, .T2Obj3, .T2Obj4 {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.T1Obj2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.T1Obj3 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.T1Obj4 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.T2Obj1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.T2Obj2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.T2Obj3 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-}
-.T2Obj4 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-}
-
 .Team1ObjectivesDD {
   display: flex;
   justify-content: flex-end;
@@ -822,11 +762,9 @@ html, body {
   filter: hue-rotate(180deg);
 }
 #GoldIconDD {
-  height: 32px;
-  width: 32px;
   filter: brightness(50%) sepia(100) saturate(50) hue-rotate(45deg);
 }
-#BaronIconDD, #DragonIconDD, #TurretIconDD {
+#BaronIconDD, #DragonIconDD, #TurretIconDD, #GoldIconDD {
   height: 32px;
   width: 32px;
 }
@@ -875,8 +813,6 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* width: 30em; */
-  /* height: 100%; */
   border-radius: 0.5em;
   background-color: #171A21;
   padding: 10px;
@@ -944,16 +880,19 @@ html, body {
 }
 .SummonerDataBoxButton {
   display: flex;
-  width: 100%;
   justify-content: flex-end;
   align-items: flex-end;
   border: none;
   background: none;
+  padding: 0;
   color:rgba(255, 255, 255, 0.80);
 }
 .SummonerDataBoxButton:hover {
   filter: invert(20%);
   cursor: pointer;
+}
+#SDBexpand, #SDBcontract {
+  float: right;
 }
 #champEntryChampIcon {
   border-radius: 0.2em;
@@ -989,7 +928,6 @@ html, body {
   flex-direction: column;
 }
 .recent20TotalStats p {
-  width: 7em;
   font-size: 0.9em;
   text-align: center;
   margin: 5px;
@@ -1150,7 +1088,7 @@ html, body {
 .positionStats {
   display: flex;
   flex-direction: column;
-  gap: 2em;
+  gap: 1em;
 }
 .positionStats h2 {
   font-size: 1.1em;
@@ -1161,7 +1099,7 @@ html, body {
   display: flex;
   width: 100%;
   gap: 2em;
-  height: 6.5em;
+  height: 100px;
 }
 .pos-div {
   height: 100%;
@@ -1250,7 +1188,7 @@ h4 {
 }
 .SummonerInfo p {
   margin: 0;
-  width: 10em;
+  width: 100%;
   text-align: center;
 }
 .SummonerRankInfo {
@@ -1354,6 +1292,9 @@ h4 {
   height: 48px;
 }
 .Keystone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 48px;
 }
 .RunesInfoDD {
@@ -1380,7 +1321,6 @@ h4 {
   border: 3px solid rgba(39, 45, 58, 0.5);
   border-radius: 0.2em;
   padding: 0.5em;
-  /* height: 100%; */
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
 }
 #div-8000 {
@@ -1406,28 +1346,18 @@ h4 {
 }
 #Blue {
   background-color:rgba(68, 92, 198, 0.2);
-  border: 2px solid #272d3a;
-  /* box-shadow: 1px 1px 10px rgba(0, 0, 0, 5); */
 }
 #White {
   background-color:rgba(69, 169, 211, 0.3);
-  border: 2px solid #272d3a;
-  /* box-shadow: 1px 1px 10px rgba(0, 0, 0, 5); */
 }
 #Yellow {
   background-color:rgba(255, 195, 0, 0.1);
-  border: 2px solid rgba(66, 63, 25, 0.2);
-  /* box-shadow: 1px 1px 10px rgba(0, 0, 0, 5); */
 }
 #Red {
   background-color:rgba(196, 36, 2, 0.1);
-  border: 2px solid #272d3a;
-  /* box-shadow: 1px 1px 10px rgba(0, 0, 0, 5); */
 }
 #Green {
   background-color:rgba(0, 100, 0, 0.2);
-  border: 2px solid #272d3a;
-  /* box-shadow: 1px 1px 10px rgba(0, 0, 0, 5); */
 }
 .TreeStyle {
   width: 32px;
@@ -1494,10 +1424,6 @@ h4 {
 .maintreeDD {
   display: flex;
   align-items: center;
-  /* background-color:rgba(212, 205, 71, 0.2);
-  border: 2px solid rgba(175, 169, 51, 0.2);
-  padding: 4px;
-  border-radius: 0.5em; */
 }
 .secondtreeDD {
   display: flex;
@@ -1526,7 +1452,6 @@ h4 {
   border: none;
   font-size: 1em;
   border-bottom: 4px solid #4d525f;
-  /* border-radius: 0.5em; */
   height: 2.5em;
   width: 5em;
   font-family: Kanit;
@@ -1537,43 +1462,32 @@ h4 {
   cursor: pointer;
   color:rgba(255, 255, 255, 0.861);
   border-color: #e4e4e4;
-  /* transform: translateY(-2px); */
 }
 #dd-box-nav-active {
   color:rgba(255, 255, 255, 0.861);
   border-color: #e4e4e4;
 }
 #otherPlayers-8000 {
-  /* border-color: rgba(212, 205, 71, 0.561); */
   border-right: 5px solid rgba(212, 205, 71, 0.561);
-  /* background-color: rgba(212, 205, 71, 0.2); */
 }
 #otherPlayers-8100 {
   border-right: 5px solid rgba(212, 71, 87, 0.464);
-  /* background-color: rgba(212, 71, 87, 0.2); */
 }
 #otherPlayers-8200 {
   border-right: 5px solid rgba(71, 87, 212, 0.51);
-  /* background-color: rgba(71, 87, 212, 0.2); */
 }
 #otherPlayers-8300 {
   border-right: 5px solid rgba(71, 170, 212, 0.463);
-  /* background-color: rgba(71, 170, 212, 0.2); */
 }
 #otherPlayers-8400 {
   border-right: 5px solid rgba(71, 212, 92, 0.473);
-  /* background-color: rgba(71, 212, 92, 0.2); */
 }
 .IconAndBuild {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* flex-direction: column; */
-  /* border: 2px solid #272d3a; */
-  /* border-radius: 0.2em; */
   padding: 8px;
   gap: 2em;
-  /* box-shadow: 2px 2px 10px rgba(0, 0, 0, 5); */
   margin: 0.5em;
 }
 .runes-itemsDiv {
@@ -1738,7 +1652,6 @@ h4 {
   color: rgba(255, 255, 255, 0.80);
   text-align: center;
   grid-template-columns: 13% 10% repeat(9, 1fr);
-  /* grid-template-columns: 18% 18% 12% 1fr 10% repeat(6, 1fr); */
   list-style: none;
   margin: 0;
 }
@@ -1808,7 +1721,6 @@ h4 {
   flex-direction: column;
   width: 100%;
   border: 2px solid rgba(39, 45, 58, 0.5);
-  /* border: 3px solid #272d3a; */
   align-items: center;
   color: rgba(255, 255, 255, 0.80);
   font-size: 1.5em;
@@ -1930,7 +1842,6 @@ h4 {
 .lg-team-bans p {
   border-left: 2px solid rgba(255, 255, 255, 0.861);
   padding-left: 10px;
-  /* text-decoration: underline; */
 }
 .lg-ban {
   width: 48px;
@@ -2049,7 +1960,6 @@ h4 {
   height: 1.75em;
   width: 100%;
   padding-bottom: 1em;
-  /* border-left: 2px solid rgba(255, 255, 255, 0.8); */
   border-bottom: 1px solid #272d3a;
 }
 .match-timeline-skills-header p, .match-timeline-items-header p {
@@ -2092,7 +2002,7 @@ h4 {
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: 1px solid #303b51;
+  border: 1px solid #242a37;
   border-radius: 0.2em;
 }
 .champion-ability-icon {
@@ -2147,12 +2057,9 @@ h4 {
   flex-direction: column;
   justify-content: flex-start;
   gap: 2em;
-  align-items: flex-end;
-  /* align-items: center; */
+  align-items: flex-start;
 }
 .test-two {
-  /* display: flex; */
-  /* flex-direction: column; */
   width: 93%;
   border-radius: 0.5em;
   background-color: #171A21;
@@ -2191,7 +2098,6 @@ h4 {
 }
 .recent-20-played-header {
   width: 100%;
-  /* border-top: 2px solid rgba(255, 255, 255, 0.861); */
 }
 .recent-20-played-header p {
   margin: 0;
@@ -2220,10 +2126,6 @@ h4 {
   align-items: center;
   gap: 1em;
 }
-/* .recent-played-with-1 div { */
-  /* text-align: left; */
-  /* width: 100%; */
-/* } */
 .recent-played-with-1 p {
   text-align: left;
 }
@@ -2251,7 +2153,6 @@ h4 {
   text-align: center;
 }
 #disclaimer {
-  /* display: flex; */
   width: 90%;
 }
 #privacy-policy {
@@ -2275,11 +2176,12 @@ h4 {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  grid-template-columns: 35% 8%;
+  grid-template-columns: 35% 10%;
   margin-right: 10px;
 }
 #SearchBoxDemoButton {
   background: #16181a;
+  width: 60px;
   border: 1px solid rgba(71, 70, 70, 0.4);
   border-radius: 0.2em;
   height: 2.5em;
@@ -2308,6 +2210,9 @@ h4 {
 }
 
 @media only screen and (max-width: 1400px) {
+  .TeamInfoTextDD1, .TeamInfoTextDD2 {
+    grid-template-columns: 56% 10.2% 10% 7%;
+  }
   .SummonerDataBoxGroup {
     display: flex;
     flex-direction: column;
@@ -2322,10 +2227,64 @@ h4 {
     flex-direction: row;
     width: 100%;
   }
+  .Team1DropDownBox {
+    grid-template-columns: 7% 5% 5% 22% 15% 10% 10% 6% 20%;
+  }
+  #Player0Champion {
+    width: 40px;
+    height: 40px;
+  }
+  #summonerSpellIcon1DropDown, #summonerSpellIcon2DropDown {
+    width: 22px;
+    height: 22px;
+  }
+  #Player0Team1Keystone {
+    width: 28px;
+    height: 28px;
+  }
+  #Player0Team1SecondaryTree {
+    width: 20px;
+    height: 20px;
+  }
+  #dd-playernames {
+    font-size: 1.1em;
+  }
+  .Player0Team1KDA {
+    font-size: 0.8em;
+  }
+  .Player0Team1Damage {
+    font-size: 0.85em;
+  }
+  .Player0Team1VisionScore {
+    font-size: 0.9em;
+  }
+  .Player0Team1CS {
+    font-size: 0.9em;
+  }
+  #item0DD, #item1DD, #item2DD, #item3DD, #item4DD, #item5DD, #item6DD {
+    width: 24px;
+    height: 24px;
+  }
 }
 @media only screen and (max-width: 1200px) {
   html {
     font-size: 0.9em;
+  }
+  #Player0Champion {
+    width: 32px;
+    height: 32px;
+  }
+  #summonerSpellIcon1DropDown, #summonerSpellIcon2DropDown {
+    width: 20px;
+    height: 20px;
+  }
+  #Player0Team1Keystone {
+    width: 24px;
+    height: 24px;
+  }
+  #Player0Team1SecondaryTree {
+    width: 16px;
+    height: 16px;
   }
   #championsInfoEntry2 p {
     font-size: 0.8em;
@@ -2354,7 +2313,14 @@ h4 {
   .otherPlayerRunesBox {
     display: grid;
     grid-template-columns: 10% 25% 12% 27% 18% 9%;
-  } 
+  }
+  .Team1DropDownBox {
+    grid-template-columns: 7% 5% 5% 22% 15% 10% 10% 6% 20%;
+  }
+  #champions-entry-icon {
+    width: 48px;
+    height: 48px;
+  }
 }
 @media only screen and (max-width: 1100px) {
   .match-timeline-skills-div {
@@ -2381,8 +2347,17 @@ h4 {
     opacity: 1;
   }
   #welcome {
+    display: none;
     opacity: 0;
     margin-top: 4%;
+  }
+  .test-button {
+    grid-template-columns: 35% 8%;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .Team1DropDownBox {
+    grid-template-columns: 9% 6% 6% 19% 15% 10% 10% 6% 20%;
   }
 }
 @media only screen and (max-width: 900px) {
@@ -2416,9 +2391,6 @@ h4 {
     width: 20px;
     height: 20px;
   }
-  .leftSideGroup p, .rightSideGroup p {
-    font-size: 0.9em;
-  }
   .Matches {
     grid-template-columns: 15% 24% 19% 39% 3%;
   }
@@ -2436,19 +2408,11 @@ h4 {
     width: 32px;
     height: 32px;
   }
-  .inactiveKeystone {
+  .inactiveKeystone, .activeKeystone {
     width: 40px;
     height: 40px;
   }
-  .activeKeystone {
-    width: 40px;
-    height: 40px;
-  }
-  .inactiveRune {
-    width: 24px;
-    height: 24px;
-  }
-  .activeRune {
+  .inactiveRune, .activeRune {
     width: 24px;
     height: 24px;
   }
@@ -2520,6 +2484,22 @@ h4 {
   .queue-and-rankicon {
     font-size: 0.9em;
   }
+  .Team1DropDownBox {
+    grid-template-columns: 9% 7% 7% 18% 15% 10% 10% 6% 20%;
+  }
+  .Player0Team1CS {
+    font-size: 0.6em;
+  }
+  .Player0Team1VisionScore {
+    font-size: 0.6em;
+  }
+  #dd-playernames {
+    font-size: 0.6em;
+  }
+  #item0DD, #item1DD, #item2DD, #item3DD, #item4DD, #item5DD {
+    width: 17px;
+    height: 17px;
+  }
   .RunesInfoMainWrap {
     flex-direction: column;
     align-items: center;
@@ -2558,4 +2538,511 @@ h4 {
   }
 }
 @media only screen and (max-width: 420px) {
+  #doop {
+    position: relative;
+    margin-top: 50px;
+    margin-right: 15px;
+    width: 128px;
+    height: 128px;
+  }
+  .MatchesWrapper {
+    width: 99%;
+  }
+  .test-one {
+    gap: 0.5em;
+  }
+  .inputSummonerName {
+    font-size: 1em;
+  }
+  #SearchBoxInput {
+    height: 26px;
+  }
+  .select-btn {
+    width: 40px;
+    display: grid;
+    grid-template-columns: 40% 50%;
+  }
+  #SearchIcon {
+    width: 24px;
+    height: 24px;
+  }
+  .test-button {
+    font-size: 0.6em;
+  }
+  #SearchBoxDemoButton {
+    width: 50px;
+    height: 24px;
+    font-size: 1.3em;
+  }
+  .summonerUpdateButton {
+    width: 60px;
+    height: 30px;
+    font-size: 0.8em;
+  }
+  #summonerIcon {
+    width: 48px;
+    height: 48px;
+  }
+  #summoner-level-div {
+    font-size: 0.8em;
+  }
+  .SummonerInfoBox {
+    grid-template-columns: 100%;
+    grid-template-rows: 33% 67%;
+    font-size: 0.7em;
+    padding: 5px;
+    justify-content: flex-start;
+  }
+  .SummonerInfo {
+    border-bottom: 1px solid #272d3a;
+  }
+  .RankedSoloDuo {
+    border-left: 0;
+    border-bottom: 1px solid #272d3a;
+  }
+  .RankedFlex {
+    border-left: 0;
+    border-bottom: none;
+  }
+  #rankIcon {
+    width: 32px;
+    height: 32px;
+  }
+  .queue-and-rankicon p {
+    font-size: 10px;
+  }
+  .DataBoxHeader {
+    align-items: flex-start;
+  }
+  .DataBoxHeader h3 {
+    padding-top: 5px;
+    font-size: 1em;
+    border-top: 1px solid rgba(255, 255, 255, 0.80);
+  }
+  #rankedsoloheader {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.80);
+  }
+  .champEntryWrapper {
+    border-width: 1px;
+  }
+  .champEntry {
+    padding: 2px;
+    grid-template-columns: 22% 30% 24% 21%;
+    grid-gap: 1px;
+  }
+  .champEntryDiv1 {
+    display: flex;
+    gap: 1px;
+    flex-direction: column;
+    font-size: 8px;
+  }
+  .champEntryDiv2 p, .champEntryDiv3 p {
+    font-size: 8px;
+  }
+  .champEntryDiv4 p {
+    font-size: 6px;
+  }
+  #RPWinBar, #RPWinBar-100 {
+    height: 5px;
+  }
+  #champ-entry-ptag1 {
+    font-size: 7px;
+  }
+  #champEntryChampIcon {
+    width: 24px;
+    height: 24px;
+  }
+  .recent-20-played-box ul {
+    align-items: center;
+    font-size: 9px;
+    grid-template-columns: 50% 15% 18% 17%;
+  }
+  .recent-played-with-entry {
+    grid-template-columns: 50% 15% 20% 15%;
+    font-size: 10px;
+  }
+  .recent-played-with-1 {
+    gap: 3px;
+    font-size: 10px;
+    overflow: hidden;
+  }
+  #recent-played-profile-icon {
+    width: 24px;
+    height: 24px;
+  }
+  #championIcon {
+    width: 24px;
+    height: 24px;
+  }
+  .MatchGroup1 {
+    font-size: 8px;
+  }
+  #summonerSpellIcon1 {
+    height: 12px;
+    width: 12px;
+  }
+  #summonerSpellIcon2 {
+    height: 12px;
+    width: 12px;
+  }
+  .level-div {
+    border-width: 1px;
+    width: 40%;
+    font-size: 7px;
+  }
+  #keystoneIcon {
+    width: 16px;
+    height: 16px;
+  }
+  #secondaryRuneIcon {
+    width: 12px;
+    height: 12px;
+  }
+  .MatchGroup2 {
+    gap: 0.1em;
+    font-size: 8px;
+  }
+  .MatchGroup2div3 {
+    gap: 2px;
+    padding-bottom: 2px;
+  }
+  .playerGroup {
+    font-size: 6px;
+  }
+  .playerChampionIcon {
+    width: 16px;
+    height: 16px;
+  }
+  #item0, #item1, #item2, #item3, #item4, #item5, #item6 {
+    width: 14px;
+    height: 14px;
+  }
+  .Recent20ChampCardDiv2 {
+    font-size: 7px;
+  }
+  #championIconRecent20 {
+    width: 16px;
+    height: 16px;
+  }
+  .recent20StatsBox {
+    display: grid;
+    grid-template-columns: 15% 35% 45%;
+    gap: 5px;
+  }
+  .Recent20ChampCard {
+    border-width: 1px;
+  }
+  .recent20TotalStats {
+    font-size: 7px;
+    gap: 3px;
+  }
+  .recent20TotalStats p {
+    margin: 0;
+  }
+  .pos-div-wrap {
+    justify-content: center;
+    height: 75px;
+    gap: 10px;
+    padding: 2px;
+  }
+  #non-filled-pos, #filled-pos {
+    border-width: 1px;
+  }
+  .recent20Champs {
+    width: 100%;
+  }
+  #R20WinBar {
+    height: 5px;
+  }
+  #topLogo, #jungleLogo, #midLogo, #bottomLogo, #supportLogo {
+    width: 20px;
+    height: 20px;
+  }
+  .positionStats h2 {
+    font-size: 0.9em;
+  }
+  .recent20Wrapper h3 {
+    font-size: 0.9em;
+  }
+  #MatchBoxes {
+    border-top-left-radius: 0.5em;
+  }
+  #MatchBoxes h4 {
+    font-size: 1em;
+    margin: 0;
+  }
+  #MatchBoxes {
+    padding: 3px;
+  }
+  .OuterSearchBox {
+    padding: 3px;
+  }
+  .SummonerDataBoxButton svg {
+    width: 7px;
+  }
+  .dd-box-routes {
+    font-size: 10px;
+  }
+  #BaronIconDD, #DragonIconDD, #TurretIconDD, #GoldIconDD {
+    height: 16px;
+    width: 16px;
+  }
+  .Team1ObjectivesDD, .Team2ObjectivesDD {
+    font-size: 9px;
+  }
+  #goldBarDDWin, #goldBarDDLose {
+    height: 5px;
+    border-width: 0;
+  }
+  #invis1, #invis3 {
+    font-size: 10px;
+  }
+  #damageDDIcon, #csDDIcon, #visionDDIcon, #damageDDIcon2, #visionDDIcon2, #csDDIcon2 {
+    width: 12px;
+    height: 12px;
+  }
+  #Player0Champion {
+    height: 16px;
+    width: 16px;
+    border: none;
+  }
+  #level-matchbox {
+    font-size: 5px;
+    width: 25%;
+    right: 15%;
+  }
+  #summonerSpellIcon1DropDown, #summonerSpellIcon2DropDown {
+    height: 10px;
+    width: 10px;
+  }
+  #Player0Team1Keystone {
+    width: 12px;
+    height: 12px;
+  }
+  #Player0Team1SecondaryTree {
+    width: 10px;
+    height: 10px;
+  }
+  #dd-playernames {
+    font-size: 6px;
+    overflow: hidden;
+  }
+  .Player0Team1KDA {
+    font-size: 6px;
+  }
+  .Player0Team1Damage {
+    font-size: 7px;
+    gap: 1px;
+  }
+  #dd-winMatch-damagebar, #dd-damagebar-grey, #dd-winMatch-damagebar-100, #dd-loseMatch-damagebar {
+    height: 3px;
+    border: none;
+  }
+  .Player0Team1CS {
+    font-size: 6px;
+  }
+  .Player0Team1VisionScore {
+    font-size: 6px;
+  }
+  #item0DD, #item1DD, #item2DD, #item3DD, #item4DD, #item5DD {
+    height: 10px;
+    width: 10px;
+    border: none;
+  }
+  .upperHalfItems, .lowerHalfItems {
+    gap: 0;
+  }
+  #dd-winMatch, #dd-loseMatch {
+    border-width: 1px;
+  }
+  .Keystone {
+    height: 24px;
+  }
+  .Team1DropDownBox {
+    padding: 3px;
+  }
+  .inactiveKeystone, .activeKeystone {
+    width: 20px;
+    height: 20px;
+  }
+  .inactiveRune, .activeRune {
+    width: 16px;
+    height: 16px;
+  }
+  .TreeStyle {
+    height: 16px;
+    width: 16px;
+  }
+  #temp {
+    height: 24px;
+    width: 24px;
+  }
+  #upperDDbox img, #lowerDDbox img {
+    width: 16px;
+    height: 16px;
+  }
+  .TreeDiv {
+    border-width: 1px;
+    padding: 3px;
+  }
+  .IconAndBuild {
+    gap: 5px;
+  }
+  .runes-items-champicon {
+    border-width: 1px;
+    gap: 5px;
+    font-size: 12px;
+  }
+  .runes-items-champicon-div {
+    gap: 2px; 
+  }
+  .runes-items-rune-trees {
+    gap: 1px;
+  }
+  .runes-items-summspells {
+    gap: 1px;
+  }
+  #keystoneIcon {
+    width: 14px;
+    height: 14px;
+  }
+  #secondaryRuneIcon {
+    width: 12px;
+    height: 12px;
+  }
+  .runes-items-summspells {
+    padding-bottom: 3px;
+  }
+  .minorRuneRow {
+    padding: 4px;
+  }
+  #champIconRunesDD {
+    width: 16px;
+    height: 16px;
+  }
+  .otherPlayerRunesBox p {
+    font-size: 7px;
+    overflow: hidden;
+  }
+  .keystoneRunesDD {
+    width: 20px;
+    height: 20px;
+  }
+  .minorRuneDD {
+    width: 12px;
+    height: 12px;
+  }
+  .shardDD {
+    width: 12px;
+    height: 12px;
+  }
+  .OtherPlayersRunes {
+    padding-left: 0;
+  }
+  #otherPlayers1, #otherPlayers2 {
+    gap: 5px;
+  }
+  #otherPlayers-8000, #otherPlayers-8100, #otherPlayers-8200, #otherPlayers-8300, #otherPlayers-8400 {
+    border-right-width: 3px;
+  }
+  .champion-ability-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .skill-box {
+    width: 12px;
+    height: 12px;
+    font-size: 10px;
+  }
+  .timeline-events-div {
+    border-width: 1px;
+  }
+  .timeline-item-box {
+    width: 16px;
+    height: 16px;
+  }
+  .match-timeline-items-header {
+    font-size: 12px;
+  }
+  .match-timeline-skills-header {
+    font-size: 12px;
+  }
+  .ChampionsInfoBox ul {
+    font-size: 7px;
+    border-width: 1px;
+    width: 97.2%;
+  }
+  .championsInfoEntryBox {
+    font-size: 7px;
+    border-width: 1px;
+  }
+  #champions-entry-icon {
+    width: 24px;
+    height: 24px;
+  }
+  #ci-winbar {
+    height: 4px;
+  }
+  .searchbox-tab {
+    font-size: 10px;
+    border-bottom-width: 1px;
+  }
+  #active-btn-tab {
+    border-bottom-width: 2px;
+  }
+  .test-two {
+    padding-bottom: 2px;
+  }
+  .live-game-player {
+    grid-template-columns: 25% 15% 25% 20% 12%;
+  }
+  .lg-teams {
+    flex-direction: column;
+  }
+  .lg-ban {
+    width: 32px;
+    height: 32px;
+  }
+  #disclaimer {
+    font-size: 7px;
+  }
+  #lg-champicon-100, #lg-champicon-200 {
+    width: 32px;
+    height: 32px;
+  }
+  .lg-summ-spell {
+    width: 16px;
+    height: 16px;
+  }
+  #lg-keystone-icon {
+    width: 24px;
+    height: 24px;
+  }
+  #lg-rune-style-icon {
+    width: 16px;
+    height: 16px;
+  }
+  #lg-summoner-name {
+    font-size: 10px;
+    overflow: hidden;
+  }
+  #lg-rank-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .lg-rank-div p {
+    font-size: 9px;
+  }
+  .lg-winrate-div {
+    font-size: 12px;
+  }
+  #lg-runes-button {
+    font-size: 9px;
+  }
+  .in-live-game-box {
+    width: 99.5%;
+    border-width: 1px;
+  }
 }

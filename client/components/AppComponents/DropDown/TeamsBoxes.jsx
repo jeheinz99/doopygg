@@ -30,7 +30,7 @@ const TeamsBoxes = props => {
           <img id="Player0Team1SecondaryTree" src={runes[5].icon}/>
         </div>
         <div className="Player0Team1Info">
-          <p className="playernames" onClick={() => setSearchParams({ region: regionId, summonerName: summonerName })}>{summonerName}</p>
+          <p className="playernames" id="dd-playernames"onClick={() => setSearchParams({ region: regionId, summonerName: summonerName })}>{summonerName}</p>
         </div>
         <div className="Player0Team1KDA">
           <p>{kills} / {deaths} / {assists}</p>
