@@ -209,6 +209,10 @@ html, body {
   align-self: center;
   padding-top: 15px;
 }
+#pulse-expand-load {
+  transform: translateY(8px);
+  height: 32px;
+}
 .SummonerDataBoxGroup {
   display: grid;
   grid-template-columns: 30% 70%;
@@ -468,12 +472,13 @@ html, body {
   justify-content: center
 }
 .leftSidePlayers, .rightSidePlayers {
-  display: flex;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
   width: 100%;
-  flex-direction: column;
   gap: 2px;
-  font-size: 1.3em;
+  font-size: 20px;
   padding: 5px;
+  overflow: hidden;
 }
 .playerChampionIcon {
   width: 24px;
@@ -602,6 +607,9 @@ html, body {
 }
 .Player0Team1Info p {
   margin: 0;
+}
+.playernames {
+  overflow: hidden;
 }
 .playernames:hover {
   filter: invert(20%);

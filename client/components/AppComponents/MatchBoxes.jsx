@@ -4,6 +4,7 @@ import Recent20StatsBox from './RecentMatches/Recent20StatsBox.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { BiChevronDown } from 'react-icons/bi';
 import { expandSummMatchHistory } from '../../actions/actions.js';
+import { PulseLoader } from 'react-spinners';
 
 const MatchBoxes = () => {
 
@@ -15,10 +16,9 @@ const MatchBoxes = () => {
   const [loading, setLoading] = useState(false);
 
   const expandHistory = async () => {
-    // setLoading(true);
-    // await dispatch(expandSummMatchHistory(summonerName, matchHistory.length, region));
-    // setLoading(false);
-    // console.log('hi');
+    setLoading(true);
+    await dispatch(expandSummMatchHistory(summonerName, matchHistory.length, region));
+    setLoading(false);
   };
 
   /* there are only 10 players per match, the 'otherPlayersMatches' players are in order by match played in,
@@ -134,7 +134,14 @@ const MatchBoxes = () => {
       <h4>Match History</h4>
       <Recent20StatsBox recent20Data={recent20Data}/>
       { matchList }
-      <button id="match-history-expand-btn" onClick={() => expandHistory()}><BiChevronDown size={25}/></button>
+
+      {loading ? 
+      <button id="match-history-expand-btn">
+        <PulseLoader id="pulse-expand-load" color="#c9c9c9" size={10} speedMultiplier={0.6}/>
+      </button>
+      : 
+      <button id="match-history-expand-btn" onClick={() => expandHistory()}><BiChevronDown size={25}/></button>}
+
     </div>
   );
 };

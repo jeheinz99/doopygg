@@ -293,6 +293,9 @@ summonerController.updateSummData = async (req, res, next) => {
       for (let j = 0; j < matchHistoryData[i].participants.length; j++) {
         if (matchHistoryData[i].participants[j].summonerName === name) {
           const player = matchHistoryData[i].participants[j];
+          let gameDuration = matchHistoryData[i].gameDuration;
+          // check if timestamp is old timestamp in ms over seconds by checking 
+          if (gameDuration > 10000) gameDuration = gameDuration*.001;
           matchesData.push({
             matchId: matchIdList[i],
             gameEnd: matchHistoryData[i].gameEndTimestamp,
@@ -301,7 +304,7 @@ summonerController.updateSummData = async (req, res, next) => {
             kills: player.kills,
             deaths: player.deaths,
             assists: player.assists,
-            matchLength: `${matchHistoryData[i].gameDuration}`,
+            matchLength: `${gameDuration}`,
             gameMode: matchHistoryData[i].queueId,
             champion: player.championName,
             position: player.teamPosition,
@@ -896,12 +899,136 @@ summonerController.expandSummMatchHistory = async (req, res, next) => {
     matchHistoryData.sort((a, b) => {
       return ((b.gameEndTimestamp - a.gameEndTimestamp));
     });
+
+        // iterates through the matchHistoryData list to find the summoner being-
+    // looked up so you only find their statistics for each match and push an object 
+    // with statistics from the last 20 matches 
+    const matchesData = [];
+    const otherPlayersData = [];
+    for (let i = 0; i < matchHistoryData.length; i++) {      
+      for (let j = 0; j < matchHistoryData[i].participants.length; j++) {
+        if (matchHistoryData[i].participants[j].puuid === puuid) {
+          const player = matchHistoryData[i].participants[j];
+          matchesData.push({
+            matchId: matchIdList[i],
+            gameEnd: matchHistoryData[i].gameEndTimestamp,
+            championId: player.championId,
+            summonerIcon: player.profileIcon,
+            kills: player.kills,
+            deaths: player.deaths,
+            assists: player.assists,
+            matchLength: `${matchHistoryData[i].gameDuration}`,
+            gameMode: matchHistoryData[i].queueId,
+            champion: player.championName,
+            position: player.teamPosition,
+            win: player.win,
+            visionScore: player.visionScore,
+            cs: (player.totalMinionsKilled + player.neutralMinionsKilled),
+            champDamage: player.totalDamageDealtToChampions,
+            champLevel: player.champLevel,
+            summonerSpells: [player.summoner1Id, player.summoner2Id],
+            items: [player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.item6],
+            runes: [player.perks.styles[0].selections[0].perk, // keystone [0]
+            player.perks.styles[0].selections[1].perk, // first rune in keystone tree [1]
+            player.perks.styles[0].selections[2].perk, // second rune in keystone tree [2] 
+            player.perks.styles[0].selections[3].perk, // third rune in keystone tree [3]
+            player.perks.styles[0].style, // primary tree style [4]
+            player.perks.styles[1].style, // secondary tree style (i.e. pic of green tree icon) [5]
+            player.perks.styles[1].selections[0].perk, // secondary tree first rune [6]
+            player.perks.styles[1].selections[1].perk,  // secondary tree second rune [7]
+            player.perks.statPerks.defense, // stat shard row 1 [8]
+            player.perks.statPerks.flex, // stat shard row 2 [9]
+            player.perks.statPerks.offense], // stat shard row 3 [10]
+          });
+          otherPlayersData.push({
+            championId: player.championId,
+            champion: player.championName,
+            summonerName: player.summonerName,
+            kills: player.kills,
+            deaths: player.deaths,
+            assists: player.assists,
+            win: player.win,
+            turretKills: player.turretKills,
+            barons: player.baronKills,
+            dragons: player.dragonKills,
+            goldEarned: player.goldEarned,
+            position: player.teamPosition,
+            visionScore: player.visionScore,
+            profileIcon: player.profileIcon,
+            cs: player.totalMinionsKilled,
+            champDamage: player.totalDamageDealtToChampions,
+            champLevel: player.champLevel,
+            summonerSpells: [player.summoner1Id, player.summoner2Id],
+            items: [player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.item6],
+            runes: [player.perks.styles[0].selections[0].perk,
+            player.perks.styles[0].selections[1].perk,
+            player.perks.styles[0].selections[2].perk,
+            player.perks.styles[0].selections[3].perk,
+            player.perks.styles[0].style,
+            player.perks.styles[1].style,
+            player.perks.styles[1].selections[0].perk,
+            player.perks.styles[1].selections[1].perk,
+            player.perks.statPerks.defense,
+            player.perks.statPerks.flex,
+            player.perks.statPerks.offense],
+          });
+        }
+        else {
+          const player = matchHistoryData[i].participants[j];
+          otherPlayersData.push({
+            championId: player.championId,
+            champion: player.championName,
+            summonerName: player.summonerName,
+            kills: player.kills,
+            deaths: player.deaths,
+            assists: player.assists,
+            win: player.win,
+            profileIcon: player.profileIcon,
+            turretKills: player.turretKills,
+            barons: player.baronKills,
+            dragons: player.dragonKills,
+            goldEarned: player.goldEarned,
+            visionScore: player.visionScore,
+            position: player.teamPosition,
+            cs: player.totalMinionsKilled,
+            champDamage: player.totalDamageDealtToChampions,
+            champLevel: player.champLevel,
+            summonerSpells: [player.summoner1Id, player.summoner2Id],
+            items: [player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.item6],
+            runes: [player.perks.styles[0].selections[0].perk,
+            player.perks.styles[0].selections[1].perk,
+            player.perks.styles[0].selections[2].perk,
+            player.perks.styles[0].selections[3].perk,
+            player.perks.styles[0].style,
+            player.perks.styles[1].style,
+            player.perks.styles[1].selections[0].perk,
+            player.perks.styles[1].selections[1].perk,
+            player.perks.statPerks.defense,
+            player.perks.statPerks.flex,
+            player.perks.statPerks.offense],
+          });
+        }
+      };
+    };
     
-    // console.log(matchHistoryData, 'match history data');
-    
-    // res.locals.newSummMatchHistory = {
-    //   matchHistory: matchHistoryData,
-    // };
+    // maps icons for main player being searched for
+    for (let i = 0; i < matchesData.length; i++) {
+      const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
+      const runesMap = await mapRuneIcons(matchesData[i].runes); // 11 runes total
+      const summSpellMap = await mapSummonerIcons(matchesData[i].summonerSpells); // 2 items total
+      const queueMap = await mapQueueType(matchesData[i].gameMode);
+
+      matchesData[i].gameMode = queueMap;
+      matchesData[i].items = itemsMap;
+      matchesData[i].runes = runesMap;
+      matchesData[i].summonerSpells = summSpellMap;
+    }
+
+
+    res.locals.newSummMatchHistory = {
+      matchesData: matchesData,
+      otherPlayersMatches: otherPlayersData
+    };
     return next();
   }
   catch(err) {

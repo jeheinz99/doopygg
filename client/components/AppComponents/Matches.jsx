@@ -8,6 +8,17 @@ import { useEffect } from 'react';
 
 import MatchBoxTeamPlayers from './MatchBoxTeamPlayers.jsx';
 
+const numsObj = {
+  1: '01',
+  2: '02',
+  3: '03',
+  4: '04',
+  5: '05',
+  6: '06',
+  7: '07',
+  8: '08',
+  9: '09'
+};
 
 const Matches = props => {
 
@@ -72,6 +83,10 @@ const Matches = props => {
       summonerName={otherPlayers[i].summonerName}
       championId={otherPlayers[i].championId}/>);
   }
+  const matchLength1 = Math.floor(Number(Math.round(matchLength) / 60));
+  let matchLength2 = Number(Math.round(matchLength)) % 60;
+  // just a check from cache for numbers 1-9 to turn into 01-09
+  if (numsObj[matchLength2]) matchLength2 = numsObj[matchLength2];
 
   return (
     <div className="MatchesWrapper">
@@ -79,7 +94,7 @@ const Matches = props => {
         <div className="MatchGroup1">
           <p>{gameMode}</p>
           <p id="p2-mg1">{timeAgo}</p>
-          <p id="p3-mg1">{`${Math.floor(Number(matchLength / 60))}:${Number(matchLength) % 60}`}</p>
+          <p id="p3-mg1">{`${matchLength1}:${matchLength2}`}</p>
           {id === "winMatch" ? <p style={{color: 'blue'}}>{outcome}</p> : <p style={{color: 'red'}}>{outcome}</p>}
         </div>
         <div className="MatchGroup2">

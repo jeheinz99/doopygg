@@ -94,6 +94,9 @@ const SearchBox = () => {
       dispatch(getSummonerData(summonerNameParam, regionIdParam))
       .then(() =>  setSearching(false));
     }
+    if (currBox !== 'matchHistory') {
+      setCurrBox('matchHistory');
+    }
     if (summonerNameParam && regionIdParam) {
       tempFunc();
     }

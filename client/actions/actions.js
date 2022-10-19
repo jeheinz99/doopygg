@@ -71,9 +71,8 @@ export const updateSummonerData = summonerName => async dispatch => {
 };
 
 export const expandSummMatchHistory = (summonerName, historyLength, regionId) => async dispatch => {
-  console.log('hi inside expand');
   const responseSummExpandMatchHistory = await axios.get(`/summoner/history/${regionId}/${summonerName}/${historyLength}`);
-  console.log('SUMMONER EXPAND HISTORY response from back-end');
+  // console.log('SUMMONER EXPAND HISTORY response from back-end');
   dispatch(expandSummMatchHistoryActionCreator(responseSummExpandMatchHistory.data));
 };
 
