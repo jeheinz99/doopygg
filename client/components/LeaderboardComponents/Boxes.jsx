@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Boxes = props => {
 
   const { id, wins, losses, summonerName, leaguePoints, rank, profileIcon } = props;

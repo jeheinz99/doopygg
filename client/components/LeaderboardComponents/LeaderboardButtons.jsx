@@ -1,6 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { getLeaderboardData } from "../../actions/actions";
+import { useDispatch } from 'react-redux';
+import { getLeaderboardData } from '../../actions/actions';
 
 const LBButtons = props => {
 

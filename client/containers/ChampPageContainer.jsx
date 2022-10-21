@@ -1,6 +1,5 @@
-import React from 'react';
-import { getChampionData, testAsyncFunc } from '../actions/actions';
 import { useDispatch } from 'react-redux';
+import { getChampionData, testAsyncFunc } from '../actions/actions';
 import ChampionsHeader from '../components/ChampionsComponents/ChampionsHeader';
 
 const ChampPageContainer = () => {

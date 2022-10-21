@@ -28,7 +28,7 @@ router.get('/livegamedata/:regionId/:summonerName', summonerController.getLiveGa
   return res.status(200).send(res.locals.liveGameData);
 });
 
-router.get('/test', summonerController.testSummData, (req, res) => {
+router.get('/test', (req, res) => {
   return res.status(200).send(res.locals.summonerTestData);
 });
 

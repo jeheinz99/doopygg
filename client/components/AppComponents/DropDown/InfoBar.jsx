@@ -1,4 +1,3 @@
-import React from 'react';
 import { RiSwordFill } from 'react-icons/ri';
 
 const InfoBar = () => {

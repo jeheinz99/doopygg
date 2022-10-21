@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Runes1 from '../DropDown/Runes1.jsx';
 import Runes2 from '../DropDown/Runes2.jsx';
 import Runes3 from '../DropDown/Runes3.jsx';
@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 
 const LiveGamePlayerBox = props => {
 
-  const { id, championId, division, losses, wins, lp, tier, profileIconId, runes, summonerName, summonerSpells, team } = props;
+  const { id, championId, division, losses, wins, lp, tier, runes, summonerName, summonerSpells, team } = props;
 
   const regionId = useSelector(state => state.summoners.region);
   

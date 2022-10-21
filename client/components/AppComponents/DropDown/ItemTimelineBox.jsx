@@ -1,4 +1,3 @@
-import React from 'react';
 import ItemTimelineBoxItem from './ItemTimelineBoxItem.jsx';
 
 const ItemTimelineBox = props => {

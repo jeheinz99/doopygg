@@ -1,8 +1,6 @@
-import React from 'react';
-
 const Recent20Champion = props => {
 
-  const { kills, deaths, assists, win, loss, played, cs, champDamage, id, championId, championName } = props;
+  const { championId, kills, deaths, assists, played, win, loss } = props;
 
   const avgKills = (kills / (win + loss)).toFixed(1);
   const avgDeaths = (deaths / (win + loss)).toFixed(1);

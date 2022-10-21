@@ -1,5 +1,3 @@
-import React from 'react';
-
 const TFTSummonerBoxes = props => {
 
   const { name, value, percent } = props;

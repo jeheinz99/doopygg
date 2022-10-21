@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { PulseLoader } from 'react-spinners';
+import { useSelector } from 'react-redux';
 import Runes1 from './Runes1.jsx';
 import Runes2 from './Runes2.jsx';
 import Runes3 from './Runes3.jsx';
@@ -6,15 +8,13 @@ import OtherPlayersRunes from './OtherPlayersRunes.jsx';
 import ObjectivesDD from './ObjectivesDD.jsx';
 import InfoBar from './InfoBar.jsx';
 import axios from 'axios';
-import { PulseLoader } from 'react-spinners';
-import { useSelector } from 'react-redux';
 import DDBoxPlayers from './DDBoxPlayers.jsx';
 import SkillBox from './SkillBox.jsx';
 import ItemTimelineBox from './ItemTimelineBox.jsx';
 
 const DropDownBox = props => {
   
-  const { summonerSpells, runes, kills, deaths, assists, champLevel, championId, matchId, matchNum, matchLength, otherPlayers, id, championIcon, items } = props;
+  const { summonerSpells, runes, kills, deaths, assists, champLevel, championId, matchId, matchNum, matchLength, otherPlayers, championIcon, items } = props;
 
   const summonerName = useSelector(state => state.summoners.summonerName);
   const puuid = useSelector(state => state.summoners.puuid);
@@ -83,7 +83,6 @@ const DropDownBox = props => {
     otherPlayersRunes.push(
     <OtherPlayersRunes
       key={`playerRunes-${i}`}
-      id={`otherPlayerRunes-${i}`}
       championId={runeInfo.otherPlayers[i].championId}
       summonerName={runeInfo.otherPlayers[i].name}
       runes={runeInfo.otherPlayers[i].runes} 
@@ -91,7 +90,6 @@ const DropDownBox = props => {
     otherPlayersRunes2.push(
     <OtherPlayersRunes
       key={`playerRunes-${i}`}
-      id={`otherPlayerRunes-${i}`}
       championId={runeInfo.otherPlayers[i].championId}
       summonerName={runeInfo.otherPlayers[i].name}
       runes={runeInfo.otherPlayers[i].runes} 

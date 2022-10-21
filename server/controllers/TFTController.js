@@ -522,15 +522,3 @@ TFTController.addTFTSummMatchesData = async (req, res, next) => {
 };
 
 module.exports = TFTController;
-
-// const playerNameRes = await axios.get(`https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${matchData[i].participants[j].puuid}?api_key=${api_key}`,
-// {
-//   headers: {
-//     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-//     "Accept-Language": "en-US,en;q=0.9",
-//     "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-//     "Origin": "https://developer.riotgames.com"
-//     }
-// });
-
-// const playerName = playerNameRes.data.name;

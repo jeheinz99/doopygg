@@ -1,10 +1,9 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom';
 
-const OtherPlayerRunes = props => {
+const OtherPlayersRunes = props => {
 
-  const { summonerName, id, runes, championId } = props;
+  const { summonerName, runes, championId } = props;
 
   const regionId = useSelector(state => state.summoners.region);
 
@@ -46,4 +45,4 @@ const OtherPlayerRunes = props => {
   );
 };
 
-export default OtherPlayerRunes;
+export default OtherPlayersRunes;

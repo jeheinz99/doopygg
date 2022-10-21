@@ -1,13 +1,9 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import LeaderboardBoxes from '../components/LeaderboardComponents/LeaderboardBoxes.jsx';
 import LBButtons from '../components/LeaderboardComponents/LeaderboardButtons.jsx'; 
 
-const LeaderboardPageContainer = () => {
-
-  const leaderboardData = useSelector(state => state.leaderboard.leaderboardData);
-
-  const regions = {'BR1': 'BR',
+const regions = {
+  'BR1': 'BR',
   'RU': 'RU', 
   'TR1': 'TR', 
   'JP1': 'JP', 
@@ -17,7 +13,12 @@ const LeaderboardPageContainer = () => {
   'KR': 'KR',
   'OC1': 'OCE',
   'EUN1': 'EUNE', 
-  'EUW1': 'EUW'};
+  'EUW1': 'EUW'
+};
+
+const LeaderboardPageContainer = () => {
+
+  const leaderboardData = useSelector(state => state.leaderboard.leaderboardData);
 
   const regionsArr = [];
   const regionsArr2 = [];

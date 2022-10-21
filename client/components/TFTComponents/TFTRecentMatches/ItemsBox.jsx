@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ItemsBox = props => {
 
   const { played, icon } = props;

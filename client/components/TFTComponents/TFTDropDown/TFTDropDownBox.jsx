@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import TFTPlayersDD from "./TFTPlayersDD";
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { PulseLoader } from 'react-spinners';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import TFTPlayersDD from './TFTPlayersDD';
 
 const TFTDropDownBox = props => {
 

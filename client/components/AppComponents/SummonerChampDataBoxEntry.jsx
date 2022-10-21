@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SummonerChampDataBoxEntry = props => {
 
   const { kills, deaths, assists, win, loss, championId, id, played } = props;

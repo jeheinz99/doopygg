@@ -1,9 +1,8 @@
-import React, { Fragment, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
-import { useState } from 'react';
-import LiveGamePlayerBox from './LiveGamePlayerBox.jsx';
 import { PulseLoader } from 'react-spinners';
+import axios from 'axios';
+import LiveGamePlayerBox from './LiveGamePlayerBox.jsx';
 import LiveGameBansBox from './LiveGameBansBox.jsx';
 
 const LiveGameBox = () => {
@@ -16,7 +15,6 @@ const LiveGameBox = () => {
     const getLiveGameData = async () => {
       try {
         const res = await axios.get(`/summoner/livegamedata/${region}/${summonerName}`);
-        // console.log(res.data, 'res.data');
         setLiveGameData(res.data);
       }
       catch(err) {
@@ -125,7 +123,7 @@ const LiveGameBox = () => {
       }
 
     </div>
-  )
+  );
 };
 
 export default LiveGameBox;

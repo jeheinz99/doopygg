@@ -1,4 +1,3 @@
-import React from 'react';
 import Navbar from '../containers/Navbar';
 import LeaderboardPageContainer from '../containers/LeaderboardPageContainer';
 

@@ -1,8 +1,7 @@
-import React from 'react';
-
 const ItemTimelineBoxItem = props => {
 
   const { id, icon, count } = props;
+  
   return (
     <div className="timeline-item-box-div">
       <img className="timeline-item-box" id={id} src={icon}/>

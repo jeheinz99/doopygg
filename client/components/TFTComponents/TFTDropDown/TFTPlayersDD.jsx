@@ -1,4 +1,3 @@
-import React from 'react';
 import TFTDDUnitsBox from './TFTDDUnitsBox.jsx';
 
 const TFTPlayersDD = props => {

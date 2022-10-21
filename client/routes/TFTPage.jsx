@@ -1,4 +1,3 @@
-import React from 'react';
 import TFTPageContainer from '../containers/TFTPageContainer';
 import Navbar from '../containers/Navbar';
 

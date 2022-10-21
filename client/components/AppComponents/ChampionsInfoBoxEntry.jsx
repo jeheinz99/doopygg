@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ChampionsInfoBoxEntry = props => {
 
   const { championId, id, kills, deaths, assists, played, win, loss, cs, champDamage, gold, csPerMin, doubleKills, tripleKills, quadraKills, pentaKills, damageTaken } = props;

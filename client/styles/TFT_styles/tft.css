@@ -67,14 +67,6 @@
   justify-content: space-evenly;
   width: 100%;
 }
-#SummonerDataBoxGroup-champions {
-  display: flex;
-  width: 100%;
-}
-#SummonerDataBoxGroup-live-game {
-  display: flex;
-  width: 100%;
-}
 .RankedMatchesInfo {
   display: grid;
   grid-gap: 40px;
@@ -627,15 +619,15 @@
   width: 100%;
   grid-template-rows: repeat(5, 1fr);
 }
+.RecentUnitsBoxes ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
 .RecentTraits p {
   margin: 0;
 }
 .RecentUnits p {
   margin: 0;
-}
-.RecentUnitsBox ul {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
 }
 .PlacementInfo {
   display: flex;

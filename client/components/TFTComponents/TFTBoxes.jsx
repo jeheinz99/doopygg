@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { AiFillCaretUp, AiFillCaretDown } from 'react-icons/ai';
 import TFTDropDownBox from './TFTDropDown/TFTDropDownBox.jsx';
 import TFTUnitsBox from './TFTUnitsBox.jsx';
-
-import { AiFillCaretUp } from 'react-icons/ai';
-import { AiFillCaretDown } from 'react-icons/ai';
 
 const TFTBoxes = props => {
 

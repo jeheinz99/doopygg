@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import SummonerChampDataBoxEntry from "./SummonerChampDataBoxEntry";
-import Recent20PlayedWith from "./RecentMatches/Recent20PlayedWith.jsx";
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import SummonerChampDataBoxEntry from './SummonerChampDataBoxEntry';
+import Recent20PlayedWith from './RecentMatches/Recent20PlayedWith.jsx';
 
 import { AiFillCaretDown } from 'react-icons/ai';
 import { AiFillCaretUp } from 'react-icons/ai';
@@ -13,7 +13,6 @@ const SummonerChampDataBox = () => {
   const summonerName = useSelector(state => state.summoners.summonerName);
   const summonerIcon = useSelector(state => state.summoners.profileIconId);
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
-  const matchHistory = useSelector(state => state.summoners.matchHistory);
 
   const [ open, setOpen ] = useState(false);
   

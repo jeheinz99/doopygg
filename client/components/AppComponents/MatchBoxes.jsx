@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import Matches from './Matches.jsx';
-import Recent20StatsBox from './RecentMatches/Recent20StatsBox.jsx';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { PulseLoader } from 'react-spinners';
 import { BiChevronDown } from 'react-icons/bi';
 import { expandSummMatchHistory } from '../../actions/actions.js';
-import { PulseLoader } from 'react-spinners';
+import Recent20StatsBox from './RecentMatches/Recent20StatsBox.jsx';
+import Matches from './Matches.jsx';
 
 const MatchBoxes = () => {
 

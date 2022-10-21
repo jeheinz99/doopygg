@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import R20PlayedEntry from './Recent20PlayedEntry.jsx';
 
@@ -6,7 +5,6 @@ const Recent20PlayedWith = () => {
 
   const matchHistory = useSelector(state => state.summoners.matchHistory);
   const otherPlayersMatches = useSelector(state => state.summoners.otherPlayersMatches);
-  const summonerName = useSelector(state => state.summoners.summonerName);
 
   const orderPlayedWith = data => {
     const tempArr = [];

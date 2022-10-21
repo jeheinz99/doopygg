@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getSummonerData, updateSummonerData } from '../actions/actions.js';
 import { useSearchParams } from 'react-router-dom';
 import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';

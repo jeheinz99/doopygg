@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { SiRiotgames } from 'react-icons/si';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { getValorantData } from '../actions/actions.js';
-import axios from 'axios';
+import { SiRiotgames } from 'react-icons/si';
 import { BiSearch } from 'react-icons/bi';
 import cypher from '../assets/cypher.png';
 import jett from '../assets/jett.png';
@@ -63,8 +62,6 @@ const ValorantPageContainer = () => {
   if (document.cookie) {
     const accessToken = getCookie('accessToken');
     const refreshToken = getCookie('refreshToken');
-    // console.log(accessToken, 'access token');
-    // console.log(refreshToken, 'refresh token');
   }
 
   return (

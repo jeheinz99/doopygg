@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { getTFTData, updateTFTData } from '../actions/actions.js';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { PulseLoader } from 'react-spinners';
-
+import { BiSearch } from 'react-icons/bi';
+import { getTFTData, updateTFTData } from '../actions/actions.js';
 import TFTMatchBoxes from '../components/TFTComponents/TFTMatchBoxes.jsx';
 import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx';
-import chibiYasuo from '../assets/chibi_yasuo.png';
-
-import { BiSearch } from 'react-icons/bi';
 import CustomSelect from '../components/AppComponents/CustomSelect.jsx';
+import chibiYasuo from '../assets/chibi_yasuo.png';
 
 const TFTPageContainer = () => {
 

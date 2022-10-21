@@ -1,17 +1,12 @@
-import React from 'react';
 import tftLogo from '../assets/tftLogo.png';
 import valorantLogo from '../assets/valorantLogo.png';
 import { Outlet, NavLink } from 'react-router-dom';
 
 import { SiRiotgames } from 'react-icons/si';
-import { AiFillHome } from 'react-icons/ai';
 import { MdLeaderboard } from 'react-icons/md';
-
 import { FaDiscord } from 'react-icons/fa';
 import { BsTwitter } from 'react-icons/bs';
-import { AiFillYoutube } from 'react-icons/ai';
-import { AiFillLinkedin } from 'react-icons/ai';
-import { AiFillGithub } from 'react-icons/ai';
+import { AiFillYoutube, AiFillLinkedin, AiFillGithub, AiFillHome } from 'react-icons/ai';
 
 import '../styles/Navbar_styles/Navbar.css';
 

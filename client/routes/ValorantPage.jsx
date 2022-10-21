@@ -1,4 +1,3 @@
-import React from 'react';
 import ValorantPageContainer from '../containers/ValorantPageContainer';
 import Navbar from '../containers/Navbar';
 

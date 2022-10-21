@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Yellow from './PrimaryTrees/Yellow.jsx';
 import Red from './PrimaryTrees/Red.jsx';
 import Blue from './PrimaryTrees/Blue.jsx';

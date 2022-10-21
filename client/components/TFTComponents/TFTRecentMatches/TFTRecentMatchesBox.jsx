@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import TraitsBox from './TraitsBox.jsx';
 import UnitsBox from './UnitsBox.jsx';
@@ -225,13 +224,9 @@ const RecentMatchesBox = () => {
   for (let i = 0; i < sortedTraits.top5Played.length; i++) {
     traitsArr.push(<TraitsBox
     key={`traits-${i}`}
-    id={i}
     placements={sortedTraits.top5Played[i].placements}
     name={sortedTraits.top5Played[i].name}
     count={sortedTraits.top5Played[i].count}
-    styleCount={sortedTraits.top5Played[i].styleCount}
-    unitCount={sortedTraits.top5Played[i].unitCount}
-    tierFreq={sortedTraits.top5Played[i].tier_frequency}
     traitIcon={sortedTraits.top5Played[i].traitIcon}
     />);
   }

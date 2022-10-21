@@ -1,4 +1,3 @@
-import React from 'react';
 import ChampPageContainer from '../containers/ChampPageContainer';
 import Navbar from '../containers/Navbar';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import TeamsBoxes from './TeamsBoxes.jsx';
 
 const DDBoxPlayers = props => {

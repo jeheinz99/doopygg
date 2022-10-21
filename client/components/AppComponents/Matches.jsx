@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import DropDownBox from './DropDown/DropDownBox.jsx';
-
-import { AiFillCaretDown } from 'react-icons/ai';
-import { AiFillCaretUp } from 'react-icons/ai';
-import { useEffect } from 'react';
-
 import MatchBoxTeamPlayers from './MatchBoxTeamPlayers.jsx';
 
 const numsObj = {
@@ -149,7 +145,21 @@ const Matches = props => {
         </div>
       </div>
       <div className="DropDownBoxes">
-        {summonerOpen && <DropDownBox runes={runes} summonerSpells={summonerSpells} champLevel={champLevel} kills={kills} deaths={deaths} assists={assists} championId={championId} matchId={matchId} matchLength={matchLength} championIcon={championIcon} items={items} matchNum={matchNum} otherPlayers={otherPlayers} id={id}/>}
+        {summonerOpen && 
+        <DropDownBox 
+        runes={runes} 
+        summonerSpells={summonerSpells} 
+        champLevel={champLevel} 
+        kills={kills} deaths={deaths} 
+        assists={assists} 
+        championId={championId} 
+        matchId={matchId} 
+        matchLength={matchLength} 
+        championIcon={championIcon} 
+        items={items} 
+        matchNum={matchNum} 
+        otherPlayers={otherPlayers} 
+        id={id}/>}
       </div>
     </div>
   );

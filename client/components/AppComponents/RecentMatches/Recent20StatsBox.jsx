@@ -1,4 +1,3 @@
-import React from 'react';
 import Recent20Champion from './Recent20Champion.jsx';
 
 const Recent20StatsBox = props => {
@@ -81,15 +80,12 @@ const Recent20StatsBox = props => {
     champsArr.push(<Recent20Champion 
       key={`champion-${i}`}
       championId={top3Played[i].championId}
-      id={top3Played[i].championName}
       kills={top3Played[i].kills}
       deaths={top3Played[i].deaths}
       assists={top3Played[i].assists}
       played={top3Played[i].played}
       win={top3Played[i].win}
       loss={top3Played[i].loss}
-      cs={top3Played[i].cs}
-      champDamage={top3Played[i].champDamage}
       />);
   }
 
@@ -134,7 +130,6 @@ const Recent20StatsBox = props => {
         <div className="recent20TotalStats">
           <p> {totalWins + totalLosses}G </p>
           <p> {Math.round(totalWinPercent)}% W/L </p>
-          {/* {`( ${totalWins}`}<span id="winTag">{`W`}</span> - {totalLosses}<span id="lossTag">{`L`}</span>{' )'} */}
 
           <div className="WinLossBar">
             <div className="winBar" id="R20WinBar" style={{width: `${totalWinPercent}%`}}>{totalWins}W</div>

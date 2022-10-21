@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 
 const CustomSelect = props => {

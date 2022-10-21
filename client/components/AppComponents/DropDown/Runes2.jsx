@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Red2 from './SecondaryTrees/Red2.jsx';
 import Blue2 from './SecondaryTrees/Blue2.jsx';
 import Green2 from './SecondaryTrees/Green2.jsx';

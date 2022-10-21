@@ -1,11 +1,7 @@
-import React from 'react';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import ChampionsInfoBoxEntry from './ChampionsInfoBoxEntry.jsx';
 
 const ChampionsInfoBox = () => {
-  const summonerName = useSelector(state => state.summoners.summonerName);
-  const summonerLevel = useSelector(state => state.summoners.summonerLevel);
-  const profileIconId = useSelector(state => state.summoners.profileIconId);
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
   
   const orderData = data => {
@@ -113,14 +109,8 @@ const ChampionsInfoBox = () => {
     }
   }
 
-  const profileIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${profileIconId}.jpg`;
-
   return (
     <div className="ChampionsInfoBox">
-      <div className="ci-header">
-
-      </div>
-
       <ul>
         <li id="ci-champion"><p>Champion</p></li>
         <li id="ci-played"><p>Played</p></li>
