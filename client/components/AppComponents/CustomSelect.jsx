@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { BiChevronDown } from 'react-icons/bi';
 
 const CustomSelect = props => {
@@ -7,6 +8,8 @@ const CustomSelect = props => {
   
   const [selected, setSelected] = useState(init);
   const [hidden, toggleHidden] = useState(true);
+
+  const dispatch = useDispatch();
 
   const regions = {
     'NA': 'na1',
@@ -40,6 +43,16 @@ const CustomSelect = props => {
     'II': 'II',
     'III': 'III',
     'IV': 'IV'
+  };
+  const gameTypes = {
+    'All': 'All',
+    'RankedSolo': 'Ranked Solo',
+    'RankedFlex': 'Ranked Flex',
+    'Normals': 'Normals',
+    'ARAM': 'ARAM',
+    'Clash': 'Clash',
+    'Bot': 'Bot',
+    'Other': 'Other'
   };
 
   const selectBoxes = [];
@@ -77,6 +90,15 @@ const CustomSelect = props => {
     };
     for (let divisionName in divisions) {
       selectBoxes.push(<button key={`division-${divisionName}`} className="division-btn" onClick={() => setDivision(divisionName)}>{divisionName}</button>);
+    }
+  }
+  else if (selectType === 'gameTypes') {
+    const setGameType = async id => {
+      setSelected(id);
+      toggleHidden(!hidden);
+    }
+    for (let gameType in gameTypes) {
+      selectBoxes.push(<button key={`gameType-${gameType}`} className="select-btn" onClick={() => setGameType(gameType)}>{gameType}</button>);
     }
   }
 

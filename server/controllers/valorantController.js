@@ -33,9 +33,19 @@ valorantController.checkValorantUser = async (req, res, next) => {
     return next();
   }
   catch(err) {
-    console.log('error in valorantController at valData', err);
+    console.log('error in valorantController at checkValorantUser', err);
     next(err);
   };
+};
+
+valorantController.getValorantUserData = async(req, res, next) => {
+  try {
+    // const valorantUserDataRes = await axios.get(``)
+  }
+  catch(err) {
+    console.log('error in valorantController at getValorantUserData', err);
+    next(err);
+  }
 };
 
 module.exports = valorantController;

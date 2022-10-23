@@ -85,6 +85,7 @@ html, body {
 }
 .custom-select {
   position: relative;
+  width: 99%;
 }
 .select-btn {
   width: 70px;
@@ -98,7 +99,14 @@ html, body {
   color: rgba(255, 255, 255, 0.861);
   font-family: Kanit;
   font-size: 1em;
-  padding: 0;
+}
+.select-btn:hover {
+  cursor: pointer;
+  border-radius: 5px;
+  background: #12151a;
+}
+.select-btn:focus-visible {
+  outline: none;
 }
 #custom-select-btn:focus-visible {
   outline: none;
@@ -131,6 +139,11 @@ html, body {
 }
 #content-regions {
   width: 50px;
+}
+#gametype-select-btn {
+  width: fit-content;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .summonerUpdateButton {
@@ -924,7 +937,7 @@ html, body {
   align-items: center;
   margin-bottom: 10px;
 }
-.recent20Wrapper h3 {
+#MatchBoxes h3 {
   margin: 0.5em;
 }
 .recent20StatsBox {
@@ -2779,7 +2792,7 @@ h4 {
   .positionStats h2 {
     font-size: 0.9em;
   }
-  .recent20Wrapper h3 {
+  #MatchBoxes h3 {
     font-size: 0.9em;
   }
   #MatchBoxes {

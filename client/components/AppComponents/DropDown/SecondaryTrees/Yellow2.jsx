@@ -5,8 +5,11 @@ const Yellow2 = props => {
   const { matchNum, runeInfo } = props;
 
   useEffect(() => {
-    document.getElementById(`${matchNum}-${runeInfo[6].id}`).classList.remove('inactiveRune');
-    document.getElementById(`${matchNum}-${runeInfo[6].id}`).classList.add('activeRune');
+    console.log(runeInfo, 'rune info');
+    const rune = document.getElementById(`${matchNum}-${runeInfo[6].id}`);
+    if (rune.classList.contains('inactiveRune')) rune.classList.remove('inactiveRune')
+    if (!rune.classList.contains('activeRune')) rune.classList.add('activeRune')
+    // document.getElementById(`${matchNum}-${runeInfo[6].id}`).classList.add('activeRune');
 
     document.getElementById(`${matchNum}-${runeInfo[7].id}`).classList.remove('inactiveRune');
     document.getElementById(`${matchNum}-${runeInfo[7].id}`).classList.add('activeRune');

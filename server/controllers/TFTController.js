@@ -173,7 +173,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const { summonerName, regionId } = req.params;
     const regionRoute = regionObj[regionId];
 
-    const getSummData = await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-name/${encodeURI(summonerName)}?api_key=${process.env.dev_api_key}`,
+    const getSummData = await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-name/${encodeURI(summonerName)}?api_key=${process.env.tft_api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -186,7 +186,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const { data } = getSummData;
     const { puuid, profileIconId, summonerLevel, id, accountId, name } = data;
 
-    const getRankData = await axios.get(`https://${regionId}.api.riotgames.com/tft/league/v1/entries/by-summoner/${id}?api_key=${process.env.dev_api_key}`,
+    const getRankData = await axios.get(`https://${regionId}.api.riotgames.com/tft/league/v1/entries/by-summoner/${id}?api_key=${process.env.tft_api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
@@ -196,7 +196,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       }
     });
 
-    const getRankData2 = await axios.get(`https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${process.env.dev_api_key}`,
+    const getRankData2 = await axios.get(`https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${process.env.api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
@@ -229,7 +229,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
 
 
     // returns a list of recent matches based on puuid 
-    const getMatchList = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${process.env.dev_api_key}`,
+    const getMatchList = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${process.env.tft_api_key}`,
     {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -247,7 +247,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
       const match = await tftMatches.findOne({matchId: matchIdList[i]});
       // if match returns null (doesn't exist in DB), ping API and then store it
       if (match === null) {
-        const getMatchData = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/${matchIdList[i]}?api_key=${process.env.dev_api_key}`,
+        const getMatchData = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/${matchIdList[i]}?api_key=${process.env.tft_api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -321,7 +321,6 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     }
 
     for (let i = 0; i < matchData.length; i++) {
-
       const augmentsMap = await mapAugmentIcons(TFTMatchHistory[i].augments);
       const littleLegendMap = await mapLittleLegendIcons(TFTMatchHistory[i].companion);
       const unitsMap = await mapUnitIcons(TFTMatchHistory[i].units);
@@ -339,7 +338,7 @@ TFTController.updateTFTSummData = async (req, res, next) => {
     const set7MatchesArr = [];
     try {
       for (let i = 0; i < 2000; i+=100) {
-        const getSet7AllMatches = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=${i}&startTime=1654646400&count=100&api_key=${process.env.dev_api_key}`,
+        const getSet7AllMatches = await axios.get(`https://${regionRoute}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=${i}&startTime=1654646400&count=100&api_key=${process.env.tft_api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -434,7 +433,7 @@ TFTController.getTFTDDBoxSummData = async (req, res, next) => {
     const { otherPlayers, regionId } = req.body;
 
     const otherPlayersRes = await Promise.allSettled(otherPlayers.map(async player => {
-      return await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${player.puuid}?api_key=${process.env.dev_api_key}`,
+      return await axios.get(`https://${regionId}.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/${player.puuid}?api_key=${process.env.tft_api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",

@@ -18,7 +18,6 @@ const Navbar = () => {
 
     const navBarHeader = document.getElementById('NavbarHeader');
     navBarHeader.classList.toggle('stickyHeader', window.scrollY > 50);
-
   });
 
   return (

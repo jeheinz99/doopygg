@@ -5,6 +5,7 @@ import { BiChevronDown } from 'react-icons/bi';
 import { expandSummMatchHistory } from '../../actions/actions.js';
 import Recent20StatsBox from './RecentMatches/Recent20StatsBox.jsx';
 import Matches from './Matches.jsx';
+import CustomSelect from './CustomSelect.jsx';
 
 const MatchBoxes = () => {
 
@@ -13,6 +14,7 @@ const MatchBoxes = () => {
   const summonerName = useSelector(state => state.summoners.summonerName);
   const region = useSelector(state => state.summoners.region);
   const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(false);
 
   const expandHistory = async () => {
@@ -132,7 +134,10 @@ const MatchBoxes = () => {
   return (
     <div id="MatchBoxes" className="OuterSearchBox">
       <h4>Match History</h4>
+      <h3>Recent 20 Matches</h3>
+      {/* <CustomSelect id={'gametype-select-btn'} selectType={'gameTypes'} init={'All'}/> */}
       <Recent20StatsBox recent20Data={recent20Data}/>
+      
       { matchList }
 
       {loading ? 

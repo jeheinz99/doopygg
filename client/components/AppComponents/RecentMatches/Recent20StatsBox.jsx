@@ -124,7 +124,6 @@ const Recent20StatsBox = props => {
 
   return (
     <div className="recent20Wrapper">
-      <h3>Recent 20 Matches</h3>
       <div className="recent20StatsBox">
         
         <div className="recent20TotalStats">
