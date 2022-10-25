@@ -51,9 +51,7 @@ router.get('/auth/callback', (req, res) => {
           Authorization: `Bearer ${payload.access_token}`
         }
       });
-      const puuid = getUserData.data.puuid;
-      const gameName = getUserData.data.gameName;
-      const tagLine = getUserData.data.tagLine;
+      const { puuid, gameName, tagLine } = getUserData.data;
 
       const user = await authUsers.findOne({"gameName": { "$regex" : new RegExp(gameName, "i")}, "tagLine": tagLine, "puuid": puuid});
       if (user === null) {

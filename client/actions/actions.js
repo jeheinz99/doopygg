@@ -89,6 +89,7 @@ export const getLeaderboardData = regionName => async dispatch => {
   // console.log('LEADERBOARDS response from back-end', responseLeaderboardData.data);
   dispatch(addLeaderboardDataActionCreator(responseLeaderboardData.data));
 };
+
 export const getValorantData = (riotID, tagLine) => async dispatch => {
   const input1 = document.getElementById('val-input-1');
   const input2 = document.getElementById('val-input-2');

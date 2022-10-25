@@ -10,8 +10,7 @@ const link = 'https://auth.riotgames.com/authorize?redirect_uri=http://www.doopy
 
 const ValorantPageContainer = () => {
 
-  const loadValorantData = useDispatch();
-  // console.log(document.cookie, 'document cookie');
+  const dispatch = useDispatch();
 
   let riotIdInput;
   const riotIdData = e => {
@@ -29,6 +28,10 @@ const ValorantPageContainer = () => {
     const escape = s => { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }
     const match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
     return match ? match[1] : null;
+  };
+
+  const searchValData = () => {
+    dispatch(getValorantData(riotIdInput, taglineInput));
   };
 
   const signOutFunc = async () => {
@@ -80,7 +83,7 @@ const ValorantPageContainer = () => {
               <input className="ValBoxInput" id="val-input-1" placeholder="Riot ID" onChange={ riotIdData } required></input>
               <p id="hash"> # </p>
               <input className="ValBoxInput" id="val-input-2" placeholder="Tag-line" onChange={ taglineData } required></input>
-              <button id="ValorantBoxButton" onClick={() => loadValorantData(getValorantData(riotIdInput, taglineInput))}> <BiSearch id="SearchIcon"/> </button>
+              <button id="ValorantBoxButton" onClick={() => searchValData()}> <BiSearch id="SearchIcon"/> </button>
             </div>
             {!document.cookie ? 
             <a id="Riot-Sign-On" href={link}><SiRiotgames />Sign In</a>
