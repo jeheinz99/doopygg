@@ -293,6 +293,7 @@ summonerController.updateSummData = async (req, res, next) => {
       for (let j = 0; j < matchHistoryData[i].participants.length; j++) {
         if (matchHistoryData[i].participants[j].summonerName === name) {
           const player = matchHistoryData[i].participants[j];
+          console.log([player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.item6], 'items');
           let gameDuration = matchHistoryData[i].gameDuration;
           // check if timestamp is old timestamp in ms over seconds by checking 
           if (gameDuration > 10000) gameDuration = gameDuration*.001;
@@ -417,7 +418,8 @@ summonerController.updateSummData = async (req, res, next) => {
     try {
       for (let i = 0; i < 2000; i+=100) {
         // gets players last 1000 ranked soloq match ids from riot api
-        const getRankedS12Matches = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1641531600&queue=420&type=ranked&start=${i}&count=100&api_key=${process.env.api_key}`,
+        // &endTime=1668470399
+        const getRankedS12Matches = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1641531600&endTime=1668470399&queue=420&type=ranked&start=${i}&count=100&api_key=${process.env.api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",

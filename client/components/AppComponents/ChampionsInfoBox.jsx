@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import ChampionsInfoBoxEntry from './ChampionsInfoBoxEntry.jsx';
+import CustomSelect from './CustomSelect.jsx';
 
 const ChampionsInfoBox = () => {
   const allMatchesPlayedData = useSelector(state => state.summoners.allMatchesPlayedData);
@@ -111,6 +112,9 @@ const ChampionsInfoBox = () => {
 
   return (
     <div className="ChampionsInfoBox">
+      <div className="season-select">
+        <CustomSelect id={'season-select-btn'} selectType={'seasons'} init={'Season 12'}/>
+      </div>
       <ul>
         <li id="ci-champion"><p>Champion</p></li>
         <li id="ci-played"><p>Played</p></li>

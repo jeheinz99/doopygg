@@ -133,6 +133,12 @@ const SearchBox = () => {
       <div className="headerinfo">
         <button className="summonerUpdateButton" onClick={() => updateSummData()}> Update </button>
         <p>Last Updated {timeAgo}</p>
+        <div className="missing-info-disc">
+          <p>
+            Data is likely missing from accounts that have a large amount of ranked games played. 
+            You can try updating and seeing if stats update slowly or come back later.
+          </p>
+        </div>
       </div>}
 
       {matchHistory[0] && !updating && typeof timeAgo === "number" && !searching &&
@@ -141,6 +147,12 @@ const SearchBox = () => {
         {timeAgo === 3 && <p>Please wait {timeAgo} minutes before updating again.</p>}
         {timeAgo === 2 && <p>Please wait {timeAgo} minutes before updating again.</p>}
         {timeAgo <= 1 && <p>Please wait 1 minute before updating again.</p>}
+        <div className="missing-info-disc">
+          <p>
+            Data is likely missing from accounts that have a large amount of ranked games played. 
+            You can try updating and seeing if stats update slowly or come back later.
+          </p>
+        </div>
       </div>}
 
       {matchHistory[0] && updating && !searching &&
@@ -150,6 +162,12 @@ const SearchBox = () => {
           <PulseLoader id="pulse-test" color="#c9c9c9" size={8} speedMultiplier={0.6}/>
         </div>
         <p>Last Updated {timeAgo}</p>
+        <div className="missing-info-disc">
+          <p>
+            Data is likely missing from accounts that have a large amount of ranked games played. 
+            You can try updating and seeing if stats update slowly or come back later.
+          </p>
+        </div>
       </div>}
     
     {matchHistory[0] && allMatchesPlayedData[0] && currBox === 'matchHistory' && !searching &&

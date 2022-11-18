@@ -54,7 +54,7 @@ html, body {
   box-shadow: 2px 5px 5px rgba(0, 0, 0, 5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.861);
   background: #171A21;
-  gap: 1.5em;
+  gap: 1em;
   padding: 10px;
 }
 
@@ -90,7 +90,7 @@ html, body {
 .select-btn {
   width: 70px;
   display: grid;
-  grid-template-columns: 40% 30%;
+  grid-template-columns: 55% 30%;
   align-items: center;
   position: relative;
   background: none;
@@ -141,9 +141,18 @@ html, body {
   width: 50px;
 }
 #gametype-select-btn {
-  width: fit-content;
+  grid-template-columns: 75% 25%;
+  text-align: left;
+  min-width: 125px;
+}
+#content-gameTypes {
+  min-width: 110px;
   display: flex;
-  justify-content: flex-start;
+}
+#gameType-btn {
+  display: flex;
+  justify-content: flex;
+  width: 100%;
 }
 
 .summonerUpdateButton {
@@ -244,8 +253,9 @@ html, body {
 }
 .headerinfo {
   display: flex;
-  width: 99%;
   flex-direction: column;
+  width: 99%;
+  align-self: flex-start;
   justify-content: center;
 }
 .headerinfo p {
@@ -254,6 +264,19 @@ html, body {
   margin-top: 0.5em;
   font-style: italic;
   color: rgba(255, 255, 255, 0.6);
+}
+.missing-info-disc {
+  margin-top: 5px;
+  width: 27%;
+  border: 1px solid #303b51;
+  border-radius: 4px;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 5);
+  text-align: center;
+}
+.missing-info-disc p {
+  padding: 2px;
+  margin: 0;
+  color: rgb(194, 69, 69);
 }
 
 #welcome {
@@ -1112,6 +1135,25 @@ html, body {
 #rankedsoloheader:hover {
   cursor: pointer;
   filter: invert(20%);
+}
+#season-select-btn {
+  border: 2px solid rgba(39, 45, 58, 1);
+  min-width: 160px;
+  grid-template-columns: 70% 30%;
+  padding-left: 12px;
+  height: 32px;
+  margin-bottom: 10px;
+  text-align: left;
+  background-color: #16161dce;
+}
+#content-seasons {
+  border-radius: 0;
+  top: 0%;
+  max-width: 148px;
+}
+#season-btn {
+  display: flex;
+  min-width: 150px;
 }
 
 .positionStats {
@@ -2241,6 +2283,9 @@ h4 {
 @media only screen and (max-width: 1400px) {
   .TeamInfoTextDD1, .TeamInfoTextDD2 {
     grid-template-columns: 56% 10.2% 10% 7%;
+  }
+  .missing-info-disc {
+    width: 49%;
   }
   .SummonerDataBoxGroup {
     display: flex;

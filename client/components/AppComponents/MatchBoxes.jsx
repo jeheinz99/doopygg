@@ -135,7 +135,7 @@ const MatchBoxes = () => {
     <div id="MatchBoxes" className="OuterSearchBox">
       <h4>Match History</h4>
       <h3>Recent 20 Matches</h3>
-      {/* <CustomSelect id={'gametype-select-btn'} selectType={'gameTypes'} init={'All'}/> */}
+      <CustomSelect id={'gametype-select-btn'} selectType={'gameTypes'} init={'All'}/>
       <Recent20StatsBox recent20Data={recent20Data}/>
       
       { matchList }

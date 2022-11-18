@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { BiChevronDown } from 'react-icons/bi';
 
@@ -8,6 +8,12 @@ const CustomSelect = props => {
   
   const [selected, setSelected] = useState(init);
   const [hidden, toggleHidden] = useState(true);
+
+  // if (selectType === 'seasons') {
+  //   useEffect(() => {
+  //     console.log('hello');
+  //   }, [selected]);
+  // }
 
   const dispatch = useDispatch();
 
@@ -54,6 +60,11 @@ const CustomSelect = props => {
     'Bot': 'Bot',
     'Other': 'Other'
   };
+  const seasons = {
+    'Season 12': 'S12',
+    'Preseason 13': 'PS13',
+    'Season 13': 'S13'
+  };
 
   const selectBoxes = [];
   if (selectType === 'regions') {
@@ -93,12 +104,21 @@ const CustomSelect = props => {
     }
   }
   else if (selectType === 'gameTypes') {
-    const setGameType = async id => {
+    const setGameType = id => {
       setSelected(id);
       toggleHidden(!hidden);
-    }
+    };
     for (let gameType in gameTypes) {
-      selectBoxes.push(<button key={`gameType-${gameType}`} className="select-btn" onClick={() => setGameType(gameType)}>{gameType}</button>);
+      selectBoxes.push(<button key={`gameType-${gameType}`} id="gameType-btn" className="select-btn" onClick={() => setGameType(gameType)}>{gameType}</button>);
+    }
+  }
+  else if (selectType === 'seasons') {
+    const setSeason = id => {
+      setSelected(id);
+      toggleHidden(!hidden);
+    };
+    for (let season in seasons) {
+      selectBoxes.push(<button key={`season-${season}`} className="select-btn" id="season-btn" onClick={() => setSeason(season)}>{season}</button>);
     }
   }
 
