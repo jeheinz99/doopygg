@@ -1,19 +1,35 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BiChevronDown } from 'react-icons/bi';
 
 const CustomSelect = props => {
 
   const { id, selectType, init } = props;
+  if (selectType === 'gameTypes') {   
+    const aramMatchesPlayedData = useSelector(state => state.summoners.aramMatchesPlayedData);
+    const rankedMatchesPlayedData = useSelector(state => state.summoners.rankedMatchesPlayedData);
+    const flexMatchesPlayedData = useSelector(state => state.summoners.flexMatchesPlayedData);
+    const clashMatchesPlayedData = useSelector(state => state.summoners.clashMatchesPlayedData);
+    const botMatchesPlayedData = useSelector(state => state.summoners.botMatchesPlayedData);
+  } 
   
   const [selected, setSelected] = useState(init);
   const [hidden, toggleHidden] = useState(true);
+  // console.log(selected, 'selected');
 
-  // if (selectType === 'seasons') {
-  //   useEffect(() => {
-  //     console.log('hello');
-  //   }, [selected]);
-  // }
+  // useEffect(() => {
+  //   if (selectType === 'gameTypes') {
+  //     const queueIds = {
+  //       'ARAM': [450],
+  //       'RankedSolo': [420],
+  //       'RankedFlex': [440],
+  //       'Clash': [700],
+  //       'Bot': [31, 32, 33, 800, 810, 820, 830, 840, 850],
+  //       'Normals': [400, 430],
+  //     };
+  //     const ids = queueIds[selected];
+  //   }
+  // }, [selected, selectType]);
 
   const dispatch = useDispatch();
 

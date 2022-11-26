@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import R20PlayedEntry from './Recent20PlayedEntry.jsx';
 

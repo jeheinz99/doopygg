@@ -12,6 +12,12 @@ const initialState = {
   otherPlayersMatches: [],
   allMatchesPlayed: [],
   allMatchesPlayedData: [],
+  rankedMatchesPlayedData: [],
+  aramMatchesPlayedData: [],
+  flexMatchesPlayedData: [],
+  normalsMatchesPlayedData: [],
+  clashMatchesPlayedData: [],
+  botMatchesPlayedData: [],
   lastUpdated: 0,
   region: '',
 }

@@ -3,6 +3,8 @@ import * as types from '../constants/actionTypes';
 const initialState = {
   gameName: '',
   tagLine: '',
+  playerName: '',
+  matchHistory: [],
 };
 
 const valorantReducer = (state = initialState, action) => {
@@ -15,6 +17,7 @@ const valorantReducer = (state = initialState, action) => {
         state, {
           gameName: payload.gameName,
           tagLine: payload.tagLine,
+          matchHistory: payload.matchHistory,
         }
       );
     default: {

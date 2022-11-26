@@ -5,7 +5,6 @@ const Yellow2 = props => {
   const { matchNum, runeInfo } = props;
 
   useEffect(() => {
-    console.log(runeInfo, 'rune info');
     const rune = document.getElementById(`${matchNum}-${runeInfo[6].id}`);
     if (rune.classList.contains('inactiveRune')) rune.classList.remove('inactiveRune')
     if (!rune.classList.contains('activeRune')) rune.classList.add('activeRune')

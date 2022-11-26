@@ -31,7 +31,8 @@ const ValorantPageContainer = () => {
   };
 
   const searchValData = () => {
-    dispatch(getValorantData(riotIdInput, taglineInput));
+    console.log('hi');
+    // dispatch(getValorantData(riotIdInput, taglineInput));
   };
 
   const signOutFunc = async () => {
@@ -48,18 +49,18 @@ const ValorantPageContainer = () => {
   useEffect(() => {
     const input1 = document.getElementById('val-input-1');
     const input2 = document.getElementById('val-input-2');
-    input1.addEventListener('keypress', (e) => {
+    const enterKeyFunc = (e) => {
       if (e.key === 'Enter') {
         e.preventDefault;
         document.getElementById('ValorantBoxButton').click();
       }
-    });
-    input2.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault;
-        document.getElementById('ValorantBoxButton').click();
-      }
-    });
+    };
+    input1.addEventListener('keypress', enterKeyFunc);
+    input2.addEventListener('keypress', enterKeyFunc);
+    return () => {
+      input1.removeEventListener('keypress', enterKeyFunc);
+      input2.removeEventListener('keypress', enterKeyFunc);
+    }
   }, []);
 
   if (document.cookie) {

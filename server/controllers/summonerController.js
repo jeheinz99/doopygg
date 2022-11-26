@@ -293,7 +293,6 @@ summonerController.updateSummData = async (req, res, next) => {
       for (let j = 0; j < matchHistoryData[i].participants.length; j++) {
         if (matchHistoryData[i].participants[j].summonerName === name) {
           const player = matchHistoryData[i].participants[j];
-          console.log([player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.item6], 'items');
           let gameDuration = matchHistoryData[i].gameDuration;
           // check if timestamp is old timestamp in ms over seconds by checking 
           if (gameDuration > 10000) gameDuration = gameDuration*.001;
