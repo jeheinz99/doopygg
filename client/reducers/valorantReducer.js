@@ -5,6 +5,7 @@ const initialState = {
   tagLine: '',
   playerName: '',
   matchHistory: [],
+  puuid: '',
 };
 
 const valorantReducer = (state = initialState, action) => {
@@ -18,6 +19,7 @@ const valorantReducer = (state = initialState, action) => {
           gameName: payload.gameName,
           tagLine: payload.tagLine,
           matchHistory: payload.matchHistory,
+          puuid: payload.puuid,
         }
       );
     default: {

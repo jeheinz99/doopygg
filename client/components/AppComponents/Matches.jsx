@@ -19,7 +19,6 @@ const numsObj = {
 const Matches = props => {
 
   const { matchId, gameEnd, matchNum, otherPlayers, visionScore, summonerSpells, items, cs, champLevel, champDamage, kills, deaths, assists, matchLength, champion, gameMode, id, championId, runes, outcome } = props;
-  
   const [summonerOpen, setOpen] = useState(false);
 
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
@@ -94,9 +93,10 @@ const Matches = props => {
           {id === "winMatch" ? <p style={{color: 'blue'}}>{outcome}</p> : <p style={{color: 'red'}}>{outcome}</p>}
         </div>
         <div className="MatchGroup2">
-          <div className="championIcon-and-Level">
-            <img id="championIcon" src={championIcon}/>
-            <div className="level-div">{champLevel}</div>
+          <div className="tooltip championIcon-and-Level">
+              <span className="tooltiptext"> {champion} </span>
+              <img id="championIcon" src={championIcon}/>
+              <div className="level-div">{champLevel}</div>
           </div>
           <div className="MatchGroup2div3">
             <img id="summonerSpellIcon1" src={summonerSpells[0]}/>

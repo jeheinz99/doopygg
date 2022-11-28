@@ -39,6 +39,11 @@ export const addTFTDataActionCreator = TFTData => ({
   payload: TFTData
 });
 
+// export const addARAMDataActionCreator = ARAMData => ({
+//   type: types.ADD_ARAM_DATA,
+//   payload: ARAMData
+// });
+
 
 
 // async thunks
@@ -67,6 +72,9 @@ export const updateSummonerData = summonerName => async dispatch => {
   // console.log('SUMM UPDATE response from back-end', responseSummUpdateData.data);
   dispatch(addSummonerDataActionCreator(responseSummUpdateData.data));
 };
+// export const addARAMData = summonerName => async dispatch => {
+//   const responseARAMData = await axios.get(`/summoner/`);
+// };
 
 export const getTFTData = summonerName => async dispatch => {
   const region = document.getElementById('region-select-btn').value;

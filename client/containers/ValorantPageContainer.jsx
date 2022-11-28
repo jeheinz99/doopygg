@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getValorantData } from '../actions/actions.js';
 import { SiRiotgames } from 'react-icons/si';
 import { BiSearch } from 'react-icons/bi';
 import cypher from '../assets/cypher.png';
 import jett from '../assets/jett.png';
+import PlayerStatsContainer from '../components/ValorantComponents/PlayerStatsContainer';
 
 const link = 'https://auth.riotgames.com/authorize?redirect_uri=http://www.doopy.dev/riot/auth/callback&client_id=doopygg&response_type=code&scope=openid';
 
 const ValorantPageContainer = () => {
+
+  const matchHistory = useSelector(state => state.valorant.matchHistory);
+  console.log(matchHistory);
 
   const dispatch = useDispatch();
 
@@ -31,7 +35,6 @@ const ValorantPageContainer = () => {
   };
 
   const searchValData = () => {
-    console.log('hi');
     // dispatch(getValorantData(riotIdInput, taglineInput));
   };
 
@@ -67,7 +70,7 @@ const ValorantPageContainer = () => {
     const accessToken = getCookie('accessToken');
     const refreshToken = getCookie('refreshToken');
   }
-
+  
   return (
     <div className="ValorantPageBox">
       <div className="OuterSearchBox" id="welcomeValorant"> 
@@ -91,13 +94,15 @@ const ValorantPageContainer = () => {
             :
             <button id="Riot-Sign-Out" onClick={() => signOutFunc()}>Sign Out</button>
             }
-            {/* <button id="Riot-Sign-On" onClick={() => authFunc()}><SiRiotgames />Sign In</button> */}
             <p id="RSO-warning"> Signing in with Riot allows doopy.gg access to your stats and makes your profile public. </p>
 
           </div>
 
           <img id="jett" src={jett}/>
         </div>
+        {/* {document.cookie && matchHistory.length > 0 &&  */}
+          {/* <PlayerStatsContainer matchHistory={matchHistory}/> */}
+        {/* } */}
       </div>
     </div>
   );
