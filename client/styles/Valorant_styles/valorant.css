@@ -21,7 +21,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  /* height: 105px; */
+  height: 105px;
   justify-content: center;
   display: flex;
   align-items: center;
@@ -177,20 +177,79 @@
 }
 .MatchBox {
   display: grid;
-  grid-template-columns: 10% 10% 15%;
+  grid-template-columns: 10% 10% 15% 20%;
   color: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(39, 45, 58, 0.5);
   padding: 5px;
+  align-items: center;
 }
 .userAgent {
   width: 64px;
   height: 64px;
 }
-.AgentInfo p {
+.userRank {
+  width: 64px;
+  height: 64px;
+}
+.AgentInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.AgentInfo p, .RankInfo p {
   margin: 0;
+}
+.RankInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.RankInfo-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.RankInfo-2 {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
 }
 .time-ago-p {
   color:rgba(255, 255, 255, 0.6);
+}
+.MatchInfo p {
+  width: 100%;
+}
+.MatchInfo-1 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 5px;
+}
+.MatchInfo-p-1 {
+  font-size: 24px;
+}
+.StatsInfo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.gamemode-icon {
+  width: 20px;
+  height: 20px;
+  filter: invert(30%);
+}
+#win-true {
+  border-left: 5px solid rgb(34, 62, 111);
+}
+#win-false {
+  border-left: 5px solid rgb(116, 33, 41);
 }
 @media only screen and (max-width: 420px) {
   #welcome-valorant {

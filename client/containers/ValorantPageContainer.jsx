@@ -38,6 +38,10 @@ const ValorantPageContainer = () => {
     // dispatch(getValorantData(riotIdInput, taglineInput));
   };
 
+  // const testButton = () => {
+  //   dispatch(getValorantData('doopy', 'gap'));
+  // }
+
   const signOutFunc = async () => {
     const cookies = document.cookie.split(";");
 
@@ -88,6 +92,7 @@ const ValorantPageContainer = () => {
               <p id="hash"> # </p>
               <input className="ValBoxInput" id="val-input-2" placeholder="Tag-line" onChange={ taglineData } required></input>
               <button id="ValorantBoxButton" onClick={() => searchValData()}> <BiSearch id="SearchIcon"/> </button>
+              {/* <button id="temp-button" onClick={() => testButton()}> test button </button> */}
             </div>
             {!document.cookie ? 
             <a id="Riot-Sign-On" href={link}><SiRiotgames />Sign In</a>
@@ -95,13 +100,12 @@ const ValorantPageContainer = () => {
             <button id="Riot-Sign-Out" onClick={() => signOutFunc()}>Sign Out</button>
             }
             <p id="RSO-warning"> Signing in with Riot allows doopy.gg access to your stats and makes your profile public. </p>
-
           </div>
 
           <img id="jett" src={jett}/>
         </div>
         {/* {document.cookie && matchHistory.length > 0 &&  */}
-          {/* <PlayerStatsContainer matchHistory={matchHistory}/> */}
+          <PlayerStatsContainer matchHistory={matchHistory}/>
         {/* } */}
       </div>
     </div>

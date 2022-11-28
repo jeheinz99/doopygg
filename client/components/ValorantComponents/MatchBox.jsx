@@ -1,10 +1,23 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import PlayerBox from "./PlayerBox";
 import valorantMaps from "../../../valorant-maps.json";
 import valorantAgents from "../../../valorant-agents.json";
-import { useSelector } from "react-redux";
+import valorantRankData from "../../../valorant-rankdata.json";
+
+const gameModeIcons = {
+  standard: "https://media.valorant-api.com/gamemodes/96bd3920-4f36-d026-2b28-c683eb0bcac5/displayicon.png",
+  competitive: "https://media.valorant-api.com/gamemodes/96bd3920-4f36-d026-2b28-c683eb0bcac5/displayicon.png",
+  deathmatch: "https://media.valorant-api.com/gamemodes/a8790ec5-4237-f2f0-e93b-08a8e89865b2/displayicon.png",
+  escalation: "https://media.valorant-api.com/gamemodes/a4ed6518-4741-6dcb-35bd-f884aecdc859/displayicon.png",
+  onboarding: "https://media.valorant-api.com/gamemodes/4744698a-4513-dc96-9c22-a9aa437e4a58/displayicon.png",
+  spikerush: "https://media.valorant-api.com/gamemodes/e921d1e6-416b-c31f-1291-74930c330b7b/displayicon.png",
+  practice: "https://media.valorant-api.com/gamemodes/57038d6d-49b1-3a74-c5ef-3395d9f23a97/displayicon.png",
+};
 
 const MatchBox = props => {
 
+  const [open, setOpen] = useState(false);
   const { players, matchInfo, roundResults, teams } = props;
 
   const puuid = useSelector(state => state.valorant.puuid);
@@ -13,19 +26,27 @@ const MatchBox = props => {
   if (matchInfo.isRanked) gameType = "Competitive";
   else gameType = "Standard";
 
-  let blueWins = 0;
-  let redWins = 0;
+  let gamemodeIcon;
+  (gameModeIcons[matchInfo.queueId] ? gamemodeIcon = gameModeIcons[matchInfo.queueId] : gamemodeIcon = gameModeIcons[standard]);
 
-  for (let i = 0; i < roundResults.length; i++) {
-    const round = roundResults[i];
-    if (round.winningTeam === "Blue") {
-      blueWins++;
+  let blueWins;
+  let redWins;
+  let winningTeam;
+  let playerWin = false;
+
+  // gets team round wins outcome
+  for (let i = 0; i < teams.length; i++) {
+    if (teams[i].teamId === "Blue") {
+      blueWins = teams[i].roundsWon;
+      if (teams[i].won === true) winningTeam = "Blue";
     }
-    else if (round.winningTeam === "Red") {
-      redWins++;
+    else if (teams[i].teamId === "Red") {
+      redWins = teams[i].roundsWon;
+      if (teams[i].won === true) winningTeam = "Red";
     }
   }
 
+  // gets how long ago game was
   const getTimeAgo = gameEndTime => {
     const gameDateStamp = new Date(gameEndTime);
     const todaysDateStamp = Date.now();
@@ -56,6 +77,7 @@ const MatchBox = props => {
   };
   const timeAgo = getTimeAgo(matchInfo.gameStartMillis);
 
+  // finds the map of the current match
   const getValMap = (mapId, maps) => {
     for (let i = 0; i < maps.length; i++) {
       if (maps[i].mapUrl === mapId) {
@@ -72,10 +94,14 @@ const MatchBox = props => {
   };
   const mapData = getValMap(matchInfo.mapId, valorantMaps);
 
+  // finds the user's data from the agent they played and checks if player won game
   const getUserAgentData = (puuid, players, agents) => {
     for (let i = 0; i < players.length; i++) {
       const player = players[i];
       if (player.puuid === puuid) {
+        if (player.teamId === winningTeam) {
+          playerWin = true;
+        }
         for (let j = 0; j < agents.length; j++) {
           const agent = agents[j];
           if (player.characterId === agent.uuid) {
@@ -108,6 +134,27 @@ const MatchBox = props => {
   };
   const userAgentData = getUserAgentData(puuid, players, valorantAgents);
 
+  // finds the user's rank for each match played
+  const getUserRankData = (puuid, players, valorantRankData) => {
+    for (let i = 0; i < players.length; i++) {
+      const player = players[i];
+      if (puuid === player.puuid) {
+        for (let j = 0; j < valorantRankData.length; j++) {
+          const rank = valorantRankData[j];
+          if (player.competitiveTier === rank.tier) {
+            return {
+              rankIcon: rank.largeIcon,
+              rankTier: rank.tierName,
+              rankDivision: rank.divisionName,
+            }
+          }
+        }
+      }
+    }
+  };
+  const userRankData = getUserRankData(puuid, players, valorantRankData[4].tiers);
+
+  // determines who was on blue/red teams
   const team1Arr = [];
   const team2Arr = [];
   for (let i = 0; i < players.length; i++) {
@@ -148,16 +195,42 @@ const MatchBox = props => {
 
   return (
     // <div className="MatchBox" style={{backgroundImage: `url(${mapData.mapImage})`, backgroundRepeat: 'no-repeat', objectFit: 'fill'}}>
-    <div className="MatchBox">
-      <div className="AgentInfo">
+    <div className="MatchBox" id={`win-${playerWin}`}>
+
+      <div className="AgentInfo tooltip">
+        <span className="tooltiptext"> {userAgentData.agentData.agentName} </span>
         <img className="userAgent" src={userAgentData.agentData.agentIcon} />
-        <p> {userAgentData.agentData.agentName} </p>
       </div>
+
       <div className="MatchInfo">
-        <p> {gameType} </p>
-        <p> {mapData.mapName} </p>
+        <p className="MatchInfo-p-1"> {mapData.mapName} </p>
+
+        <div className="MatchInfo-1">
+          <img className="gamemode-icon" src={gamemodeIcon} />
+          <p> {gameType} </p>
+        </div>
+
         <p className="time-ago-p"> {timeAgo} </p>
       </div>
+
+      <div className="RankInfo">
+        <div className="RankInfo-1">
+          <img className="userRank" src={userRankData.rankIcon} />
+          <p> {userRankData.rankTier} </p>
+        </div>
+
+        <div className="RankInfo-2">
+          <p style={{color: '#2f62bb', fontSize: '32px'}}> {blueWins} </p> 
+          <p style={{fontSize: '32px'}}> : </p> 
+          <p style={{color: '#ad2230', fontSize: '32px'}}> {redWins} </p>
+        </div>
+      </div>
+
+      <div className="StatsInfo">
+        <p style={{fontSize: '24px', fontWeight: 'bold'}}>{userAgentData.playerData.kills}/{userAgentData.playerData.deaths}/{userAgentData.playerData.assists}</p>
+        <p style={{margin: 0}}> K/D/A: <span style={{fontSize: '20px', margin: 0}}> {((userAgentData.playerData.kills + userAgentData.playerData.assists) / userAgentData.playerData.deaths).toFixed(2)} </span> </p>
+      </div>
+
       <div className="TeamsBoxes">
         <div className="Team1Box">
           {team1Arr}
@@ -166,6 +239,7 @@ const MatchBox = props => {
           {team2Arr}
         </div>
       </div>
+
     </div>
   );
 };

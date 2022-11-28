@@ -102,6 +102,8 @@ valorantController.getValorantUserData = async(req, res, next) => {
         }
       }));
     }
+    const sortedMatchHistory = matchHistoryData.sort((a, b) => b.matchInfo.gameStartMillis - a.matchInfo.gameStartMillis);
+
     res.locals.valData.matchHistory = matchHistoryData;
     return next();
   }

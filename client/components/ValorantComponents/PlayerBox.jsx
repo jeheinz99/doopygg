@@ -15,7 +15,7 @@ const PlayerBox = props => {
 
   return (
     <div className="PlayerBox">
-      <p></p>
+      {/* <p> {gameName}#{tagLine} </p> */}
     </div>
   );
 };
