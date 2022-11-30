@@ -105,7 +105,7 @@ const ValorantPageContainer = () => {
           <img id="jett" src={jett}/>
         </div>
         {/* {document.cookie && matchHistory.length > 0 &&  */}
-          <PlayerStatsContainer matchHistory={matchHistory}/>
+          {/* <PlayerStatsContainer matchHistory={matchHistory}/> */}
         {/* } */}
       </div>
     </div>

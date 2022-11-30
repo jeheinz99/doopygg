@@ -10,6 +10,7 @@ html, body {
   background: #16161b;
   font-family: Kanit;
   scroll-behavior: smooth;
+  color:rgba(255, 255, 255, 0.861);
 }
 .AppBox {
   display: flex;

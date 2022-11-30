@@ -175,9 +175,14 @@
 .PlayerStatsContainer h3 {
   text-align: left;
 }
+.OuterMatchBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 .MatchBox {
   display: grid;
-  grid-template-columns: 10% 10% 15% 20%;
+  grid-template-columns: 10% 10% 15% 20% 45%;
   color: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(39, 45, 58, 0.5);
   padding: 5px;
@@ -240,10 +245,129 @@
   justify-content: center;
   align-items: center;
 }
+.StatsInfo p {
+  margin: 0;
+}
 .gamemode-icon {
   width: 20px;
   height: 20px;
   filter: invert(30%);
+}
+.TeamDD {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 5px;
+}
+#Team1DD {
+  border-bottom: 1px solid rgba(39, 45, 58, 0.5);
+}
+#Team2DD {
+  border-top: 1px solid rgba(39, 45, 58, 0.5);
+}
+.PlayerBox {
+  display: grid;
+  grid-template-columns: 64px 15% 10% 15% 10% 10%;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+  width: 99%;
+  border-radius: 2px;
+}
+.team-header-dd {
+  display: grid;
+  padding: 0px 5px 2px 5px;
+  grid-template-columns: 64px 15% 10% 15% 10% 10%;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: #222429;
+  border-radius: 2px;
+  width: 99%;
+}
+.team-header-dd p {
+  margin: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.team-header-dd h3 {
+  margin: 0;
+  font-size: 20px;
+}
+.avg-damage-div, .acurracy-percent-div {
+  display: flex;
+  justify-content: center;
+}
+#DD-PlayerBox-Blue:nth-child(odd) {
+  background-color: rgba(47, 69, 81, 0.593);
+}
+#DD-PlayerBox-Blue:nth-child(even) {
+  background-color: rgba(38, 55, 63, 0.593);
+}
+#DD-PlayerBox-Red:nth-child(odd) {
+  background-color: rgba(84, 48, 48, 0.593);
+}
+#DD-PlayerBox-Red:nth-child(even) {
+  background-color: rgba(88, 59, 59, 0.593);
+}
+.dd-agent-icon {
+  width: 48px;
+  height: 48px;
+}
+.dd-player-rank-div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.dd-kda-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.dd-kda-div p {
+  margin: 0;
+}
+.dd-button-div {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.dd-player-rank-icon {
+  width: 48px;
+  height: 48px;
+}
+.val-dd-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+}
+.val-dd-button:hover {
+  cursor: pointer;
+  filter: invert(20%);
+}
+.MatchBoxDD {
+  border: 1px solid rgba(39, 45, 58, 0.5);
+  padding: 5px;
+}
+.playerbox-p-name {
+  font-size: 14px;
+}
+.kda-high {
+  color: #5ee790;
+}
+.kda-low {
+  color: #ffffff99;
+}
+.kda-normal {
+  color:rgba(255, 255, 255, 0.861);
 }
 #win-true {
   border-left: 5px solid rgb(34, 62, 111);

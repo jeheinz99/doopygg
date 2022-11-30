@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import PlayerBox from "./PlayerBox";
+import PlayerBox from "./DropDown/PlayerBox";
+import DropDownBox from "./DropDown/DropDownBox";
 import valorantMaps from "../../../valorant-maps.json";
 import valorantAgents from "../../../valorant-agents.json";
 import valorantRankData from "../../../valorant-rankdata.json";
+import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 
 const gameModeIcons = {
   standard: "https://media.valorant-api.com/gamemodes/96bd3920-4f36-d026-2b28-c683eb0bcac5/displayicon.png",
@@ -154,92 +156,63 @@ const MatchBox = props => {
   };
   const userRankData = getUserRankData(puuid, players, valorantRankData[4].tiers);
 
-  // determines who was on blue/red teams
-  const team1Arr = [];
-  const team2Arr = [];
-  for (let i = 0; i < players.length; i++) {
-    const player = players[i];
-    if (player.teamId === "Blue") {
-      team1Arr.push(
-      <PlayerBox 
-        key={`player-${i}-${player.puuid}`}
-        characterId={player.characterId}
-        competitiveTier={player.competitiveTier}
-        gameName={player.gameName}
-        tagLine={player.tagLine}
-        partyId={player.partyId}
-        playerCard={player.playerCard}
-        playerTitle={player.playerTitle}
-        puuid={player.puuid}
-        state={player.stats}
-        teamId={player.teamId}
-      />);
-    }
-    else {
-      team2Arr.push(
-      <PlayerBox 
-        key={`player-${i}-${player.puuid}`}
-        characterId={player.characterId}
-        competitiveTier={player.competitiveTier}
-        gameName={player.gameName}
-        tagLine={player.tagLine}
-        partyId={player.partyId}
-        playerCard={player.playerCard}
-        playerTitle={player.playerTitle}
-        puuid={player.puuid}
-        state={player.stats}
-        teamId={player.teamId}
-      />);
-    }
-  }
-
   return (
-    // <div className="MatchBox" style={{backgroundImage: `url(${mapData.mapImage})`, backgroundRepeat: 'no-repeat', objectFit: 'fill'}}>
-    <div className="MatchBox" id={`win-${playerWin}`}>
+    <div className="OuterMatchBox">
+      <div className="MatchBox" id={`win-${playerWin}`}>
 
-      <div className="AgentInfo tooltip">
-        <span className="tooltiptext"> {userAgentData.agentData.agentName} </span>
-        <img className="userAgent" src={userAgentData.agentData.agentIcon} />
-      </div>
-
-      <div className="MatchInfo">
-        <p className="MatchInfo-p-1"> {mapData.mapName} </p>
-
-        <div className="MatchInfo-1">
-          <img className="gamemode-icon" src={gamemodeIcon} />
-          <p> {gameType} </p>
+        <div className="AgentInfo tooltip">
+          <span className="tooltiptext"> {userAgentData.agentData.agentName} </span>
+          <img className="userAgent" src={userAgentData.agentData.agentIcon} />
         </div>
 
-        <p className="time-ago-p"> {timeAgo} </p>
-      </div>
+        <div className="MatchInfo">
+          <p className="MatchInfo-p-1"> {mapData.mapName} </p>
 
-      <div className="RankInfo">
-        <div className="RankInfo-1">
-          <img className="userRank" src={userRankData.rankIcon} />
-          <p> {userRankData.rankTier} </p>
+          <div className="MatchInfo-1">
+            <img className="gamemode-icon" src={gamemodeIcon} />
+            <p> {gameType} </p>
+          </div>
+
+          <p className="time-ago-p"> {timeAgo} </p>
         </div>
 
-        <div className="RankInfo-2">
-          <p style={{color: '#2f62bb', fontSize: '32px'}}> {blueWins} </p> 
-          <p style={{fontSize: '32px'}}> : </p> 
-          <p style={{color: '#ad2230', fontSize: '32px'}}> {redWins} </p>
-        </div>
-      </div>
+        <div className="RankInfo">
+          <div className="RankInfo-1">
+            <img className="userRank" src={userRankData.rankIcon} />
+            <p> {userRankData.rankTier} </p>
+          </div>
 
-      <div className="StatsInfo">
-        <p style={{fontSize: '24px', fontWeight: 'bold'}}>{userAgentData.playerData.kills}/{userAgentData.playerData.deaths}/{userAgentData.playerData.assists}</p>
-        <p style={{margin: 0}}> K/D/A: <span style={{fontSize: '20px', margin: 0}}> {((userAgentData.playerData.kills + userAgentData.playerData.assists) / userAgentData.playerData.deaths).toFixed(2)} </span> </p>
-      </div>
-
-      <div className="TeamsBoxes">
-        <div className="Team1Box">
-          {team1Arr}
+          <div className="RankInfo-2">
+            <p style={{color: '#2f62bb', fontSize: '32px'}}> {blueWins} </p> 
+            <p style={{fontSize: '32px'}}> : </p> 
+            <p style={{color: '#ad2230', fontSize: '32px'}}> {redWins} </p>
+          </div>
         </div>
-        <div className="Team2Box">
-          {team2Arr}
-        </div>
-      </div>
 
+        <div className="StatsInfo">
+          <p style={{fontSize: '24px', fontWeight: 'bold'}}>{userAgentData.playerData.kills}/{userAgentData.playerData.deaths}/{userAgentData.playerData.assists}</p>
+          <p> K/D/A: <span style={{fontSize: '20px', margin: 0}}> {((userAgentData.playerData.kills + userAgentData.playerData.assists) / userAgentData.playerData.deaths).toFixed(2)} </span> </p>
+        </div>
+
+        {!open && 
+        <div className="dd-button-div">
+          <button className="val-dd-button" onClick={() => setOpen(!open)}> 
+            <AiFillCaretDown color={'white'}/> 
+          </button>
+        </div>
+        }
+        {open && 
+        <div className="dd-button-div">
+          <button className="val-dd-button" onClick={() => setOpen(!open)}> 
+            <AiFillCaretUp color={'white'}/> 
+          </button>
+        </div>
+        }
+
+      </div>
+      {open && 
+      <DropDownBox players={players} roundResults={roundResults}/>
+      }
     </div>
   );
 };
