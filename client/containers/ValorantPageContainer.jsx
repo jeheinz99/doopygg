@@ -11,7 +11,7 @@ const link = 'https://auth.riotgames.com/authorize?redirect_uri=http://www.doopy
 
 const ValorantPageContainer = () => {
 
-  const matchHistory = useSelector(state => state.valorant.matchHistory);
+  const matchHistory = useSelector(state => state.valorant.searchedUser.matchHistory);
   console.log(matchHistory);
 
   const dispatch = useDispatch();

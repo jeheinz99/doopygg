@@ -1,0 +1,863 @@
+[
+  {
+  "uuid": "48d870a2-4493-ebf8-7d6f-979be914dc43",
+  "displayName": "Fortune Title",
+  "titleText": "Fortune",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/2022LNY/PlayerTitle_Fortune_PrimaryAsset"
+  },
+  {
+  "uuid": "f8c974b0-4e0c-c0e6-174d-c1b6d990b2a6",
+  "displayName": "Tiger Title",
+  "titleText": "Tiger",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/2022LNY/PlayerTitle_Tiger_PrimaryAsset"
+  },
+  {
+  "uuid": "a65074fd-4937-734e-20fe-3cafa842c631",
+  "displayName": "Catalyst Title",
+  "titleText": "Catalyst",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Act1_2_BP/PlayerTitle_Catalyst_PrimaryAsset"
+  },
+  {
+  "uuid": "2d284b12-4536-1d0e-b08c-e58850b2a76e",
+  "displayName": "Chicken Title",
+  "titleText": "Chicken",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Act1_2_BP/PlayerTitle_Chicken_PrimaryAsset"
+  },
+  {
+  "uuid": "326c3796-43c0-4aca-cd5e-53b3ccf8c507",
+  "displayName": "Foxy Title",
+  "titleText": "Foxy",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Act1_2_BP/PlayerTitle_Foxy_PrimaryAsset"
+  },
+  {
+  "uuid": "dc75c976-4a9a-97f0-a94d-42bd5f5e262f",
+  "displayName": "Bait Title",
+  "titleText": "Bait",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Act1_3_BP/PlayerTitle_Bait_PrimaryAsset"
+  },
+  {
+  "uuid": "349d430a-445f-c87e-cc8d-38bc2a86213a",
+  "displayName": "Pumped Title",
+  "titleText": "Pumped",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Act1_3_BP/PlayerTitle_Pumped_PrimaryAsset"
+  },
+  {
+  "uuid": "5dc79611-42f8-24ad-9f5d-6d8288a7fe9a",
+  "displayName": "Spicy Title",
+  "titleText": "Spicy",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Act1_3_BP/PlayerTitle_Spicy_PrimaryAsset"
+  },
+  {
+  "uuid": "9e6f13d8-49f3-db30-76bd-e69a0dba963e",
+  "displayName": "Bounty Hunter Title",
+  "titleText": "Bounty Hunter",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/BountyHunter/PlayerTitle_BountyHunter_PrimaryAsset"
+  },
+  {
+  "uuid": "daae405e-4fc7-0c3a-0ab6-08bebca1a8dc",
+  "displayName": "Living Nightmare Title",
+  "titleText": "Living Nightmare",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/BountyHunter/PlayerTitle_LivingNightmare_PrimaryAsset"
+  },
+  {
+  "uuid": "703cd95a-4624-16f3-fdd9-f4a881993577",
+  "displayName": "Charmer Title",
+  "titleText": "Charmer",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Deadeye/PlayerTitle_Charmer_PrimaryAsset"
+  },
+  {
+  "uuid": "9f294ab8-4b0a-4c3f-711c-cb89ca4d3ad5",
+  "displayName": "High Class Title",
+  "titleText": "High Class",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Deadeye/PlayerTitle_HighClass_PrimaryAsset"
+  },
+  {
+  "uuid": "5bdea980-4397-a1bd-1fab-659153ca196e",
+  "displayName": "Boosted Title",
+  "titleText": "Boosted",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep2_Act1_BP/PlayerTitle_Boosted_PrimaryAsset"
+  },
+  {
+  "uuid": "63057041-4f65-5579-e5a6-d88ae7007ebb",
+  "displayName": "Unlucky Title",
+  "titleText": "Unlucky",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep2_Act1_BP/PlayerTitle_Unlucky_PrimaryAsset"
+  },
+  {
+  "uuid": "1626ab23-49dd-aa09-dee5-05962e49b342",
+  "displayName": "Wraith Title",
+  "titleText": "Wraith",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep2_Act1_BP/PlayerTitle_Wraith_PrimaryAsset"
+  },
+  {
+  "uuid": "88be9116-4d09-b9a1-87d5-2f8d1831aabe",
+  "displayName": "Bulldog Title",
+  "titleText": "Bulldog",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep2_Act2_BP/PlayerTitle_Bulldog_PrimaryAsset"
+  },
+  {
+  "uuid": "bf94d3eb-4025-4e4a-9942-a2a17c0da2db",
+  "displayName": "Full Auto Title",
+  "titleText": "Full Auto",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep2_Act2_BP/PlayerTitle_FullAuto_PrimaryAsset"
+  },
+  {
+  "uuid": "b293212f-4574-1ffa-4593-4fad2b97b5ec",
+  "displayName": "Sheriff Title",
+  "titleText": "Sheriff",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep2_Act2_BP/PlayerTitle_Sheriff_PrimaryAsset"
+  },
+  {
+  "uuid": "42e2f97d-4e69-274c-589c-0fbdeb397df9",
+  "displayName": "Chill Title",
+  "titleText": "Chill",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep2_Act3_BP/PlayerTitle_Chill_PrimaryAsset"
+  },
+  {
+  "uuid": "951af77f-4683-ba12-2557-1da1950c390b",
+  "displayName": "Hard Carry Title",
+  "titleText": "Hard Carry",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep2_Act3_BP/PlayerTitle_HardCarry_PrimaryAsset"
+  },
+  {
+  "uuid": "21dda67e-46d9-081d-0436-fc93fbb1331d",
+  "displayName": "Lucky Title",
+  "titleText": "Lucky",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep2_Act3_BP/PlayerTitle_Lucky_PrimaryAsset"
+  },
+  {
+  "uuid": "3fabf39b-452e-9f82-52ec-5c984619c782",
+  "displayName": "Cracked Title",
+  "titleText": "Cracked",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act1_BP/PlayerTitle_Cracked_PrimaryAsset"
+  },
+  {
+  "uuid": "229907f5-41a1-855d-a1f6-c1a934c74ed1",
+  "displayName": "No Breaks Title",
+  "titleText": "No Breaks",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act1_BP/PlayerTitle_NoBreaks_PrimaryAsset"
+  },
+  {
+  "uuid": "9f2bbbe7-4b73-3ad0-193c-c7a0ee5ff6a8",
+  "displayName": "Salty Title",
+  "titleText": "Salty",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act1_BP/PlayerTitle_Salty_PrimaryAsset"
+  },
+  {
+  "uuid": "ca0895c6-412b-0f14-0fa4-5dafb9b9fb15",
+  "displayName": "Aimbot Title",
+  "titleText": "Aimbot",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act2_BP/PlayerTitle_Aimbot_PrimaryAsset"
+  },
+  {
+  "uuid": "7c2efedc-4d1f-509a-fb02-f2af4d9395d5",
+  "displayName": "Cheap Title",
+  "titleText": "Cheap",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act2_BP/PlayerTitle_Cheap_PrimaryAsset"
+  },
+  {
+  "uuid": "5c3e2030-4d8a-a242-04b1-ff872557ebfd",
+  "displayName": "Lurker Title",
+  "titleText": "Lurker",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act2_BP/PlayerTitle_Lurker_PrimaryAsset"
+  },
+  {
+  "uuid": "cbab01c3-4626-2418-f52b-9db472572908",
+  "displayName": "Hardstuck Title",
+  "titleText": "Hardstuck",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act3_BP/PlayerTitle_Hardstuck_PrimaryAsset"
+  },
+  {
+  "uuid": "eea7d1b0-4a94-59d7-b131-5998a1b3b9f9",
+  "displayName": "Haunted Title",
+  "titleText": "Haunted",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act3_BP/PlayerTitle_Haunted_PrimaryAsset"
+  },
+  {
+  "uuid": "25c60422-4246-fe96-9ac1-d88e7a379571",
+  "displayName": "Unstoppable Title",
+  "titleText": "Unstoppable",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act3_BP/PlayerTitle_Unstoppable_PrimaryAsset"
+  },
+  {
+  "uuid": "8b426759-4e32-0c61-51cc-289dc0a33073",
+  "displayName": "Jinx Title",
+  "titleText": "Jinx",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act3_Bundle/PlayerTitle_Jinx_PrimaryAsset"
+  },
+  {
+  "uuid": "5c26249f-4396-4bd8-166a-8fbf15ba4219",
+  "displayName": "Arcane Title",
+  "titleText": "Arcane",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act3_EventPass/PlayerTitle_Arcane_PrimaryAsset"
+  },
+  {
+  "uuid": "fc78400c-4356-c491-ab14-3dbb9e481073",
+  "displayName": "Cupcake Title",
+  "titleText": "Cupcake",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act3_EventPass/PlayerTitle_Cupcake_PrimaryAsset"
+  },
+  {
+  "uuid": "2111510b-4dbf-e9b6-9959-60b8fbce5b2b",
+  "displayName": "Liar Title",
+  "titleText": "Liar",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep3_Act3_EventPass/PlayerTitle_Liar_PrimaryAsset"
+  },
+  {
+  "uuid": "184e2e0d-4df5-2979-9bb0-93b102cf38fd",
+  "displayName": "Boomer Title",
+  "titleText": "Boomer",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep4_Act1_BP/PlayerTitle_Boomer_PrimaryAsset"
+  },
+  {
+  "uuid": "28a16537-46e1-5b94-be11-788e89dd2f56",
+  "displayName": "Cringe Title",
+  "titleText": "Cringe",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep4_Act1_BP/PlayerTitle_Cringe_PrimaryAsset"
+  },
+  {
+  "uuid": "a87a5216-42d2-7c01-0d88-d69274c35254",
+  "displayName": "Unrivaled Title",
+  "titleText": "Unrivaled",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep4_Act1_BP/PlayerTitle_Unrivaled_PrimaryAsset"
+  },
+  {
+  "uuid": "ae71f09f-4875-9c37-d6e0-bd83fab998bf",
+  "displayName": "Wide Title",
+  "titleText": "Wide",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep4_Act2_BP/PlayerTitle_GalaxyBrain_PrimaryAsset"
+  },
+  {
+  "uuid": "025b0aaf-4bc6-522c-faae-a484779c5d03",
+  "displayName": "Habibi Title",
+  "titleText": "Habibi",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep4_Act2_BP/PlayerTitle_Habibi_PrimaryAsset"
+  },
+  {
+  "uuid": "810b90a3-4399-1f96-9e86-ce853c932156",
+  "displayName": "Goinmul Title",
+  "titleText": "Goinmul",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep4_Act2_BP/PlayerTitle_StagnantWater_PrimaryAsset"
+  },
+  {
+  "uuid": "93a2544e-4f3e-2914-0d38-00a58345ffd9",
+  "displayName": "Chalked Title",
+  "titleText": "Chalked",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep4_Act3_BP/PlayerTitle_Chalked_PrimaryAsset"
+  },
+  {
+  "uuid": "5b3510f1-49ac-dc6e-2158-bbbd09e071d1",
+  "displayName": "Finest Title",
+  "titleText": "Finest",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep4_Act3_BP/PlayerTitle_Finest_PrimaryAsset"
+  },
+  {
+  "uuid": "39374ca0-447b-1d4e-aa38-e6b0e0b07946",
+  "displayName": "No Scope Title",
+  "titleText": "No Scope",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep4_Act3_BP/PlayerTitle_NoScope_PrimaryAsset"
+  },
+  {
+  "uuid": "8178b705-49f5-553a-29c8-6ca3a5bb3f83",
+  "displayName": "Clown Title",
+  "titleText": "Clown",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act1_BP/PlayerTitle_Clown_PrimaryAsset"
+  },
+  {
+  "uuid": "41c01df4-4d3d-d08d-58d4-e198763019f2",
+  "displayName": "Guilty Title",
+  "titleText": "Guilty",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act1_BP/PlayerTitle_Guilty_PrimaryAsset"
+  },
+  {
+  "uuid": "a030f8ac-4475-d8d0-53a1-b8aafd5a3546",
+  "displayName": "Random Title",
+  "titleText": "Random",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act1_BP/PlayerTitle_Random_PrimaryAsset"
+  },
+  {
+  "uuid": "d9ab76c4-4b27-6437-577a-0f9dc8e28de7",
+  "displayName": "Dimensional Title",
+  "titleText": "Dimensional",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act1_EventPass/PlayerTitle_Dimensional_PrimaryAsset"
+  },
+  {
+  "uuid": "dd66cdcb-46cb-5e6e-f66f-51aa8cc3c14b",
+  "displayName": "Double Agent Title",
+  "titleText": "Double Agent",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act1_EventPass/PlayerTitle_DoubleAgent_PrimaryAsset"
+  },
+  {
+  "uuid": "b4309170-40bd-49cd-a097-a9a5b988d1d4",
+  "displayName": "Clean Title",
+  "titleText": "Clean",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act2_BP/PlayerTitle_Clean_PrimaryAsset"
+  },
+  {
+  "uuid": "7a6bbce5-4708-42d0-2152-98963ebdcf2c",
+  "displayName": "Extra Title",
+  "titleText": "Extra",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act2_BP/PlayerTitle_Extra_PrimaryAsset"
+  },
+  {
+  "uuid": "2cb0c732-46b1-8c7f-81fc-25ac323f8962",
+  "displayName": "Mid Title",
+  "titleText": "Mid",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act2_BP/PlayerTitle_Mid_PrimaryAsset"
+  },
+  {
+  "uuid": "d67cef9b-43cd-bc8c-840d-039582975c2a",
+  "displayName": "Gamer Title",
+  "titleText": "Gamer",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act2_EventPass/PlayerTitle_Gamer_PrimaryAsset"
+  },
+  {
+  "uuid": "171e2f90-41e0-48d0-bbf5-28a531c7eafb",
+  "displayName": "Potato Title",
+  "titleText": "Potato",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act2_EventPass/PlayerTitle_Potato_PrimaryAsset"
+  },
+  {
+  "uuid": "06478ef0-4dc2-5767-ec02-d190487ed132",
+  "displayName": "Cursed Title",
+  "titleText": "Cursed",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act3_BP/PlayerTItle_Cursed_PrimaryAsset"
+  },
+  {
+  "uuid": "18d5ee78-4a55-d1bb-205f-29ac410b5a7d",
+  "displayName": "Icy Title",
+  "titleText": "Icy",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act3_BP/PlayerTitle_Icy_PrimaryAsset"
+  },
+  {
+  "uuid": "f286dd70-42eb-57ba-9711-e2b56db08448",
+  "displayName": "¡VAMOS! Title",
+  "titleText": "¡VAMOS!",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Ep5_Act3_BP/PlayerTitle_Vamos_PrimaryAsset"
+  },
+  {
+  "uuid": "631f4283-48b1-1855-d646-5e8f80e29821",
+  "displayName": "Day One Title",
+  "titleText": "Day One",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Episode1-1/PlayerTitle_Episode1-1_DayOne_PrimaryAsset"
+  },
+  {
+  "uuid": "00d4d326-4edc-3229-7c28-129d3374e3ad",
+  "displayName": "Lone Wolf Title",
+  "titleText": "Lone Wolf",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Episode1-1/PlayerTitle_Episode1-1_LoneWolf_PrimaryAsset"
+  },
+  {
+  "uuid": "9f0ead27-4925-db1e-626f-ab95d9c45845",
+  "displayName": "Team Player Title",
+  "titleText": "Team Player",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Episode1-1/PlayerTitle_Episode1-1_TeamPlayer_PrimaryAsset"
+  },
+  {
+  "uuid": "bf097526-4503-6b17-2859-49a67bde66d2",
+  "displayName": "Bot Title",
+  "titleText": "Bot",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Grenadier/PlayerTitle_Bot_PrimaryAsset"
+  },
+  {
+  "uuid": "3a8f14a7-43e0-5c08-d021-41a5d8b3c983",
+  "displayName": "Built Different Title",
+  "titleText": "Built Different",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Grenadier/PlayerTitle_BuiltDifferent_PrimaryAsset"
+  },
+  {
+  "uuid": "39a0f753-4a86-9a32-5e1d-7687b13f6e7e",
+  "displayName": "ONE // 2022 Title",
+  "titleText": "ONE // 2022",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/JapanTeamTitle22/PlayerTitle_JapanTeam22_PrimaryAsset"
+  },
+  {
+  "uuid": "08bc0abb-4878-e384-6719-0196163cde67",
+  "displayName": "Soaked Title",
+  "titleText": "Soaked",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Mage/PlayerTitle_Soaked_PrimaryAsset"
+  },
+  {
+  "uuid": "1ae3bd2a-4a12-d824-960e-a6a167d2d4e8",
+  "displayName": "Torrential Title",
+  "titleText": "Torrential",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Mage/PlayerTitle_Torrential_PrimaryAsset"
+  },
+  {
+  "uuid": "96bbed0e-426e-2f54-8ce1-ff820ca6b703",
+  "displayName": "All Star Title",
+  "titleText": "All Star",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_AllStar_PrimaryAsset"
+  },
+  {
+  "uuid": "0210a31e-41a0-6150-ee41-bd9d727b629b",
+  "displayName": "Dauntless Title",
+  "titleText": "Dauntless",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Ascendant_PrimaryAsset"
+  },
+  {
+  "uuid": "bf25c13b-4f89-1ab5-4455-53b34b9763f0",
+  "displayName": "Ballistic Title",
+  "titleText": "Ballistic",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Ballistic_PrimaryAsset"
+  },
+  {
+  "uuid": "887d1bc0-43b4-c084-4723-e0963a491722",
+  "displayName": "Biohazard Title",
+  "titleText": "Biohazard",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Biohazard_PrimaryAsset"
+  },
+  {
+  "uuid": "0ec01b3e-4822-d882-7e6e-e9a0b47cd8bb",
+  "displayName": "Catastrophic Title",
+  "titleText": "Catastrophic",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Catastrophic_PrimaryAsset"
+  },
+  {
+  "uuid": "13b4c766-4f55-11f2-cde3-adababe50c7d",
+  "displayName": "Coach Title",
+  "titleText": "Coach",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Coach_PrimaryAsset"
+  },
+  {
+  "uuid": "e5b82cbf-409e-af39-a6f8-6dadf336dedb",
+  "displayName": "Concussive Title",
+  "titleText": "Concussive",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Concussive_PrimaryAsset"
+  },
+  {
+  "uuid": "e4bdb590-4888-86aa-a259-bebdb52fcbe7",
+  "displayName": "Deadeye Title",
+  "titleText": "Deadeye",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Deadeye_PrimaryAsset"
+  },
+  {
+  "uuid": "d13e579c-435e-44d4-cec2-6eae5a3c5ed4",
+  "displayName": " ",
+  "titleText": null,
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Default_PrimaryAsset"
+  },
+  {
+  "uuid": "86375046-4f22-9dc8-f8d8-b3b4d029cd4b",
+  "displayName": "Empress Title",
+  "titleText": "Empress",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Empress_PrimaryAsset"
+  },
+  {
+  "uuid": "37121e2f-43f6-0b7d-fdc4-29b85f3121c9",
+  "displayName": "Enlightened Title",
+  "titleText": "Enlightened",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Enlightened_PrimaryAsset"
+  },
+  {
+  "uuid": "86bd997d-4e37-18c9-ada0-bf92e54baf60",
+  "displayName": "First Title",
+  "titleText": "First",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_First_PrimaryAsset"
+  },
+  {
+  "uuid": "633be923-4e83-204f-8da1-d5930f939369",
+  "displayName": "Flashy Title",
+  "titleText": "Flashy",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Flashy_PrimaryAsset"
+  },
+  {
+  "uuid": "8f53997a-481a-d982-1deb-8fa995dbd7d4",
+  "displayName": "Gatecrasher Title",
+  "titleText": "Gatecrasher",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Gatecrasher_PrimaryAsset"
+  },
+  {
+  "uuid": "c3b8609d-46cf-e290-868a-e4852a85704f",
+  "displayName": "Genius Title",
+  "titleText": "Genius",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Genius_PrimaryAsset"
+  },
+  {
+  "uuid": "574b3440-46bd-fee9-0735-12b4e8a55acd",
+  "displayName": "Harbinger Title",
+  "titleText": "Harbinger",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Harbinger_PrimaryAsset"
+  },
+  {
+  "uuid": "24e2431e-45b4-ef91-e3f5-f19012522a70",
+  "displayName": "Hasty Title",
+  "titleText": "Hasty",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Hasty_PrimaryAsset"
+  },
+  {
+  "uuid": "7e3a1c4f-4aae-0569-cd74-a38f3cce2f51",
+  "displayName": "High Command Title",
+  "titleText": "High Command",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_HighCommand_PrimaryAsset"
+  },
+  {
+  "uuid": "566b6a77-4f72-af35-6d17-43be14e73cb7",
+  "displayName": "Hotshot Title",
+  "titleText": "Hotshot",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Hotshot_PrimaryAsset"
+  },
+  {
+  "uuid": "e1cbd3aa-4156-5330-20c4-e4b95a236dc2",
+  "displayName": "Hunter Title",
+  "titleText": "Hunter",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Hunter_PrimaryAsset"
+  },
+  {
+  "uuid": "475467ae-4a07-41e7-df1e-699cc239fbd1",
+  "displayName": "Hurricane Title",
+  "titleText": "Hurricane",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Hurricane_PrimaryAsset"
+  },
+  {
+  "uuid": "eab22308-45da-2059-c14f-44b4c52237b1",
+  "displayName": "Infinite Title",
+  "titleText": "Infinite",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Infinite_PrimaryAsset"
+  },
+  {
+  "uuid": "32087e8b-4260-37af-f865-5aa64d79f916",
+  "displayName": "Mind Thief Title",
+  "titleText": "Mind Thief",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_MindThief_PrimaryAsset"
+  },
+  {
+  "uuid": "42e5678c-4ffd-c1a1-71ab-568db7af918a",
+  "displayName": "Nature's Wrath Title",
+  "titleText": "Nature's Wrath",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_NaturesWrath_PrimaryAsset"
+  },
+  {
+  "uuid": "224f0e96-475d-165d-3ca6-8481a4cb7629",
+  "displayName": "Old Dog Title",
+  "titleText": "Old Dog",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_OldDog_PrimaryAsset"
+  },
+  {
+  "uuid": "f802662f-7a82-43d9-a626-335d65df08c5",
+  "displayName": "Pioneer Title",
+  "titleText": "Pioneer",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Pioneer_PrimaryAsset"
+  },
+  {
+  "uuid": "d873aef3-49be-277d-7966-d0a2d9d9ad22",
+  "displayName": "Recruit Title",
+  "titleText": "Recruit",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Recruit_PrimaryAsset"
+  },
+  {
+  "uuid": "e23eaf20-4fb2-5c01-03b0-4fa7f14fbfbd",
+  "displayName": "Revenant Title",
+  "titleText": "Revenant",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Revenant_PrimaryAsset"
+  },
+  {
+  "uuid": "82de085a-4c2b-da95-a139-048e4ce83dae",
+  "displayName": "Savage Title",
+  "titleText": "Savage",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Savage_PrimaryAsset"
+  },
+  {
+  "uuid": "b957c1f1-4784-f202-9bee-8598ebaa8bad",
+  "displayName": "Sharpshooter Title",
+  "titleText": "Sharpshooter",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Sharpshooter_PrimaryAsset"
+  },
+  {
+  "uuid": "540826d2-4aff-4da9-e1b7-4ebf79deb4b4",
+  "displayName": "Stellar Title",
+  "titleText": "Stellar",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Stellar_PrimaryAsset"
+  },
+  {
+  "uuid": "533b2a28-4638-f8cc-5aae-28a9a9af5a69",
+  "displayName": "Swift Title",
+  "titleText": "Swift",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Swift_PrimaryAsset"
+  },
+  {
+  "uuid": "af20bdd6-4829-2dee-1bd3-77a34b6e2e9e",
+  "displayName": "Techie Title",
+  "titleText": "Techie",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Techie_PrimaryAsset"
+  },
+  {
+  "uuid": "58dbc4af-4baf-bd4b-7084-9f92485b4006",
+  "displayName": "Toxic Title",
+  "titleText": "Toxic",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Toxic_PrimaryAsset"
+  },
+  {
+  "uuid": "189f8454-45f8-0a74-4b25-77aae468ac02",
+  "displayName": "Trailblazer Title",
+  "titleText": "Trailblazer",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Trailblazer_PrimaryAsset"
+  },
+  {
+  "uuid": "336516ab-475b-7e0c-74d1-9caaa4d580ac",
+  "displayName": "Unmasked Title",
+  "titleText": "Unmasked",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Unmasked_PrimaryAsset"
+  },
+  {
+  "uuid": "e3ca05a4-4e44-9afe-3791-7d96ca8f71fa",
+  "displayName": "V1.0 Title",
+  "titleText": "V1.0",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_V1dot0_PrimaryAsset"
+  },
+  {
+  "uuid": "3aebca82-4877-bfa9-b215-8e8e3e5dedc7",
+  "displayName": "Warden Title",
+  "titleText": "Warden",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Warden_PrimaryAsset"
+  },
+  {
+  "uuid": "503810e1-44f2-7ce9-5226-9398e60557de",
+  "displayName": "Warhead Title",
+  "titleText": "Warhead",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Warhead_PrimaryAsset"
+  },
+  {
+  "uuid": "bec998ee-416d-ba4a-8afb-a4ba38c9e228",
+  "displayName": "Watchdog Title",
+  "titleText": "Watchdog",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/PlayerTitle_Watchdog_PrimaryAsset"
+  },
+  {
+  "uuid": "f3bf3c15-4e3b-6e58-64a3-8f9995f39370",
+  "displayName": "Ally Title",
+  "titleText": "Ally",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Pride2021/PlayerTitle_Ally_PrimaryAsset"
+  },
+  {
+  "uuid": "c70f542b-4880-c65f-485e-ec8ffd055243",
+  "displayName": "Proud Title",
+  "titleText": "Proud",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Pride2021/PlayerTitle_Proud_PrimaryAsset"
+  },
+  {
+  "uuid": "08ac32fb-450a-34b8-4aef-d88e50ebd3cb",
+  "displayName": "Clutch Title",
+  "titleText": "Clutch",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/RedWings/PlayerTitle_Clutch_PrimaryAsset"
+  },
+  {
+  "uuid": "58e5f5db-4b18-cf8a-afa2-b49574b34456",
+  "displayName": "Champion Title",
+  "titleText": "Champion",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Skinline_Titles/Champions/PlayerTitle_2021Champions_PrimaryAsset"
+  },
+  {
+  "uuid": "e398da6e-4719-eb48-0f79-72b51bf4c49f",
+  "displayName": "Electrifying Title",
+  "titleText": "Electrifying",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Sprinter/PlayerTitle_Electrifying_PrimaryAsset"
+  },
+  {
+  "uuid": "c4285636-4056-8c21-b0d1-55867e74c98f",
+  "displayName": "Zoomer Title",
+  "titleText": "Zoomer",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/Sprinter/PlayerTitle_Zoomer_PrimaryAsset"
+  },
+  {
+  "uuid": "77b12d01-4209-6b61-16aa-23a7382ae17b",
+  "displayName": "Year One Title",
+  "titleText": "Year One",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VALBirthday2021/PlayerTitle_YearOne_PrimaryAsset"
+  },
+  {
+  "uuid": "c402b173-403b-b3f6-f1a6-2a819a687397",
+  "displayName": "YR1 Title",
+  "titleText": "YR1",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VALBirthday2021/PlayerTitle_YR1_PrimaryAsset"
+  },
+  {
+  "uuid": "1ba98f24-4989-8778-f8a6-b7af353a1625",
+  "displayName": "2021 VCT Champion Title",
+  "titleText": "2021 VCT Champion",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/2021_Champions_Winners/PlayerTitle_2021ChampionsWinners_PrimaryAsset"
+  },
+  {
+  "uuid": "00031857-43a9-9545-4e05-58ad0a62b79d",
+  "displayName": "VCT Masters Berlin Winner Title",
+  "titleText": "VCT Masters Berlin Winner",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/2021_VCT_Masters_Berlin/PlayerTitle_2021VCTMastersBerlin_PrimaryAsset"
+  },
+  {
+  "uuid": "cd19dad9-4975-7e7d-c511-c6a851589c15",
+  "displayName": "VCT Masters Reykjavik Winner Title",
+  "titleText": "VCT Masters Reykjavik Winner",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/2021_VCT_Masters_Reykjavik/PlayerTitle_2021VCTMastersReykjavik_PrimaryAsset"
+  },
+  {
+  "uuid": "a6d9e243-4046-b025-358e-0087b4b7fcf3",
+  "displayName": "2022 VCT Champion Title",
+  "titleText": "2022 VCT Champion",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/2022_Champions_Winners/PlayerTitle_2022ChampionsWinners_PrimaryAsset"
+  },
+  {
+  "uuid": "a7d5ae34-4907-072c-13f9-67af86ec737c",
+  "displayName": "Game Changer Title",
+  "titleText": "Game Changer",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/2022_GameChanger_Title/PlayerTitle_GameChangers_PrimaryAsset"
+  },
+  {
+  "uuid": "2c4634dd-40bd-052e-bf3c-92a7aca4f084",
+  "displayName": "2022 Game Changers Winner Title",
+  "titleText": "2022 Game Changers Winner",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/2022_VCT_GameChangerWinner_Title/PlayerTitle_22GameChangersWinner_PrimaryAsset"
+  },
+  {
+  "uuid": "75aaadc3-427a-e194-e8d0-fd8b76b4540f",
+  "displayName": "VCT Masters Copenhagen Winner Title",
+  "titleText": "VCT Masters Copenhagen Winner",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/2022_VCT_Masters_Copenhagen/PlayerTitle_2022VCTMastersCopenhagen_PrimaryAsset"
+  },
+  {
+  "uuid": "d9c1a80f-4531-8c05-9841-4aafd417df8c",
+  "displayName": "VCT Masters Reykjavik Winner Title",
+  "titleText": "VCT Masters Reykjavik Winner",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/2022_VCT_Masters_Reykjavik/PlayerTitle_2022VCTMastersReykjavik_PrimaryAsset"
+  },
+  {
+  "uuid": "6966d46b-4fd1-3287-fd00-a790c9e7a3d8",
+  "displayName": "Fire Title",
+  "titleText": "Fire",
+  "isHiddenIfNotOwned": false,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/PlayerTitle_2022ChampionsDrops_Fire_PrimaryAsset"
+  },
+  {
+  "uuid": "f0751060-4d86-39e8-b881-469f52058b3f",
+  "displayName": "VCT Regional Masters Winner",
+  "titleText": "VCT Regional Masters Winner",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/PlayerTitle_VCTWinner_PrimaryAsset"
+  },
+  {
+  "uuid": "d11e42f8-45e9-7d71-720b-8c9c54c3b808",
+  "displayName": "VCT Game Changer Title",
+  "titleText": "VCT Game Changer",
+  "isHiddenIfNotOwned": true,
+  "assetPath": "ShooterGame/Content/Personalization/Titles/VCT/VCT_GameChanger_Title/PlayerTitle_VCT_GameChanger_PrimaryAsset"
+  }
+]

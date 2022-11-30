@@ -1,11 +1,18 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-  gameName: '',
-  tagLine: '',
-  playerName: '',
-  matchHistory: [],
-  puuid: '',
+  loggedIn: {
+    gameName: '',
+    tagLine: '',
+    puuid: '',
+  },
+  searchedUser: {
+    gameName: '',
+    tagLine: '',
+    puuid: '',
+    playerName: '',
+    matchHistory: [],
+  },
 };
 
 const valorantReducer = (state = initialState, action) => {
@@ -13,13 +20,17 @@ const valorantReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch(type) {
     case types.ADD_VALORANT_DATA:
+      const newObj = {
+        gameName: payload.gameName,
+        tagLine: payload.tagLine,
+        puuid: payload.puuid,
+        matchHistory: payload.matchHistory
+      };
       return Object.assign(
         {},
         state, {
-          gameName: payload.gameName,
-          tagLine: payload.tagLine,
-          matchHistory: payload.matchHistory,
-          puuid: payload.puuid,
+          loggedIn: newObj,
+          searchedUser: newObj,
         }
       );
     default: {

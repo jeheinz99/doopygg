@@ -1,8 +1,9 @@
+import DDTeamHeader from "./DDTeamHeader";
 import PlayerBox from "./PlayerBox";
 
 const DropDownBox = props => {
 
-  const { players, roundResults } = props;
+  const { players, roundResults, playerWin } = props;
 
   // finds player's per-round stats (headshot%, econ, etc.)
   const findPlayerRoundStats = (players, roundResults) => {
@@ -30,7 +31,7 @@ const DropDownBox = props => {
     return playerStats;
   };
   const playersRoundStats = findPlayerRoundStats(players, roundResults);
-  console.log(playersRoundStats, 'players round stats');
+  // console.log(playersRoundStats, 'players round stats');
   // determines who was on blue/red teams
   const team1Arr = [];
   const team2Arr = [];
@@ -75,26 +76,12 @@ const DropDownBox = props => {
   return (
     <div className="MatchBoxDD">
       <div className="TeamDD" id="Team1DD">
-        <div className="team-header-dd" id="team1header">
-          <h3> Team 1 </h3>
-          <p> Riot ID </p>
-          <p> Rank </p>
-          <p> K/D/A </p>
-          <p> HS% </p>
-          <p> ADR </p>
-        </div>
-        {team1Arr}
+        <DDTeamHeader teamName={"Team 1"}/>
+        {playerWin ? <>{team1Arr}</> : <>{team2Arr}</> }
       </div>
       <div className="TeamDD" id="Team2DD">
-        <div className="team-header-dd" id="team2header">
-          <h3> Team 2 </h3>
-          <p> Riot ID </p>
-          <p> Rank </p>
-          <p> K/D/A </p>
-          <p> HS% </p>
-          <p> ADR </p>
-        </div>
-        {team2Arr}
+        <DDTeamHeader teamName={"Team 2"}/>
+        {playerWin ? <>{team2Arr}</> : <>{team1Arr}</> }
       </div>
     </div>
   )

@@ -1,5 +1,7 @@
-import valorantAgents from "../../../../valorant-agents.json";
-import valorantRankData from "../../../../valorant-rankdata.json";
+import { useSelector } from "react-redux";
+import valorantAgents from "../../../../valorant-assets/valorant-agents.json";
+import valorantRankData from "../../../../valorant-assets/valorant-rankdata.json";
+import Tooltip from "../../SharedComponents/Tooltip";
 
 const PlayerBox = props => {
   const { 
@@ -16,6 +18,8 @@ const PlayerBox = props => {
     roundStats
   } = props;
   
+  const searchedPuuid = useSelector(state => state.valorant.searchedUser.puuid);
+
   // finds the user's data from the agent they played and checks if player won game
   // console.log({
   //   characterId,
@@ -79,8 +83,13 @@ const PlayerBox = props => {
 
   return (
     <div className="PlayerBox" id={`DD-PlayerBox-${teamId}`}>
-      <img className="dd-agent-icon" src={playerIcons.agentData.agentIcon}/>
-      <p className="playerbox-p-name"> {gameName}#{tagLine} </p>
+      <Tooltip tooltipType={'image'}
+        tooltipContent={playerIcons.agentData.agentName}
+        width={'120px'}
+        contentClassName={'dd-agent-icon'}
+        content={playerIcons.agentData.agentIcon}
+        leftPercent={30}/>
+      {searchedPuuid === puuid ? <p className="playerbox-p-name"> {gameName}#{tagLine} </p> : <p style={{color: "#ffffff99"}} className="playerbox-p-name"> {gameName}#{tagLine} </p>}
 
       <div className="dd-player-rank-div">
         <img className="dd-player-rank-icon" src={playerIcons.playerRankData.playerRankIcon}/>
@@ -89,12 +98,12 @@ const PlayerBox = props => {
 
       <div className="dd-kda-div">
         <p> {stats.kills}/{stats.deaths}/{stats.assists} </p>
-        {KDA >= 1 && KDA < 2 && <p style={{fontSize: "12px", color: "#ffffff99"}}> K/D/A: <span className="kda-normal">{KDA}</span> </p>}
-        {KDA >= 2 && <p style={{fontSize: "12px", color: "#ffffff99"}}> K/D/A: <span className="kda-high">{KDA}</span> </p>}
+        {KDA >= 1.5 && <p style={{fontSize: "12px", color: "#ffffff99"}}> K/D/A: <span className="kda-high">{KDA}</span> </p>}
+        {KDA >= 1 && KDA < 1.5 && <p style={{fontSize: "12px", color: "#ffffff99"}}> K/D/A: <span className="kda-normal">{KDA}</span> </p>}
         {KDA < 1 && <p style={{fontSize: "12px", color: "#ffffff99"}}> K/D/A: <span className="kda-low">{KDA}</span> </p>}
       </div>
 
-      <div className="acurracy-percent-div">
+      <div className="accuracy-percent-div">
         <p> <span style={{fontSize: "14px", color: "#ffffff99"}}>HS: </span>{headshotPercent}% </p>
       </div>
 

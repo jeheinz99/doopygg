@@ -167,13 +167,55 @@
   align-items: center;
 }
 .PlayerStatsContainer {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  /* flex-direction: column; */
   width: 90%;
   gap: 10px;
 }
-.PlayerStatsContainer h3 {
+.PlayerAccountInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #222429a4;
+  height: fit-content;
+  border-radius: 4px;
+  padding: 8px;
+  gap: 10px;
+}
+.PlayerMatchInfo {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 5px;
+}
+.acc-info-div2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-bottom: 1px solid rgba(213, 55, 65, 0.6);
+  border-top: 1px solid rgba(213, 55, 65, 0.6);
+  width: 95%;
+}
+.acc-info-div2 h3 {
+  margin: 0;
   text-align: left;
+  font-size: 22px;
+}
+.acc-info-div2 p {
+  color: rgba(255, 255, 255, 0.6);
+}
+.acc-info-div3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.UserPlayercard {
+  width: 96px;
+  height: 96px;
+  border-radius: 4px;
 }
 .OuterMatchBox {
   display: flex;
@@ -182,7 +224,7 @@
 }
 .MatchBox {
   display: grid;
-  grid-template-columns: 10% 10% 15% 20% 45%;
+  grid-template-columns: 10% 15% 15% 25% 10% 10% 15%;
   color: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(39, 45, 58, 0.5);
   padding: 5px;
@@ -193,8 +235,8 @@
   height: 64px;
 }
 .userRank {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
 }
 .AgentInfo {
   display: flex;
@@ -205,7 +247,8 @@
   margin: 0;
 }
 .RankInfo {
-  display: flex;
+  display: grid;
+  grid-template-columns: 60% 40%;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -218,9 +261,24 @@
 }
 .RankInfo-2 {
   display: flex;
+  flex-direction: column;
   gap: 5px;
   justify-content: center;
   align-items: center;
+}
+.rankinfo-2-1 {
+  display: flex;
+  gap: 5px;
+}
+.rankinfo-2-1 p {
+  margin: 0;
+  font-size: 24px;
+}
+.accuracy-percent-div-matchbox {
+  font-size: 22px;
+}
+.avg-damage-div-matchbox {
+
 }
 .time-ago-p {
   color:rgba(255, 255, 255, 0.6);
@@ -267,7 +325,7 @@
 }
 .PlayerBox {
   display: grid;
-  grid-template-columns: 64px 15% 10% 15% 10% 10%;
+  grid-template-columns: 7% 15% 10% 15% 10% 10%;
   gap: 10px;
   align-items: center;
   width: 100%;
@@ -278,7 +336,7 @@
 .team-header-dd {
   display: grid;
   padding: 0px 5px 2px 5px;
-  grid-template-columns: 64px 15% 10% 15% 10% 10%;
+  grid-template-columns: 7% 15% 10% 15% 10% 10%;
   align-items: center;
   gap: 10px;
   color: rgba(255, 255, 255, 0.7);
@@ -291,12 +349,13 @@
   display: flex;
   width: 100%;
   justify-content: center;
+  cursor: default;
 }
 .team-header-dd h3 {
   margin: 0;
   font-size: 20px;
 }
-.avg-damage-div, .acurracy-percent-div {
+.avg-damage-div, .accuracy-percent-div {
   display: flex;
   justify-content: center;
 }
@@ -364,7 +423,7 @@
   color: #5ee790;
 }
 .kda-low {
-  color: #ffffff99;
+  color: #e83f3fc4;
 }
 .kda-normal {
   color:rgba(255, 255, 255, 0.861);
@@ -374,6 +433,9 @@
 }
 #win-false {
   border-left: 5px solid rgb(116, 33, 41);
+}
+#test-p {
+  justify-content: flex-start;
 }
 @media only screen and (max-width: 420px) {
   #welcome-valorant {

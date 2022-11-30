@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import PlayerBox from "./DropDown/PlayerBox";
 import DropDownBox from "./DropDown/DropDownBox";
-import valorantMaps from "../../../valorant-maps.json";
-import valorantAgents from "../../../valorant-agents.json";
-import valorantRankData from "../../../valorant-rankdata.json";
+import valorantMaps from "../../../valorant-assets/valorant-maps.json";
+import valorantAgents from "../../../valorant-assets/valorant-agents.json";
+import valorantRankData from "../../../valorant-assets/valorant-rankdata.json";
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
+import Tooltip from "../SharedComponents/Tooltip";
 
 const gameModeIcons = {
   standard: "https://media.valorant-api.com/gamemodes/96bd3920-4f36-d026-2b28-c683eb0bcac5/displayicon.png",
@@ -20,9 +20,12 @@ const gameModeIcons = {
 const MatchBox = props => {
 
   const [open, setOpen] = useState(false);
-  const { players, matchInfo, roundResults, teams } = props;
 
-  const puuid = useSelector(state => state.valorant.puuid);
+  const { players, matchInfo, roundResults, teams } = props;
+  
+  const searchedPuuid = useSelector(state => state.valorant.searchedUser.puuid);
+  const getPlayerTeam = players.filter((player) => player.puuid === searchedPuuid);
+  const playerTeam = getPlayerTeam[0].teamId;
 
   let gameType;
   if (matchInfo.isRanked) gameType = "Competitive";
@@ -97,10 +100,10 @@ const MatchBox = props => {
   const mapData = getValMap(matchInfo.mapId, valorantMaps);
 
   // finds the user's data from the agent they played and checks if player won game
-  const getUserAgentData = (puuid, players, agents) => {
+  const getUserAgentData = (searchedPuuid, players, agents) => {
     for (let i = 0; i < players.length; i++) {
       const player = players[i];
-      if (player.puuid === puuid) {
+      if (player.puuid === searchedPuuid) {
         if (player.teamId === winningTeam) {
           playerWin = true;
         }
@@ -134,13 +137,13 @@ const MatchBox = props => {
       }
     }
   };
-  const userAgentData = getUserAgentData(puuid, players, valorantAgents);
+  const userAgentData = getUserAgentData(searchedPuuid, players, valorantAgents);
 
   // finds the user's rank for each match played
-  const getUserRankData = (puuid, players, valorantRankData) => {
+  const getUserRankData = (searchedPuuid, players, valorantRankData) => {
     for (let i = 0; i < players.length; i++) {
       const player = players[i];
-      if (puuid === player.puuid) {
+      if (searchedPuuid === player.puuid) {
         for (let j = 0; j < valorantRankData.length; j++) {
           const rank = valorantRankData[j];
           if (player.competitiveTier === rank.tier) {
@@ -154,16 +157,61 @@ const MatchBox = props => {
       }
     }
   };
-  const userRankData = getUserRankData(puuid, players, valorantRankData[4].tiers);
+  const userRankData = getUserRankData(searchedPuuid, players, valorantRankData[4].tiers);
+
+  const getUserRoundsData = (roundResults, userPuuid) => {
+    let headshots = 0;
+    let legshots = 0;
+    let bodyshots = 0;
+    let totalDamage = 0;
+
+    const playerStats = [];
+    for (let i = 0; i < roundResults.length; i++) {
+      const round = roundResults[i];
+      // for each round, iterate through the player's array
+      for (let j = 0; j < round.playerStats.length; j++) {
+        const roundStats = round.playerStats[j];
+        if (roundStats.puuid === userPuuid) {
+          playerStats.push({
+            damage: roundStats.damage,
+            kills: roundStats.kills,
+            economy: roundStats.economy,
+          });
+        }
+      }
+    }
+
+    for (let i = 0; i < playerStats.length; i++) {
+      for (let j = 0; j < playerStats[i].damage.length; j++) {
+        headshots += playerStats[i].damage[j].headshots;
+        bodyshots += playerStats[i].damage[j].bodyshots;
+        legshots += playerStats[i].damage[j].legshots;
+        totalDamage += playerStats[i].damage[j].damage;
+      }
+    }
+    return {
+      headshots: headshots,
+      legshots: legshots,
+      bodyshots: bodyshots,
+      totalDamage: totalDamage
+    }
+  };
+  const userRoundsData = getUserRoundsData(roundResults, searchedPuuid);
+
+  const headshotPercent = (((userRoundsData.headshots) / (userRoundsData.bodyshots + userRoundsData.legshots + userRoundsData.headshots))*100).toFixed(0);
+  const KDA = ((userAgentData.playerData.kills + userAgentData.playerData.assists) / userAgentData.playerData.deaths).toFixed(2);
+  const averageDamage = (userRoundsData.totalDamage / roundResults.length).toFixed(1);
 
   return (
     <div className="OuterMatchBox">
       <div className="MatchBox" id={`win-${playerWin}`}>
 
-        <div className="AgentInfo tooltip">
-          <span className="tooltiptext"> {userAgentData.agentData.agentName} </span>
-          <img className="userAgent" src={userAgentData.agentData.agentIcon} />
-        </div>
+        <Tooltip tooltipType={'image'}
+          tooltipContent={userAgentData.agentData.agentName}
+          width={'120px'}
+          contentClassName={'userAgent'}
+          content={userAgentData.agentData.agentIcon}
+          leftPercent={25}/>
 
         <div className="MatchInfo">
           <p className="MatchInfo-p-1"> {mapData.mapName} </p>
@@ -183,15 +231,40 @@ const MatchBox = props => {
           </div>
 
           <div className="RankInfo-2">
-            <p style={{color: '#2f62bb', fontSize: '32px'}}> {blueWins} </p> 
-            <p style={{fontSize: '32px'}}> : </p> 
-            <p style={{color: '#ad2230', fontSize: '32px'}}> {redWins} </p>
+            {playerTeam === "Blue" && 
+            <div className="rankinfo-2-1">
+              <p style={{color: '#2f62bb'}}> {blueWins} </p> 
+              <p> : </p> 
+              <p style={{color: '#ad2230'}}> {redWins} </p>
+            </div>
+            }
+            {playerTeam === "Red" && 
+            <div className="rankinfo-2-1">
+              <p style={{color: '#ad2230'}}> {redWins} </p>
+              <p> : </p> 
+              <p style={{color: '#2f62bb'}}> {blueWins} </p> 
+            </div>  
+            }
+            <div className="rankinfo-2-2">
+              {playerWin && <p style={{color: '#2f62bb'}}> Win </p>}
+              {!playerWin && <p style={{color: '#ad2230'}}> Loss </p>}
+            </div>
           </div>
         </div>
 
         <div className="StatsInfo">
           <p style={{fontSize: '24px', fontWeight: 'bold'}}>{userAgentData.playerData.kills}/{userAgentData.playerData.deaths}/{userAgentData.playerData.assists}</p>
-          <p> K/D/A: <span style={{fontSize: '20px', margin: 0}}> {((userAgentData.playerData.kills + userAgentData.playerData.assists) / userAgentData.playerData.deaths).toFixed(2)} </span> </p>
+          {KDA >= 1.5 && <p> K/D/A: <span className="kda-high" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>}
+          {KDA >= 1 && KDA < 1.5 && <p> K/D/A: <span className="kda-normal" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>}
+          {KDA < 1 && <p> K/D/A: <span className="kda-low" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>}
+        </div>
+
+        <div className="accuracy-percent-div-matchbox">
+          <p> <span style={{fontSize: "18px", color: "#ffffff99"}}> HS%: </span> {headshotPercent} </p>
+        </div>
+
+        <div className="avg-damage-div-matchbox">
+          <p> <span style={{fontSize: "14px", color: "#ffffff99"}}>ADR: </span>{averageDamage} </p>
         </div>
 
         {!open && 
@@ -211,7 +284,7 @@ const MatchBox = props => {
 
       </div>
       {open && 
-      <DropDownBox players={players} roundResults={roundResults}/>
+      <DropDownBox players={players} playerWin={playerWin} roundResults={roundResults}/>
       }
     </div>
   );

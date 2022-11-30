@@ -60,7 +60,6 @@ valorantController.getValorantUserData = async(req, res, next) => {
 
     // check DB for each ID in player's recent matches
     const matchObjs = await valMatches.find({ matchId: { $in: matchIdList }});
-    console.log(matchObjs, 'match objs');
 
     // create new set of match obj ids of ids found in DB
     const set = new Set();
@@ -73,7 +72,6 @@ valorantController.getValorantUserData = async(req, res, next) => {
     for (let i = 0; i < matchIdList.length; i++) {
       if (!set.has(matchIdList[i])) neededObjs.push(matchIdList[i]);
     }
-    console.log(neededObjs.length, 'length');
 
     if (neededObjs.length > 0) {
       const gettingMatchObjs = await Promise.allSettled(neededObjs.map(async id => {
