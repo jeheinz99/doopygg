@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import MatchBox from "./MatchBox";
+import RecentMatchesBox from "./RecentMatches/RecentMatchesBox";
 import valorantPlayerCards from "../../../valorant-assets/valorant-playercards.json";
 import valorantTitles from "../../../valorant-assets/valorant-titles.json";
 import valorantRankData from "../../../valorant-assets/valorant-rankdata.json";
@@ -73,11 +74,13 @@ const PlayerStatsContainer = props => {
           <img className="userRank" src={playerData.rankData.playerRankIcon} />
           <p style={{margin: 0}}> {playerData.rankData.playerRankTier} </p>
         </div> 
-
       </div>
       }
-      <div className="PlayerMatchInfo">
-        {matchesArr}
+      <div className="PlayerMatchHistory">
+        { gameName!== "" && tagLine !== "" && <RecentMatchesBox matchHistory={matchHistory}/>}
+        <div className="PlayerMatchInfo">
+          {matchesArr}
+        </div>
       </div>
     </div>
   );

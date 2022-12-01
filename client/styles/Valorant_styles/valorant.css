@@ -169,8 +169,13 @@
 .PlayerStatsContainer {
   display: grid;
   grid-template-columns: 20% 80%;
-  /* flex-direction: column; */
   width: 90%;
+  gap: 10px;
+}
+.PlayerMatchHistory {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   gap: 10px;
 }
 .PlayerAccountInfo {
@@ -182,6 +187,7 @@
   border-radius: 4px;
   padding: 8px;
   gap: 10px;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 5);
 }
 .PlayerMatchInfo {
   display: flex;
@@ -216,6 +222,55 @@
   width: 96px;
   height: 96px;
   border-radius: 4px;
+}
+.RecentMatchesBox {
+  display: flex;
+  border: 1px solid #d5374123;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 5);
+  padding: 8px;
+  border-radius: 4px;
+  gap: 20px;
+}
+.overview-div {
+  height: 90%;
+  width: 20%;
+  border-right: 1px solid #d53741a0;
+}
+.RecentMatchesBox h3 {
+  font-size: 24px;
+}
+.RecentMatchesDivs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  width: 100%;
+}
+.val-recent-matches-div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  justify-self: center;
+  background-color: #222429b3;
+  border-radius: 4px;
+  padding: 5px;
+  box-shadow: 1px 1px 5px rgb(0 0 0);
+  transition: 0.5s;
+}
+.val-recent-matches-div:hover {
+  transform: translateY(-1px);
+  cursor: default;
+}
+.val-recent-matches-div p {
+  margin: 0;
+}
+.val-recent-div1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .OuterMatchBox {
   display: flex;
@@ -276,9 +331,6 @@
 }
 .accuracy-percent-div-matchbox {
   font-size: 22px;
-}
-.avg-damage-div-matchbox {
-
 }
 .time-ago-p {
   color:rgba(255, 255, 255, 0.6);
@@ -415,6 +467,13 @@
 .MatchBoxDD {
   border: 1px solid rgba(39, 45, 58, 0.5);
   padding: 5px;
+}
+.recent-top-ptag {
+  color: #ffffff99;
+  font-size: 16px;
+}
+.recent-bottom-ptag {
+  font-size: 24px;
 }
 .playerbox-p-name {
   font-size: 14px;

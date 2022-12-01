@@ -233,21 +233,21 @@ const MatchBox = props => {
           <div className="RankInfo-2">
             {playerTeam === "Blue" && 
             <div className="rankinfo-2-1">
-              <p style={{color: '#2f62bb'}}> {blueWins} </p> 
+              <p style={{color: '#2c5e74'}}> {blueWins} </p> 
               <p> : </p> 
-              <p style={{color: '#ad2230'}}> {redWins} </p>
+              <p style={{color: '#773424'}}> {redWins} </p>
             </div>
             }
             {playerTeam === "Red" && 
             <div className="rankinfo-2-1">
-              <p style={{color: '#ad2230'}}> {redWins} </p>
+              <p style={{color: '#773424'}}> {redWins} </p>
               <p> : </p> 
-              <p style={{color: '#2f62bb'}}> {blueWins} </p> 
+              <p style={{color: '#2c5e74'}}> {blueWins} </p> 
             </div>  
             }
             <div className="rankinfo-2-2">
-              {playerWin && <p style={{color: '#2f62bb'}}> Win </p>}
-              {!playerWin && <p style={{color: '#ad2230'}}> Loss </p>}
+              {playerWin && <p style={{color: '#2c5e74'}}> Win </p>}
+              {!playerWin && <p style={{color: '#773424'}}> Loss </p>}
             </div>
           </div>
         </div>

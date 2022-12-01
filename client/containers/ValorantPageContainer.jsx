@@ -40,7 +40,7 @@ const ValorantPageContainer = () => {
 
   // const testButton = () => {
   //   dispatch(getValorantData('doopy', 'gap'));
-  // }
+  // };
 
   const signOutFunc = async () => {
     const cookies = document.cookie.split(";");
