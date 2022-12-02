@@ -125,6 +125,7 @@ const MatchBox = props => {
         }
       }
     }
+    // if nothing happens default return obj
     return {
       agentData: {
         agentName: 'N/A',
@@ -164,6 +165,7 @@ const MatchBox = props => {
     let legshots = 0;
     let bodyshots = 0;
     let totalDamage = 0;
+    let totalCombatScore = 0;
 
     const playerStats = [];
     for (let i = 0; i < roundResults.length; i++) {
@@ -176,6 +178,7 @@ const MatchBox = props => {
             damage: roundStats.damage,
             kills: roundStats.kills,
             economy: roundStats.economy,
+            combatScore: roundStats.score,
           });
         }
       }
@@ -188,19 +191,23 @@ const MatchBox = props => {
         legshots += playerStats[i].damage[j].legshots;
         totalDamage += playerStats[i].damage[j].damage;
       }
+      totalCombatScore += playerStats[i].combatScore;
+
     }
     return {
       headshots: headshots,
       legshots: legshots,
       bodyshots: bodyshots,
-      totalDamage: totalDamage
+      totalDamage: totalDamage,
+      totalCombatScore: totalCombatScore,
     }
   };
   const userRoundsData = getUserRoundsData(roundResults, searchedPuuid);
 
-  const headshotPercent = (((userRoundsData.headshots) / (userRoundsData.bodyshots + userRoundsData.legshots + userRoundsData.headshots))*100).toFixed(0);
+  const headshotPercent = (((userRoundsData.headshots) / (userRoundsData.bodyshots + userRoundsData.legshots + userRoundsData.headshots))*100).toFixed(1);
   const KDA = ((userAgentData.playerData.kills + userAgentData.playerData.assists) / userAgentData.playerData.deaths).toFixed(2);
   const averageDamage = (userRoundsData.totalDamage / roundResults.length).toFixed(1);
+  const averageCombatScore = (userRoundsData.totalCombatScore / roundResults.length).toFixed(1);
 
   return (
     <div className="OuterMatchBox">
@@ -254,17 +261,43 @@ const MatchBox = props => {
 
         <div className="StatsInfo">
           <p style={{fontSize: '24px', fontWeight: 'bold'}}>{userAgentData.playerData.kills}/{userAgentData.playerData.deaths}/{userAgentData.playerData.assists}</p>
-          {KDA >= 1.5 && <p> K/D/A: <span className="kda-high" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>}
-          {KDA >= 1 && KDA < 1.5 && <p> K/D/A: <span className="kda-normal" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>}
-          {KDA < 1 && <p> K/D/A: <span className="kda-low" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>}
+          {/* {KDA >= 1.5 && <p> K/D/A: <span className="kda-high" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>} */}
+          {/* {KDA >= 1 && KDA < 1.5 && <p> K/D/A: <span className="kda-normal" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>} */}
+          {/* {KDA < 1 && <p> K/D/A: <span className="kda-low" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>} */}
         </div>
 
-        <div className="accuracy-percent-div-matchbox">
-          <p> <span style={{fontSize: "18px", color: "#ffffff99"}}> HS%: </span> {headshotPercent} </p>
+        {KDA >= 1.5 && 
+          <div className="statdiv-matchbox">
+            <p style={{fontSize: "18px", color: "#ffffff99"}}> K/D/A </p>
+            <p className="kda-high"> {KDA} </p>
+          </div>}
+
+          {KDA >= 1 && KDA < 1.5 && 
+          <div className="statdiv-matchbox">
+            <p style={{fontSize: "18px", color: "#ffffff99"}}> K/D/A </p>
+            <p className="kda-normal"> {KDA} </p>
+          </div>}
+          
+          {KDA < 1 && 
+          <div className="statdiv-matchbox">
+            <p style={{fontSize: "18px", color: "#ffffff99"}}> K/D/A </p>
+            <p className="kda-low"> {KDA} </p>
+          </div>}
+
+
+        <div className="statdiv-matchbox">
+          <p style={{fontSize: "18px", color: "#ffffff99"}}> HS% </p>
+          <p> {headshotPercent}% </p>
         </div>
 
-        <div className="avg-damage-div-matchbox">
-          <p> <span style={{fontSize: "14px", color: "#ffffff99"}}>ADR: </span>{averageDamage} </p>
+        <div className="statdiv-matchbox">
+          <p style={{fontSize: "18px", color: "#ffffff99"}}> ADR </p>
+          <p> {averageDamage} </p>
+        </div>
+
+        <div className="statdiv-matchbox">
+          <p style={{fontSize: "18px", color: "#ffffff99"}}> ACS </p>
+          <p> {averageCombatScore} </p>
         </div>
 
         {!open && 
