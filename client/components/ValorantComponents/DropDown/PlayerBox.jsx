@@ -15,8 +15,10 @@ const PlayerBox = props => {
     puuid,
     stats,
     teamId,
+    totalRounds,
     roundStats
   } = props;
+  console.log(roundStats, 'round stats');
   
   const searchedPuuid = useSelector(state => state.valorant.searchedUser.puuid);
 
@@ -53,12 +55,14 @@ const PlayerBox = props => {
       }
     };
   };
+  const playerIcons = findPlayerIcons(valorantAgents, characterId, competitiveTier);
 
   const getPlayerRoundsData = (roundStats) => {
     let headshots = 0;
     let legshots = 0;
     let bodyshots = 0;
     let totalDamage = 0;
+    let totalCombatScore = 0;
     for (let i = 0; i < roundStats.length; i++) {
       for (let j = 0; j < roundStats[i].damage.length; j++) {
         headshots += roundStats[i].damage[j].headshots;
@@ -66,20 +70,22 @@ const PlayerBox = props => {
         legshots += roundStats[i].damage[j].legshots;
         totalDamage += roundStats[i].damage[j].damage;
       }
+      totalCombatScore += roundStats[i].combatScore;
     }
     return {
-      headshots: headshots,
-      legshots: legshots,
-      bodyshots: bodyshots,
-      totalDamage: totalDamage
+      headshots,
+      legshots,
+      bodyshots,
+      totalDamage,
+      totalCombatScore,
     }
   };
-
   const playerRoundsData = getPlayerRoundsData(roundStats);
-  const playerIcons = findPlayerIcons(valorantAgents, characterId, competitiveTier);
+
   const KDA = ((stats.kills + stats.assists) / stats.deaths).toFixed(2);
   const headshotPercent = (((playerRoundsData.headshots) / (playerRoundsData.bodyshots + playerRoundsData.legshots + playerRoundsData.headshots))*100).toFixed(0);
-  const averageDamage = (playerRoundsData.totalDamage / roundStats.length).toFixed(1);
+  const averageDamage = (playerRoundsData.totalDamage / totalRounds).toFixed(1);
+  const averageCombatScore = (playerRoundsData.totalCombatScore / totalRounds).toFixed(1);
 
   return (
     <div className="PlayerBox" id={`DD-PlayerBox-${teamId}`}>
@@ -103,12 +109,16 @@ const PlayerBox = props => {
         {KDA < 1 && <p style={{fontSize: "12px", color: "#ffffff99"}}> K/D/A: <span className="kda-low">{KDA}</span> </p>}
       </div>
 
-      <div className="accuracy-percent-div">
-        <p> <span style={{fontSize: "14px", color: "#ffffff99"}}>HS: </span>{headshotPercent}% </p>
+      <div className="avg-stats-div">
+        <p className="playerbox-ptag"> {headshotPercent} <span style={{color: "#ffffff99"}}>%</span> </p>
       </div>
 
-      <div className="avg-damage-div">
-        <p> <span style={{fontSize: "14px", color: "#ffffff99"}}>ADR: </span>{averageDamage} </p>
+      <div className="avg-stats-div">
+        <p className="playerbox-ptag"> {averageDamage} </p>
+      </div>
+
+      <div className="avg-stats-div">
+        <p className="playerbox-ptag"> {averageCombatScore} </p>
       </div>
 
 

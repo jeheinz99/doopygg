@@ -193,7 +193,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 5px;
+  gap: 15px;
 }
 .PlayerWeaponInfo {
   display: flex;
@@ -362,10 +362,12 @@
 .MatchBox {
   display: grid;
   grid-template-columns: 8% 12% 20% 15% 10% 10% 10% 10% 5%;
-  color: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(39, 45, 58, 0.5);
   padding: 5px;
   align-items: center;
+}
+.MatchBox p {
+  margin: 0;
 }
 .userAgent {
   width: 64px;
@@ -382,6 +384,7 @@
 }
 .AgentInfo p, .RankInfo p {
   margin: 0;
+  font-size: 14px;
 }
 .RankInfo {
   display: flex;
@@ -424,11 +427,9 @@
 .statdiv-matchbox p {
   margin: 0;
 }
-.time-ago-p {
-  color:rgba(255, 255, 255, 0.6);
-}
 .MatchInfo p {
   width: 100%;
+  color: rgba(255, 255, 255, 0.7);
 }
 .MatchInfo-1 {
   display: flex;
@@ -438,17 +439,8 @@
   gap: 5px;
 }
 .MatchInfo-p-1 {
-  font-size: 24px;
-}
-.StatsInfo {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-.StatsInfo p {
-  margin: 0;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.8);
 }
 .gamemode-icon {
   width: 20px;
@@ -469,7 +461,7 @@
 }
 .PlayerBox {
   display: grid;
-  grid-template-columns: 7% 20% 15% 15% 10% 10%;
+  grid-template-columns: 7% 20% 15% 15% repeat(3, 1fr);
   gap: 10px;
   align-items: center;
   width: 100%;
@@ -479,8 +471,8 @@
 }
 .team-header-dd {
   display: grid;
-  padding: 0px 5px 2px 5px;
-  grid-template-columns: 7% 20% 15% 15% 10% 10%;
+  padding: 5px;
+  grid-template-columns: 7% 20% 15% 15% repeat(3, 1fr);
   align-items: center;
   gap: 10px;
   color: rgba(255, 255, 255, 0.7);
@@ -497,11 +489,16 @@
 }
 .team-header-dd h3 {
   margin: 0;
-  font-size: 20px;
+  font-size: 16px;
 }
-.avg-damage-div, .accuracy-percent-div {
+.avg-stats-div {
+  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
+}
+.avg-stats-div p {
+  margin: 0;
 }
 #DD-PlayerBox-Blue:nth-child(odd) {
   background-color: rgba(47, 69, 81, 0.593);
@@ -572,6 +569,13 @@
 .recent-bottom-ptag {
   font-size: 24px;
 }
+.playerbox-top-ptag {
+  color: #ffffff99;
+  font-size: 14px;
+}
+.playerbox-bottom-ptag {
+  font-size: 18px;
+}
 .playerbox-p-name {
   font-size: 14px;
 }
@@ -586,9 +590,12 @@
 }
 #win-true {
   border-left: 5px solid rgb(34, 62, 111);
+  background-color: rgba(30, 38, 50, 0.534);;
+  /* background-color: rgba(43, 26, 28, 0.534); */
 }
 #win-false {
   border-left: 5px solid rgb(116, 33, 41);
+  background-color: rgba(41, 32, 33, 0.874);
 }
 @media only screen and (max-width: 420px) {
   #welcome-valorant {

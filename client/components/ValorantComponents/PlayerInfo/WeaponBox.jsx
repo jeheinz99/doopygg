@@ -6,7 +6,7 @@ const WeaponBox = props => {
     <div className="WeaponBox">
       <img className="weapon-icon" src={icon2} />
       <p> {name} </p>
-      <p> {kills} Kills </p>
+      { kills === 1 ? <p> {kills} Kill </p> : <p> {kills} Kills </p>}
     </div>
   );
 };

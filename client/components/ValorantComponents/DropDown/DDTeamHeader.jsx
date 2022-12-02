@@ -27,6 +27,12 @@ const DDTeamHeader = (props) => {
         contentClassName={''}
         content={'ADR'}
         leftPercent={55}/>
+      <Tooltip tooltipType={'text'}
+        tooltipContent={'Average Combat Score'}
+        width={'100px'}
+        contentClassName={''}
+        content={'ACS'}
+        leftPercent={55}/>
     </div>
   );
 };

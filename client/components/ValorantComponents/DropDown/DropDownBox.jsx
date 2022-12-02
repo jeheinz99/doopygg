@@ -3,10 +3,10 @@ import PlayerBox from "./PlayerBox";
 
 const DropDownBox = props => {
 
-  const { players, roundResults, playerWin } = props;
+  const { totalRounds, players, roundResults, playerWin } = props;
 
   // finds player's per-round stats (headshot%, econ, etc.)
-  const findPlayerRoundStats = (players, roundResults) => {
+  const findPlayersRoundStats = (players, roundResults) => {
     const playerStats = {};
     // add a key value for each player by their puuid
     for (let i = 0; i < players.length; i++) {
@@ -25,17 +25,21 @@ const DropDownBox = props => {
           damage: roundStats.damage,
           kills: roundStats.kills,
           economy: roundStats.economy,
+          combatScore: roundStats.score,
         });
       }
     }
     return playerStats;
   };
-  const playersRoundStats = findPlayerRoundStats(players, roundResults);
-  // console.log(playersRoundStats, 'players round stats');
+  const playersRoundStats = findPlayersRoundStats(players, roundResults);
+
+  // sort players by their combat scores
+  const sortedPlayers = players.sort((a, b) => b.stats.score - a.stats.score);
+
   // determines who was on blue/red teams
   const team1Arr = [];
   const team2Arr = [];
-  for (let i = 0; i < players.length; i++) {
+  for (let i = 0; i < sortedPlayers.length; i++) {
     const player = players[i];
     if (player.teamId === "Blue") {
       team1Arr.push(
@@ -51,6 +55,7 @@ const DropDownBox = props => {
         puuid={player.puuid}
         stats={player.stats}
         teamId={player.teamId}
+        totalRounds={totalRounds}
         roundStats={playersRoundStats[player.puuid].rounds}
       />);
     }
@@ -68,6 +73,7 @@ const DropDownBox = props => {
         puuid={player.puuid}
         stats={player.stats}
         teamId={player.teamId}
+        totalRounds={totalRounds}
         roundStats={playersRoundStats[player.puuid].rounds}
       />);
     }

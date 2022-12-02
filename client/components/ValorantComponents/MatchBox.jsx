@@ -38,17 +38,19 @@ const MatchBox = props => {
   let redWins;
   let winningTeam;
   let playerWin = false;
+  let totalRoundsPlayed = 0;
 
   // gets team round wins outcome
   for (let i = 0; i < teams.length; i++) {
     if (teams[i].teamId === "Blue") {
-      blueWins = teams[i].roundsWon;
+      blueWins = teams[i].numPoints;
       if (teams[i].won === true) winningTeam = "Blue";
     }
     else if (teams[i].teamId === "Red") {
-      redWins = teams[i].roundsWon;
+      redWins = teams[i].numPoints;
       if (teams[i].won === true) winningTeam = "Red";
     }
+    totalRoundsPlayed += teams[i].numPoints;
   }
 
   // gets how long ago game was
@@ -206,8 +208,8 @@ const MatchBox = props => {
 
   const headshotPercent = (((userRoundsData.headshots) / (userRoundsData.bodyshots + userRoundsData.legshots + userRoundsData.headshots))*100).toFixed(1);
   const KDA = ((userAgentData.playerData.kills + userAgentData.playerData.assists) / userAgentData.playerData.deaths).toFixed(2);
-  const averageDamage = (userRoundsData.totalDamage / roundResults.length).toFixed(1);
-  const averageCombatScore = (userRoundsData.totalCombatScore / roundResults.length).toFixed(1);
+  const averageDamage = (userRoundsData.totalDamage / totalRoundsPlayed).toFixed(1);
+  const averageCombatScore = (userRoundsData.totalCombatScore / totalRoundsPlayed).toFixed(1);
 
   return (
     <div className="OuterMatchBox">
@@ -240,50 +242,42 @@ const MatchBox = props => {
           <div className="RankInfo-2">
             {playerTeam === "Blue" && 
             <div className="rankinfo-2-1">
-              <p style={{color: '#2c5e74'}}> {blueWins} </p> 
+              <p style={{color: '#16e5b4'}}> {blueWins} </p> 
               <p> : </p> 
-              <p style={{color: '#773424'}}> {redWins} </p>
+              <p style={{color: '#ff4655'}}> {redWins} </p>
             </div>
             }
             {playerTeam === "Red" && 
             <div className="rankinfo-2-1">
-              <p style={{color: '#773424'}}> {redWins} </p>
+              <p style={{color: '#16e5b4'}}> {redWins} </p>
               <p> : </p> 
-              <p style={{color: '#2c5e74'}}> {blueWins} </p> 
+              <p style={{color: '#ff4655'}}> {blueWins} </p> 
             </div>  
             }
-            <div className="rankinfo-2-2">
-              {playerWin && <p style={{color: '#2c5e74'}}> Win </p>}
-              {!playerWin && <p style={{color: '#773424'}}> Loss </p>}
-            </div>
           </div>
         </div>
-
-        <div className="StatsInfo">
-          <p style={{fontSize: '24px', fontWeight: 'bold'}}>{userAgentData.playerData.kills}/{userAgentData.playerData.deaths}/{userAgentData.playerData.assists}</p>
-          {/* {KDA >= 1.5 && <p> K/D/A: <span className="kda-high" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>} */}
-          {/* {KDA >= 1 && KDA < 1.5 && <p> K/D/A: <span className="kda-normal" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>} */}
-          {/* {KDA < 1 && <p> K/D/A: <span className="kda-low" style={{fontSize: '20px', margin: 0}}> {KDA} </span> </p>} */}
+        
+        <div className="statdiv-matchbox">
+          <p style={{fontSize: '20px', fontWeight: 'bold', textAlign: 'center'}}>{userAgentData.playerData.kills}/{userAgentData.playerData.deaths}/{userAgentData.playerData.assists}</p>
         </div>
 
         {KDA >= 1.5 && 
-          <div className="statdiv-matchbox">
-            <p style={{fontSize: "18px", color: "#ffffff99"}}> K/D/A </p>
-            <p className="kda-high"> {KDA} </p>
-          </div>}
+        <div className="statdiv-matchbox">
+          <p style={{fontSize: "18px", color: "#ffffff99"}}> K/D/A </p>
+          <p className="kda-high"> {KDA} </p>
+        </div>}
 
-          {KDA >= 1 && KDA < 1.5 && 
-          <div className="statdiv-matchbox">
-            <p style={{fontSize: "18px", color: "#ffffff99"}}> K/D/A </p>
-            <p className="kda-normal"> {KDA} </p>
-          </div>}
-          
-          {KDA < 1 && 
-          <div className="statdiv-matchbox">
-            <p style={{fontSize: "18px", color: "#ffffff99"}}> K/D/A </p>
-            <p className="kda-low"> {KDA} </p>
-          </div>}
+        {KDA >= 1 && KDA < 1.5 && 
+        <div className="statdiv-matchbox">
+          <p style={{fontSize: "18px", color: "#ffffff99"}}> K/D/A </p>
+          <p className="kda-normal"> {KDA} </p>
+        </div>}
 
+        {KDA < 1 && 
+        <div className="statdiv-matchbox">
+          <p style={{fontSize: "18px", color: "#ffffff99"}}> K/D/A </p>
+          <p className="kda-low"> {KDA} </p>
+        </div>}
 
         <div className="statdiv-matchbox">
           <p style={{fontSize: "18px", color: "#ffffff99"}}> HS% </p>
@@ -317,7 +311,7 @@ const MatchBox = props => {
 
       </div>
       {open && 
-      <DropDownBox players={players} playerWin={playerWin} roundResults={roundResults}/>
+      <DropDownBox totalRounds={totalRoundsPlayed} players={players} playerWin={playerWin} roundResults={roundResults}/>
       }
     </div>
   );
