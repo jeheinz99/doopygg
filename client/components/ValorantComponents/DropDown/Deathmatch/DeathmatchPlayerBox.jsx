@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
-import valorantAgents from "../../../../../valorant-assets/valorant-agents.json";
 import Tooltip from "../../../SharedComponents/Tooltip";
 import { numFormat } from "../../../../functions/functions";
+
+import valorantAgents from "../../../../../game-asset-data/valorant-assets/valorant-agents.json";
 
 const DeathmatchPlayerBox = props => {
 

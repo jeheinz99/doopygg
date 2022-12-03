@@ -4,9 +4,9 @@ import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { getMatchTimeAgo, numFormat } from "../../functions/functions";
 import { getUserAgentData, getValMap } from "../../functions/valorant-functions";
 import Tooltip from "../SharedComponents/Tooltip";
-import valorantMaps from "../../../valorant-assets/valorant-maps.json";
-import valorantAgents from "../../../valorant-assets/valorant-agents.json";
 import DeathmatchDropdown from "./DropDown/Deathmatch/DeathmatchDropdown";
+import valorantMaps from "../../../game-asset-data/valorant-assets/valorant-maps.json";
+import valorantAgents from "../../../game-asset-data/valorant-assets/valorant-agents.json";
 
 const gameModeIcon = "https://media.valorant-api.com/gamemodes/a8790ec5-4237-f2f0-e93b-08a8e89865b2/displayicon.png";
 

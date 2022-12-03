@@ -38,10 +38,6 @@ const ValorantPageContainer = () => {
     // dispatch(getValorantData(riotIdInput, taglineInput));
   };
 
-  // const testButton = () => {
-  //   dispatch(getValorantData('doopy', 'gap'));
-  // };
-
   const signOutFunc = async () => {
     const cookies = document.cookie.split(";");
 
@@ -92,7 +88,6 @@ const ValorantPageContainer = () => {
               <p id="hash"> # </p>
               <input className="ValBoxInput" id="val-input-2" placeholder="Tag-line" onChange={ taglineData } required></input>
               <button id="ValorantBoxButton" onClick={() => searchValData()}> <BiSearch id="SearchIcon"/> </button>
-              {/* <button id="temp-button" onClick={() => testButton()}> test button </button> */}
             </div>
             {!document.cookie ? 
             <a id="Riot-Sign-On" href={link}><SiRiotgames />Sign In</a>

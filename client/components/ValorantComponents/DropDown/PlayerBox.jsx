@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
-import valorantAgents from "../../../../valorant-assets/valorant-agents.json";
-import valorantRankData from "../../../../valorant-assets/valorant-rankdata.json";
 import Tooltip from "../../SharedComponents/Tooltip";
+
+import valorantAgents from "../../../../game-asset-data/valorant-assets/valorant-agents.json";
+import valorantRankData from "../../../../game-asset-data/valorant-assets/valorant-rankdata.json";
 
 const PlayerBox = props => {
   

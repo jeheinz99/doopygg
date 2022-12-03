@@ -4,6 +4,7 @@ import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { getMatchTimeAgo } from '../../functions/functions.js';
 import DropDownBox from './DropDown/DropDownBox.jsx';
 import MatchBoxTeamPlayers from './MatchBoxTeamPlayers.jsx';
+import Tooltip from '../SharedComponents/Tooltip.jsx';
 
 const numsObj = {
   1: '01',
@@ -66,8 +67,12 @@ const Matches = props => {
         </div>
         <div className="MatchGroup2">
           <div className="tooltip championIcon-and-Level">
-              <span className="tooltiptext"> {champion} </span>
-              <img id="championIcon" src={championIcon}/>
+            <Tooltip tooltipType={'image'}
+              tooltipContent={champion}
+              width={'120px'}
+              contentClassName={'championIcon'}
+              content={championIcon}
+              leftPercent={50}/>              
               <div className="level-div">{champLevel}</div>
           </div>
           <div className="MatchGroup2div3">

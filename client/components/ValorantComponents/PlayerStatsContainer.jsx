@@ -4,12 +4,12 @@ import RecentMatchesBox from "./PlayerInfo/RecentMatchesBox";
 import PlayerInfo from "./PlayerInfo/PlayerInfo";
 import PlayerWeaponInfo from "./PlayerInfo/PlayerWeaponInfo";
 import PlayerAccuracyInfo from "./PlayerInfo/PlayerAccuracyInfo";
-
-import valorantPlayerCards from "../../../valorant-assets/valorant-playercards.json";
-import valorantTitles from "../../../valorant-assets/valorant-titles.json";
-import valorantRankData from "../../../valorant-assets/valorant-rankdata.json";
-import valorantWeapons from "../../../valorant-assets/valorant-weapons.json";
 import DeathmatchBox from "./DeathmatchBox";
+
+import valorantPlayerCards from "../../../game-asset-data/valorant-assets/valorant-playercards.json";
+import valorantTitles from "../../../game-asset-data/valorant-assets/valorant-titles.json";
+import valorantRankData from "../../../game-asset-data/valorant-assets/valorant-rankdata.json";
+import valorantWeapons from "../../../game-asset-data/valorant-assets/valorant-weapons.json";
 
 const PlayerStatsContainer = props => {
 

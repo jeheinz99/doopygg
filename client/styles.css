@@ -87,6 +87,7 @@ html, body {
   align-items: center;
   justify-content: center;
   width: 98.5%;
+  max-width: 100vw;
   box-shadow: 2px 5px 5px rgba(0, 0, 0, 5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.861);
   background: #171A21;
@@ -281,7 +282,7 @@ html, body {
   display: grid;
   grid-template-columns: 30% 70%;
   justify-content: center;
-  width: 100%;
+  width: 98.5%;
   height: 100%;
   gap: 1em;
 }
@@ -502,7 +503,7 @@ html, body {
 #DropDownButton:hover {
   filter: invert(20%);
 }
-#championIcon {
+.championIcon {
   position: relative;
   top: 0;
   left: 0;
@@ -2418,7 +2419,7 @@ h4 {
     height: 96px;
     width: 96px;
   }
-  #championIcon {
+  .championIcon {
     width: 56px;
     height: 56px;
   }
@@ -2491,7 +2492,7 @@ h4 {
     width: 24px;
     height: 24px;
   }
-  #championIcon {
+  .championIcon {
     width: 48px;
     height: 48px;
   }
@@ -2648,7 +2649,7 @@ h4 {
     width: 40px;
     height: 40px;
   }
-  #championIcon {
+  .championIcon {
     width: 40px;
     height: 40px;
   }
@@ -2788,7 +2789,7 @@ h4 {
     width: 24px;
     height: 24px;
   }
-  #championIcon {
+  .championIcon {
     width: 24px;
     height: 24px;
   }
