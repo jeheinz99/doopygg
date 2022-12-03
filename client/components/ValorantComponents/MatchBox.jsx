@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
+import { getMatchTimeAgo } from "../../functions/functions";
+import { getUserAgentData, getValMap, getUserRankData } from "../../functions/valorant-functions";
 import DropDownBox from "./DropDown/DropDownBox";
 import valorantMaps from "../../../valorant-assets/valorant-maps.json";
 import valorantAgents from "../../../valorant-assets/valorant-agents.json";
 import valorantRankData from "../../../valorant-assets/valorant-rankdata.json";
-import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import Tooltip from "../SharedComponents/Tooltip";
 
 const gameModeIcons = {
   standard: "https://media.valorant-api.com/gamemodes/96bd3920-4f36-d026-2b28-c683eb0bcac5/displayicon.png",
   competitive: "https://media.valorant-api.com/gamemodes/96bd3920-4f36-d026-2b28-c683eb0bcac5/displayicon.png",
-  deathmatch: "https://media.valorant-api.com/gamemodes/a8790ec5-4237-f2f0-e93b-08a8e89865b2/displayicon.png",
   escalation: "https://media.valorant-api.com/gamemodes/a4ed6518-4741-6dcb-35bd-f884aecdc859/displayicon.png",
   onboarding: "https://media.valorant-api.com/gamemodes/4744698a-4513-dc96-9c22-a9aa437e4a58/displayicon.png",
   spikerush: "https://media.valorant-api.com/gamemodes/e921d1e6-416b-c31f-1291-74930c330b7b/displayicon.png",
@@ -24,20 +25,20 @@ const MatchBox = props => {
   const { players, matchInfo, roundResults, teams } = props;
   
   const searchedPuuid = useSelector(state => state.valorant.searchedUser.puuid);
+
   const getPlayerTeam = players.filter((player) => player.puuid === searchedPuuid);
   const playerTeam = getPlayerTeam[0].teamId;
 
-  let gameType;
-  if (matchInfo.isRanked) gameType = "Competitive";
-  else gameType = "Standard";
-
+  let gameType = matchInfo.queueId;
+  gameType = gameType.charAt(0).toUpperCase() + gameType.slice(1);
+ 
   let gamemodeIcon;
   (gameModeIcons[matchInfo.queueId] ? gamemodeIcon = gameModeIcons[matchInfo.queueId] : gamemodeIcon = gameModeIcons[standard]);
 
   let blueWins;
   let redWins;
   let winningTeam;
-  let playerWin = false;
+  let playerWin;
   let totalRoundsPlayed = 0;
 
   // gets team round wins outcome
@@ -53,113 +54,10 @@ const MatchBox = props => {
     totalRoundsPlayed += teams[i].numPoints;
   }
 
-  // gets how long ago game was
-  const getTimeAgo = gameEndTime => {
-    const gameDateStamp = new Date(gameEndTime);
-    const todaysDateStamp = Date.now();
-
-    const diff = todaysDateStamp - gameDateStamp;
-    if (diff >= 3600000 && diff < 86400000) {
-      if (Math.round(diff/3600000) === 1) return ('1 hour ago');
-      return (`${Math.round(diff/3600000)} hours ago`);
-    }
-    if (diff >= 60000 && diff < 3600000) {
-      if (Math.round(diff/60000) === 1) return ('1 minute ago');
-      return (`${Math.round(diff/60000)} minutes ago`);
-    }
-    if (diff >= 86400000 && diff < 2592000000) {
-      if (Math.round(diff/86400000) === 1) return ('1 day ago');
-      return (`${Math.round(diff/86400000)} days ago`);
-    }
-    if (diff < 60000) {
-      return (`${Math.round(diff/1000)} seconds ago`);
-    }
-    if (diff >= 2592000000 && diff < 31540000000) {
-      if (Math.round(diff/2592000000) === 1) return ('1 month ago');
-      return (`${Math.round(diff/2592000000)} months ago`);
-    }
-    else {
-      return ('over 1 year ago');
-    }
-  };
-  const timeAgo = getTimeAgo(matchInfo.gameStartMillis);
-
-  // finds the map of the current match
-  const getValMap = (mapId, maps) => {
-    for (let i = 0; i < maps.length; i++) {
-      if (maps[i].mapUrl === mapId) {
-        return {
-          mapImage: maps[i].listViewIcon,
-          mapName: maps[i].displayName
-        }
-      }
-    }
-    return {
-      mapImage: 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png',
-      mapName: 'N/A'
-    }
-  };
+  const timeAgo = getMatchTimeAgo(matchInfo.gameStartMillis);
+  const userAgentData = getUserAgentData(searchedPuuid, players, valorantAgents, winningTeam);
+  (userAgentData.playerData.playerWin === true ? playerWin = true : playerWin = false);
   const mapData = getValMap(matchInfo.mapId, valorantMaps);
-
-  // finds the user's data from the agent they played and checks if player won game
-  const getUserAgentData = (searchedPuuid, players, agents) => {
-    for (let i = 0; i < players.length; i++) {
-      const player = players[i];
-      if (player.puuid === searchedPuuid) {
-        if (player.teamId === winningTeam) {
-          playerWin = true;
-        }
-        for (let j = 0; j < agents.length; j++) {
-          const agent = agents[j];
-          if (player.characterId === agent.uuid) {
-            return {
-              agentData: {
-                agentName: agent.displayName,
-                agentIcon: agent.displayIcon,
-              },
-              playerData: {
-                kills: player.stats.kills,
-                deaths: player.stats.deaths,
-                assists: player.stats.assists, 
-              }
-            }
-          }
-        }
-      }
-    }
-    // if nothing happens default return obj
-    return {
-      agentData: {
-        agentName: 'N/A',
-        agentIcon: 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png' 
-      },
-      playerData: {
-        kills: 0,
-        deaths: 0,
-        assists: 0,
-      }
-    }
-  };
-  const userAgentData = getUserAgentData(searchedPuuid, players, valorantAgents);
-
-  // finds the user's rank for each match played
-  const getUserRankData = (searchedPuuid, players, valorantRankData) => {
-    for (let i = 0; i < players.length; i++) {
-      const player = players[i];
-      if (searchedPuuid === player.puuid) {
-        for (let j = 0; j < valorantRankData.length; j++) {
-          const rank = valorantRankData[j];
-          if (player.competitiveTier === rank.tier) {
-            return {
-              rankIcon: rank.largeIcon,
-              rankTier: rank.tierName,
-              rankDivision: rank.divisionName,
-            }
-          }
-        }
-      }
-    }
-  };
   const userRankData = getUserRankData(searchedPuuid, players, valorantRankData[4].tiers);
 
   const getUserRoundsData = (roundResults, userPuuid) => {
@@ -230,9 +128,9 @@ const MatchBox = props => {
             <p> {gameType} </p>
           </div>
 
-          <p className="time-ago-p"> {timeAgo} </p>
+          <p> {timeAgo} </p>
         </div>
-
+        
         <div className="RankInfo">
           <div className="RankInfo-1">
             <img className="userRank" src={userRankData.rankIcon} />
@@ -299,20 +197,18 @@ const MatchBox = props => {
           <button className="val-dd-button" onClick={() => setOpen(!open)}> 
             <AiFillCaretDown color={'white'}/> 
           </button>
-        </div>
-        }
+        </div>}
+
         {open && 
         <div className="dd-button-div">
           <button className="val-dd-button" onClick={() => setOpen(!open)}> 
             <AiFillCaretUp color={'white'}/> 
           </button>
-        </div>
-        }
+        </div>}
 
       </div>
       {open && 
-      <DropDownBox totalRounds={totalRoundsPlayed} players={players} playerWin={playerWin} roundResults={roundResults}/>
-      }
+      <DropDownBox totalRounds={totalRoundsPlayed} players={players} playerWin={playerWin} roundResults={roundResults}/>}
     </div>
   );
 };

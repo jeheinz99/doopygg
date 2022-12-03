@@ -4,6 +4,7 @@ import valorantRankData from "../../../../valorant-assets/valorant-rankdata.json
 import Tooltip from "../../SharedComponents/Tooltip";
 
 const PlayerBox = props => {
+  
   const { 
     characterId, 
     competitiveTier, 
@@ -18,22 +19,8 @@ const PlayerBox = props => {
     totalRounds,
     roundStats
   } = props;
-  console.log(roundStats, 'round stats');
   
   const searchedPuuid = useSelector(state => state.valorant.searchedUser.puuid);
-
-  // finds the user's data from the agent they played and checks if player won game
-  // console.log({
-  //   characterId,
-  //   competitiveTier,
-  //   partyId,
-  //   playerCard,
-  //   playerTitle,
-  //   puuid,
-  //   stats,
-  //   teamId,
-  //   roundStats
-  // });
 
   const findPlayerIcons = (valorantAgents, characterId, competitiveTier) => {
     const findAgentIcon = valorantAgents.filter(({uuid}) => uuid === characterId);

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { AiFillCaretUp, AiFillCaretDown } from 'react-icons/ai';
+import { getMatchTimeAgo } from '../../functions/functions.js';
 import TFTDropDownBox from './TFTDropDown/TFTDropDownBox.jsx';
 import TFTUnitsBox from './TFTUnitsBox.jsx';
 
@@ -28,37 +29,7 @@ const TFTBoxes = props => {
     return outputArr;
   };
 
-  // function that compares todays unix timestamp to the match timestamp
-  const getTimeAgo = gameEndTime => {
-    const gameDateStamp = new Date(gameEndTime);
-    const todaysDateStamp = Date.now();
-
-    const diff = todaysDateStamp - gameDateStamp;
-    if (diff >= 3600000 && diff < 86400000) {
-      if (Math.round(diff/3600000) === 1) return ('1 hour ago');
-      return (`${Math.round(diff/3600000)} hours ago`);
-    }
-    if (diff >= 60000 && diff < 3600000) {
-      if (Math.round(diff/60000) === 1) return ('1 minute ago');
-      return (`${Math.round(diff/60000)} minutes ago`);
-    }
-    if (diff >= 86400000 && diff < 2592000000) {
-      if (Math.round(diff/86400000) === 1) return ('1 day ago');
-      return (`${Math.round(diff/86400000)} days ago`);
-    }
-    if (diff < 60000) {
-      return (`${Math.round(diff/1000)} seconds ago`);
-    }
-    if (diff >= 2592000000 && diff < 31540000000) {
-      if (Math.round(diff/2592000000) === 1) return ('1 month ago');
-      return (`${Math.round(diff/2592000000)} months ago`);
-    }
-    else {
-      return ('over 1 year ago');
-    }
-  }
-
-  const timeAgo = getTimeAgo(gameEnd);
+  const timeAgo = getMatchTimeAgo(gameEnd);
 
   const unitsArr = [];
   

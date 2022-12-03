@@ -7,7 +7,7 @@ const DDTeamHeader = (props) => {
   return (
     <div className="team-header-dd" id="team1header">
       <h3> { teamName } </h3>
-      <p id="test-p"> Riot ID </p>
+      <p> Riot ID </p>
       <p> Rank </p>
       <Tooltip tooltipType={'text'}
         tooltipContent={'Kills, Deaths, Assists'}

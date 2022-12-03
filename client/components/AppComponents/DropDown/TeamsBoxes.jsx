@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+import { numFormat } from '../../../functions/functions';
 
 const TeamsBoxes = props => {
 
@@ -8,8 +9,6 @@ const TeamsBoxes = props => {
   const regionId = useSelector(state => state.summoners.region);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  // allows to get commas in large numbers
-  const numFormat = new Intl.NumberFormat('en-US');
   
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
   const KDA = ((kills + assists) / deaths).toFixed(2);

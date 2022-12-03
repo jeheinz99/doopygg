@@ -9,6 +9,7 @@ import valorantPlayerCards from "../../../valorant-assets/valorant-playercards.j
 import valorantTitles from "../../../valorant-assets/valorant-titles.json";
 import valorantRankData from "../../../valorant-assets/valorant-rankdata.json";
 import valorantWeapons from "../../../valorant-assets/valorant-weapons.json";
+import DeathmatchBox from "./DeathmatchBox";
 
 const PlayerStatsContainer = props => {
 
@@ -156,14 +157,26 @@ const PlayerStatsContainer = props => {
 
   const matchesArr = [];
   for (let i = 0; i < matchHistory.length; i++) {
-    matchesArr.push(
-    <MatchBox 
-      key={`val-match-${matchHistory[i].matchInfo.matchId}`}
-      players={matchHistory[i].players}
-      matchInfo={matchHistory[i].matchInfo}
-      roundResults={matchHistory[i].roundResults}
-      teams={matchHistory[i].teams}
-    />);
+    const match = matchHistory[i];
+    if (match.matchInfo.queueId === "deathmatch") {
+      matchesArr.push(
+      <DeathmatchBox
+        key={`val-match-${match.matchInfo.matchId}`}
+        players={match.players}
+        matchInfo={match.matchInfo}
+        roundResults={match.roundResults}
+      />);
+    }
+    else {
+      matchesArr.push(
+      <MatchBox 
+        key={`val-match-${match.matchInfo.matchId}`}
+        players={match.players}
+        matchInfo={match.matchInfo}
+        roundResults={match.roundResults}
+        teams={match.teams}
+      />);
+    }
   }
 
   return (

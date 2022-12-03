@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getSummonerData, updateSummonerData } from '../actions/actions.js';
 import { useSearchParams } from 'react-router-dom';
+import { getUpdatedTimeAgo } from '../functions/functions.js';
 import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataBox.jsx';
@@ -36,33 +37,7 @@ const SearchBox = () => {
     setSearchParams({ region: regionId, summonerName: summonerName });
   };
 
-  const getTimeAgo = lastUpdated => {
-    const todaysDateStamp = Date.now();
-    
-    const diff = todaysDateStamp - lastUpdated;
-    if (diff < 180000) return (3 - (Math.round(diff/60000)));
-    if (diff >= 3600000 && diff < 86400000) {
-      if (Math.round(diff/3600000) === 1) return ('1 hour ago');
-      return (`${Math.round(diff/3600000)} hours ago`);
-    }
-    if (diff >= 60000 && diff < 3600000) {
-      if (Math.round(diff/60000) === 1) return ('1 minute ago');
-      return (`${Math.round(diff/60000)} minutes ago`);
-    }
-    if (diff >= 86400000 && diff < 2592000000) {
-      if (Math.round(diff/86400000) === 1) return ('1 day ago');
-      return (`${Math.round(diff/86400000)} days ago`);
-    }
-    if (diff >= 2592000000 && diff < 31540000000) {
-      if (Math.round(diff/2592000000) === 1) return ('1 month ago');
-      return (`${Math.round(diff/2592000000)} months ago`);
-    }
-    else {
-      return ('over 1 year ago');
-    }
-  };
-
-  const timeAgo = getTimeAgo(lastUpdated);
+  const timeAgo = getUpdatedTimeAgo(lastUpdated);
 
   let summonerNameInput;
   const summonerNameData = e => {

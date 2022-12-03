@@ -366,6 +366,13 @@
   padding: 5px;
   align-items: center;
 }
+.DeathMatchBox {
+  display: grid;
+  grid-template-columns: 8% 12% repeat(4, 1fr) auto;
+  border: 1px solid rgba(39, 45, 58, 0.5);
+  padding: 5px;
+  align-items: center;
+}
 .MatchBox p {
   margin: 0;
 }
@@ -486,6 +493,21 @@
   width: 100%;
   justify-content: center;
   cursor: default;
+}
+#deathmatch-header {
+  grid-template-columns: 10% 12% repeat(3, 1fr) 15% 15%;
+}
+#deathmatch-player-box {
+  width: 99%;
+  grid-template-columns: 10% 12% repeat(3, 1fr) 15% 15%;
+}
+#deathmatch-player-box:nth-child(odd) {
+  background-color: #1f1f26;
+}
+#deathmatch-player-box p {
+  margin: 0;
+  text-align: center;
+  font-size: 18px;
 }
 .team-header-dd h3 {
   margin: 0;

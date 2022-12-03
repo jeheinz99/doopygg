@@ -1,3 +1,5 @@
+import { numFormat } from "../../functions/functions";
+
 const ChampionsInfoBoxEntry = props => {
 
   const { championId, id, kills, deaths, assists, played, win, loss, cs, champDamage, gold, csPerMin, doubleKills, tripleKills, quadraKills, pentaKills, damageTaken } = props;
@@ -6,9 +8,6 @@ const ChampionsInfoBoxEntry = props => {
   if (idCopy === "MonkeyKing") idCopy = "Wukong";
 
   const championIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${championId}.png`;
-  
-  // number format to get commas in large numbers
-  const numFormat = new Intl.NumberFormat('en-US');
 
   // getting avg of all stats
   const KDA = ((kills + assists) / deaths).toFixed(2);

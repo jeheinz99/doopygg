@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { PulseLoader } from 'react-spinners';
 import { BiSearch } from 'react-icons/bi';
 import { getTFTData, updateTFTData } from '../actions/actions.js';
+import { getUpdatedTimeAgo } from '../functions/functions.js';
 import TFTMatchBoxes from '../components/TFTComponents/TFTMatchBoxes.jsx';
 import TFTSummonerBox from '../components/TFTComponents/TFTSummonerBox.jsx';
 import CustomSelect from '../components/AppComponents/CustomSelect.jsx';
@@ -27,39 +28,13 @@ const TFTPageContainer = () => {
     await dispatch(updateTFTData(summonerName));
     setUpdating(false);
   };
-  
-  const getTimeAgo = lastUpdated => {
-    const todaysDateStamp = Date.now();
-    
-    const diff = todaysDateStamp - lastUpdated;
-    if (diff < 180000) return (3 - (Math.round(diff/60000)));
-    if (diff >= 3600000 && diff < 86400000) {
-      if (Math.round(diff/3600000) === 1) return ('1 hour ago');
-      return (`${Math.round(diff/3600000)} hours ago`);
-    }
-    if (diff >= 60000 && diff < 3600000) {
-      if (Math.round(diff/60000) === 1) return ('1 minute ago');
-      return (`${Math.round(diff/60000)} minutes ago`);
-    }
-    if (diff >= 86400000 && diff < 2592000000) {
-      if (Math.round(diff/86400000) === 1) return ('1 day ago');
-      return (`${Math.round(diff/86400000)} days ago`);
-    }
-    if (diff >= 2592000000 && diff < 31540000000) {
-      if (Math.round(diff/2592000000) === 1) return ('1 month ago');
-      return (`${Math.round(diff/2592000000)} months ago`);
-    }
-    else {
-      return ('over 1 year ago');
-    }
-  };
 
   const searchSummTFTData = summonerName => {
     const regionId = document.getElementById('region-select-btn').value;
     setSearchParams({ region: regionId, summonerName: summonerName });
   };
 
-  const timeAgo = getTimeAgo(lastUpdated);
+  const timeAgo = getUpdatedTimeAgo(lastUpdated);
 
   let summonerNameInput;
   const summonerNameData = e => {
