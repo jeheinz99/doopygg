@@ -47,12 +47,6 @@ const DeathmatchBox = props => {
     }
   };
   const userRoundsData = getUserRoundsData(searchedPuuid, players);
-  console.log({
-    userRoundsData,
-    timeAgo,
-    userAgentData,
-    mapData
-  });
 
   const KDA = ((userAgentData.playerData.kills + userAgentData.playerData.assists) / userAgentData.playerData.deaths).toFixed(2);
 

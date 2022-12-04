@@ -39,6 +39,11 @@ export const addTFTDataActionCreator = TFTData => ({
   payload: TFTData
 });
 
+export const addFailedValSearchActionCreator = valorantData => ({
+  type: types.FAILED_VAL_SEARCH,
+  payload: valorantData,
+});
+
 // export const addARAMDataActionCreator = ARAMData => ({
 //   type: types.ADD_ARAM_DATA,
 //   payload: ARAMData
@@ -105,7 +110,13 @@ export const getValorantData = (riotID, tagLine) => async dispatch => {
   input2.value = '';
   const responseValData = await axios.get(`/valorant/playerdata/na1/${riotID}/${tagLine}`);
   // console.log('VAL response from back-end', responseValData.data);
-  dispatch(addValorantDataActionCreator(responseValData.data));  
+
+  // if data is not false, then we found the user in the DB
+  if (responseValData.data.search) {
+    dispatch(addValorantDataActionCreator(responseValData.data));  
+  }
+  // if it's false, notify the user that account doesn't exist or it just be verified through RSO
+  else dispatch(addFailedValSearchActionCreator(responseValData.data));
 };
 
 export const getChampionData = () => async dispatch => {

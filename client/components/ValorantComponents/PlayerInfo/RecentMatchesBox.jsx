@@ -2,8 +2,6 @@ const RecentMatchesBox = props => {
 
   const { recent20Data } = props;
 
-  console.log(recent20Data, 'recent 20 data');
-
   const totalWinPercent = ((recent20Data.totalWins / (recent20Data.totalWins + recent20Data.totalLosses))*100).toFixed(1);
   const averageDamage = (recent20Data.totalDamage / recent20Data.totalRounds).toFixed(1);
   const KDA = ((recent20Data.totalKills + recent20Data.totalAssists) / recent20Data.totalDeaths).toFixed(2);

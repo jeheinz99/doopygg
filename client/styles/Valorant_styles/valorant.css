@@ -522,6 +522,11 @@
 .avg-stats-div p {
   margin: 0;
 }
+.failed-search p {
+  text-align: center;
+  margin: 0;
+  font-size: 18px;
+}
 #DD-PlayerBox-Blue:nth-child(odd) {
   background-color: rgba(47, 69, 81, 0.593);
 }

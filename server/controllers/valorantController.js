@@ -28,10 +28,16 @@ valorantController.checkValorantUser = async (req, res, next) => {
         gameName: user.gameName,
         tagLine: user.tagLine,
         puuid: user.puuid,
+        search: true,
       };
     }
     else {
-      res.locals.valData = null;
+      res.locals.valData = {
+        gameName: riotId,
+        tagLine: tagLine,
+        search: false,
+      };
+      return res.send(res.locals.valData);
     }
     return next();
   }
@@ -42,10 +48,10 @@ valorantController.checkValorantUser = async (req, res, next) => {
 };
 
 valorantController.getValorantUserData = async(req, res, next) => {
-  if (res.locals.valData === null) {
+  const { puuid } = res.locals.valData;
+  if (!res.locals.valData) {
     return next();
   }
-  const { puuid } = res.locals.valData;
   try {
     // gets array of objects containing the match id, game start time, and queue name of the past 32? games
     const valorantUserDataRes = await axios.get(`https://na.api.riotgames.com/val/match/v1/matchlists/by-puuid/${puuid}?api_key=${process.env.val_api_key}`);

@@ -12,7 +12,9 @@ const link = 'https://auth.riotgames.com/authorize?redirect_uri=http://www.doopy
 const ValorantPageContainer = () => {
 
   const matchHistory = useSelector(state => state.valorant.searchedUser.matchHistory);
-  console.log(matchHistory);
+  const failedSearch = useSelector(state => state.valorant.failedSearch);
+  const searchedGameName = useSelector(state => state.valorant.searchedUser.gameName);
+  const searchedTagLine = useSelector(state => state.valorant.searchedUser.tagLine);
 
   const dispatch = useDispatch();
 
@@ -35,7 +37,7 @@ const ValorantPageContainer = () => {
   };
 
   const searchValData = () => {
-    // dispatch(getValorantData(riotIdInput, taglineInput));
+    dispatch(getValorantData(riotIdInput, taglineInput));
   };
 
   const signOutFunc = async () => {
@@ -89,6 +91,11 @@ const ValorantPageContainer = () => {
               <input className="ValBoxInput" id="val-input-2" placeholder="Tag-line" onChange={ taglineData } required></input>
               <button id="ValorantBoxButton" onClick={() => searchValData()}> <BiSearch id="SearchIcon"/> </button>
             </div>
+            {failedSearch && 
+            <div className="failed-search">
+              <p> Could not find player {searchedGameName}#{searchedTagLine}. </p>
+              <p> Either the player has not yet verified themselves using RSO or check spelling. </p>
+            </div>}
             {!document.cookie ? 
             <a id="Riot-Sign-On" href={link}><SiRiotgames />Sign In</a>
             :
@@ -99,9 +106,9 @@ const ValorantPageContainer = () => {
 
           <img id="jett" src={jett}/>
         </div>
-        {/* {document.cookie && matchHistory.length > 0 &&  */}
-          {/* <PlayerStatsContainer matchHistory={matchHistory}/> */}
-        {/* } */}
+        {matchHistory.length > 0 && 
+          <PlayerStatsContainer matchHistory={matchHistory}/>
+        }
       </div>
     </div>
   );
