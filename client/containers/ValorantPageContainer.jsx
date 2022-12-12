@@ -37,7 +37,7 @@ const ValorantPageContainer = () => {
   };
 
   const searchValData = () => {
-    dispatch(getValorantData(riotIdInput, taglineInput));
+    // dispatch(getValorantData(riotIdInput, taglineInput));
   };
 
   const signOutFunc = async () => {
