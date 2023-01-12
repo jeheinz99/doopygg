@@ -418,7 +418,7 @@ summonerController.updateSummData = async (req, res, next) => {
       for (let i = 0; i < 2000; i+=100) {
         // gets players last 1000 ranked soloq match ids from riot api
         // &endTime=1668470399
-        const getRankedS12Matches = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1641531600&endTime=1668470399&queue=420&type=ranked&start=${i}&count=100&api_key=${process.env.api_key}`,
+        const getRankedS12Matches = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1673438400&queue=420&type=ranked&start=${i}&count=100&api_key=${process.env.api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",

@@ -184,15 +184,16 @@ const SummonerChampDataBox = () => {
           <p id="rankedsoloheader"> Ranked Solo </p>
         </div>
       
+
         {!open && <div className="SummonerDataBoxEntries" id="topEntries">
           {champEntries}
         </div>}
         {open && <div className="SummonerDataBoxEntries" id="allEntries">
           {allChampEntries}
         </div>}
-    
-        {!open && <button className="SummonerDataBoxButton" id="SDBexpand" onClick={ () => setOpen(!open) }><AiFillCaretDown /></button>}
-        {open && <button className="SummonerDataBoxButton" id="SDBcontract" onClick={ () => setOpen(!open) }><AiFillCaretUp /></button>}
+        
+        {!open && champEntries.length > 0 ? <button className="SummonerDataBoxButton" id="SDBexpand" onClick={ () => setOpen(!open) }><AiFillCaretDown /></button> : <p> No Ranked Games Played </p>}
+        {open && champEntries.length > 0 && <button className="SummonerDataBoxButton" id="SDBcontract" onClick={ () => setOpen(!open) }><AiFillCaretUp /></button>}
       </div>
     <Recent20PlayedWith />
   </div>

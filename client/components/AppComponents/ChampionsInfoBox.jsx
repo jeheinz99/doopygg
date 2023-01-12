@@ -113,7 +113,7 @@ const ChampionsInfoBox = () => {
   return (
     <div className="ChampionsInfoBox">
       <div className="season-select">
-        <CustomSelect id={'season-select-btn'} selectType={'seasons'} init={'Season 12'}/>
+        <CustomSelect id={'season-select-btn'} selectType={'seasons'} init={'Season 13'}/>
       </div>
       <ul>
         <li id="ci-champion"><p>Champion</p></li>

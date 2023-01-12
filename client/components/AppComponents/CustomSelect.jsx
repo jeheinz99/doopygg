@@ -84,8 +84,6 @@ const CustomSelect = props => {
     'Other': 'Other'
   };
   const seasons = {
-    'Season 12': 'S12',
-    'Preseason 13': 'PS13',
     'Season 13': 'S13'
   };
 
