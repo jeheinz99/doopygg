@@ -99,7 +99,7 @@ const SearchBox = () => {
           </div>
           <div className="test-button">
             <p>Don't have a summoner name?</p>
-            {searching ? <button id="SearchBoxDemoButton"> Demo </button> : <button id="SearchBoxDemoButton" onClick={() => searchSummData('Doopliss2')}> Demo </button>}
+            {searching ? <button id="SearchBoxDemoButton"> Demo </button> : <button id="SearchBoxDemoButton" onClick={() => searchSummData('kindo v9')}> Demo </button>}
           </div>
         </div>
       </div>
