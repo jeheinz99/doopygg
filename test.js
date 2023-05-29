@@ -1,4 +1,7 @@
-for (var i = 0; i < 5; i++) {
-  console.log(i)
-  setTimeout(() => console.log(i))
+const getUsers = (users) => {
+  const outputArr = [];
+
+  for (let i = 0; i < users.length; i++) {
+    
+  }
 }
