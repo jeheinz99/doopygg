@@ -93,7 +93,7 @@ const TFTPageContainer = () => {
           </div>
           <div className="test-button">
             <p id="tft-test-p">Don't have a summoner name?</p>
-            {searching ? <button id="SearchBoxDemoButton"> Demo </button> : <button id="SearchBoxDemoButton" onClick={() => searchSummTFTData('kindo v9')}> Demo </button>}
+            {searching ? <button id="SearchBoxDemoButton"> Demo </button> : <button id="SearchBoxDemoButton" onClick={() => searchSummTFTData('Dooplíss')}> Demo </button>}
           </div>
         </div>
       </div>
