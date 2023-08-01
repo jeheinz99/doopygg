@@ -163,7 +163,7 @@ const DropDownBox = props => {
 
         <div className="dd-box-routes">
           <button className="dd-box-nav-btn" id="dd-box-nav-active"> Overview </button>
-          <button className="dd-box-nav-btn" onClick={() => toggleBox("match-runes")}> Runes </button>
+          {runes.length > 0 && <button className="dd-box-nav-btn" onClick={() => toggleBox("match-runes")}> Runes </button>}
           <button className="dd-box-nav-btn" onClick={() => toggleBox("match-timeline")}> Build </button>
         </div>
 
@@ -179,7 +179,7 @@ const DropDownBox = props => {
       <div className="RunesInfoDD">
         <div className="dd-box-routes">
           <button className="dd-box-nav-btn" onClick={() => toggleBox("match-overview")}> Overview </button>
-          <button className="dd-box-nav-btn" id="dd-box-nav-active"> Runes </button>
+          {runes.length > 0 && <button className="dd-box-nav-btn" id="dd-box-nav-active"> Runes </button>}
           <button className="dd-box-nav-btn" onClick={() => toggleBox("match-timeline")}> Build </button>
         </div>
         <div className="RunesInfoMainWrap">
@@ -238,7 +238,7 @@ const DropDownBox = props => {
       <div className="Match-timeline-main">
         <div className="dd-box-routes">
           <button className="dd-box-nav-btn" onClick={() => toggleBox("match-overview")}> Overview </button>
-          <button className="dd-box-nav-btn" onClick={() => toggleBox("match-runes")}> Runes </button>
+          {runes.length > 0 && <button className="dd-box-nav-btn" onClick={() => toggleBox("match-runes")}> Runes </button>}
           <button className="dd-box-nav-btn" id="dd-box-nav-active"> Build </button>
         </div>
         <div className="match-timeline-skills-header">

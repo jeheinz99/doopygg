@@ -79,10 +79,11 @@ const Matches = props => {
             <img id="summonerSpellIcon1" src={summonerSpells[0]}/>
             <img id="summonerSpellIcon2" src={summonerSpells[1]}/>
           </div>
-          <div className="MatchGroup2div">
+          {runes.length > 0 &&
+           <div className="MatchGroup2div">
             <img id="keystoneIcon" src={runes[0].icon}/>
             <img id="secondaryRuneIcon" src={runes[5].icon}/>
-          </div>
+          </div>}
           <div className="MatchGroup2div2">
             <p>{kills} / {deaths} / {assists}</p>
             {KDA === 'Infinity' && <p id="over5kda"> K/D/A: <span>Perfect</span> </p>}

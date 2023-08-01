@@ -14,7 +14,7 @@ const TeamsBoxes = props => {
   const KDA = ((kills + assists) / deaths).toFixed(2);
 
   return (
-      <div className="Team1DropDownBox" id={id}>
+      <div className={runes.length > 0 ? "Team1DropDownBox" : "DropDownNoRunes"} id={id}>
         <div className="Player0Team1ChampIcon">
           <img id="Player0Champion" src={championIcon}/>
           <div className="level-div" id="level-matchbox">{champLevel}</div>
@@ -23,10 +23,11 @@ const TeamsBoxes = props => {
           <img id="summonerSpellIcon1DropDown" src={summonerSpells[0]}/>
           <img id="summonerSpellIcon2DropDown" src={summonerSpells[1]}/>
         </div>
+        {runes.length > 0 &&
         <div className="Player0Team1Runes">
           <img id="Player0Team1Keystone" src={runes[0].icon}/>
           <img id="Player0Team1SecondaryTree" src={runes[5].icon}/>
-        </div>
+        </div>}
         <div className="Player0Team1Info">
           <p className="playernames" id="dd-playernames"onClick={() => setSearchParams({ region: regionId, summonerName: summonerName })}>{summonerName}</p>
         </div>

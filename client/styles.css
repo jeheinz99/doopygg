@@ -680,6 +680,14 @@ html, body {
   padding: 5px;
   border-radius: 0.5em;
 }
+.DropDownNoRunes {
+  display: grid;
+  grid-template-columns: 10% 5% 27% 15% 10% 10% 6% 17%;
+  width: 97%;
+  align-items: center;
+  padding: 5px;
+  border-radius: 0.5em;
+}
 .Player0Team1ChampIcon {
   display: flex;
   align-items: center;

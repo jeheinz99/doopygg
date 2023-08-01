@@ -22,28 +22,39 @@ const mapQueueType = queueId => {
 };
 
 // maps item icons for 6 items for player from ids from SQL DB
-const mapItemIcons = async items => {
-  const query = `SELECT id, path FROM items WHERE id = any(array[${items}])
-  ORDER BY CASE id
-  WHEN ${items[0]} then 1
-  WHEN ${items[1]} then 2
-  WHEN ${items[2]} then 3
-  WHEN ${items[3]} then 4
-  WHEN ${items[4]} then 5
-  WHEN ${items[5]} then 6
-  WHEN ${items[6]} then 7 
-  end;`
-  const path = await db.query(query);
-  const outputArr = [];
-  for (let i = 0; i < items.length; i++) {
-    for (let j = 0; j < path.rows.length; j++) {
-      if (items[i] === path.rows[j].id) {
-        outputArr.push(path.rows[j].path);
-      }
+// const mapItemIcons = async items => {
+//   const query = `SELECT id, path FROM items WHERE id = any(array[${items}])
+//   ORDER BY CASE id
+//   WHEN ${items[0]} then 1
+//   WHEN ${items[1]} then 2
+//   WHEN ${items[2]} then 3
+//   WHEN ${items[3]} then 4
+//   WHEN ${items[4]} then 5
+//   WHEN ${items[5]} then 6
+//   WHEN ${items[6]} then 7 
+//   end;`
+//   const path = await db.query(query);
+//   const outputArr = [];
+//   for (let i = 0; i < items.length; i++) {
+//     for (let j = 0; j < path.rows.length; j++) {
+//       if (items[i] === path.rows[j].id) {
+//         outputArr.push(path.rows[j].path);
+//       }
+//     }
+//   }
+//   return outputArr;
+// };
+
+const mapItemIcons = (itemId, itemsData) => {
+  for (let i = 0; i < itemsData.length; i++) {
+    if (itemsData[i].id === itemId) {
+      let str = itemsData[i].iconPath
+      str = str.toLowerCase().replace('/lol-game-data/assets/', '');
+      return `https://raw.communitydragon.org/latest/game/${str}`
     }
   }
-  return outputArr;
-};
+  return null
+}
 
 // maps item icons from match timeline using item ids
 const mapItemTimelineIcons = async items => {
@@ -398,15 +409,25 @@ summonerController.updateSummData = async (req, res, next) => {
       };
     };
 
+    const itemsData = await axios.get(`https://raw.communitydragon.org/13.14/plugins/rcp-be-lol-game-data/global/default/v1/items.json`);
+    const itemsDataArr = itemsData.data
+
     // maps icons for main player being searched for
     for (let i = 0; i < matchesData.length; i++) {
-      const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
+      // const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
+      const itemsArr = []
+      for (let j = 0; j < matchesData[i].items.length; j++) {
+        const itemIcon = mapItemIcons(matchesData[i].items[j], itemsDataArr);
+        if (itemIcon === null) itemsArr.push('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png')
+        else itemsArr.push(itemIcon)
+      }
       const runesMap = await mapRuneIcons(matchesData[i].runes); // 11 runes total
       const summSpellMap = await mapSummonerIcons(matchesData[i].summonerSpells); // 2 items total
       const queueMap = await mapQueueType(matchesData[i].gameMode);
 
       matchesData[i].gameMode = queueMap;
-      matchesData[i].items = itemsMap;
+      // matchesData[i].items = itemsMap;
+      matchesData[i].items = itemsArr;
       matchesData[i].runes = runesMap;
       matchesData[i].summonerSpells = summSpellMap;
 
@@ -700,15 +721,24 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
     const matchTimeline = getMatchTimeline.data.info;
 
     const timelineData = getTimelineData(matchTimeline);
+
+    const itemsData = await axios.get(`https://raw.communitydragon.org/13.14/plugins/rcp-be-lol-game-data/global/default/v1/items.json`);
+    const itemsDataArr = itemsData.data
     
     for (let i = 0; i < otherPlayers.length; i++) {
-      const itemsMap = await mapItemIcons(otherPlayers[i].items); // 7 items total
+      const itemsArr = []
+      for (let j = 0; j < otherPlayers[i].items.length; j++) {
+        const itemIcon = mapItemIcons(otherPlayers[i].items[j], itemsDataArr);
+        if (itemIcon === null) itemsArr.push('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png');
+        else itemsArr.push(itemIcon);
+      }
       const runesMap = await mapRuneIcons(otherPlayers[i].runes); // 11 runes total
       const summSpellMap = await mapSummonerIcons(otherPlayers[i].summonerSpells); // 2 items total
       const itemTimelineMap = await mapItemTimelineIcons(timelineData.itemTimeline);
       
       timelineData.itemTimeline = itemTimelineMap;
-      otherPlayers[i].items = itemsMap;
+      // otherPlayers[i].items = itemsMap;
+      otherPlayers[i].items = itemsArr;
       otherPlayers[i].runes = runesMap;
       otherPlayers[i].summonerSpells = summSpellMap;
     }
@@ -1011,16 +1041,26 @@ summonerController.expandSummMatchHistory = async (req, res, next) => {
         }
       };
     };
+
+    const itemsData = await axios.get(`https://raw.communitydragon.org/13.14/plugins/rcp-be-lol-game-data/global/default/v1/items.json`);
+    const itemsDataArr = itemsData.data
     
     // maps icons for main player being searched for
     for (let i = 0; i < matchesData.length; i++) {
-      const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
+      const itemsArr = []
+      for (let j = 0; j < matchesData[i].items.length; j++) {
+        const itemIcon = mapItemIcons(matchesData[i].items[j], itemsDataArr);
+        if (itemIcon === null) itemsArr.push('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png');
+        else itemsArr.push(itemIcon);
+      }
+      // const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
       const runesMap = await mapRuneIcons(matchesData[i].runes); // 11 runes total
       const summSpellMap = await mapSummonerIcons(matchesData[i].summonerSpells); // 2 items total
       const queueMap = await mapQueueType(matchesData[i].gameMode);
 
       matchesData[i].gameMode = queueMap;
-      matchesData[i].items = itemsMap;
+      // matchesData[i].items = itemsMap;
+      matchesData[i].items = itemsArr
       matchesData[i].runes = runesMap;
       matchesData[i].summonerSpells = summSpellMap;
     }
