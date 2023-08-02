@@ -12,12 +12,8 @@ const lolSummonerSchema = new mongoose.Schema({
   profileIcon: {type: Number, required: false},
   matchHistory: {type: Array, required: false},
   otherPlayersMatches: {type: Array, required: false},
-  S12MatchesPlayed: {type: Array, required: false},
-  S12MatchesPlayedData: {type: Array, required: false},
-  PS13MatchesPlayed: {type: Array, required: false},
-  PS13MatchesPlayedData: {type: Array, required: false},
-  S13MatchesPlayed: {type: Array, required: false},
-  S13MatchesPlayedData: {type: Array, required: false},
+  MatchesPlayed: {type: Array, required: false},
+  MatchesPlayedData: {type: Array, required: false},
   lastUpdated: {type: Number, required: false},
 });
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getSummonerData, updateSummonerData } from '../actions/actions.js';
 import { useSearchParams } from 'react-router-dom';
 import { getUpdatedTimeAgo } from '../functions/functions.js';
+import { getLeagueVersion } from '../functions/league-functions.js';
 import MatchBoxes from '../components/AppComponents/MatchBoxes.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import SummonerChampDataBox from '../components/AppComponents/SummonerChampDataBox.jsx';
@@ -101,6 +102,7 @@ const SearchBox = () => {
             <p>Don't have a summoner name?</p>
             {searching ? <button id="SearchBoxDemoButton"> Demo </button> : <button id="SearchBoxDemoButton" onClick={() => searchSummData('Dooplíss')}> Demo </button>}
           </div>
+          {/* <button onClick={() => testFunc()} styles={{ position: 'absolute'}}> test </button> */}
         </div>
       </div>
 
@@ -118,7 +120,8 @@ const SearchBox = () => {
 
       {matchHistory[0] && !updating && typeof timeAgo === "number" && !searching &&
       <div className="headerinfo">
-        <button className="summonerUpdateButton" id="update-wait"> Updated </button>
+        {/* <button className="summonerUpdateButton" id="update-wait"> Updated </button> */}
+        <button className="summonerUpdateButton" onClick={() => updateSummData()}> Update </button>
         {timeAgo === 3 && <p>Please wait {timeAgo} minutes before updating again.</p>}
         {timeAgo === 2 && <p>Please wait {timeAgo} minutes before updating again.</p>}
         {timeAgo <= 1 && <p>Please wait 1 minute before updating again.</p>}

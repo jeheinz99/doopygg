@@ -4,6 +4,7 @@ const db = require('../models/IconPaths');
 const lolSummoner = require('../models/LoLSummonerData');
 const lolMatches = require('../models/LoLMatchesModel');
 const queueData = require('../../queues.json');
+const leagueFunctions = require('../../client/functions/league-functions')
 
 // HELPER FUNCTIONS ---> USED TO GET DATA FROM SQL DATABASE FROM RIOT API DATA
 
@@ -21,30 +22,7 @@ const mapQueueType = queueId => {
   }
 };
 
-// maps item icons for 6 items for player from ids from SQL DB
-// const mapItemIcons = async items => {
-//   const query = `SELECT id, path FROM items WHERE id = any(array[${items}])
-//   ORDER BY CASE id
-//   WHEN ${items[0]} then 1
-//   WHEN ${items[1]} then 2
-//   WHEN ${items[2]} then 3
-//   WHEN ${items[3]} then 4
-//   WHEN ${items[4]} then 5
-//   WHEN ${items[5]} then 6
-//   WHEN ${items[6]} then 7 
-//   end;`
-//   const path = await db.query(query);
-//   const outputArr = [];
-//   for (let i = 0; i < items.length; i++) {
-//     for (let j = 0; j < path.rows.length; j++) {
-//       if (items[i] === path.rows[j].id) {
-//         outputArr.push(path.rows[j].path);
-//       }
-//     }
-//   }
-//   return outputArr;
-// };
-
+// maps item icons for 1 item for player from ids 
 const mapItemIcons = (itemId, itemsData) => {
   for (let i = 0; i < itemsData.length; i++) {
     if (itemsData[i].id === itemId) {
@@ -112,8 +90,18 @@ const mapRuneIcons = async runes => {
   return outputArr;
 };
 
-// maps summoner spell icons from ids from SQL DB
-const mapSummonerIcons = async summSpells => {
+const mapSummonerIcons = (summSpellId, summSpellData) => {
+  for (let i = 0; i < summSpellData.length; i++) {
+    if (summSpellData[i].id === summSpellId) {
+      let str = summSpellData[i].iconPath
+      str = str.toLowerCase().replace('/lol-game-data/assets/', '');
+      return `https://raw.communitydragon.org/latest/game/${str}`
+    }
+  }
+}
+
+// // maps summoner spell icons from ids from SQL DB
+const mapSummonerIconsTemp = async summSpells => {
   const query = `SELECT path FROM summonerspells WHERE id = any(array[${summSpells}])
   ORDER BY CASE id
   WHEN ${summSpells[0]} then 1
@@ -143,7 +131,6 @@ const regionObj = {
 summonerController.checkSummData = async (req, res, next) => {
   const { summonerName, regionId } = req.params;
   try {
-    // const summoner = null;
     const summoner = await lolSummoner.findOne({"summonerName": { "$regex" : new RegExp(summonerName, "i")}, "region": regionId});
     if (summoner !== null) {
       res.locals.summonerData = {
@@ -157,8 +144,8 @@ summonerController.checkSummData = async (req, res, next) => {
         profileIcon: summoner.profileIcon,
         matchHistory: summoner.matchHistory,
         otherPlayersMatches: summoner.otherPlayersMatches,
-        allMatchesPlayed: summoner.S12MatchesPlayed,
-        allMatchesPlayedData: summoner.S12MatchesPlayedData,
+        allMatchesPlayed: summoner.MatchesPlayed,
+        allMatchesPlayedData: summoner.MatchesPlayedData,
         lastUpdated: summoner.lastUpdated,
       };
       return next();
@@ -339,6 +326,7 @@ summonerController.updateSummData = async (req, res, next) => {
             player.perks.statPerks.offense], // stat shard row 3 [10]
           });
           otherPlayersData.push({
+            matchId: matchIdList[i],
             championId: player.championId,
             champion: player.championName,
             summonerName: player.summonerName,
@@ -374,6 +362,7 @@ summonerController.updateSummData = async (req, res, next) => {
         else {
           const player = matchHistoryData[i].participants[j];
           otherPlayersData.push({
+            matchId: matchIdList[i],
             championId: player.championId,
             champion: player.championName,
             summonerName: player.summonerName,
@@ -409,37 +398,44 @@ summonerController.updateSummData = async (req, res, next) => {
       };
     };
 
-    const itemsData = await axios.get(`https://raw.communitydragon.org/13.14/plugins/rcp-be-lol-game-data/global/default/v1/items.json`);
-    const itemsDataArr = itemsData.data
+    const gameVersion = await leagueFunctions.getLeagueVersion();
+    const itemsData = await leagueFunctions.getItemsData(gameVersion);
+    const summSpellData = await leagueFunctions.getSummSpellData(gameVersion);
 
     // maps icons for main player being searched for
     for (let i = 0; i < matchesData.length; i++) {
-      // const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
-      const itemsArr = []
-      for (let j = 0; j < matchesData[i].items.length; j++) {
-        const itemIcon = mapItemIcons(matchesData[i].items[j], itemsDataArr);
-        if (itemIcon === null) itemsArr.push('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png')
-        else itemsArr.push(itemIcon)
-      }
+      const itemIcons = matchesData[i].items.map((item) => {
+        const itemIcon = mapItemIcons(item, itemsData);
+        return itemIcon === null ? 
+          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          :
+          itemIcon
+      });
+      const summSpellIcons = matchesData[i].summonerSpells.map((summSpell) => {
+        const summSpellIcon = mapSummonerIcons(summSpell, summSpellData);
+        return summSpellIcon === null ?
+          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          :
+          summSpellIcon
+      });
+
       const runesMap = await mapRuneIcons(matchesData[i].runes); // 11 runes total
-      const summSpellMap = await mapSummonerIcons(matchesData[i].summonerSpells); // 2 items total
-      const queueMap = await mapQueueType(matchesData[i].gameMode);
+      const queueMap = mapQueueType(matchesData[i].gameMode);
 
       matchesData[i].gameMode = queueMap;
-      // matchesData[i].items = itemsMap;
-      matchesData[i].items = itemsArr;
+      matchesData[i].items = itemIcons;
       matchesData[i].runes = runesMap;
-      matchesData[i].summonerSpells = summSpellMap;
+      matchesData[i].summonerSpells = summSpellIcons;
 
     }
 
-    let allS12MatchesArr = [];
+    let allMatchesArr = [];
 
     try {
       for (let i = 0; i < 2000; i+=100) {
         // gets players last 1000 ranked soloq match ids from riot api
         // &endTime=1668470399
-        const getRankedS12Matches = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1673438400&queue=420&type=ranked&start=${i}&count=100&api_key=${process.env.api_key}`,
+        const getRankedMatches = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?startTime=1673438400&queue=420&type=ranked&start=${i}&count=100&api_key=${process.env.api_key}`,
         {
           headers: {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -449,21 +445,21 @@ summonerController.updateSummData = async (req, res, next) => {
           }
         });
 
-        const { data } = getRankedS12Matches;
-        allS12MatchesArr.push(data);
+        const { data } = getRankedMatches;
+        allMatchesArr.push(data);
         // ONCE WE HIT LENGTH !== 100, WE HAVE FOUND ALL OF THEIR RECENT MATCHES OR MOST RECENT 1000
         if (data.length !== 100) {
           // flatten the array of arrays of new recent ranked matches from their recent 1000
-          allS12MatchesArr = allS12MatchesArr.flat();
+          allMatchesArr = allMatchesArr.flat();
           
           // check DB for summoner name
           const summoner = await lolSummoner.findOne({summonerName: name, region: regionId});
           // if they exist in the DB, we want to preserve their OLD match ids along with new ones
           if (summoner !== null) {
-            const oldMatchIds = summoner.S12MatchesPlayed.flat();
+            const oldMatchIds = summoner.MatchesPlayed.flat();
   
             // create a new set of summoner's NEW match IDs 
-            const newMatchIdsSet = new Set(allS12MatchesArr);
+            const newMatchIdsSet = new Set(allMatchesArr);
   
             /*
             iterate through the OLD match id list, checking if those match
@@ -471,7 +467,7 @@ summonerController.updateSummData = async (req, res, next) => {
             */
             for (let i = 0; i < oldMatchIds.length; i++) {
               if (!newMatchIdsSet.has(oldMatchIds[i])) {
-                allS12MatchesArr.push(oldMatchIds[i]);
+                allMatchesArr.push(oldMatchIds[i]);
               }
             }
             break;
@@ -483,7 +479,7 @@ summonerController.updateSummData = async (req, res, next) => {
       }
     }
     catch(err) {
-      console.log('err in getting all s12 ranked matches');
+      console.log('err in getting all  ranked matches');
       return next(err);
     }
 
@@ -499,7 +495,7 @@ summonerController.updateSummData = async (req, res, next) => {
       region: regionId,
       profileIcon: responseSummData.data.profileIconId,
       otherPlayersMatches: otherPlayersData,
-      allMatchesPlayed: allS12MatchesArr,
+      allMatchesPlayed: allMatchesArr,
       allMatchesPlayedData: [],
       lastUpdated: Date.now(),
     };
@@ -516,7 +512,7 @@ summonerController.updateSummData = async (req, res, next) => {
         profileIcon: responseSummData.data.profileIconId,
         matchHistory: matchesData,
         otherPlayersMatches: otherPlayersData,
-        S12MatchesPlayed: allS12MatchesArr,
+        MatchesPlayed: allMatchesArr,
         puuid: puuid,
         region: regionId,
         summonerId: id,
@@ -535,7 +531,7 @@ summonerController.updateSummData = async (req, res, next) => {
             profileIcon: responseSummData.data.profileIconId,
             matchHistory: matchesData,
             otherPlayersMatches: otherPlayersData,
-            S12MatchesPlayed: allS12MatchesArr,
+            MatchesPlayed: allMatchesArr,
             puuid: puuid,
             summonerId: id,
             accountId: accountId,
@@ -642,9 +638,9 @@ summonerController.addSummMatchesData = async (req, res, next) => {
       newObjs = newObjs.concat(newObjData);
     }
     // console.log(summoner.puuid, 'puuid');
-    const S12MatchesInfoArr = getObjData(newObjs, summonerName, summoner.puuid);
-    await lolSummoner.findOneAndUpdate({summonerName: summonerName, region: region}, {S12MatchesPlayedData: S12MatchesInfoArr});
-    res.locals.summonerData.allMatchesPlayedData = S12MatchesInfoArr;
+    const MatchesInfoArr = getObjData(newObjs, summonerName, summoner.puuid);
+    await lolSummoner.findOneAndUpdate({summonerName: summonerName, region: region}, {MatchesPlayedData: MatchesInfoArr});
+    res.locals.summonerData.allMatchesPlayedData = MatchesInfoArr;
     return next();
   }
   catch(err) {
@@ -722,25 +718,35 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
 
     const timelineData = getTimelineData(matchTimeline);
 
-    const itemsData = await axios.get(`https://raw.communitydragon.org/13.14/plugins/rcp-be-lol-game-data/global/default/v1/items.json`);
-    const itemsDataArr = itemsData.data
+    const gameVersion = await leagueFunctions.getLeagueVersion();
+    const itemsData = await leagueFunctions.getItemsData(gameVersion);
+    const summSpellData = await leagueFunctions.getSummSpellData(gameVersion);
     
     for (let i = 0; i < otherPlayers.length; i++) {
-      const itemsArr = []
-      for (let j = 0; j < otherPlayers[i].items.length; j++) {
-        const itemIcon = mapItemIcons(otherPlayers[i].items[j], itemsDataArr);
-        if (itemIcon === null) itemsArr.push('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png');
-        else itemsArr.push(itemIcon);
-      }
+      
+      const itemIcons = otherPlayers[i].items.map((item) => {
+        const itemIcon = mapItemIcons(item, itemsData);
+        return itemIcon === null ? 
+          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          :
+          itemIcon
+      });
+      const summSpellIcons = otherPlayers[i].summonerSpells.map((summSpell) => {
+        const summSpellIcon = mapSummonerIcons(summSpell, summSpellData);
+        return summSpellIcon === null ?
+          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          :
+          summSpellIcon
+      });
+
       const runesMap = await mapRuneIcons(otherPlayers[i].runes); // 11 runes total
-      const summSpellMap = await mapSummonerIcons(otherPlayers[i].summonerSpells); // 2 items total
       const itemTimelineMap = await mapItemTimelineIcons(timelineData.itemTimeline);
       
       timelineData.itemTimeline = itemTimelineMap;
       // otherPlayers[i].items = itemsMap;
-      otherPlayers[i].items = itemsArr;
+      otherPlayers[i].items = itemIcons;
       otherPlayers[i].runes = runesMap;
-      otherPlayers[i].summonerSpells = summSpellMap;
+      otherPlayers[i].summonerSpells = summSpellIcons;
     }
 
     const championAbilityIcons = await getChampAbilityIcons();
@@ -788,7 +794,7 @@ summonerController.getLiveGameData = async (req, res, next) => {
     });
     const { data } = getLiveGameData;
     
-    const queueMap = await mapQueueType(data.gameQueueConfigId, queueData);
+    const queueMap = mapQueueType(data.gameQueueConfigId, queueData);
 
     // extract all 10 players encrypted summoner ids from response and send request to league-v4 to get rank data
     const playerInfoArr = [];
@@ -816,7 +822,7 @@ summonerController.getLiveGameData = async (req, res, next) => {
       }
       newObj.summonerName = player.summonerName;
       
-      const summSpellMap = await mapSummonerIcons([player.spell1Id, player.spell2Id]); // 2 items total
+      const summSpellMap = await mapSummonerIconsTemp([player.spell1Id, player.spell2Id]); // 2 items total
       // inserting runes in format of -> keystone, primary runes 1-2-3, 
       // primary tree style, secondary tree style, secondary runes 1-2, shards 1-2-3
       const runesMap = await mapRuneIcons(
@@ -972,6 +978,7 @@ summonerController.expandSummMatchHistory = async (req, res, next) => {
             player.perks.statPerks.offense], // stat shard row 3 [10]
           });
           otherPlayersData.push({
+            matchId: matchIdList[i],
             championId: player.championId,
             champion: player.championName,
             summonerName: player.summonerName,
@@ -1007,6 +1014,7 @@ summonerController.expandSummMatchHistory = async (req, res, next) => {
         else {
           const player = matchHistoryData[i].participants[j];
           otherPlayersData.push({
+            matchId: matchIdList[i],
             championId: player.championId,
             champion: player.championName,
             summonerName: player.summonerName,
@@ -1042,27 +1050,36 @@ summonerController.expandSummMatchHistory = async (req, res, next) => {
       };
     };
 
-    const itemsData = await axios.get(`https://raw.communitydragon.org/13.14/plugins/rcp-be-lol-game-data/global/default/v1/items.json`);
-    const itemsDataArr = itemsData.data
+    const gameVersion = await leagueFunctions.getLeagueVersion();
+    const itemsData = await leagueFunctions.getItemsData(gameVersion);
+    const summSpellData = await leagueFunctions.getSummSpellData(gameVersion);
     
     // maps icons for main player being searched for
     for (let i = 0; i < matchesData.length; i++) {
-      const itemsArr = []
-      for (let j = 0; j < matchesData[i].items.length; j++) {
-        const itemIcon = mapItemIcons(matchesData[i].items[j], itemsDataArr);
-        if (itemIcon === null) itemsArr.push('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png');
-        else itemsArr.push(itemIcon);
-      }
+      const itemIcons = matchesData[i].items.map((item) => {
+        const itemIcon = mapItemIcons(item, itemsData);
+        return itemIcon === null ? 
+          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          :
+          itemIcon
+      });
+
+      const summSpellIcons = matchesData[i].summonerSpells.map((summSpell) => {
+        const summSpellIcon = mapSummonerIcons(summSpell, summSpellData);
+        return summSpellIcon === null ?
+          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          :
+          summSpellIcon
+      });
       // const itemsMap = await mapItemIcons(matchesData[i].items); // 7 items total
       const runesMap = await mapRuneIcons(matchesData[i].runes); // 11 runes total
-      const summSpellMap = await mapSummonerIcons(matchesData[i].summonerSpells); // 2 items total
-      const queueMap = await mapQueueType(matchesData[i].gameMode);
+      const queueMap = mapQueueType(matchesData[i].gameMode);
 
       matchesData[i].gameMode = queueMap;
       // matchesData[i].items = itemsMap;
       matchesData[i].items = itemsArr
       matchesData[i].runes = runesMap;
-      matchesData[i].summonerSpells = summSpellMap;
+      matchesData[i].summonerSpells = summSpellIcons;
     }
 
     res.locals.newSummMatchHistory = {

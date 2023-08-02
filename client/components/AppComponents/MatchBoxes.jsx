@@ -23,27 +23,31 @@ const MatchBoxes = () => {
     setLoading(false);
   };
 
-  /* there are only 10 players per match, the 'otherPlayersMatches' players are in order by match played in,
-  this function will split 10 players for each match based on the amount of matches that were queried
-  (i.e. if 20 matches are queried, splits 10 players to each match box component) */
-  const chunkArr = [];
-  const chunkSize = (otherPlayersMatches.length / matchHistory.length);
-  for (let i = 0; i < otherPlayersMatches.length; i+= chunkSize) {
-    const chunk = otherPlayersMatches.slice(i, i + chunkSize);
-    chunkArr.push(chunk);
-  }
+  /* Function to group players based on Match Id */
+  const groupByMatchId = players => {
+    return players.reduce((acc, player) => {
+      const existingGroup = acc.find((group) => group[0]?.matchId === player.matchId);
+      if (existingGroup) {
+        existingGroup.push(player);
+      } else {
+        acc.push([player]);
+      }
+      return acc;
+    }, []);
+  };
+  const sortedPlayers = groupByMatchId(otherPlayersMatches);
   
   const recent20Data = {};
   const matchList = [];
   for (let i = 0; i < matchHistory.length; i++) {
     if (matchHistory[i].win) {
-      matchList.push(<Matches 
+      matchList.push(<Matches
         id="winMatch" 
-        outcome={'Victory'} 
+        outcome={'Victory'}
         key={`match-${i}`}
         matchNum={`matchBox-${i}`}
         matchId={matchHistory[i].matchId}
-        otherPlayers={chunkArr[i]}
+        otherPlayers={sortedPlayers[i]}
         visionScore={matchHistory[i].visionScore} 
         summonerSpells={matchHistory[i].summonerSpells} 
         items={matchHistory[i].items} 
@@ -70,7 +74,7 @@ const MatchBoxes = () => {
         key={`match-${i}`}
         matchNum={`matchBox-${i}`}
         matchId={matchHistory[i].matchId}
-        otherPlayers={chunkArr[i]} 
+        otherPlayers={sortedPlayers[i]} 
         visionScore={matchHistory[i].visionScore} 
         summonerSpells={matchHistory[i].summonerSpells} 
         items={matchHistory[i].items} 
