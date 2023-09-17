@@ -8,6 +8,14 @@ const leagueFunctions = require('../../client/functions/league-functions')
 
 const EMPTY_ICON = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png`
 
+const TREE_STYLES = {
+  8000: 'https://raw.communitydragon.org/latest/game/assets/perks/styles/7201_precision.png',
+  8100: 'https://raw.communitydragon.org/latest/game/assets/perks/styles/7200_domination.png',
+  8200: 'https://raw.communitydragon.org/latest/game/assets/perks/styles/7202_sorcery.png',
+  8300: 'https://raw.communitydragon.org/latest/game/assets/perks/styles/7203_whimsy.png',
+  8400: 'https://raw.communitydragon.org/latest/game/assets/perks/styles/7204_resolve.png'
+}
+
 // HELPER FUNCTIONS ---> USED TO GET DATA FROM SQL DATABASE FROM RIOT API DATA
 
 // maps queue type based on queueId
@@ -26,6 +34,9 @@ const mapQueueType = queueId => {
 
 // maps item icons for 1 item for player from ids 
 const mapItemIcons = (itemId, itemsData) => {
+  if (TREE_STYLES[itemId] !== undefined) {
+    return TREE_STYLES[itemId]
+  }
   for (let i = 0; i < itemsData.length; i++) {
     if (itemsData[i].id === itemId) {
       let str = itemsData[i].iconPath
@@ -70,37 +81,35 @@ const mapItemTimelineIcons = async items => {
   return items;
 };
 
-// maps rune icons for keystone and secondary tree from ids from SQL DB
-const mapRuneIcons = async runes => {
-  const query = `SELECT id, path FROM runes WHERE id IN (${runes[0]}, ${runes[1]}, ${runes[2]}, ${runes[3]}, ${runes[4]}, ${runes[5]}, ${runes[6]}, ${runes[7]}, ${runes[8]}, ${runes[9]}, ${runes[10]})
-  ORDER BY CASE id
-  WHEN ${runes[0]} then 1
-  WHEN ${runes[1]} then 2
-  WHEN ${runes[2]} then 3
-  WHEN ${runes[3]} then 4
-  WHEN ${runes[4]} then 5
-  WHEN ${runes[5]} then 6
-  WHEN ${runes[6]} then 7
-  WHEN ${runes[7]} then 8
-  WHEN ${runes[8]} then 9
-  WHEN ${runes[9]} then 10
-  WHEN ${runes[10]} then 11
-  end;`
 
-  const path = await db.query(query);
-  const outputArr = [];
-  for (let i = 0; i < runes.length; i++) {
-    for (let j = 0; j < path.rows.length; j++) {
-      if (runes[i] === path.rows[j].id) {
-        outputArr.push({
-          id: runes[i],
-          icon: path.rows[j].path
-        });
+const getRuneData = (runeId, runesData) => {
+  for (let i = 0; i < runesData.length; i++) {
+    if (runesData[i].id === runeId) {
+      let str = runesData[i].iconPath
+      str = str.toLowerCase().replace('/lol-game-data/assets/', '')
+      return {
+        id: runeId,
+        icon: `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${str}`
       }
     }
   }
-  return outputArr;
-};
+  return {
+    id: runeId,
+    icon: EMPTY_ICON
+  }
+}
+
+// maps rune icons for keystone and secondary tree from ids from SQL DB
+const mapRuneIcons = (runeId, runesData) => {
+  for (let i = 0; i < runesData.length; i++) {
+    if (runesData[i].id === runeId) {
+      let str = runesData[i].iconPath
+      str = str.toLowerCase().replace('/lol-game-data/assets/', '')
+      return `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/${str}`
+    }
+  }
+  return null
+}
 
 const mapSummonerIcons = (summSpellId, summSpellData) => {
   for (let i = 0; i < summSpellData.length; i++) {
@@ -112,7 +121,7 @@ const mapSummonerIcons = (summSpellId, summSpellData) => {
   }
 }
 
-// // maps summoner spell icons from ids from SQL DB
+// maps summoner spell icons from ids from SQL DB
 const mapSummonerIconsTemp = async summSpells => {
   const query = `SELECT path FROM summonerspells WHERE id = any(array[${summSpells}])
   ORDER BY CASE id
@@ -413,6 +422,7 @@ summonerController.updateSummData = async (req, res, next) => {
     const gameVersion = await leagueFunctions.getLeagueVersion();
     const itemsData = await leagueFunctions.getItemsData(gameVersion);
     const summSpellData = await leagueFunctions.getSummSpellData(gameVersion);
+    const runesData = await leagueFunctions.getRunesData(gameVersion);
 
     // maps icons for main player being searched for
     for (let i = 0; i < matchesData.length; i++) {
@@ -430,13 +440,17 @@ summonerController.updateSummData = async (req, res, next) => {
           :
           summSpellIcon
       });
+      const runeIcons = matchesData[i].runes.map((rune) => {
+        const runeIcon = mapRuneIcons(rune, runesData);
+        return runeIcon === null ? { id: rune, icon: EMPTY_ICON } : { id: rune, icon: runeIcon }
+      });
 
-      const runesMap = await mapRuneIcons(matchesData[i].runes); // 11 runes total
+      // const runesMap = mapRuneIcons(matchesData[i].runes, runesData); // 11 runes total
       const queueMap = mapQueueType(matchesData[i].gameMode);
 
       matchesData[i].gameMode = queueMap;
       matchesData[i].items = itemIcons;
-      matchesData[i].runes = runesMap;
+      matchesData[i].runes = runeIcons;
       matchesData[i].summonerSpells = summSpellIcons;
 
     }
@@ -727,9 +741,10 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
     const gameVersion = await leagueFunctions.getLeagueVersion();
     const itemsData = await leagueFunctions.getItemsData(gameVersion);
     const summSpellData = await leagueFunctions.getSummSpellData(gameVersion);
+    const runesData = await leagueFunctions.getRunesData(gameVersion);
     
     for (let i = 0; i < otherPlayers.length; i++) {
-      
+
       const itemIcons = otherPlayers[i].items.map((item) => {
         const itemIcon = mapItemIcons(item, itemsData);
         return itemIcon === null ? 
@@ -744,14 +759,16 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
           :
           summSpellIcon
       });
+      const runeIcons = otherPlayers[i].runes.map((rune) => {
+        const runeIcon = mapRuneIcons(rune, runesData);
+        return runeIcon === null ? { id: rune, icon: EMPTY_ICON } : { id: rune, icon: runeIcon }
+      });
 
-      const runesMap = await mapRuneIcons(otherPlayers[i].runes); // 11 runes total
       const itemTimelineMap = await mapItemTimelineIcons(timelineData.itemTimeline);
       
       timelineData.itemTimeline = itemTimelineMap;
-      // otherPlayers[i].items = itemsMap;
       otherPlayers[i].items = itemIcons;
-      otherPlayers[i].runes = runesMap;
+      otherPlayers[i].runes = runeIcons;
       otherPlayers[i].summonerSpells = summSpellIcons;
     }
 
@@ -829,27 +846,31 @@ summonerController.getLiveGameData = async (req, res, next) => {
       newObj.summonerName = player.summonerName;
       
       const summSpellMap = await mapSummonerIconsTemp([player.spell1Id, player.spell2Id]); // 2 items total
+      const gameVersion = await leagueFunctions.getLeagueVersion();
+      const runesData = await leagueFunctions.getRunesData(gameVersion);
       // inserting runes in format of -> keystone, primary runes 1-2-3, 
       // primary tree style, secondary tree style, secondary runes 1-2, shards 1-2-3
-      const runesMap = await mapRuneIcons(
-        [
-          player.perks.perkIds[0],
-          player.perks.perkIds[1],
-          player.perks.perkIds[2],
-          player.perks.perkIds[3],
-          player.perks.perkStyle,
-          player.perks.perkSubStyle,
-          player.perks.perkIds[4],
-          player.perks.perkIds[5],
-          player.perks.perkIds[8],
-          player.perks.perkIds[7],
-          player.perks.perkIds[6],
-        ]
-      );
+      const runes = [
+        player.perks.perkIds[0],
+        player.perks.perkIds[1],
+        player.perks.perkIds[2],
+        player.perks.perkIds[3],
+        player.perks.perkStyle,
+        player.perks.perkSubStyle,
+        player.perks.perkIds[4],
+        player.perks.perkIds[5],
+        player.perks.perkIds[8],
+        player.perks.perkIds[7],
+        player.perks.perkIds[6],
+      ]
+      const runeIcons = runes.map((rune) => {
+        const runeIcon = mapRuneIcons(rune, runesData);
+        return runeIcon === null ? { id: rune, icon: EMPTY_ICON } : { id: rune, icon: runeIcon }
+      });
 
       newObj.summonerSpells = summSpellMap;
       newObj.championId = player.championId;
-      newObj.runes = runesMap;
+      newObj.runes = runeIcons;
       newObj.team = player.teamId;
       playerInfoArr.push(newObj);
     }

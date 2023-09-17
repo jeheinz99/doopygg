@@ -25,7 +25,12 @@ leagueUtils.getChampAbilityIcons = (championId) => {
     `https://cdn.communitydragon.org/latest/champion/${championId}/ability-icon/w`,
     `https://cdn.communitydragon.org/latest/champion/${championId}/ability-icon/e`,
     `https://cdn.communitydragon.org/latest/champion/${championId}/ability-icon/r`
-  ]
+  ];
+}
+
+leagueUtils.getRunesData = async (version) => {
+  const runesData = await axios.get(`https://raw.communitydragon.org/${version}/plugins/rcp-be-lol-game-data/global/default/v1/perks.json`);
+  return runesData.data;
 }
 
 module.exports = leagueUtils;
