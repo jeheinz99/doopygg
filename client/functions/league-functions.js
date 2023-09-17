@@ -19,4 +19,13 @@ leagueUtils.getSummSpellData = async (version) => {
   return summSpellData.data;
 };
 
+leagueUtils.getChampAbilityIcons = (championId) => {
+  return [
+    `https://cdn.communitydragon.org/latest/champion/${championId}/ability-icon/q`,
+    `https://cdn.communitydragon.org/latest/champion/${championId}/ability-icon/w`,
+    `https://cdn.communitydragon.org/latest/champion/${championId}/ability-icon/e`,
+    `https://cdn.communitydragon.org/latest/champion/${championId}/ability-icon/r`
+  ]
+}
+
 module.exports = leagueUtils;

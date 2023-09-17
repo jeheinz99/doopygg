@@ -6,6 +6,8 @@ const lolMatches = require('../models/LoLMatchesModel');
 const queueData = require('../../queues.json');
 const leagueFunctions = require('../../client/functions/league-functions')
 
+const EMPTY_ICON = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png`
+
 // HELPER FUNCTIONS ---> USED TO GET DATA FROM SQL DATABASE FROM RIOT API DATA
 
 // maps queue type based on queueId
@@ -35,7 +37,16 @@ const mapItemIcons = (itemId, itemsData) => {
 }
 
 // maps item icons from match timeline using item ids
+const mapItemTimelineIconsTest = items => {
+  return items.map((item) => {
+    return {
+      id: item.itemId,
+      path: item.path
+    }
+  })
+}
 const mapItemTimelineIcons = async items => {
+  // console.log(items, 'items')
   const itemsArr = [];
   for (let i = 0; i < items.length; i++) {
     for (let j = 0; j < items[i].length; j++) {
@@ -44,6 +55,7 @@ const mapItemTimelineIcons = async items => {
   }
   const query = `SELECT id, path FROM items WHERE id = any(array[${itemsArr}]);`
   const path = await db.query(query);
+  // console.log(path, 'path in item timeline icons')
   // iterate through array of arrays
   // for each index in each array, check if id matches and set corresponding path
   for (let i = 0; i < items.length; i++) {
@@ -407,14 +419,14 @@ summonerController.updateSummData = async (req, res, next) => {
       const itemIcons = matchesData[i].items.map((item) => {
         const itemIcon = mapItemIcons(item, itemsData);
         return itemIcon === null ? 
-          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          EMPTY_ICON
           :
           itemIcon
       });
       const summSpellIcons = matchesData[i].summonerSpells.map((summSpell) => {
         const summSpellIcon = mapSummonerIcons(summSpell, summSpellData);
         return summSpellIcon === null ?
-          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          EMPTY_ICON
           :
           summSpellIcon
       });
@@ -698,12 +710,6 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
       };
     };
 
-    const getChampAbilityIcons = async () => {
-      const query = `SELECT champion_spell_paths FROM champion_info WHERE champion_id = ${championId};`
-      const path = await db.query(query);
-      return path.rows[0].champion_spell_paths;
-    };
-
     const getMatchTimeline = await axios.get(`https://${regionRoute}.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline?api_key=${process.env.api_key}`,
     {
       headers: {
@@ -727,14 +733,14 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
       const itemIcons = otherPlayers[i].items.map((item) => {
         const itemIcon = mapItemIcons(item, itemsData);
         return itemIcon === null ? 
-          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          EMPTY_ICON
           :
           itemIcon
       });
       const summSpellIcons = otherPlayers[i].summonerSpells.map((summSpell) => {
         const summSpellIcon = mapSummonerIcons(summSpell, summSpellData);
         return summSpellIcon === null ?
-          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          EMPTY_ICON
           :
           summSpellIcon
       });
@@ -749,7 +755,7 @@ summonerController.getDDBoxSummData = async (req, res, next) => {
       otherPlayers[i].summonerSpells = summSpellIcons;
     }
 
-    const championAbilityIcons = await getChampAbilityIcons();
+    const championAbilityIcons = leagueFunctions.getChampAbilityIcons(championId);
 
     res.locals.DDBoxData = {
       otherPlayers: otherPlayers,
@@ -1059,7 +1065,7 @@ summonerController.expandSummMatchHistory = async (req, res, next) => {
       const itemIcons = matchesData[i].items.map((item) => {
         const itemIcon = mapItemIcons(item, itemsData);
         return itemIcon === null ? 
-          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          EMPTY_ICON
           :
           itemIcon
       });
@@ -1067,7 +1073,7 @@ summonerController.expandSummMatchHistory = async (req, res, next) => {
       const summSpellIcons = matchesData[i].summonerSpells.map((summSpell) => {
         const summSpellIcon = mapSummonerIcons(summSpell, summSpellData);
         return summSpellIcon === null ?
-          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/summoner_empty.png'
+          EMPTY_ICON
           :
           summSpellIcon
       });
